@@ -251,7 +251,7 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-20T00:09:28+08:00" content="2016-09-20">
+            <time itemprop="dateCreated" datetime="2016-09-20T00:41:53+08:00" content="2016-09-20">
               2016-09-20
             </time>
           </span>
@@ -423,7 +423,172 @@
             
               
                 
-                <a class="post-title-link" href="/2016/09/20/about-git-installation/" itemprop="url">
+                <a class="post-title-link" href="/2016/09/19/why-git/" itemprop="url">
+                  SVN 与 Git 的区别
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-19T00:15:12+08:00" content="2016-09-19">
+              2016-09-19
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
+<li><code>Git</code>: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。</li>
+<li><p><code>SVN</code>: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。</p>
+<p>  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：</p>
+<ol>
+<li>跟踪修改过程。        </li>
+<li>自然的提交过程。这极大方便了代码细节演进过程的查看。</li>
+<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><h3 id="修正提交"><a href="#修正提交" class="headerlink" title="修正提交"></a>修正提交</h3><ul>
+<li><p><code>Git</code>: 可以修正提交。</p>
+<p>使用功能分支工作流，在自己的分支可以方便修正提交而不会影响大家。</p>
+</li>
+<li><p><code>SVN</code>: 一旦提交就到服务器上，实际使用中就是不能修改。</p>
+<p><em><code>SVN</code>可以在服务器上修改，因为过程复杂需要权限实际上从不会这样做</em></p>
+<p>实际使用中会有误提交的情况（如提交了一个不该提交的日志文件），对于svn来说，就是让大家一遍又一遍看到这个垃圾文件。</p>
+<p>没有干净的提交，严重影响了Code Review，增加成本。</p>
+<p>另外对于想了解演进过程的同学，垃圾提交影响了了解效果。</p>
+</li>
+</ul>
+</li>
+<li><h3 id="廉价好用的本地分支"><a href="#廉价好用的本地分支" class="headerlink" title="廉价好用的本地分支"></a>廉价好用的本地分支</h3><ul>
+<li><code>Git</code>: 有本地分支</li>
+<li><p><code>SVN</code>: 无本地分支</p>
+<p>git可以方便创建本地分支，且瞬间就可以完成创建。由于分支可以是本地的，也就不存在svn目录权限的问题。</p>
+<p>可以从想要工作点闪电般创建本地分支，本地实验不确定的修改，创建分支如此之廉价，git推荐创建分支来隔离修改。</p>
+</li>
+</ul>
+</li>
+<li><h3 id="更强大智能的合并能力"><a href="#更强大智能的合并能力" class="headerlink" title="更强大智能的合并能力"></a>更强大智能的合并能力</h3><ul>
+<li><code>Git</code>: 重命名（无论文件还是目录）提交可以合并上文件重命名前的这些文件的提交。</li>
+<li><p><code>SVN</code>: 重命名（无论文件还是目录）提交后，你本地/或是分支上 有文件重命名前的这些文件的修改或提交，在做合并操作时，恭喜，你会碰上传说中难搞的树冲突！</p>
+<p>因为惧怕svn树冲突，在包名调整（重命名目录）或类名调整（重命名文件）前，我不得不先向一起开发的组员广播：</p>
+</li>
+</ul>
+<ol>
+<li>提交你的修改</li>
+<li>暂停相关类的修改</li>
+<li>我开始做调整</li>
+<li><p>等我修改好后，你再开始修改</p>
+<p>因为这个过程烦琐，结果就是影响了大家去做这样重构操作的积极性，进而影响项目的代码质量改进</p>
+</li>
+</ol>
+</li>
+<li><h3 id="灵活、迅速"><a href="#灵活、迅速" class="headerlink" title="灵活、迅速"></a>灵活、迅速</h3><ul>
+<li><p>打断开发</p>
+<p>  在开发新功能过程中，突然需要你去修复一个Bug，使用Git，你可以直接 保存贮藏/提交当前改动到本地，然后切换到主分支去修复Bug，之后 弹出贮藏/切换回你原来的分支 继续开发。</p>
+</li>
+<li><p>小步提交，互不干扰</p>
+<p>  并行开发过程中各开发人员可以随时多次commit代码且互不影响，最后在merage到主分支，并且能记录所有成员的所有commint记录。SVN只能大量的一次性提交到中心库。</p>
+</li>
+</ul>
+</li>
+<li><h3 id="日志查看"><a href="#日志查看" class="headerlink" title="日志查看"></a>日志查看</h3><ul>
+<li><code>Git</code>: 本地包含了完整的日志，速度极快（并且无需网络)</li>
+<li><code>SVN</code>: 需要从服务拉取。</li>
+</ul>
+</li>
+<li><h3 id="Github-全球最大的开源社区"><a href="#Github-全球最大的开源社区" class="headerlink" title="Github-全球最大的开源社区"></a>Github-全球最大的开源社区</h3><ul>
+<li><p>全球顶级科技公司纷纷加入 GitHub ，并贡献他们自己的项目代码</p>
+<p>  Google: <a href="https://github.com/google" target="_blank" rel="external">https://github.com/google</a><br>  苹果: <a href="https://github.com/apple" target="_blank" rel="external">https://github.com/apple</a><br>  Facebook: <a href="https://github.com/facebook" target="_blank" rel="external">https://github.com/facebook</a><br>  Twitter：<a href="https://github.com/twitter" target="_blank" rel="external">https://github.com/twitter</a><br>  微软：<a href="https://github.com/microsoft" target="_blank" rel="external">https://github.com/microsoft</a><br>  Square：<a href="https://github.com/square" target="_blank" rel="external">https://github.com/square</a><br>  阿里：<a href="https://github.com/alibaba" target="_blank" rel="external">https://github.com/alibaba</a><br>  …</p>
+</li>
+<li><p>全球顶级开源项目都优先选择在 GitHub 上开源</p>
+<p>  Linux：<a href="https://github.com/torvalds/linux" target="_blank" rel="external">https://github.com/torvalds/linux</a><br>  Android：<a href="https://github.com/owncloud/android" target="_blank" rel="external">https://github.com/owncloud/android</a><br>  Rails：<a href="https://github.com/rails/rails" target="_blank" rel="external">https://github.com/rails/rails</a><br>  Nodejs：<a href="https://github.com/nodejs/node" target="_blank" rel="external">https://github.com/nodejs/node</a><br>  Swift：<a href="https://github.com/apple/swift" target="_blank" rel="external">https://github.com/apple/swift</a><br>  CoffeeScript：<a href="https://github.com/jashkenas/coffeescript" target="_blank" rel="external">https://github.com/jashkenas/coffeescript</a><br>  Ruby：<a href="https://github.com/ruby/ruby" target="_blank" rel="external">https://github.com/ruby/ruby</a><br>  …</p>
+</li>
+</ul>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/09/17/about-git-installation/" itemprop="url">
                   Git的安装与配置
                 </a>
               
@@ -437,8 +602,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-20T00:08:00+08:00" content="2016-09-20">
-              2016-09-20
+            <time itemprop="dateCreated" datetime="2016-09-17T03:49:38+08:00" content="2016-09-17">
+              2016-09-17
             </time>
           </span>
 
@@ -569,171 +734,6 @@
 <p>常用 Git 命令清单 - <a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a></p>
 <p>猴子都能懂的GIT入门 - <a href="http://backlogtool.com/git-guide/cn/" target="_blank" rel="external">http://backlogtool.com/git-guide/cn/</a></p>
 <p>Git教程 - <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/09/18/why-git/" itemprop="url">
-                  SVN 与 Git 的区别
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-18T23:56:46+08:00" content="2016-09-18">
-              2016-09-18
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ol>
-<li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
-<li><code>Git</code>: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。</li>
-<li><p><code>SVN</code>: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。</p>
-<p>  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：</p>
-<ol>
-<li>跟踪修改过程。        </li>
-<li>自然的提交过程。这极大方便了代码细节演进过程的查看。</li>
-<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。</li>
-</ol>
-</li>
-</ul>
-</li>
-<li><h3 id="修正提交"><a href="#修正提交" class="headerlink" title="修正提交"></a>修正提交</h3><ul>
-<li><p><code>Git</code>: 可以修正提交。</p>
-<p>使用功能分支工作流，在自己的分支可以方便修正提交而不会影响大家。</p>
-</li>
-<li><p><code>SVN</code>: 一旦提交就到服务器上，实际使用中就是不能修改。</p>
-<p><em><code>SVN</code>可以在服务器上修改，因为过程复杂需要权限实际上从不会这样做</em></p>
-<p>实际使用中会有误提交的情况（如提交了一个不该提交的日志文件），对于svn来说，就是让大家一遍又一遍看到这个垃圾文件。</p>
-<p>没有干净的提交，严重影响了Code Review，增加成本。</p>
-<p>另外对于想了解演进过程的同学，垃圾提交影响了了解效果。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="廉价好用的本地分支"><a href="#廉价好用的本地分支" class="headerlink" title="廉价好用的本地分支"></a>廉价好用的本地分支</h3><ul>
-<li><code>Git</code>: 有本地分支</li>
-<li><p><code>SVN</code>: 无本地分支</p>
-<p>git可以方便创建本地分支，且瞬间就可以完成创建。由于分支可以是本地的，也就不存在svn目录权限的问题。</p>
-<p>可以从想要工作点闪电般创建本地分支，本地实验不确定的修改，创建分支如此之廉价，git推荐创建分支来隔离修改。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="更强大智能的合并能力"><a href="#更强大智能的合并能力" class="headerlink" title="更强大智能的合并能力"></a>更强大智能的合并能力</h3><ul>
-<li><code>Git</code>: 重命名（无论文件还是目录）提交可以合并上文件重命名前的这些文件的提交。</li>
-<li><p><code>SVN</code>: 重命名（无论文件还是目录）提交后，你本地/或是分支上 有文件重命名前的这些文件的修改或提交，在做合并操作时，恭喜，你会碰上传说中难搞的树冲突！</p>
-<p>因为惧怕svn树冲突，在包名调整（重命名目录）或类名调整（重命名文件）前，我不得不先向一起开发的组员广播：</p>
-</li>
-</ul>
-<ol>
-<li>提交你的修改</li>
-<li>暂停相关类的修改</li>
-<li>我开始做调整</li>
-<li><p>等我修改好后，你再开始修改</p>
-<p>因为这个过程烦琐，结果就是影响了大家去做这样重构操作的积极性，进而影响项目的代码质量改进</p>
-</li>
-</ol>
-</li>
-<li><h3 id="灵活、迅速"><a href="#灵活、迅速" class="headerlink" title="灵活、迅速"></a>灵活、迅速</h3><ul>
-<li><p>打断开发</p>
-<p>  在开发新功能过程中，突然需要你去修复一个Bug，使用Git，你可以直接 保存贮藏/提交当前改动到本地，然后切换到主分支去修复Bug，之后 弹出贮藏/切换回你原来的分支 继续开发。</p>
-</li>
-<li><p>小步提交，互不干扰</p>
-<p>  并行开发过程中各开发人员可以随时多次commit代码且互不影响，最后在merage到主分支，并且能记录所有成员的所有commint记录。SVN只能大量的一次性提交到中心库。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="日志查看"><a href="#日志查看" class="headerlink" title="日志查看"></a>日志查看</h3><ul>
-<li><code>Git</code>: 本地包含了完整的日志，速度极快（并且无需网络)</li>
-<li><code>SVN</code>: 需要从服务拉取。</li>
-</ul>
-</li>
-<li><h3 id="Github-全球最大的开源社区"><a href="#Github-全球最大的开源社区" class="headerlink" title="Github-全球最大的开源社区"></a>Github-全球最大的开源社区</h3><ul>
-<li><p>全球顶级科技公司纷纷加入 GitHub ，并贡献他们自己的项目代码</p>
-<p>  Google: <a href="https://github.com/google" target="_blank" rel="external">https://github.com/google</a><br>  苹果: <a href="https://github.com/apple" target="_blank" rel="external">https://github.com/apple</a><br>  Facebook: <a href="https://github.com/facebook" target="_blank" rel="external">https://github.com/facebook</a><br>  Twitter：<a href="https://github.com/twitter" target="_blank" rel="external">https://github.com/twitter</a><br>  微软：<a href="https://github.com/microsoft" target="_blank" rel="external">https://github.com/microsoft</a><br>  Square：<a href="https://github.com/square" target="_blank" rel="external">https://github.com/square</a><br>  阿里：<a href="https://github.com/alibaba" target="_blank" rel="external">https://github.com/alibaba</a><br>  …</p>
-</li>
-<li><p>全球顶级开源项目都优先选择在 GitHub 上开源</p>
-<p>  Linux：<a href="https://github.com/torvalds/linux" target="_blank" rel="external">https://github.com/torvalds/linux</a><br>  Android：<a href="https://github.com/owncloud/android" target="_blank" rel="external">https://github.com/owncloud/android</a><br>  Rails：<a href="https://github.com/rails/rails" target="_blank" rel="external">https://github.com/rails/rails</a><br>  Nodejs：<a href="https://github.com/nodejs/node" target="_blank" rel="external">https://github.com/nodejs/node</a><br>  Swift：<a href="https://github.com/apple/swift" target="_blank" rel="external">https://github.com/apple/swift</a><br>  CoffeeScript：<a href="https://github.com/jashkenas/coffeescript" target="_blank" rel="external">https://github.com/jashkenas/coffeescript</a><br>  Ruby：<a href="https://github.com/ruby/ruby" target="_blank" rel="external">https://github.com/ruby/ruby</a><br>  …</p>
-</li>
-</ul>
-</li>
-</ol>
 
           
         
