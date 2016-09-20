@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-20T07:44:56.607Z</updated>
+  <updated>2016-09-20T11:14:28.089Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://yoursite.com/learn-markdown/"/>
     <id>http://yoursite.com/learn-markdown/</id>
     <published>2016-09-20T04:47:54.000Z</published>
-    <updated>2016-09-20T07:44:56.607Z</updated>
+    <updated>2016-09-20T11:14:28.089Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="什么是Markdown语法？"><a href="#什么是Markdown语法？" class="headerlink" title="什么是Markdown语法？"></a>什么是Markdown语法？</h3> Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。<a id="more"></a></li>
@@ -137,6 +137,7 @@
 <p>Markdown 语法说明 (简体中文版) - <a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">http://wowubuntu.com/markdown/</a></p>
 </li>
 </ol>
+<p><em>本文转载自<a href="https://coding.net/help/doc/project/markdown.html#section-2" target="_blank" rel="external">https://coding.net/help/doc/project/markdown.html#section-2</a></em></p>
 ]]></content>
     
     <summary type="html">
