@@ -159,12 +159,12 @@
     <link href="http://yoursite.com/create-hexo-blog-on-github/"/>
     <id>http://yoursite.com/create-hexo-blog-on-github/</id>
     <published>2016-09-19T16:41:53.000Z</published>
-    <updated>2016-09-20T10:06:27.197Z</updated>
+    <updated>2016-09-20T11:55:29.911Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
 <li>一个服务器（即博客的代码存放的地方，这里选用github）</li>
-<li>一个Blog生成工具（这里选用Hexo，类似WordPress）<a id="more"></a></li>
+<li>一个Blog生成工具（这里选用Hexo，类似的还有 WordPress，jekyll）<a id="more"></a></li>
 </ul>
 </li>
 <li><h3 id="介绍Git和GitHub"><a href="#介绍Git和GitHub" class="headerlink" title="介绍Git和GitHub"></a>介绍Git和GitHub</h3><p> Git，一个非常强大的版本管理工具。</p>
@@ -261,7 +261,7 @@
       &lt;ol&gt;
 &lt;li&gt;&lt;h3 id=&quot;前言：搭建博客的几大要素&quot;&gt;&lt;a href=&quot;#前言：搭建博客的几大要素&quot; class=&quot;headerlink&quot; title=&quot;前言：搭建博客的几大要素&quot;&gt;&lt;/a&gt;前言：搭建博客的几大要素&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;一个服务器（即博客的代码存放的地方，这里选用github）&lt;/li&gt;
-&lt;li&gt;一个Blog生成工具（这里选用Hexo，类似WordPress）
+&lt;li&gt;一个Blog生成工具（这里选用Hexo，类似的还有 WordPress，jekyll）
     
     </summary>
     
