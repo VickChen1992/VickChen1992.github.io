@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/create-hexo-blog-on-github/</loc>
+    
+    <lastmod>2016-09-20T10:06:27.197Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/about-git-installation/</loc>
+    
+    <lastmod>2016-09-20T10:05:27.165Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2016-09-20T07:55:22.378Z</lastmod>
@@ -19,20 +33,6 @@
     <loc>http://yoursite.com/learn-markdown/</loc>
     
     <lastmod>2016-09-20T07:44:56.607Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/about-git-installation/</loc>
-    
-    <lastmod>2016-09-20T07:13:25.296Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/create-hexo-blog-on-github/</loc>
-    
-    <lastmod>2016-09-20T07:11:23.700Z</lastmod>
     
   </url>
   

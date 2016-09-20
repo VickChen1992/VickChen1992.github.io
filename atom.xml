@@ -158,7 +158,7 @@
     <link href="http://yoursite.com/create-hexo-blog-on-github/"/>
     <id>http://yoursite.com/create-hexo-blog-on-github/</id>
     <published>2016-09-19T16:41:53.000Z</published>
-    <updated>2016-09-20T07:11:23.700Z</updated>
+    <updated>2016-09-20T10:06:27.197Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
@@ -172,7 +172,7 @@
 </li>
 <li><h3 id="Github的安装和配置"><a href="#Github的安装和配置" class="headerlink" title="Github的安装和配置"></a>Github的安装和配置</h3><ol>
 <li>注册，这个总会吧，官网-<a href="https://github.com/" target="_blank" rel="external">https://github.com/</a></li>
-<li>安装及配置可以看<a href="http://vickchen.win/2016/09/17/about-git-installation/" target="_blank" rel="external">这里</a></li>
+<li>安装及配置可以看<a href="http://vickchen.win/about-git-installation/" target="_blank" rel="external">这里</a></li>
 </ol>
 </li>
 <li><h3 id="使用Github-Pages生成博客"><a href="#使用Github-Pages生成博客" class="headerlink" title="使用Github Pages生成博客"></a>使用Github Pages生成博客</h3><ol>
@@ -390,7 +390,7 @@
     <link href="http://yoursite.com/about-git-installation/"/>
     <id>http://yoursite.com/about-git-installation/</id>
     <published>2016-09-16T19:49:38.000Z</published>
-    <updated>2016-09-20T07:13:25.296Z</updated>
+    <updated>2016-09-20T10:05:27.165Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。<br><a id="more"></a></p>
 <h2 id="Git是什么"><a href="#Git是什么" class="headerlink" title="Git是什么"></a>Git是什么</h2><blockquote>
@@ -405,7 +405,7 @@
 <blockquote>
 <p>“SVN没有后悔药，Git有一堆后悔药”</p>
 </blockquote>
-<p>更多差异可以参考: <a href="http://vickchen.win/2016/09/18/why-git/" target="_blank" rel="external">SVN 与 Git 的区别</a></p>
+<p>更多差异可以参考: <a href="http://vickchen.win/why-git/" target="_blank" rel="external">SVN 与 Git 的区别</a></p>
 <h2 id="Git与Github的区别"><a href="#Git与Github的区别" class="headerlink" title="Git与Github的区别"></a>Git与Github的区别</h2><p>Git是一个版本控制的工具，而Github有点类似于远程仓库，用于存放用Git管理的各种项目。</p>
 <h2 id="Git的安装与配置"><a href="#Git的安装与配置" class="headerlink" title="Git的安装与配置"></a>Git的安装与配置</h2><ol>
 <li><h3 id="Git客户端下载地址-https-git-scm-com-，下载后安装。"><a href="#Git客户端下载地址-https-git-scm-com-，下载后安装。" class="headerlink" title="Git客户端下载地址: https://git-scm.com/ ，下载后安装。"></a>Git客户端下载地址: <a href="https://git-scm.com/" target="_blank" rel="external">https://git-scm.com/</a> ，下载后安装。</h3></li>
