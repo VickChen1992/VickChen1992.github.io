@@ -17,8 +17,8 @@
   
   <entry>
     <title>Markdown 入门</title>
-    <link href="http://yoursite.com/2016/09/20/learn-markdown/"/>
-    <id>http://yoursite.com/2016/09/20/learn-markdown/</id>
+    <link href="http://yoursite.com/learn-markdown/"/>
+    <id>http://yoursite.com/learn-markdown/</id>
     <published>2016-09-20T04:47:54.000Z</published>
     <updated>2016-09-20T07:44:56.607Z</updated>
     
@@ -155,8 +155,8 @@
   
   <entry>
     <title>使用hexo在GitHub上搭建自己的bolg</title>
-    <link href="http://yoursite.com/2016/09/20/create-hexo-blog-on-github/"/>
-    <id>http://yoursite.com/2016/09/20/create-hexo-blog-on-github/</id>
+    <link href="http://yoursite.com/create-hexo-blog-on-github/"/>
+    <id>http://yoursite.com/create-hexo-blog-on-github/</id>
     <published>2016-09-19T16:41:53.000Z</published>
     <updated>2016-09-20T07:11:23.700Z</updated>
     
@@ -281,8 +281,8 @@
   
   <entry>
     <title>SVN 与 Git 的区别</title>
-    <link href="http://yoursite.com/2016/09/19/why-git/"/>
-    <id>http://yoursite.com/2016/09/19/why-git/</id>
+    <link href="http://yoursite.com/why-git/"/>
+    <id>http://yoursite.com/why-git/</id>
     <published>2016-09-18T16:15:12.000Z</published>
     <updated>2016-09-20T07:09:50.685Z</updated>
     
@@ -387,8 +387,8 @@
   
   <entry>
     <title>Git的安装与配置</title>
-    <link href="http://yoursite.com/2016/09/17/about-git-installation/"/>
-    <id>http://yoursite.com/2016/09/17/about-git-installation/</id>
+    <link href="http://yoursite.com/about-git-installation/"/>
+    <id>http://yoursite.com/about-git-installation/</id>
     <published>2016-09-16T19:49:38.000Z</published>
     <updated>2016-09-20T07:13:25.296Z</updated>
     
