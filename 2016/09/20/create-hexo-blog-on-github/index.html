@@ -68,12 +68,10 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Git,GitHub,Hexo,Nodejs,npm," />
 
 
 
-
-  
 
 
   <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml" />
@@ -90,41 +88,26 @@
 
 <meta name="description" content="前言：搭建博客的几大要素
 一个服务器（即博客的代码存放的地方，这里选用github）
-一个Blog生成工具（这里选用Hexo，类似WordPress）
-
-
-介绍Git和GitHub Git，一个非常强大的版本管理工具。
- GitHub,一个基于Git的日益流行的开源项目托管库，也就是你的“代码仓库”（repository）。
- 你可以在本地或者网上对自己的代码进行修改，而Github就是一个将你">
+一个Blog生成工具（这里选用Hexo，类似WordPress）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用hexo在GitHub上搭建自己的bolg">
 <meta property="og:url" content="http://yoursite.com/2016/09/20/create-hexo-blog-on-github/index.html">
 <meta property="og:site_name" content="Vick's Blog">
 <meta property="og:description" content="前言：搭建博客的几大要素
 一个服务器（即博客的代码存放的地方，这里选用github）
-一个Blog生成工具（这里选用Hexo，类似WordPress）
-
-
-介绍Git和GitHub Git，一个非常强大的版本管理工具。
- GitHub,一个基于Git的日益流行的开源项目托管库，也就是你的“代码仓库”（repository）。
- 你可以在本地或者网上对自己的代码进行修改，而Github就是一个将你">
+一个Blog生成工具（这里选用Hexo，类似WordPress）">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/9460f058gw1f7zaho97v0j20bo06ddgc.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/9460f058gw1f7zaho1bv9j20ke0ebtbh.jpg">
 <meta property="og:image" content="http://ww4.sinaimg.cn/large/9460f058gw1f7zahndv9nj20qu046wfc.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/9460f058gw1f7zaho7n5fj20mp0k2jvw.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/9460f058gw1f7zbcc4ekrj20g908cmyl.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/9460f058gw1f7zbi1z5y7j20fa06zjs5.jpg">
-<meta property="og:updated_time" content="2016-09-19T16:31:43.866Z">
+<meta property="og:updated_time" content="2016-09-20T07:11:23.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用hexo在GitHub上搭建自己的bolg">
 <meta name="twitter:description" content="前言：搭建博客的几大要素
 一个服务器（即博客的代码存放的地方，这里选用github）
-一个Blog生成工具（这里选用Hexo，类似WordPress）
-
-
-介绍Git和GitHub Git，一个非常强大的版本管理工具。
- GitHub,一个基于Git的日益流行的开源项目托管库，也就是你的“代码仓库”（repository）。
- 你可以在本地或者网上对自己的代码进行修改，而Github就是一个将你">
+一个Blog生成工具（这里选用Hexo，类似WordPress）">
 <meta name="twitter:image" content="http://ww3.sinaimg.cn/large/9460f058gw1f7zaho97v0j20bo06ddgc.jpg">
 
 
@@ -211,6 +194,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -286,6 +289,25 @@
           </span>
 
           
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
 
           
             
@@ -311,7 +333,7 @@
         <ol>
 <li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
 <li>一个服务器（即博客的代码存放的地方，这里选用github）</li>
-<li>一个Blog生成工具（这里选用Hexo，类似WordPress）</li>
+<li>一个Blog生成工具（这里选用Hexo，类似WordPress）<a id="more"></a></li>
 </ul>
 </li>
 <li><h3 id="介绍Git和GitHub"><a href="#介绍Git和GitHub" class="headerlink" title="介绍Git和GitHub"></a>介绍Git和GitHub</h3><p> Git，一个非常强大的版本管理工具。</p>
@@ -421,6 +443,20 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Git/" rel="tag">#Git</a>
+          
+            <a href="/tags/GitHub/" rel="tag">#GitHub</a>
+          
+            <a href="/tags/Hexo/" rel="tag">#Hexo</a>
+          
+            <a href="/tags/Nodejs/" rel="tag">#Nodejs</a>
+          
+            <a href="/tags/npm/" rel="tag">#npm</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
@@ -433,6 +469,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/20/learn-markdown/" rel="prev" title="Markdown 入门">
+                Markdown 入门 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -500,13 +540,27 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
 
           
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
 
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
           
 
         </nav>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-19T16:31:43.866Z</updated>
+  <updated>2016-09-20T07:44:56.607Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,16 +16,154 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Markdown 入门</title>
+    <link href="http://yoursite.com/2016/09/20/learn-markdown/"/>
+    <id>http://yoursite.com/2016/09/20/learn-markdown/</id>
+    <published>2016-09-20T04:47:54.000Z</published>
+    <updated>2016-09-20T07:44:56.607Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li><h3 id="什么是Markdown语法？"><a href="#什么是Markdown语法？" class="headerlink" title="什么是Markdown语法？"></a>什么是Markdown语法？</h3> Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。<a id="more"></a></li>
+<li><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p> 在Markdown中，你只需要在文本前面加上# 即可，同理、你还可以增加二级标题、三级标题、四级标题、五级标题和六级标题，总共六级，只需要增加# 即可，标题字号相应降低。例如：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 一级标题</div><div class="line">## 二级标题</div><div class="line">### 三级标题</div><div class="line">#### 四级标题</div><div class="line">##### 五级标题</div><div class="line">###### 六级标题</div></pre></td></tr></table></figure>
+<p> <img src="http://ww1.sinaimg.cn/large/9460f058gw1f7zypdyzhwj20gf09cq3i.jpg" alt=""></p>
+</li>
+<li><h3 id="锚点"><a href="#锚点" class="headerlink" title="锚点"></a>锚点</h3><p> Hexo 会针对每个标题，在解析时都会添加锚点id，如</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># 锚点</div></pre></td></tr></table></figure>
+<p> 会被解析成：</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"user-content-锚点"</span>&gt;</span>锚点<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div></pre></td></tr></table></figure>
+<p> 注意:我们添加了一个user-content-的前缀所以如果要自己添加跳转链接要使用markdown的形式，且链接要加一个’user-content-‘前缀，如：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[问内链接](#user-content-锚点);</div></pre></td></tr></table></figure>
+</li>
+<li><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p> Markdown 标记区块引用是使用类似 email 中用 &gt; 的引用方式，只需要在整个段落的第一行最前面加上 &gt; :</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&gt; GitHub 为软件开发者提供基于云计算技术的软件开发平台，包括项目管理，代码托管，运行空间和质量控制等等。</div></pre></td></tr></table></figure>
+<p> 效果图如下：</p>
+<p> <img src="http://ww1.sinaimg.cn/large/9460f058gw1f7zyuw2sw6j20ge02v74p.jpg" alt=""></p>
+<p> 区块引用可以嵌套，只要根据层次加上不同数量的 &gt; ：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&gt; 这是第一级引用。</div><div class="line">&gt;</div><div class="line">&gt; &gt; 这是第二级引用。</div><div class="line">&gt;</div><div class="line">&gt; 现在回到第一级引用。</div></pre></td></tr></table></figure>
+<p> 效果图如下：</p>
+<p> <img src="http://ww2.sinaimg.cn/large/9460f058gw1f7zyw0q9oqj20gk04eaa9.jpg" alt=""></p>
+<p> 引用的区块内也可以使用其他的 Markdown 语法，包括标题、列表、代码区块等：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&gt; ## 这是一个标题。</div><div class="line">&gt;</div><div class="line">&gt; 1. 这是第一行列表项。</div><div class="line">&gt; 2. 这是第二行列表项。</div><div class="line">&gt;</div><div class="line">&gt; 给出一些例子代码：</div><div class="line">&gt;</div><div class="line">&gt; return shell_exec(&quot;echo $input | $markdown_script&quot;);</div></pre></td></tr></table></figure>
+<p> 效果图如下：</p>
+<p> <img src="http://ww2.sinaimg.cn/large/9460f058gw1f7zyyay4vlj20gq06st9d.jpg" alt=""></p>
+</li>
+<li><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p> 列表项目标记通常放在最左边，项目标记后面要接一个字符的空格。</p>
+<ul>
+<li><p>无序列表：使用星号、加号或是减号作为列表标记</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">- Red</div><div class="line">- Green</div><div class="line">- Blue</div></pre></td></tr></table></figure>
+<p>  效果图如下：</p>
+<p>  <img src="http://ww1.sinaimg.cn/large/9460f058gw1f7zz0fooujj20go03rwei.jpg" alt=""></p>
+</li>
+<li><p>有序列表：使用数字接着一个英文句点</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. Red</div><div class="line">2. Green</div><div class="line">3. Blue</div></pre></td></tr></table></figure>
+<p>  效果图如下：</p>
+<p>  <img src="http://ww4.sinaimg.cn/large/9460f058gw1f7zzg35wtij20gf03pq2z.jpg" alt=""></p>
+</li>
+<li><p>如果要在列表项目内放进引用，那 &gt; 就需要缩进：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">*  Coding.net有以下主要功能:</div><div class="line">&gt; 代码托管平台</div><div class="line">&gt; 在线运行环境    </div><div class="line">&gt; 代码质量监控    </div><div class="line">&gt; 项目管理平台</div></pre></td></tr></table></figure>
+<p>  效果图如下：</p>
+<p>  <img src="http://ww1.sinaimg.cn/large/9460f058gw1f7zz3rludnj20gi066wev.jpg" alt=""></p>
+</li>
+<li><p>代办列表: 表示列表是否勾选状态</p>
+  <figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="bullet">- </span>[ ] 不勾选</div><div class="line"><span class="bullet">- </span>[x] 勾选</div></pre></td></tr></table></figure>
+<p>  效果图如下：</p>
+<p>  <img src="http://ww1.sinaimg.cn/large/9460f058gw1f7zz5kunayj20iu036glo.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+<li><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p> 只要把你的代码块包裹在 ```之间，你就不需要通过无休止的缩进来标记代码块了。 在围栏式代码块中，你可以指定一个可选的语言标识符，然后我们就可以为它启用语法着色了。 举个例子，这样可以为一段 Ruby 代码着色：</p>
+<p> <img src="http://ww1.sinaimg.cn/large/9460f058gw1f803bs0ejcj20fi03k3yl.jpg" alt=""></p>
+<p> 效果图如下：</p>
+<p> <img src="http://ww2.sinaimg.cn/large/9460f058gw1f7zz7wkcrzj20gi03yaad.jpg" alt=""></p>
+</li>
+<li><h3 id="强调"><a href="#强调" class="headerlink" title="强调"></a>强调</h3><p> 在Markdown中，可以使用 * 和 _ 来表示斜体和加粗。</p>
+<ul>
+<li><p>斜体：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">*Coding，让开发更简单*</div><div class="line">_Coding，让开发更简单_</div></pre></td></tr></table></figure>
+<p>  效果图如下：</p>
+<p>  <img src="http://ww1.sinaimg.cn/large/9460f058gw1f7zzamysjqj20gi030q34.jpg" alt=""></p>
+</li>
+<li><p>加粗：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">**Coding，让开发更简单**</div><div class="line">__Coding，让开发更简单__</div></pre></td></tr></table></figure>
+<p>  效果图如下：</p>
+<p>  <img src="http://ww3.sinaimg.cn/large/9460f058gw1f7zzbkl3ktj20gj02umxd.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+<li><h3 id="自动链接"><a href="#自动链接" class="headerlink" title="自动链接"></a>自动链接</h3><p> 方括号显示说明，圆括号内显示网址， Markdown 会自动把它转成链接，例如：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[超强大的云开发平台Coding](http://coding.net)</div></pre></td></tr></table></figure>
+<p> 效果图如下：</p>
+<p> <img src="http://ww4.sinaimg.cn/large/9460f058gw1f7zzekwr8pj20gn02wgln.jpg" alt=""></p>
+<p> 或者也可以直接用&lt; &gt;，将网址或者邮箱地址放在中间，也能将地址直接转成链接：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;support@coding.net&gt;</div></pre></td></tr></table></figure>
+<p> 效果图如下：</p>
+<p> <img src="http://ww4.sinaimg.cn/large/9460f058gw1f7zzhmtclzj20go02tt8q.jpg" alt=""></p>
+</li>
+<li><h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p> 在 Markdown 中，可以制作表格，例如：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">First Header | Second Header | Third Header</div><div class="line">------------ | ------------- | ------------</div><div class="line">Content Cell | Content Cell  | Content Cell</div><div class="line">Content Cell | Content Cell  | Content Cell</div></pre></td></tr></table></figure>
+<p> 效果图如下：</p>
+<p> <img src="http://ww3.sinaimg.cn/large/9460f058gw1f800qn8m10j20b603o74o.jpg" alt=""></p>
+<p> 或者也可以让表格两边内容对齐，中间内容居中，例如：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">First Header | Second Header | Third Header</div><div class="line">:----------- | :-----------: | -----------:</div><div class="line">Left         | Center        | Right</div><div class="line">Left         | Center        | Right</div></pre></td></tr></table></figure>
+<p> 效果图如下：</p>
+<p> <img src="http://ww1.sinaimg.cn/large/9460f058gw1f800tewbbhj20b203kdg2.jpg" alt=""></p>
+</li>
+<li><h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>在 Markdown 中，可以制作分割线，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">---</div></pre></td></tr></table></figure>
+<p>效果图如下：</p>
+<p><img src="http://ww1.sinaimg.cn/large/9460f058gw1f800v7u0inj20go04qq36.jpg" alt=""></p>
+</li>
+<li><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>Markdown 使用了类似链接的语法来插入图片, 包含两种形式: 内联 和 引用.</p>
+<ul>
+<li><p>内联图片语法如下:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![Alt text](/path/to/img.jpg)</div></pre></td></tr></table></figure>
+<p>  或</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![Alt text](/path/to/img.jpg &quot;Optional title&quot;)</div></pre></td></tr></table></figure>
+<p>  也就是:</p>
+<p>  一个感叹号: ! ; 紧跟一对方括号, 包含了可选填的图片 alt 属性; 紧跟一对圆括号, 包含了图片的 URL 或者路径, 以及一个可选的用单引号或双引号包裹的 title 属性.</p>
+</li>
+<li><p>引用图片语法如下:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![Alt text][id]</div></pre></td></tr></table></figure>
+<p>  “id” 是图片引用的名称. 图片引用使用链接定义的相同语法:</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[id]: url/to/image &quot;Optional title attribute&quot;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><h3 id="符号转义"><a href="#符号转义" class="headerlink" title="符号转义"></a>符号转义</h3><p>如果你的描述中需要用到 markdown 的符号，比如 <em> # * 等，但又不想它被转义，这时候可以在这些符号前加反斜杠，如 \</em> # * 进行避免。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">\_不想这里的文本变斜体\_</div><div class="line">\*\*不想这里的文本被加粗\*\*</div></pre></td></tr></table></figure>
+</li>
+<li><h3 id="拓展阅读"><a href="#拓展阅读" class="headerlink" title="拓展阅读"></a>拓展阅读</h3><p>Markdown 编辑器语法指南 - <a href="https://segmentfault.com/markdown" target="_blank" rel="external">https://segmentfault.com/markdown</a></p>
+<p>Markdown 语法说明 (简体中文版) - <a href="http://wowubuntu.com/markdown/" target="_blank" rel="external">http://wowubuntu.com/markdown/</a></p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;h3 id=&quot;什么是Markdown语法？&quot;&gt;&lt;a href=&quot;#什么是Markdown语法？&quot; class=&quot;headerlink&quot; title=&quot;什么是Markdown语法？&quot;&gt;&lt;/a&gt;什么是Markdown语法？&lt;/h3&gt; Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。
+    
+    </summary>
+    
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Markdown" scheme="http://yoursite.com/tags/Markdown/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用hexo在GitHub上搭建自己的bolg</title>
     <link href="http://yoursite.com/2016/09/20/create-hexo-blog-on-github/"/>
     <id>http://yoursite.com/2016/09/20/create-hexo-blog-on-github/</id>
     <published>2016-09-19T16:41:53.000Z</published>
-    <updated>2016-09-19T16:31:43.866Z</updated>
+    <updated>2016-09-20T07:11:23.700Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
 <li>一个服务器（即博客的代码存放的地方，这里选用github）</li>
-<li>一个Blog生成工具（这里选用Hexo，类似WordPress）</li>
+<li>一个Blog生成工具（这里选用Hexo，类似WordPress）<a id="more"></a></li>
 </ul>
 </li>
 <li><h3 id="介绍Git和GitHub"><a href="#介绍Git和GitHub" class="headerlink" title="介绍Git和GitHub"></a>介绍Git和GitHub</h3><p> Git，一个非常强大的版本管理工具。</p>
@@ -121,10 +259,23 @@
     
       &lt;ol&gt;
 &lt;li&gt;&lt;h3 id=&quot;前言：搭建博客的几大要素&quot;&gt;&lt;a href=&quot;#前言：搭建博客的几大要素&quot; class=&quot;headerlink&quot; title=&quot;前言：搭建博客的几大要素&quot;&gt;&lt;/a&gt;前言：搭建博客的几大要素&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;一个服务器（即博客的代码存放的
+&lt;li&gt;一个服务器（即博客的代码存放的地方，这里选用github）&lt;/li&gt;
+&lt;li&gt;一个Blog生成工具（这里选用Hexo，类似WordPress）
     
     </summary>
     
+      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+      <category term="GitHub" scheme="http://yoursite.com/tags/GitHub/"/>
+    
+      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+    
+      <category term="Nodejs" scheme="http://yoursite.com/tags/Nodejs/"/>
+    
+      <category term="npm" scheme="http://yoursite.com/tags/npm/"/>
     
   </entry>
   
@@ -133,7 +284,7 @@
     <link href="http://yoursite.com/2016/09/19/why-git/"/>
     <id>http://yoursite.com/2016/09/19/why-git/</id>
     <published>2016-09-18T16:15:12.000Z</published>
-    <updated>2016-09-19T16:31:27.789Z</updated>
+    <updated>2016-09-20T07:09:50.685Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
@@ -143,7 +294,7 @@
 <ol>
 <li>跟踪修改过程。        </li>
 <li>自然的提交过程。这极大方便了代码细节演进过程的查看。</li>
-<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。</li>
+<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。<a id="more"></a></li>
 </ol>
 </li>
 </ul>
@@ -213,10 +364,24 @@
     
       &lt;ol&gt;
 &lt;li&gt;&lt;h3 id=&quot;合并对提交过程的保留&quot;&gt;&lt;a href=&quot;#合并对提交过程的保留&quot; class=&quot;headerlink&quot; title=&quot;合并对提交过程的保留&quot;&gt;&lt;/a&gt;合并对提交过程的保留&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Git&lt;/code&gt;: 合并操作保
+&lt;li&gt;&lt;code&gt;Git&lt;/code&gt;: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;SVN&lt;/code&gt;: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。&lt;/p&gt;
+&lt;p&gt;  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;跟踪修改过程。        &lt;/li&gt;
+&lt;li&gt;自然的提交过程。这极大方便了代码细节演进过程的查看。&lt;/li&gt;
+&lt;li&gt;极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。
     
     </summary>
     
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+      <category term="GitHub" scheme="http://yoursite.com/tags/GitHub/"/>
+    
+      <category term="SVN" scheme="http://yoursite.com/tags/SVN/"/>
     
   </entry>
   
@@ -225,9 +390,9 @@
     <link href="http://yoursite.com/2016/09/17/about-git-installation/"/>
     <id>http://yoursite.com/2016/09/17/about-git-installation/</id>
     <published>2016-09-16T19:49:38.000Z</published>
-    <updated>2016-09-19T16:30:14.313Z</updated>
+    <updated>2016-09-20T07:13:25.296Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。<br><a id="more"></a></p>
 <h2 id="Git是什么"><a href="#Git是什么" class="headerlink" title="Git是什么"></a>Git是什么</h2><blockquote>
 <p>Git 是由 Linux 之父 Linus Tovalds 为了更好地管理linux内核开发而创立的分布式版本控制／软件配置管理软件。</p>
 </blockquote>
@@ -333,10 +498,16 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。&lt;br&gt;
     
     </summary>
     
+      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+      <category term="GitHub" scheme="http://yoursite.com/tags/GitHub/"/>
     
   </entry>
   
