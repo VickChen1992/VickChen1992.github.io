@@ -2,30 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/about-git-installation/</loc>
-    
-    <lastmod>2016-09-21T02:25:34.409Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://yoursite.com/create-hexo-blog-on-github/</loc>
     
-    <lastmod>2016-09-21T02:25:21.231Z</lastmod>
+    <lastmod>2016-09-20T11:55:29.911Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://yoursite.com/learn-markdown/</loc>
     
-    <lastmod>2016-09-21T02:25:04.162Z</lastmod>
+    <lastmod>2016-09-20T11:14:28.089Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/why-git/</loc>
+    <loc>http://yoursite.com/about-git-installation/</loc>
     
-    <lastmod>2016-09-21T02:23:50.710Z</lastmod>
+    <lastmod>2016-09-20T10:05:27.165Z</lastmod>
     
   </url>
   
@@ -40,6 +33,13 @@
     <loc>http://yoursite.com/categories/index.html</loc>
     
     <lastmod>2016-09-20T07:50:52.039Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/why-git/</loc>
+    
+    <lastmod>2016-09-20T07:09:50.685Z</lastmod>
     
   </url>
   

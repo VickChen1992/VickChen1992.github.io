@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2016-09-21T02:25:04.162Z</updated>
+  <updated>2016-09-20T11:14:28.089Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -20,13 +20,10 @@
     <link href="http://yoursite.com/learn-markdown/"/>
     <id>http://yoursite.com/learn-markdown/</id>
     <published>2016-09-20T04:47:54.000Z</published>
-    <updated>2016-09-21T02:25:04.162Z</updated>
+    <updated>2016-09-20T11:14:28.089Z</updated>
     
     <content type="html"><![CDATA[<ol>
-<li><h3 id="什么是Markdown语法？"><a href="#什么是Markdown语法？" class="headerlink" title="什么是Markdown语法？"></a>什么是Markdown语法？</h3> Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。</li>
-</ol>
-<a id="more"></a>
-<ol>
+<li><h3 id="什么是Markdown语法？"><a href="#什么是Markdown语法？" class="headerlink" title="什么是Markdown语法？"></a>什么是Markdown语法？</h3> Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。<a id="more"></a></li>
 <li><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p> 在Markdown中，你只需要在文本前面加上# 即可，同理、你还可以增加二级标题、三级标题、四级标题、五级标题和六级标题，总共六级，只需要增加# 即可，标题字号相应降低。例如：</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 一级标题</div><div class="line">## 二级标题</div><div class="line">### 三级标题</div><div class="line">#### 四级标题</div><div class="line">##### 五级标题</div><div class="line">###### 六级标题</div></pre></td></tr></table></figure>
 <p> <img src="http://ww1.sinaimg.cn/large/9460f058gw1f7zypdyzhwj20gf09cq3i.jpg" alt=""></p>
@@ -146,8 +143,7 @@
     <summary type="html">
     
       &lt;ol&gt;
-&lt;li&gt;&lt;h3 id=&quot;什么是Markdown语法？&quot;&gt;&lt;a href=&quot;#什么是Markdown语法？&quot; class=&quot;headerlink&quot; title=&quot;什么是Markdown语法？&quot;&gt;&lt;/a&gt;什么是Markdown语法？&lt;/h3&gt; Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。&lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;&lt;h3 id=&quot;什么是Markdown语法？&quot;&gt;&lt;a href=&quot;#什么是Markdown语法？&quot; class=&quot;headerlink&quot; title=&quot;什么是Markdown语法？&quot;&gt;&lt;/a&gt;什么是Markdown语法？&lt;/h3&gt; Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。
     
     </summary>
     
@@ -163,17 +159,14 @@
     <link href="http://yoursite.com/create-hexo-blog-on-github/"/>
     <id>http://yoursite.com/create-hexo-blog-on-github/</id>
     <published>2016-09-19T16:41:53.000Z</published>
-    <updated>2016-09-21T02:25:21.231Z</updated>
+    <updated>2016-09-20T11:55:29.911Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
 <li>一个服务器（即博客的代码存放的地方，这里选用github）</li>
-<li>一个Blog生成工具（这里选用Hexo，类似的还有 WordPress，jekyll）</li>
+<li>一个Blog生成工具（这里选用Hexo，类似的还有 WordPress，jekyll）<a id="more"></a></li>
 </ul>
 </li>
-</ol>
-<a id="more"></a>
-<ol>
 <li><h3 id="介绍Git和GitHub"><a href="#介绍Git和GitHub" class="headerlink" title="介绍Git和GitHub"></a>介绍Git和GitHub</h3><p> Git，一个非常强大的版本管理工具。</p>
 <p> GitHub,一个基于Git的日益流行的开源项目托管库，也就是你的“代码仓库”（repository）。</p>
 <p> 你可以在本地或者网上对自己的代码进行修改，而Github就是一个将你对代码的任何修改和更改说明（commit）进行同步的一个工具，并且可以进行版本管理。在我们搭建博客的过程中，它就扮演着一个“云仓库”服务器的角色，存放我们的博客代码</p>
@@ -268,10 +261,7 @@
       &lt;ol&gt;
 &lt;li&gt;&lt;h3 id=&quot;前言：搭建博客的几大要素&quot;&gt;&lt;a href=&quot;#前言：搭建博客的几大要素&quot; class=&quot;headerlink&quot; title=&quot;前言：搭建博客的几大要素&quot;&gt;&lt;/a&gt;前言：搭建博客的几大要素&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;一个服务器（即博客的代码存放的地方，这里选用github）&lt;/li&gt;
-&lt;li&gt;一个Blog生成工具（这里选用Hexo，类似的还有 WordPress，jekyll）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;一个Blog生成工具（这里选用Hexo，类似的还有 WordPress，jekyll）
     
     </summary>
     
@@ -295,7 +285,7 @@
     <link href="http://yoursite.com/why-git/"/>
     <id>http://yoursite.com/why-git/</id>
     <published>2016-09-18T16:15:12.000Z</published>
-    <updated>2016-09-21T02:23:50.710Z</updated>
+    <updated>2016-09-20T07:09:50.685Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
@@ -305,14 +295,11 @@
 <ol>
 <li>跟踪修改过程。        </li>
 <li>自然的提交过程。这极大方便了代码细节演进过程的查看。</li>
-<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。</li>
+<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。<a id="more"></a></li>
 </ol>
 </li>
 </ul>
 </li>
-</ol>
-<a id="more"></a>
-<ol>
 <li><h3 id="修正提交"><a href="#修正提交" class="headerlink" title="修正提交"></a>修正提交</h3><ul>
 <li><p><code>Git</code>: 可以修正提交。</p>
 <p>使用功能分支工作流，在自己的分支可以方便修正提交而不会影响大家。</p>
@@ -372,7 +359,6 @@
 </ul>
 </li>
 </ol>
-<p><em>本文部分转载自 - <a href="https://github.com/xirong/my-git/blob/master/why-git.md" target="_blank" rel="external">SVN 和 Git 在日常使用中的明显差异</a></em></p>
 ]]></content>
     
     <summary type="html">
@@ -385,12 +371,7 @@
 &lt;ol&gt;
 &lt;li&gt;跟踪修改过程。        &lt;/li&gt;
 &lt;li&gt;自然的提交过程。这极大方便了代码细节演进过程的查看。&lt;/li&gt;
-&lt;li&gt;极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
+&lt;li&gt;极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。
     
     </summary>
     
@@ -410,10 +391,9 @@
     <link href="http://yoursite.com/about-git-installation/"/>
     <id>http://yoursite.com/about-git-installation/</id>
     <published>2016-09-16T19:49:38.000Z</published>
-    <updated>2016-09-21T02:25:34.409Z</updated>
+    <updated>2016-09-20T10:05:27.165Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
-<a id="more"></a>
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。<br><a id="more"></a></p>
 <h2 id="Git是什么"><a href="#Git是什么" class="headerlink" title="Git是什么"></a>Git是什么</h2><blockquote>
 <p>Git 是由 Linux 之父 Linus Tovalds 为了更好地管理linux内核开发而创立的分布式版本控制／软件配置管理软件。</p>
 </blockquote>
@@ -519,7 +499,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。&lt;/p&gt;
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。&lt;br&gt;
     
     </summary>
     
