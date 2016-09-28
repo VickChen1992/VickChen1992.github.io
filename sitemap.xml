@@ -2,51 +2,51 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/about-git-installation/</loc>
+    <loc>VickChen.win/about-git-installation/</loc>
     
-    <lastmod>2016-09-21T02:25:34.409Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/create-hexo-blog-on-github/</loc>
-    
-    <lastmod>2016-09-21T02:25:21.231Z</lastmod>
+    <lastmod>2016-09-21T02:25:34.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/learn-markdown/</loc>
+    <loc>VickChen.win/create-hexo-blog-on-github/</loc>
     
-    <lastmod>2016-09-21T02:25:04.162Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/why-git/</loc>
-    
-    <lastmod>2016-09-21T02:23:50.710Z</lastmod>
+    <lastmod>2016-09-21T02:25:21.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
+    <loc>VickChen.win/learn-markdown/</loc>
     
-    <lastmod>2016-09-20T07:55:22.378Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
-    
-    <lastmod>2016-09-20T07:50:52.039Z</lastmod>
+    <lastmod>2016-09-21T02:25:04.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/about/index.html</loc>
+    <loc>VickChen.win/why-git/</loc>
     
-    <lastmod>2016-09-20T06:56:56.571Z</lastmod>
+    <lastmod>2016-09-21T02:23:50.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/tags/index.html</loc>
+    
+    <lastmod>2016-09-20T07:55:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/categories/index.html</loc>
+    
+    <lastmod>2016-09-20T07:50:52.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/about/index.html</loc>
+    
+    <lastmod>2016-09-20T06:56:56.000Z</lastmod>
     
   </url>
   

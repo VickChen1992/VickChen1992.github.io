@@ -4,9 +4,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2016-09-21T02:25:04.162Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="VickChen.win/"/>
+  <updated>2016-09-21T02:25:04.000Z</updated>
+  <id>VickChen.win/</id>
   
   <author>
     <name>Vick</name>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>Markdown 入门</title>
-    <link href="http://yoursite.com/learn-markdown/"/>
-    <id>http://yoursite.com/learn-markdown/</id>
+    <link href="VickChen.win/learn-markdown/"/>
+    <id>VickChen.win/learn-markdown/</id>
     <published>2016-09-20T04:47:54.000Z</published>
-    <updated>2016-09-21T02:25:04.162Z</updated>
+    <updated>2016-09-21T02:25:04.000Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="什么是Markdown语法？"><a href="#什么是Markdown语法？" class="headerlink" title="什么是Markdown语法？"></a>什么是Markdown语法？</h3> Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。</li>
@@ -151,19 +151,19 @@
     
     </summary>
     
-      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="Markdown" scheme="http://yoursite.com/tags/Markdown/"/>
+      <category term="Markdown" scheme="VickChen.win/tags/Markdown/"/>
     
   </entry>
   
   <entry>
     <title>使用hexo在GitHub上搭建自己的bolg</title>
-    <link href="http://yoursite.com/create-hexo-blog-on-github/"/>
-    <id>http://yoursite.com/create-hexo-blog-on-github/</id>
+    <link href="VickChen.win/create-hexo-blog-on-github/"/>
+    <id>VickChen.win/create-hexo-blog-on-github/</id>
     <published>2016-09-19T16:41:53.000Z</published>
-    <updated>2016-09-21T02:25:21.231Z</updated>
+    <updated>2016-09-21T02:25:21.000Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
@@ -275,27 +275,27 @@
     
     </summary>
     
-      <category term="技术" scheme="http://yoursite.com/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+      <category term="Git" scheme="VickChen.win/tags/Git/"/>
     
-      <category term="GitHub" scheme="http://yoursite.com/tags/GitHub/"/>
+      <category term="GitHub" scheme="VickChen.win/tags/GitHub/"/>
     
-      <category term="Hexo" scheme="http://yoursite.com/tags/Hexo/"/>
+      <category term="Hexo" scheme="VickChen.win/tags/Hexo/"/>
     
-      <category term="Nodejs" scheme="http://yoursite.com/tags/Nodejs/"/>
+      <category term="Nodejs" scheme="VickChen.win/tags/Nodejs/"/>
     
-      <category term="npm" scheme="http://yoursite.com/tags/npm/"/>
+      <category term="npm" scheme="VickChen.win/tags/npm/"/>
     
   </entry>
   
   <entry>
     <title>SVN 与 Git 的区别</title>
-    <link href="http://yoursite.com/why-git/"/>
-    <id>http://yoursite.com/why-git/</id>
+    <link href="VickChen.win/why-git/"/>
+    <id>VickChen.win/why-git/</id>
     <published>2016-09-18T16:15:12.000Z</published>
-    <updated>2016-09-21T02:23:50.710Z</updated>
+    <updated>2016-09-21T02:23:50.000Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
@@ -394,23 +394,23 @@
     
     </summary>
     
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+      <category term="Git" scheme="VickChen.win/tags/Git/"/>
     
-      <category term="GitHub" scheme="http://yoursite.com/tags/GitHub/"/>
+      <category term="GitHub" scheme="VickChen.win/tags/GitHub/"/>
     
-      <category term="SVN" scheme="http://yoursite.com/tags/SVN/"/>
+      <category term="SVN" scheme="VickChen.win/tags/SVN/"/>
     
   </entry>
   
   <entry>
     <title>Git的安装与配置</title>
-    <link href="http://yoursite.com/about-git-installation/"/>
-    <id>http://yoursite.com/about-git-installation/</id>
+    <link href="VickChen.win/about-git-installation/"/>
+    <id>VickChen.win/about-git-installation/</id>
     <published>2016-09-16T19:49:38.000Z</published>
-    <updated>2016-09-21T02:25:34.409Z</updated>
+    <updated>2016-09-21T02:25:34.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
 <a id="more"></a>
@@ -523,12 +523,12 @@
     
     </summary>
     
-      <category term="工具" scheme="http://yoursite.com/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+      <category term="Git" scheme="VickChen.win/tags/Git/"/>
     
-      <category term="GitHub" scheme="http://yoursite.com/tags/GitHub/"/>
+      <category term="GitHub" scheme="VickChen.win/tags/GitHub/"/>
     
   </entry>
   
