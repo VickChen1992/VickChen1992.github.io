@@ -311,6 +311,13 @@
 
           
             
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/create-hexo-blog-on-github/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="create-hexo-blog-on-github/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -500,6 +507,13 @@
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -741,6 +755,27 @@
 
 
 
+  
+
+    <script type="text/javascript">
+      var disqus_shortname = 'vickchen-win';
+      var disqus_identifier = 'create-hexo-blog-on-github/';
+      var disqus_title = "使用hexo在GitHub上搭建自己的bolg";
+      var disqus_url = 'VickChen.win/create-hexo-blog-on-github/';
+
+      function run_disqus_script(disqus_script){
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+
+      run_disqus_script('count.js');
+      
+        run_disqus_script('embed.js');
+      
+    </script>
   
 
 
