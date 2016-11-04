@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>VickChen.win/sql-timestamp-to-cshap/</loc>
+    
+    <lastmod>2016-11-04T03:12:41.629Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>VickChen.win/proc-generate-entity-class/</loc>
     
-    <lastmod>2016-10-27T09:05:18.466Z</lastmod>
+    <lastmod>2016-11-03T09:05:54.956Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/find-value-in-db/</loc>
+    
+    <lastmod>2016-10-31T07:18:01.699Z</lastmod>
     
   </url>
   

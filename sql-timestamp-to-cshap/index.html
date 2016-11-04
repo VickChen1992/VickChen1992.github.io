@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Git,GitHub,SVN," />
+  <meta name="keywords" content="SQL,C#," />
 
 
 
@@ -86,37 +86,18 @@
 
 
 
-<meta name="description" content="合并对提交过程的保留
-Git: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。
-SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。
-  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：
-
-跟踪修改过程。        
-自然的提交过程。这极大方便了代码细节演进过程的查看。
-极大方便查出那行提交是什么时间、">
+<meta name="description" content="项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SVN 与 Git 的区别">
-<meta property="og:url" content="VickChen.win/why-git/index.html">
+<meta property="og:title" content="解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题">
+<meta property="og:url" content="VickChen.win/sql-timestamp-to-cshap/index.html">
 <meta property="og:site_name" content="Vick's Blog">
-<meta property="og:description" content="合并对提交过程的保留
-Git: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。
-SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。
-  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：
-
-跟踪修改过程。        
-自然的提交过程。这极大方便了代码细节演进过程的查看。
-极大方便查出那行提交是什么时间、">
-<meta property="og:updated_time" content="2016-09-21T02:23:50.710Z">
+<meta property="og:description" content="项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时">
+<meta property="og:image" content="http://shiyousan.com/UserFiles/images/2014/06/635373323909511292/000001.jpg">
+<meta property="og:updated_time" content="2016-11-04T03:12:41.629Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SVN 与 Git 的区别">
-<meta name="twitter:description" content="合并对提交过程的保留
-Git: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。
-SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。
-  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：
-
-跟踪修改过程。        
-自然的提交过程。这极大方便了代码细节演进过程的查看。
-极大方便查出那行提交是什么时间、">
+<meta name="twitter:title" content="解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题">
+<meta name="twitter:description" content="项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时">
+<meta name="twitter:image" content="http://shiyousan.com/UserFiles/images/2014/06/635373323909511292/000001.jpg">
 
 
 
@@ -137,9 +118,9 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
 
 
 
-  <link rel="canonical" href="VickChen.win/why-git/"/>
+  <link rel="canonical" href="VickChen.win/sql-timestamp-to-cshap/"/>
 
-  <title> SVN 与 Git 的区别 | Vick's Blog </title>
+  <title> 解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +260,7 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
             
             
               
-                SVN 与 Git 的区别
+                解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题
               
             
           </h1>
@@ -291,8 +272,8 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-19T00:15:12+08:00" content="2016-09-19">
-              2016-09-19
+            <time itemprop="dateCreated" datetime="2016-11-03T21:06:29+08:00" content="2016-11-03">
+              2016-11-03
             </time>
           </span>
 
@@ -305,8 +286,8 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -338,82 +319,30 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
       
 
       
-        <ol>
-<li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
-<li><code>Git</code>: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。</li>
-<li><p><code>SVN</code>: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。</p>
-<p>  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：</p>
-<ol>
-<li>跟踪修改过程。        </li>
-<li>自然的提交过程。这极大方便了代码细节演进过程的查看。</li>
-<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
+        <p> 项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。</p>
 <a id="more"></a>
-<ol>
-<li><h3 id="修正提交"><a href="#修正提交" class="headerlink" title="修正提交"></a>修正提交</h3><ul>
-<li><p><code>Git</code>: 可以修正提交。</p>
-<p>使用功能分支工作流，在自己的分支可以方便修正提交而不会影响大家。</p>
-</li>
-<li><p><code>SVN</code>: 一旦提交就到服务器上，实际使用中就是不能修改。</p>
-<p><em><code>SVN</code>可以在服务器上修改，因为过程复杂需要权限实际上从不会这样做</em></p>
-<p>实际使用中会有误提交的情况（如提交了一个不该提交的日志文件），对于svn来说，就是让大家一遍又一遍看到这个垃圾文件。</p>
-<p>没有干净的提交，严重影响了Code Review，增加成本。</p>
-<p>另外对于想了解演进过程的同学，垃圾提交影响了了解效果。</p>
-</li>
+<ul>
+<li><h3 id="SQL-Server-中timestamp类型的定义"><a href="#SQL-Server-中timestamp类型的定义" class="headerlink" title="SQL Server 中timestamp类型的定义"></a>SQL Server 中timestamp类型的定义</h3></li>
 </ul>
-</li>
-<li><h3 id="廉价好用的本地分支"><a href="#廉价好用的本地分支" class="headerlink" title="廉价好用的本地分支"></a>廉价好用的本地分支</h3><ul>
-<li><code>Git</code>: 有本地分支</li>
-<li><p><code>SVN</code>: 无本地分支</p>
-<p>git可以方便创建本地分支，且瞬间就可以完成创建。由于分支可以是本地的，也就不存在svn目录权限的问题。</p>
-<p>可以从想要工作点闪电般创建本地分支，本地实验不确定的修改，创建分支如此之廉价，git推荐创建分支来隔离修改。</p>
-</li>
+<p>首先看下timestamp在SQL Server 2005中的定义，该定义摘抄自SQL Server 2005联机丛书(具体详情 <a href="http://msdn.microsoft.com/zh-cn/library/ms182776(v=sql.90).aspx" target="_blank" rel="external">点此链接)</a>:</p>
+<blockquote>
+<p>timestamp 公开数据库中自动生成的唯一二进制数字的数据类型。timestamp 通常用作给表行加版本戳的机制。 存储大小为 8 个字节。 timestamp 数据类型只是递增的数字，不保留日期或时间。 若要记录日期或时间，请使用 datetime 数据类型。</p>
+<p>每个数据库都有一个计数器，当对数据库中包含 timestamp 列的表执行插入或更新操作时，该计数器值就会增加。 该计数器是数据库时间戳。 这可以跟踪数据库内的相对时间，而不是时钟相关联的实际时间。</p>
+<p>一个表只能有一个 timestamp 列， 每次修改或插入包含 timestamp 列的行时，就会在 timestamp 列中插入增量数据库时间戳值。 这一属性使 timestamp 列不适合作为键使用，尤其是不能作为主键使用。</p>
+<p>对数据行(row)的任何更新都会更改 timestamp 值，从而更改键值。 如果该列属于主键，那么旧的键值将无效，进而引用该旧值的外键也将不再有效。 如果该表在动态游标中引用，则所有更新均会更改游标中行的位置。 如果该列属于索引键，则对数据行的所有更新还将导致索引更新。</p>
+<p>使用某一行中的 timestamp 列可以很容易地确定该行中的任何值自上次读取以后是否发生了更改。 如果对行进行了更改，就会更新该时间戳值。 如果没有对行进行更改，则该时间戳值将与以前读取该行时的时间戳值一致。 若要返回数据库的当前时间戳值，请使用 @@DBTS。</p>
+<p>Transact-SQL timestamp 数据类型不同于在 SQL-2003 标准中定义的 timestamp 数据类型。 SQL-2003 timestamp 数据类型等同于 Transact-SQL datetime 数据类型。</p>
+<p>rowversion 的数据类型为 timestamp 数据类型的同义词，并具有数据类型同义词的行为。 在 DDL 语句，请尽量使用 rowversion 而不是 timestamp。 有关详细信息，请参阅 <a href="http://msdn.microsoft.com/zh-cn/library/ms177566(v=sql.90).aspx" target="_blank" rel="external">数据类型同义词 (Transact-SQL)</a> </p>
+</blockquote>
+<ul>
+<li><h3 id="解决数据库中timestamp类型和C-中byte-类型转换问题"><a href="#解决数据库中timestamp类型和C-中byte-类型转换问题" class="headerlink" title="解决数据库中timestamp类型和C#中byte[]类型转换问题"></a>解决数据库中timestamp类型和C#中byte[]类型转换问题</h3></li>
 </ul>
-</li>
-<li><h3 id="更强大智能的合并能力"><a href="#更强大智能的合并能力" class="headerlink" title="更强大智能的合并能力"></a>更强大智能的合并能力</h3><ul>
-<li><code>Git</code>: 重命名（无论文件还是目录）提交可以合并上文件重命名前的这些文件的提交。</li>
-<li><p><code>SVN</code>: 重命名（无论文件还是目录）提交后，你本地/或是分支上 有文件重命名前的这些文件的修改或提交，在做合并操作时，恭喜，你会碰上传说中难搞的树冲突！</p>
-<p>因为惧怕svn树冲突，在包名调整（重命名目录）或类名调整（重命名文件）前，我不得不先向一起开发的组员广播：</p>
-</li>
-</ul>
-<ol>
-<li>提交你的修改</li>
-<li>暂停相关类的修改</li>
-<li>我开始做调整</li>
-<li><p>等我修改好后，你再开始修改</p>
-<p>因为这个过程烦琐，结果就是影响了大家去做这样重构操作的积极性，进而影响项目的代码质量改进</p>
-</li>
-</ol>
-</li>
-<li><h3 id="灵活、迅速"><a href="#灵活、迅速" class="headerlink" title="灵活、迅速"></a>灵活、迅速</h3><ul>
-<li><p>打断开发</p>
-<p>  在开发新功能过程中，突然需要你去修复一个Bug，使用Git，你可以直接 保存贮藏/提交当前改动到本地，然后切换到主分支去修复Bug，之后 弹出贮藏/切换回你原来的分支 继续开发。</p>
-</li>
-<li><p>小步提交，互不干扰</p>
-<p>  并行开发过程中各开发人员可以随时多次commit代码且互不影响，最后在merage到主分支，并且能记录所有成员的所有commint记录。SVN只能大量的一次性提交到中心库。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="日志查看"><a href="#日志查看" class="headerlink" title="日志查看"></a>日志查看</h3><ul>
-<li><code>Git</code>: 本地包含了完整的日志，速度极快（并且无需网络)</li>
-<li><code>SVN</code>: 需要从服务拉取。</li>
-</ul>
-</li>
-<li><h3 id="Github-全球最大的开源社区"><a href="#Github-全球最大的开源社区" class="headerlink" title="Github-全球最大的开源社区"></a>Github-全球最大的开源社区</h3><ul>
-<li><p>全球顶级科技公司纷纷加入 GitHub ，并贡献他们自己的项目代码</p>
-<p>  Google: <a href="https://github.com/google" target="_blank" rel="external">https://github.com/google</a><br>  苹果: <a href="https://github.com/apple" target="_blank" rel="external">https://github.com/apple</a><br>  Facebook: <a href="https://github.com/facebook" target="_blank" rel="external">https://github.com/facebook</a><br>  Twitter：<a href="https://github.com/twitter" target="_blank" rel="external">https://github.com/twitter</a><br>  微软：<a href="https://github.com/microsoft" target="_blank" rel="external">https://github.com/microsoft</a><br>  Square：<a href="https://github.com/square" target="_blank" rel="external">https://github.com/square</a><br>  阿里：<a href="https://github.com/alibaba" target="_blank" rel="external">https://github.com/alibaba</a><br>  …</p>
-</li>
-<li><p>全球顶级开源项目都优先选择在 GitHub 上开源</p>
-<p>  Linux：<a href="https://github.com/torvalds/linux" target="_blank" rel="external">https://github.com/torvalds/linux</a><br>  Android：<a href="https://github.com/owncloud/android" target="_blank" rel="external">https://github.com/owncloud/android</a><br>  Rails：<a href="https://github.com/rails/rails" target="_blank" rel="external">https://github.com/rails/rails</a><br>  Nodejs：<a href="https://github.com/nodejs/node" target="_blank" rel="external">https://github.com/nodejs/node</a><br>  Swift：<a href="https://github.com/apple/swift" target="_blank" rel="external">https://github.com/apple/swift</a><br>  CoffeeScript：<a href="https://github.com/jashkenas/coffeescript" target="_blank" rel="external">https://github.com/jashkenas/coffeescript</a><br>  Ruby：<a href="https://github.com/ruby/ruby" target="_blank" rel="external">https://github.com/ruby/ruby</a><br>  …</p>
-</li>
-</ul>
-</li>
-</ol>
-<p><em>本文部分转载自 - <a href="https://github.com/xirong/my-git/blob/master/why-git.md" target="_blank" rel="external">SVN 和 Git 在日常使用中的明显差异</a></em></p>
+<p>在程序中我们发现，通过ADO.NET获取数据库中timestamp字段值到程序中，结果类型为byte[]。假设在数据库中timestamp的值为0x00000000000007D6，那么获取到.net程序中的值就不是这样了，一把来说会变成byte[]的数组类型。那么我们的解决方式有两种，第一种方式是直接在数据库中将timestamp进行转换，可以转换成十六进制字符串类型或者BIGINT的长整形，这也是我推荐的方法。还有一种是在.NET 程序中使用BitConverter方法进行转换。以下是两种方式的代码：</p>
+<h4 id="方法一（在SQL中转换）："><a href="#方法一（在SQL中转换）：" class="headerlink" title="方法一（在SQL中转换）："></a>方法一（在SQL中转换）：</h4> <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> TS</div><div class="line">,<span class="keyword">CAST</span>(TS <span class="keyword">AS</span> VARBINARY(<span class="number">8</span>)) <span class="keyword">AS</span> <span class="string">'timestamp转十六进制字符串'</span> </div><div class="line">,<span class="keyword">CONVERT</span>(<span class="built_in">BIGINT</span>,TS) <span class="keyword">AS</span> <span class="string">'timestamp转bigint类型'</span></div><div class="line"><span class="keyword">FROM</span> tb_Ts</div></pre></td></tr></table></figure>
+<p> 这样一来我们就可以获取到timestamp的十六进制字符串或者bigint，最终查询出来的结果如下图：<br> <img src="http://shiyousan.com/UserFiles/images/2014/06/635373323909511292/000001.jpg" alt=""></p>
+<p> 另外要说明的一点是，VARBINARY(8)对应的c# 类型是byte[]，所以建议直接转换成bigint类型，否则在C#中还要调用下面的方法</p>
+<h4 id="方法二（在程序中转换-调用下面的方法即可）："><a href="#方法二（在程序中转换-调用下面的方法即可）：" class="headerlink" title="方法二（在程序中转换,调用下面的方法即可）："></a>方法二（在程序中转换,调用下面的方法即可）：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 将数据库中timespan转换成十六进制字符串</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="comment">/// &lt;param name="objTs"&gt;从数据库中获取的timespan值&lt;/param&gt;      </span></div><div class="line"><span class="comment">/// &lt;returns&gt;timespan十六进制字符串&lt;/returns&gt;</span></div><div class="line"><span class="function"><span class="keyword">public</span>  string <span class="title">ConvertToTimeSpanString</span><span class="params">(object objTs)</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">byte</span>[] btTsArray=objTs as <span class="keyword">byte</span>[];</div><div class="line">String strTimeSpan = <span class="string">"0x"</span>+ BitConverter.ToString(btTsArray).Replace(<span class="string">"-"</span>,<span class="string">""</span>);</div><div class="line"><span class="keyword">return</span> strTimeSpan;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em>参考:<a href="http://shiyousan.com/post/635373323909511292" target="_blank" rel="external">十有三博客</a></em></p>
 
       
     </div>
@@ -436,11 +365,9 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
       
         <div class="post-tags">
           
-            <a href="/tags/Git/" rel="tag">#Git</a>
+            <a href="/tags/SQL/" rel="tag">#SQL</a>
           
-            <a href="/tags/GitHub/" rel="tag">#GitHub</a>
-          
-            <a href="/tags/SVN/" rel="tag">#SVN</a>
+            <a href="/tags/C/" rel="tag">#C#</a>
           
         </div>
       
@@ -449,17 +376,13 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/about-git-installation/" rel="next" title="Git的安装与配置">
-                <i class="fa fa-chevron-left"></i> Git的安装与配置
+              <a href="/find-value-in-db/" rel="next" title="查询整个数据库中某个特定值所在的位置">
+                <i class="fa fa-chevron-left"></i> 查询整个数据库中某个特定值所在的位置
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/create-hexo-blog-on-github/" rel="prev" title="使用hexo在GitHub上搭建自己的bolg">
-                使用hexo在GitHub上搭建自己的bolg <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -609,7 +532,7 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#合并对提交过程的保留"><span class="nav-number">1.</span> <span class="nav-text">合并对提交过程的保留</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修正提交"><span class="nav-number">2.</span> <span class="nav-text">修正提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#廉价好用的本地分支"><span class="nav-number">3.</span> <span class="nav-text">廉价好用的本地分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更强大智能的合并能力"><span class="nav-number">4.</span> <span class="nav-text">更强大智能的合并能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#灵活、迅速"><span class="nav-number">5.</span> <span class="nav-text">灵活、迅速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志查看"><span class="nav-number">6.</span> <span class="nav-text">日志查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-全球最大的开源社区"><span class="nav-number">7.</span> <span class="nav-text">Github-全球最大的开源社区</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-Server-中timestamp类型的定义"><span class="nav-number">1.</span> <span class="nav-text">SQL Server 中timestamp类型的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决数据库中timestamp类型和C-中byte-类型转换问题"><span class="nav-number">2.</span> <span class="nav-text">解决数据库中timestamp类型和C#中byte[]类型转换问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法一（在SQL中转换）："><span class="nav-number">2.1.</span> <span class="nav-text">方法一（在SQL中转换）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法二（在程序中转换-调用下面的方法即可）："><span class="nav-number">2.2.</span> <span class="nav-text">方法二（在程序中转换,调用下面的方法即可）：</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

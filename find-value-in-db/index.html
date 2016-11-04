@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Git,GitHub,SVN," />
+  <meta name="keywords" content="SQL," />
 
 
 
@@ -86,37 +86,19 @@
 
 
 
-<meta name="description" content="合并对提交过程的保留
-Git: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。
-SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。
-  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：
-
-跟踪修改过程。        
-自然的提交过程。这极大方便了代码细节演进过程的查看。
-极大方便查出那行提交是什么时间、">
+<meta name="description" content="有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。
+前提是要将这个存储过程放在所查询的数据库。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SVN 与 Git 的区别">
-<meta property="og:url" content="VickChen.win/why-git/index.html">
+<meta property="og:title" content="查询整个数据库中某个特定值所在的位置">
+<meta property="og:url" content="VickChen.win/find-value-in-db/index.html">
 <meta property="og:site_name" content="Vick's Blog">
-<meta property="og:description" content="合并对提交过程的保留
-Git: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。
-SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。
-  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：
-
-跟踪修改过程。        
-自然的提交过程。这极大方便了代码细节演进过程的查看。
-极大方便查出那行提交是什么时间、">
-<meta property="og:updated_time" content="2016-09-21T02:23:50.710Z">
+<meta property="og:description" content="有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。
+前提是要将这个存储过程放在所查询的数据库。">
+<meta property="og:updated_time" content="2016-10-31T07:18:01.699Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="SVN 与 Git 的区别">
-<meta name="twitter:description" content="合并对提交过程的保留
-Git: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。
-SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。
-  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：
-
-跟踪修改过程。        
-自然的提交过程。这极大方便了代码细节演进过程的查看。
-极大方便查出那行提交是什么时间、">
+<meta name="twitter:title" content="查询整个数据库中某个特定值所在的位置">
+<meta name="twitter:description" content="有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。
+前提是要将这个存储过程放在所查询的数据库。">
 
 
 
@@ -137,9 +119,9 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
 
 
 
-  <link rel="canonical" href="VickChen.win/why-git/"/>
+  <link rel="canonical" href="VickChen.win/find-value-in-db/"/>
 
-  <title> SVN 与 Git 的区别 | Vick's Blog </title>
+  <title> 查询整个数据库中某个特定值所在的位置 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -279,7 +261,7 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
             
             
               
-                SVN 与 Git 的区别
+                查询整个数据库中某个特定值所在的位置
               
             
           </h1>
@@ -291,8 +273,8 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-19T00:15:12+08:00" content="2016-09-19">
-              2016-09-19
+            <time itemprop="dateCreated" datetime="2016-10-31T23:15:48+08:00" content="2016-10-31">
+              2016-10-31
             </time>
           </span>
 
@@ -305,8 +287,8 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -338,83 +320,10 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
       
 
       
-        <ol>
-<li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
-<li><code>Git</code>: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。</li>
-<li><p><code>SVN</code>: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。</p>
-<p>  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：</p>
-<ol>
-<li>跟踪修改过程。        </li>
-<li>自然的提交过程。这极大方便了代码细节演进过程的查看。</li>
-<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
+        <p>有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。</p>
+<p>前提是要将这个存储过程放在所查询的数据库。</p>
 <a id="more"></a>
-<ol>
-<li><h3 id="修正提交"><a href="#修正提交" class="headerlink" title="修正提交"></a>修正提交</h3><ul>
-<li><p><code>Git</code>: 可以修正提交。</p>
-<p>使用功能分支工作流，在自己的分支可以方便修正提交而不会影响大家。</p>
-</li>
-<li><p><code>SVN</code>: 一旦提交就到服务器上，实际使用中就是不能修改。</p>
-<p><em><code>SVN</code>可以在服务器上修改，因为过程复杂需要权限实际上从不会这样做</em></p>
-<p>实际使用中会有误提交的情况（如提交了一个不该提交的日志文件），对于svn来说，就是让大家一遍又一遍看到这个垃圾文件。</p>
-<p>没有干净的提交，严重影响了Code Review，增加成本。</p>
-<p>另外对于想了解演进过程的同学，垃圾提交影响了了解效果。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="廉价好用的本地分支"><a href="#廉价好用的本地分支" class="headerlink" title="廉价好用的本地分支"></a>廉价好用的本地分支</h3><ul>
-<li><code>Git</code>: 有本地分支</li>
-<li><p><code>SVN</code>: 无本地分支</p>
-<p>git可以方便创建本地分支，且瞬间就可以完成创建。由于分支可以是本地的，也就不存在svn目录权限的问题。</p>
-<p>可以从想要工作点闪电般创建本地分支，本地实验不确定的修改，创建分支如此之廉价，git推荐创建分支来隔离修改。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="更强大智能的合并能力"><a href="#更强大智能的合并能力" class="headerlink" title="更强大智能的合并能力"></a>更强大智能的合并能力</h3><ul>
-<li><code>Git</code>: 重命名（无论文件还是目录）提交可以合并上文件重命名前的这些文件的提交。</li>
-<li><p><code>SVN</code>: 重命名（无论文件还是目录）提交后，你本地/或是分支上 有文件重命名前的这些文件的修改或提交，在做合并操作时，恭喜，你会碰上传说中难搞的树冲突！</p>
-<p>因为惧怕svn树冲突，在包名调整（重命名目录）或类名调整（重命名文件）前，我不得不先向一起开发的组员广播：</p>
-</li>
-</ul>
-<ol>
-<li>提交你的修改</li>
-<li>暂停相关类的修改</li>
-<li>我开始做调整</li>
-<li><p>等我修改好后，你再开始修改</p>
-<p>因为这个过程烦琐，结果就是影响了大家去做这样重构操作的积极性，进而影响项目的代码质量改进</p>
-</li>
-</ol>
-</li>
-<li><h3 id="灵活、迅速"><a href="#灵活、迅速" class="headerlink" title="灵活、迅速"></a>灵活、迅速</h3><ul>
-<li><p>打断开发</p>
-<p>  在开发新功能过程中，突然需要你去修复一个Bug，使用Git，你可以直接 保存贮藏/提交当前改动到本地，然后切换到主分支去修复Bug，之后 弹出贮藏/切换回你原来的分支 继续开发。</p>
-</li>
-<li><p>小步提交，互不干扰</p>
-<p>  并行开发过程中各开发人员可以随时多次commit代码且互不影响，最后在merage到主分支，并且能记录所有成员的所有commint记录。SVN只能大量的一次性提交到中心库。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="日志查看"><a href="#日志查看" class="headerlink" title="日志查看"></a>日志查看</h3><ul>
-<li><code>Git</code>: 本地包含了完整的日志，速度极快（并且无需网络)</li>
-<li><code>SVN</code>: 需要从服务拉取。</li>
-</ul>
-</li>
-<li><h3 id="Github-全球最大的开源社区"><a href="#Github-全球最大的开源社区" class="headerlink" title="Github-全球最大的开源社区"></a>Github-全球最大的开源社区</h3><ul>
-<li><p>全球顶级科技公司纷纷加入 GitHub ，并贡献他们自己的项目代码</p>
-<p>  Google: <a href="https://github.com/google" target="_blank" rel="external">https://github.com/google</a><br>  苹果: <a href="https://github.com/apple" target="_blank" rel="external">https://github.com/apple</a><br>  Facebook: <a href="https://github.com/facebook" target="_blank" rel="external">https://github.com/facebook</a><br>  Twitter：<a href="https://github.com/twitter" target="_blank" rel="external">https://github.com/twitter</a><br>  微软：<a href="https://github.com/microsoft" target="_blank" rel="external">https://github.com/microsoft</a><br>  Square：<a href="https://github.com/square" target="_blank" rel="external">https://github.com/square</a><br>  阿里：<a href="https://github.com/alibaba" target="_blank" rel="external">https://github.com/alibaba</a><br>  …</p>
-</li>
-<li><p>全球顶级开源项目都优先选择在 GitHub 上开源</p>
-<p>  Linux：<a href="https://github.com/torvalds/linux" target="_blank" rel="external">https://github.com/torvalds/linux</a><br>  Android：<a href="https://github.com/owncloud/android" target="_blank" rel="external">https://github.com/owncloud/android</a><br>  Rails：<a href="https://github.com/rails/rails" target="_blank" rel="external">https://github.com/rails/rails</a><br>  Nodejs：<a href="https://github.com/nodejs/node" target="_blank" rel="external">https://github.com/nodejs/node</a><br>  Swift：<a href="https://github.com/apple/swift" target="_blank" rel="external">https://github.com/apple/swift</a><br>  CoffeeScript：<a href="https://github.com/jashkenas/coffeescript" target="_blank" rel="external">https://github.com/jashkenas/coffeescript</a><br>  Ruby：<a href="https://github.com/ruby/ruby" target="_blank" rel="external">https://github.com/ruby/ruby</a><br>  …</p>
-</li>
-</ul>
-</li>
-</ol>
-<p><em>本文部分转载自 - <a href="https://github.com/xirong/my-git/blob/master/why-git.md" target="_blank" rel="external">SVN 和 Git 在日常使用中的明显差异</a></em></p>
-
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> [dbo].[SP_FindValueInDB]</div><div class="line">(</div><div class="line">    @<span class="keyword">value</span> <span class="built_in">VARCHAR</span>(<span class="number">1024</span>)</div><div class="line">)        </div><div class="line"><span class="keyword">AS</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">    <span class="comment">-- SET NOCOUNT ON added to prevent extra result sets from</span></div><div class="line">    <span class="comment">-- interfering with SELECT statements.</span></div><div class="line"><span class="keyword">SET</span> NOCOUNT <span class="keyword">ON</span>;</div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">sql</span> <span class="built_in">VARCHAR</span>(<span class="number">1024</span>) </div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">table</span> <span class="built_in">VARCHAR</span>(<span class="number">64</span>) </div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">column</span> <span class="built_in">VARCHAR</span>(<span class="number">64</span>) </div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #t ( </div><div class="line">    tablename <span class="built_in">VARCHAR</span>(<span class="number">64</span>), </div><div class="line">    columnname <span class="built_in">VARCHAR</span>(<span class="number">64</span>) </div><div class="line">) </div><div class="line"></div><div class="line"><span class="keyword">DECLARE</span> <span class="keyword">TABLES</span> <span class="keyword">CURSOR</span> </div><div class="line"><span class="keyword">FOR</span> </div><div class="line"></div><div class="line">    <span class="keyword">SELECT</span> o.name, c.name </div><div class="line">    <span class="keyword">FROM</span> syscolumns c </div><div class="line">    <span class="keyword">INNER</span> <span class="keyword">JOIN</span> sysobjects o <span class="keyword">ON</span> c.id = o.id </div><div class="line">    <span class="keyword">WHERE</span> o.type = <span class="string">'U'</span> <span class="keyword">AND</span> c.xtype <span class="keyword">IN</span> (<span class="number">167</span>, <span class="number">175</span>, <span class="number">231</span>, <span class="number">239</span>) </div><div class="line">    <span class="keyword">ORDER</span> <span class="keyword">BY</span> o.name, c.name </div><div class="line"></div><div class="line"><span class="keyword">OPEN</span> <span class="keyword">TABLES</span> </div><div class="line"></div><div class="line"><span class="keyword">FETCH</span> <span class="keyword">NEXT</span> <span class="keyword">FROM</span> <span class="keyword">TABLES</span> </div><div class="line"><span class="keyword">INTO</span> @<span class="keyword">table</span>, @<span class="keyword">column</span> </div><div class="line"></div><div class="line"><span class="keyword">WHILE</span> @@FETCH_STATUS = <span class="number">0</span> </div><div class="line"><span class="keyword">BEGIN</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = <span class="string">'IF EXISTS(SELECT NULL FROM ['</span> + @<span class="keyword">table</span> + <span class="string">'] '</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = @<span class="keyword">sql</span> + <span class="string">'WHERE RTRIM(LTRIM(['</span> + @<span class="keyword">column</span> + <span class="string">'])) LIKE ''%'</span> + @<span class="keyword">value</span> + <span class="string">'%'') '</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = @<span class="keyword">sql</span> + <span class="string">'INSERT INTO #t VALUES ('''</span> + @<span class="keyword">table</span> + <span class="string">''', '''</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = @<span class="keyword">sql</span> + @<span class="keyword">column</span> + <span class="string">''')'</span> </div><div class="line"></div><div class="line">    EXEC(@<span class="keyword">sql</span>) </div><div class="line"></div><div class="line">    <span class="keyword">FETCH</span> <span class="keyword">NEXT</span> <span class="keyword">FROM</span> <span class="keyword">TABLES</span> </div><div class="line">    <span class="keyword">INTO</span> @<span class="keyword">table</span>, @<span class="keyword">column</span> </div><div class="line"><span class="keyword">END</span> </div><div class="line"></div><div class="line"><span class="keyword">CLOSE</span> <span class="keyword">TABLES</span> </div><div class="line"><span class="keyword">DEALLOCATE</span> <span class="keyword">TABLES</span> </div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * </div><div class="line"><span class="keyword">FROM</span> #t </div><div class="line"></div><div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> #t </div><div class="line"></div><div class="line"><span class="keyword">End</span></div></pre></td></tr></table></figure>
       
     </div>
 
@@ -436,11 +345,7 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
       
         <div class="post-tags">
           
-            <a href="/tags/Git/" rel="tag">#Git</a>
-          
-            <a href="/tags/GitHub/" rel="tag">#GitHub</a>
-          
-            <a href="/tags/SVN/" rel="tag">#SVN</a>
+            <a href="/tags/SQL/" rel="tag">#SQL</a>
           
         </div>
       
@@ -449,16 +354,16 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/about-git-installation/" rel="next" title="Git的安装与配置">
-                <i class="fa fa-chevron-left"></i> Git的安装与配置
+              <a href="/proc-generate-entity-class/" rel="next" title="用存储过程生成实体类">
+                <i class="fa fa-chevron-left"></i> 用存储过程生成实体类
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/create-hexo-blog-on-github/" rel="prev" title="使用hexo在GitHub上搭建自己的bolg">
-                使用hexo在GitHub上搭建自己的bolg <i class="fa fa-chevron-right"></i>
+              <a href="/sql-timestamp-to-cshap/" rel="prev" title="解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题">
+                解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -609,7 +514,7 @@ SVN: 合并操作把来源多个提交合并成了一个合并提交，即在提
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#合并对提交过程的保留"><span class="nav-number">1.</span> <span class="nav-text">合并对提交过程的保留</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修正提交"><span class="nav-number">2.</span> <span class="nav-text">修正提交</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#廉价好用的本地分支"><span class="nav-number">3.</span> <span class="nav-text">廉价好用的本地分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更强大智能的合并能力"><span class="nav-number">4.</span> <span class="nav-text">更强大智能的合并能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#灵活、迅速"><span class="nav-number">5.</span> <span class="nav-text">灵活、迅速</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志查看"><span class="nav-number">6.</span> <span class="nav-text">日志查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Github-全球最大的开源社区"><span class="nav-number">7.</span> <span class="nav-text">Github-全球最大的开源社区</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
