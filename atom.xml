@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2016-11-04T03:12:41.629Z</updated>
+  <updated>2016-11-04T03:12:41.000Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="VickChen.win/sql-timestamp-to-cshap/"/>
     <id>VickChen.win/sql-timestamp-to-cshap/</id>
     <published>2016-11-03T13:06:29.000Z</published>
-    <updated>2016-11-04T03:12:41.629Z</updated>
+    <updated>2016-11-04T03:12:41.000Z</updated>
     
     <content type="html"><![CDATA[<p> 项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。</p>
 <a id="more"></a>
@@ -68,7 +68,7 @@
     <link href="VickChen.win/find-value-in-db/"/>
     <id>VickChen.win/find-value-in-db/</id>
     <published>2016-10-31T15:15:48.000Z</published>
-    <updated>2016-11-04T03:39:34.796Z</updated>
+    <updated>2016-11-04T03:39:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。</p>
 <p>前提是要将这个存储过程放在所查询的数据库。</p>
@@ -96,7 +96,7 @@
     <link href="VickChen.win/proc-generate-entity-class/"/>
     <id>VickChen.win/proc-generate-entity-class/</id>
     <published>2016-10-26T13:46:18.000Z</published>
-    <updated>2016-11-03T09:05:54.956Z</updated>
+    <updated>2016-11-03T09:05:54.000Z</updated>
     
     <content type="html"><![CDATA[<p>其实网上已经有有很多实体类生成工具的存在,但多了解点知识总是没错的.</p>
 <a id="more"></a>
@@ -123,7 +123,7 @@
     <link href="VickChen.win/learn-markdown/"/>
     <id>VickChen.win/learn-markdown/</id>
     <published>2016-09-20T04:47:54.000Z</published>
-    <updated>2016-09-21T02:25:04.162Z</updated>
+    <updated>2016-09-21T02:25:04.000Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="什么是Markdown语法？"><a href="#什么是Markdown语法？" class="headerlink" title="什么是Markdown语法？"></a>什么是Markdown语法？</h3> Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。</li>
@@ -266,7 +266,7 @@
     <link href="VickChen.win/create-hexo-blog-on-github/"/>
     <id>VickChen.win/create-hexo-blog-on-github/</id>
     <published>2016-09-19T16:41:53.000Z</published>
-    <updated>2016-09-21T02:25:21.231Z</updated>
+    <updated>2016-09-21T02:25:21.000Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
@@ -398,7 +398,7 @@
     <link href="VickChen.win/why-git/"/>
     <id>VickChen.win/why-git/</id>
     <published>2016-09-18T16:15:12.000Z</published>
-    <updated>2016-09-21T02:23:50.710Z</updated>
+    <updated>2016-09-21T02:23:50.000Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
@@ -513,7 +513,7 @@
     <link href="VickChen.win/about-git-installation/"/>
     <id>VickChen.win/about-git-installation/</id>
     <published>2016-09-16T19:49:38.000Z</published>
-    <updated>2016-09-21T02:25:34.409Z</updated>
+    <updated>2016-09-21T02:25:34.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
 <a id="more"></a>
