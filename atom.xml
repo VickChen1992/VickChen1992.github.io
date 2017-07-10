@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2017-07-10T06:23:05.813Z</updated>
+  <updated>2017-07-10T08:07:13.683Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,11 +16,90 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>分部视图的使用</title>
+    <link href="VickChen.win/2017/how-to-use-partial-views/"/>
+    <id>VickChen.win/2017/how-to-use-partial-views/</id>
+    <published>2017-05-20T17:10:52.000Z</published>
+    <updated>2017-07-10T08:07:13.683Z</updated>
+    
+    <content type="html"><![CDATA[<p>提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。</p>
+<p>要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：</p>
+<ol>
+<li><p>分部视图可以使系统插件化。我现在非常推崇一个原则，就是可以分离的东西绝对不要让他们在一起，因为只有每个功能模块都是单独的，我们才可以在其他位置重用它。</p>
+</li>
+<li><p>分部视图还可以带来一个优点，就是分工合作。现在是一个合作的时代，没有任何一个人可以单独完成规定的任务而不与别人合作，牛人例外。分部视图可以带给我们开发不同模块中的分工合作。</p>
+</li>
+<li><p>分部视图还有一个在Mvc时代的优点，就是实现简单。我自从学习使用Mvc以后，我基本上就很少写web form的代码了，因为我感觉没有Mvc写的那么流畅。html.partial(partialName)就可以显示一个分部视图的页面。</p>
+</li>
+</ol>
+<a id="more"></a>
+<p>简单的叙述了一下优点，既然我们能发现优点存在，那么我们就想在实际项目中更好的使用它，毕竟程序员都追求懒，一段代码，三句可以搞定，绝对不会写三句半，当然最小化原则也是我们代码优化的最终目的。</p>
+<p>那么究竟在Mvc中有哪些可以实现分部视图的功能呢？以及我们要注意点什么呢？</p>
+<ul>
+<li><p>Html.Partial(partialName)和html.RenderPartial(partialName) 就是首选。<br>其实这两个方法我们可以指定任何的.cshtml文件，不一定只是分部视图。大家来回忆一下分部视图和视图的区别在哪里？就是视图有head、body标签，可以定义js，可以指定母板页，但是在我们用Vs右键添加分部视图的时候，我们会看到只是一些基本的html标签，没有任何的head、body，但是这不等于我们不可以添加，所以说partialName可以是任何的视图文件。但是我们最好是创建分部视图，因为我们最终是要把这些分部视图合并成为一个页面，如果只是分部视图的html标签，那么在整体页面中html标签就会显得很干净。</p>
+</li>
+<li><p>不要在分部视图中定义或者引用css以及js。如果需要我们在整体页面中定义或引用。原因有2：</p>
+<ol>
+<li><p>是我们的分部视图文件和整体页面的路径可能不在同一个目录下，那么会造成找不到css或js文件的情况。</p>
+</li>
+<li><p>对整体页面的html代码是一种伤害。</p>
+</li>
+</ol>
+</li>
+<li><p>html.Action和html.RenderAction()方法也可以用来作为分部视图使用.具体使用方式我想就不需要细说了，大家对htmlHelper都会非常熟悉，因为常用嘛。</p>
+</li>
+</ul>
+<p>这段时间就大量的使用到了分部视图，现在来总结一下，让后来的学习者少走一点弯路。</p>
+<ol>
+<li><p>如果可以，尽量使用母板页，这样可以很好的控制网站的样式。</p>
+</li>
+<li><p>采用单独的css文件，单独的js文件，尽量不要在分部视图中定义样式，而是在整体页面中。</p>
+</li>
+<li><p>分部视图的html标签应该尽可能的少，除了要显示的内容之外，不要有任何杂质存在。样式css、js等在整体页面添加。</p>
+</li>
+<li><p>如果可以，尽量采用html.partial(partialName)或html.RenderPartial(partialName)的方式，而不要用html.Action来作为分部视图的方式，因为这种方法会和控制器交互。</p>
+</li>
+<li><p>对分部视图的传值尽量采用Model的方式进行，如果一个分部视图需要传递两个参数，那么我建议你分成两个分部视图。</p>
+</li>
+<li><p>采用分部视图会对整体页面的样式调整带来困难，所以我建议先整体做出页面，然后再分成不同的分部视图。</p>
+</li>
+<li><p>过多的分部视图会增加服务器的延迟，所以分部视图的控制要得当，我建议控制在10个以内吧，如果服务器允许，更多也是可以的。</p>
+</li>
+<li><p>要注意分部视图的标签id的命名，最好采用固定的要规则的命名方式，尽量减少冲突的发生，毕竟同名的标签存在会对程序造成隐患。</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。&lt;/p&gt;
+&lt;p&gt;要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;分部视图可以使系统插件化。我现在非常推崇一个原则，就是可以分离的东西绝对不要让他们在一起，因为只有每个功能模块都是单独的，我们才可以在其他位置重用它。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;分部视图还可以带来一个优点，就是分工合作。现在是一个合作的时代，没有任何一个人可以单独完成规定的任务而不与别人合作，牛人例外。分部视图可以带给我们开发不同模块中的分工合作。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;分部视图还有一个在Mvc时代的优点，就是实现简单。我自从学习使用Mvc以后，我基本上就很少写web form的代码了，因为我感觉没有Mvc写的那么流畅。html.partial(partialName)就可以显示一个分部视图的页面。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C#" scheme="VickChen.win/tags/C/"/>
+    
+      <category term="MVC" scheme="VickChen.win/tags/MVC/"/>
+    
+  </entry>
+  
+  <entry>
     <title>访问https接口出现未能为SSL/TLS安全通道建立信任关系错误</title>
     <link href="VickChen.win/2017/how-to-access-https-api/"/>
     <id>VickChen.win/2017/how-to-access-https-api/</id>
-    <published>2017-04-07T02:34:21.000Z</published>
-    <updated>2017-07-10T06:23:05.813Z</updated>
+    <published>2017-05-07T02:34:21.000Z</published>
+    <updated>2017-07-10T06:24:19.968Z</updated>
     
     <content type="html"><![CDATA[<p>有时候调用https接口时会提示如下错误:</p>
 <blockquote>
@@ -28,9 +107,9 @@
 </blockquote>
 <a id="more"></a>
 <p>1,先加入命名空间：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">using System.Net.Security;</div><div class="line"></div><div class="line">using System.Security.Authentication;</div><div class="line"></div><div class="line">using System.Security.Cryptography.X509Certificates;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">using System.Net.Security;</div><div class="line"></div><div class="line">using System.Security.Authentication;</div><div class="line"></div><div class="line">using System.Security.Cryptography.X509Certificates;</div></pre></td></tr></table></figure>
 <p>2，再重载CheckValidationResult方法，返回true</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)</div><div class="line"></div><div class="line">    &#123;   // 总是接受</div><div class="line">        return true;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)</div><div class="line"></div><div class="line">    &#123;   // 总是接受</div><div class="line">        return true;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>3,然后在 <code>HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);</code>  前面加上如下一行代码：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServicePointManager.ServerCertificateValidationCallback = </div><div class="line">    new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);//验证服务器证书回调自动验证</div></pre></td></tr></table></figure>
 ]]></content>
@@ -47,9 +126,9 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C#" scheme="VickChen.win/tags/C/"/>
-    
       <category term="API" scheme="VickChen.win/tags/API/"/>
+    
+      <category term="C#" scheme="VickChen.win/tags/C/"/>
     
   </entry>
   
@@ -357,9 +436,9 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
-    
       <category term="C#" scheme="VickChen.win/tags/C/"/>
+    
+      <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
     
   </entry>
   
