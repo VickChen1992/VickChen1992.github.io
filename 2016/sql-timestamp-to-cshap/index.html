@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C#,SQL," />
+  <meta name="keywords" content="SQL,CSharp," />
 
 
 
@@ -93,7 +93,7 @@
 <meta property="og:site_name" content="Vick's Blog">
 <meta property="og:description" content="项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时">
 <meta property="og:image" content="http://shiyousan.com/UserFiles/images/2014/06/635373323909511292/000001.jpg">
-<meta property="og:updated_time" content="2016-11-04T03:12:41.000Z">
+<meta property="og:updated_time" content="2017-07-10T09:22:40.478Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题">
 <meta name="twitter:description" content="项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时">
@@ -341,7 +341,7 @@
 <h4 id="方法一（在SQL中转换）："><a href="#方法一（在SQL中转换）：" class="headerlink" title="方法一（在SQL中转换）："></a>方法一（在SQL中转换）：</h4> <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> TS</div><div class="line">,<span class="keyword">CAST</span>(TS <span class="keyword">AS</span> VARBINARY(<span class="number">8</span>)) <span class="keyword">AS</span> <span class="string">'timestamp转十六进制字符串'</span> </div><div class="line">,<span class="keyword">CONVERT</span>(<span class="built_in">BIGINT</span>,TS) <span class="keyword">AS</span> <span class="string">'timestamp转bigint类型'</span></div><div class="line"><span class="keyword">FROM</span> tb_Ts</div></pre></td></tr></table></figure>
 <p> 这样一来我们就可以获取到timestamp的十六进制字符串或者bigint，最终查询出来的结果如下图：<br> <img src="http://shiyousan.com/UserFiles/images/2014/06/635373323909511292/000001.jpg" alt=""></p>
 <p> 另外要说明的一点是，VARBINARY(8)对应的c# 类型是byte[]，所以建议直接转换成bigint类型，否则在C#中还要调用下面的方法</p>
-<h4 id="方法二（在程序中转换-调用下面的方法即可）："><a href="#方法二（在程序中转换-调用下面的方法即可）：" class="headerlink" title="方法二（在程序中转换,调用下面的方法即可）："></a>方法二（在程序中转换,调用下面的方法即可）：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 将数据库中timespan转换成十六进制字符串</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="comment">/// &lt;param name="objTs"&gt;从数据库中获取的timespan值&lt;/param&gt;      </span></div><div class="line"><span class="comment">/// &lt;returns&gt;timespan十六进制字符串&lt;/returns&gt;</span></div><div class="line"><span class="function"><span class="keyword">public</span>  string <span class="title">ConvertToTimeSpanString</span><span class="params">(object objTs)</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">byte</span>[] btTsArray=objTs as <span class="keyword">byte</span>[];</div><div class="line">String strTimeSpan = <span class="string">"0x"</span>+ BitConverter.ToString(btTsArray).Replace(<span class="string">"-"</span>,<span class="string">""</span>);</div><div class="line"><span class="keyword">return</span> strTimeSpan;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="方法二（在程序中转换-调用下面的方法即可）："><a href="#方法二（在程序中转换-调用下面的方法即可）：" class="headerlink" title="方法二（在程序中转换,调用下面的方法即可）："></a>方法二（在程序中转换,调用下面的方法即可）：</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 将数据库中timespan转换成十六进制字符串</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="objTs"&gt;</span>从数据库中获取的timespan值<span class="doctag">&lt;/param&gt;</span>      </span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>timespan十六进制字符串<span class="doctag">&lt;/returns&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">public</span>  <span class="keyword">string</span> <span class="title">ConvertToTimeSpanString</span>(<span class="params"><span class="keyword">object</span> objTs</span>)</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">byte</span>[] btTsArray=objTs <span class="keyword">as</span> <span class="keyword">byte</span>[];</div><div class="line">String strTimeSpan = <span class="string">"0x"</span>+ BitConverter.ToString(btTsArray).Replace(<span class="string">"-"</span>,<span class="string">""</span>);</div><div class="line"><span class="keyword">return</span> strTimeSpan;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><em>参考:<a href="http://shiyousan.com/post/635373323909511292" target="_blank" rel="external">十有三博客</a></em></p>
 
       
@@ -365,9 +365,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag">#C#</a>
-          
             <a href="/tags/SQL/" rel="tag">#SQL</a>
+          
+            <a href="/tags/CSharp/" rel="tag">#CSharp</a>
           
         </div>
       
@@ -454,7 +454,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -471,7 +471,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

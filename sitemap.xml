@@ -2,16 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>VickChen.win/2017/how-to-use-partial-views/</loc>
+    <loc>VickChen.win/2017/how-to-access-https-api/</loc>
     
-    <lastmod>2017-07-10T08:07:13.683Z</lastmod>
+    <lastmod>2017-07-10T09:23:44.650Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2017/how-to-access-https-api/</loc>
+    <loc>VickChen.win/2017/how-to-use-partial-views/</loc>
     
-    <lastmod>2017-07-10T06:24:19.968Z</lastmod>
+    <lastmod>2017-07-10T09:23:22.994Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2016/sql-timestamp-to-cshap/</loc>
+    
+    <lastmod>2017-07-10T09:22:40.478Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/</loc>
+    
+    <lastmod>2017-07-10T09:19:07.278Z</lastmod>
     
   </url>
   
@@ -26,13 +40,6 @@
     <loc>VickChen.win/2016/find-value-in-db/</loc>
     
     <lastmod>2016-11-04T03:39:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2016/sql-timestamp-to-cshap/</loc>
-    
-    <lastmod>2016-11-04T03:12:41.000Z</lastmod>
     
   </url>
   

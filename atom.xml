@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2017-07-10T08:07:13.683Z</updated>
+  <updated>2017-07-10T09:19:07.278Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,11 +16,49 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>不限长度RAS加密解密</title>
+    <link href="VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/"/>
+    <id>VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/</id>
+    <published>2017-06-18T19:02:41.000Z</published>
+    <updated>2017-07-10T09:19:07.278Z</updated>
+    
+    <content type="html"><![CDATA[<p>RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。</p>
+<p>.NET Framework 中提供的 RSA 算法规定：</p>
+<blockquote>
+<p>待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoServiceProvider.KeySize / 8）。</p>
+</blockquote>
+<p>所以，如果要加密较长的数据，则可以采用分段加解密的方式，实现方式如下：</p>
+<a id="more"></a>
+<p>加密部分代码如下:<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Encrypt</span>(<span class="params"><span class="keyword">string</span> xmlPublicKey, <span class="keyword">string</span> EncryptString</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</div><div class="line">    &#123;</div><div class="line">        RSACryptography.FromXmlString(xmlPublicKey);</div><div class="line">        Byte[] PlaintextData = Encoding.UTF8.GetBytes(EncryptString);</div><div class="line">        <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span> - <span class="number">11</span>;    <span class="comment">//加密块最大长度限制</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> (PlaintextData.Length &lt;= MaxBlockSize)</div><div class="line">            <span class="keyword">return</span> Convert.ToBase64String(RSACryptography.Encrypt(PlaintextData, <span class="literal">false</span>));</div><div class="line"></div><div class="line">        <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream(PlaintextData))</div><div class="line">        <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream())</div><div class="line">        &#123;</div><div class="line">            Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</div><div class="line">            <span class="keyword">int</span> BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line"></div><div class="line">            <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                Byte[] ToEncrypt = <span class="keyword">new</span> Byte[BlockSize];</div><div class="line">                Array.Copy(Buffer, <span class="number">0</span>, ToEncrypt, <span class="number">0</span>, BlockSize);</div><div class="line"></div><div class="line">                Byte[] Cryptograph = RSACryptography.Encrypt(ToEncrypt, <span class="literal">false</span>);</div><div class="line">                CrypStream.Write(Cryptograph, <span class="number">0</span>, Cryptograph.Length);</div><div class="line"></div><div class="line">                BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> Convert.ToBase64String(CrypStream.ToArray(), Base64FormattingOptions.None);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>//解密部分代码如下<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Decrypt</span>(<span class="params"><span class="keyword">string</span> xmlPrivateKey, <span class="keyword">string</span> EncryptString</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</div><div class="line">    &#123;</div><div class="line"></div><div class="line">        <span class="keyword">try</span></div><div class="line">        &#123;</div><div class="line">            RSACryptography.FromXmlString(xmlPrivateKey);</div><div class="line">            Byte[] CiphertextData = Convert.FromBase64String(EncryptString);</div><div class="line">            <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span>;    <span class="comment">//解密块最大长度限制</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> (CiphertextData.Length &lt;= MaxBlockSize)</div><div class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(RSACryptography.Decrypt(CiphertextData, <span class="literal">false</span>));</div><div class="line"></div><div class="line">            <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream(CiphertextData))</div><div class="line">            <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream())</div><div class="line">            &#123;</div><div class="line">                Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</div><div class="line">                <span class="keyword">int</span> BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line"></div><div class="line">                <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    Byte[] ToDecrypt = <span class="keyword">new</span> Byte[BlockSize];</div><div class="line">                    Array.Copy(Buffer, <span class="number">0</span>, ToDecrypt, <span class="number">0</span>, BlockSize);</div><div class="line"></div><div class="line">                    Byte[] Plaintext = RSACryptography.Decrypt(ToDecrypt, <span class="literal">false</span>);</div><div class="line">                    PlaiStream.Write(Plaintext, <span class="number">0</span>, Plaintext.Length);</div><div class="line"></div><div class="line">                    BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(PlaiStream.ToArray());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">catch</span> (Exception)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"解密失败,请检查传输数据"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。&lt;/p&gt;
+&lt;p&gt;.NET Framework 中提供的 RSA 算法规定：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoServiceProvider.KeySize / 8）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;所以，如果要加密较长的数据，则可以采用分段加解密的方式，实现方式如下：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
+    
+      <category term="RAS" scheme="VickChen.win/tags/RAS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>分部视图的使用</title>
     <link href="VickChen.win/2017/how-to-use-partial-views/"/>
     <id>VickChen.win/2017/how-to-use-partial-views/</id>
     <published>2017-05-20T17:10:52.000Z</published>
-    <updated>2017-07-10T08:07:13.683Z</updated>
+    <updated>2017-07-10T09:23:22.994Z</updated>
     
     <content type="html"><![CDATA[<p>提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。</p>
 <p>要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：</p>
@@ -88,9 +126,9 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C#" scheme="VickChen.win/tags/C/"/>
-    
       <category term="MVC" scheme="VickChen.win/tags/MVC/"/>
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
   </entry>
   
@@ -99,7 +137,7 @@
     <link href="VickChen.win/2017/how-to-access-https-api/"/>
     <id>VickChen.win/2017/how-to-access-https-api/</id>
     <published>2017-05-07T02:34:21.000Z</published>
-    <updated>2017-07-10T06:24:19.968Z</updated>
+    <updated>2017-07-10T09:23:44.650Z</updated>
     
     <content type="html"><![CDATA[<p>有时候调用https接口时会提示如下错误:</p>
 <blockquote>
@@ -107,11 +145,11 @@
 </blockquote>
 <a id="more"></a>
 <p>1,先加入命名空间：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">using System.Net.Security;</div><div class="line"></div><div class="line">using System.Security.Authentication;</div><div class="line"></div><div class="line">using System.Security.Cryptography.X509Certificates;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System.Net.Security;</div><div class="line"></div><div class="line"><span class="keyword">using</span> System.Security.Authentication;</div><div class="line"></div><div class="line"><span class="keyword">using</span> System.Security.Cryptography.X509Certificates;</div></pre></td></tr></table></figure>
 <p>2，再重载CheckValidationResult方法，返回true</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">public bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)</div><div class="line"></div><div class="line">    &#123;   // 总是接受</div><div class="line">        return true;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">CheckValidationResult</span>(<span class="params"><span class="keyword">object</span> sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors</span>)</span></div><div class="line"></div><div class="line">    &#123;   <span class="comment">// 总是接受</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
 <p>3,然后在 <code>HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);</code>  前面加上如下一行代码：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServicePointManager.ServerCertificateValidationCallback = </div><div class="line">    new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);//验证服务器证书回调自动验证</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServicePointManager.ServerCertificateValidationCallback = </div><div class="line">    <span class="keyword">new</span> System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);<span class="comment">//验证服务器证书回调自动验证</span></div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -128,7 +166,7 @@
     
       <category term="API" scheme="VickChen.win/tags/API/"/>
     
-      <category term="C#" scheme="VickChen.win/tags/C/"/>
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
   </entry>
   
@@ -399,7 +437,7 @@
     <link href="VickChen.win/2016/sql-timestamp-to-cshap/"/>
     <id>VickChen.win/2016/sql-timestamp-to-cshap/</id>
     <published>2016-11-03T13:06:29.000Z</published>
-    <updated>2016-11-04T03:12:41.000Z</updated>
+    <updated>2017-07-10T09:22:40.478Z</updated>
     
     <content type="html"><![CDATA[<p> 项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。</p>
 <a id="more"></a>
@@ -423,7 +461,7 @@
 <h4 id="方法一（在SQL中转换）："><a href="#方法一（在SQL中转换）：" class="headerlink" title="方法一（在SQL中转换）："></a>方法一（在SQL中转换）：</h4> <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> TS</div><div class="line">,<span class="keyword">CAST</span>(TS <span class="keyword">AS</span> VARBINARY(<span class="number">8</span>)) <span class="keyword">AS</span> <span class="string">'timestamp转十六进制字符串'</span> </div><div class="line">,<span class="keyword">CONVERT</span>(<span class="built_in">BIGINT</span>,TS) <span class="keyword">AS</span> <span class="string">'timestamp转bigint类型'</span></div><div class="line"><span class="keyword">FROM</span> tb_Ts</div></pre></td></tr></table></figure>
 <p> 这样一来我们就可以获取到timestamp的十六进制字符串或者bigint，最终查询出来的结果如下图：<br> <img src="http://shiyousan.com/UserFiles/images/2014/06/635373323909511292/000001.jpg" alt=""></p>
 <p> 另外要说明的一点是，VARBINARY(8)对应的c# 类型是byte[]，所以建议直接转换成bigint类型，否则在C#中还要调用下面的方法</p>
-<h4 id="方法二（在程序中转换-调用下面的方法即可）："><a href="#方法二（在程序中转换-调用下面的方法即可）：" class="headerlink" title="方法二（在程序中转换,调用下面的方法即可）："></a>方法二（在程序中转换,调用下面的方法即可）：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/// &lt;summary&gt;</span></div><div class="line"><span class="comment">/// 将数据库中timespan转换成十六进制字符串</span></div><div class="line"><span class="comment">/// &lt;/summary&gt;</span></div><div class="line"><span class="comment">/// &lt;param name="objTs"&gt;从数据库中获取的timespan值&lt;/param&gt;      </span></div><div class="line"><span class="comment">/// &lt;returns&gt;timespan十六进制字符串&lt;/returns&gt;</span></div><div class="line"><span class="function"><span class="keyword">public</span>  string <span class="title">ConvertToTimeSpanString</span><span class="params">(object objTs)</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">byte</span>[] btTsArray=objTs as <span class="keyword">byte</span>[];</div><div class="line">String strTimeSpan = <span class="string">"0x"</span>+ BitConverter.ToString(btTsArray).Replace(<span class="string">"-"</span>,<span class="string">""</span>);</div><div class="line"><span class="keyword">return</span> strTimeSpan;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="方法二（在程序中转换-调用下面的方法即可）："><a href="#方法二（在程序中转换-调用下面的方法即可）：" class="headerlink" title="方法二（在程序中转换,调用下面的方法即可）："></a>方法二（在程序中转换,调用下面的方法即可）：</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 将数据库中timespan转换成十六进制字符串</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="objTs"&gt;</span>从数据库中获取的timespan值<span class="doctag">&lt;/param&gt;</span>      </span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>timespan十六进制字符串<span class="doctag">&lt;/returns&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">public</span>  <span class="keyword">string</span> <span class="title">ConvertToTimeSpanString</span>(<span class="params"><span class="keyword">object</span> objTs</span>)</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">byte</span>[] btTsArray=objTs <span class="keyword">as</span> <span class="keyword">byte</span>[];</div><div class="line">String strTimeSpan = <span class="string">"0x"</span>+ BitConverter.ToString(btTsArray).Replace(<span class="string">"-"</span>,<span class="string">""</span>);</div><div class="line"><span class="keyword">return</span> strTimeSpan;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><em>参考:<a href="http://shiyousan.com/post/635373323909511292" target="_blank" rel="external">十有三博客</a></em></p>
 ]]></content>
     
@@ -436,9 +474,9 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="C#" scheme="VickChen.win/tags/C/"/>
-    
       <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
   </entry>
   

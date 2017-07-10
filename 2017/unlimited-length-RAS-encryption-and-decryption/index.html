@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="API,CSharp," />
+  <meta name="keywords" content="CSharp,RAS," />
 
 
 
@@ -86,22 +86,25 @@
 
 
 
-<meta name="description" content="有时候调用https接口时会提示如下错误:
+<meta name="description" content="RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。
+.NET Framework 中提供的 RSA 算法规定：
 
-基础连接已经关闭: 未能为 SSL/TLS 安全通道建立信任关系。">
+待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoSe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="访问https接口出现未能为SSL/TLS安全通道建立信任关系错误">
-<meta property="og:url" content="VickChen.win/2017/how-to-access-https-api/index.html">
+<meta property="og:title" content="不限长度RAS加密解密">
+<meta property="og:url" content="VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/index.html">
 <meta property="og:site_name" content="Vick's Blog">
-<meta property="og:description" content="有时候调用https接口时会提示如下错误:
+<meta property="og:description" content="RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。
+.NET Framework 中提供的 RSA 算法规定：
 
-基础连接已经关闭: 未能为 SSL/TLS 安全通道建立信任关系。">
-<meta property="og:updated_time" content="2017-07-10T09:23:44.650Z">
+待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoSe">
+<meta property="og:updated_time" content="2017-07-10T09:19:07.278Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="访问https接口出现未能为SSL/TLS安全通道建立信任关系错误">
-<meta name="twitter:description" content="有时候调用https接口时会提示如下错误:
+<meta name="twitter:title" content="不限长度RAS加密解密">
+<meta name="twitter:description" content="RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。
+.NET Framework 中提供的 RSA 算法规定：
 
-基础连接已经关闭: 未能为 SSL/TLS 安全通道建立信任关系。">
+待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoSe">
 
 
 
@@ -122,9 +125,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/2017/how-to-access-https-api/"/>
+  <link rel="canonical" href="VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/"/>
 
-  <title> 访问https接口出现未能为SSL/TLS安全通道建立信任关系错误 | Vick's Blog </title>
+  <title> 不限长度RAS加密解密 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -264,7 +267,7 @@
             
             
               
-                访问https接口出现未能为SSL/TLS安全通道建立信任关系错误
+                不限长度RAS加密解密
               
             
           </h1>
@@ -276,8 +279,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-07T10:34:21+08:00" content="2017-05-07">
-              2017-05-07
+            <time itemprop="dateCreated" datetime="2017-06-19T03:02:41+08:00" content="2017-06-19">
+              2017-06-19
             </time>
           </span>
 
@@ -323,17 +326,15 @@
       
 
       
-        <p>有时候调用https接口时会提示如下错误:</p>
+        <p>RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。</p>
+<p>.NET Framework 中提供的 RSA 算法规定：</p>
 <blockquote>
-<p>基础连接已经关闭: 未能为 SSL/TLS 安全通道建立信任关系。</p>
+<p>待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoServiceProvider.KeySize / 8）。</p>
 </blockquote>
+<p>所以，如果要加密较长的数据，则可以采用分段加解密的方式，实现方式如下：</p>
 <a id="more"></a>
-<p>1,先加入命名空间：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> System.Net.Security;</div><div class="line"></div><div class="line"><span class="keyword">using</span> System.Security.Authentication;</div><div class="line"></div><div class="line"><span class="keyword">using</span> System.Security.Cryptography.X509Certificates;</div></pre></td></tr></table></figure>
-<p>2，再重载CheckValidationResult方法，返回true</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">bool</span> <span class="title">CheckValidationResult</span>(<span class="params"><span class="keyword">object</span> sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors</span>)</span></div><div class="line"></div><div class="line">    &#123;   <span class="comment">// 总是接受</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>3,然后在 <code>HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);</code>  前面加上如下一行代码：</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServicePointManager.ServerCertificateValidationCallback = </div><div class="line">    <span class="keyword">new</span> System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);<span class="comment">//验证服务器证书回调自动验证</span></div></pre></td></tr></table></figure>
+<p>加密部分代码如下:<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Encrypt</span>(<span class="params"><span class="keyword">string</span> xmlPublicKey, <span class="keyword">string</span> EncryptString</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</div><div class="line">    &#123;</div><div class="line">        RSACryptography.FromXmlString(xmlPublicKey);</div><div class="line">        Byte[] PlaintextData = Encoding.UTF8.GetBytes(EncryptString);</div><div class="line">        <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span> - <span class="number">11</span>;    <span class="comment">//加密块最大长度限制</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> (PlaintextData.Length &lt;= MaxBlockSize)</div><div class="line">            <span class="keyword">return</span> Convert.ToBase64String(RSACryptography.Encrypt(PlaintextData, <span class="literal">false</span>));</div><div class="line"></div><div class="line">        <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream(PlaintextData))</div><div class="line">        <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream())</div><div class="line">        &#123;</div><div class="line">            Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</div><div class="line">            <span class="keyword">int</span> BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line"></div><div class="line">            <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                Byte[] ToEncrypt = <span class="keyword">new</span> Byte[BlockSize];</div><div class="line">                Array.Copy(Buffer, <span class="number">0</span>, ToEncrypt, <span class="number">0</span>, BlockSize);</div><div class="line"></div><div class="line">                Byte[] Cryptograph = RSACryptography.Encrypt(ToEncrypt, <span class="literal">false</span>);</div><div class="line">                CrypStream.Write(Cryptograph, <span class="number">0</span>, Cryptograph.Length);</div><div class="line"></div><div class="line">                BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> Convert.ToBase64String(CrypStream.ToArray(), Base64FormattingOptions.None);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>//解密部分代码如下<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Decrypt</span>(<span class="params"><span class="keyword">string</span> xmlPrivateKey, <span class="keyword">string</span> EncryptString</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</div><div class="line">    &#123;</div><div class="line"></div><div class="line">        <span class="keyword">try</span></div><div class="line">        &#123;</div><div class="line">            RSACryptography.FromXmlString(xmlPrivateKey);</div><div class="line">            Byte[] CiphertextData = Convert.FromBase64String(EncryptString);</div><div class="line">            <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span>;    <span class="comment">//解密块最大长度限制</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> (CiphertextData.Length &lt;= MaxBlockSize)</div><div class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(RSACryptography.Decrypt(CiphertextData, <span class="literal">false</span>));</div><div class="line"></div><div class="line">            <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream(CiphertextData))</div><div class="line">            <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream())</div><div class="line">            &#123;</div><div class="line">                Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</div><div class="line">                <span class="keyword">int</span> BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line"></div><div class="line">                <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    Byte[] ToDecrypt = <span class="keyword">new</span> Byte[BlockSize];</div><div class="line">                    Array.Copy(Buffer, <span class="number">0</span>, ToDecrypt, <span class="number">0</span>, BlockSize);</div><div class="line"></div><div class="line">                    Byte[] Plaintext = RSACryptography.Decrypt(ToDecrypt, <span class="literal">false</span>);</div><div class="line">                    PlaiStream.Write(Plaintext, <span class="number">0</span>, Plaintext.Length);</div><div class="line"></div><div class="line">                    BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(PlaiStream.ToArray());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">catch</span> (Exception)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"解密失败,请检查传输数据"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -356,9 +357,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/API/" rel="tag">#API</a>
-          
             <a href="/tags/CSharp/" rel="tag">#CSharp</a>
+          
+            <a href="/tags/RAS/" rel="tag">#RAS</a>
           
         </div>
       
@@ -367,17 +368,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/regular-expression/" rel="next" title="最常用的正则表达式">
-                <i class="fa fa-chevron-left"></i> 最常用的正则表达式
+              <a href="/2017/how-to-use-partial-views/" rel="next" title="分部视图的使用">
+                <i class="fa fa-chevron-left"></i> 分部视图的使用
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/how-to-use-partial-views/" rel="prev" title="分部视图的使用">
-                分部视图的使用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
