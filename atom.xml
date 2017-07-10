@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2017-03-16T12:24:20.448Z</updated>
+  <updated>2017-07-10T06:23:05.813Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,11 +16,49 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>访问https接口出现未能为SSL/TLS安全通道建立信任关系错误</title>
+    <link href="VickChen.win/2017/how-to-access-https-api/"/>
+    <id>VickChen.win/2017/how-to-access-https-api/</id>
+    <published>2017-04-07T02:34:21.000Z</published>
+    <updated>2017-07-10T06:23:05.813Z</updated>
+    
+    <content type="html"><![CDATA[<p>有时候调用https接口时会提示如下错误:</p>
+<blockquote>
+<p>基础连接已经关闭: 未能为 SSL/TLS 安全通道建立信任关系。</p>
+</blockquote>
+<a id="more"></a>
+<p>1,先加入命名空间：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">using System.Net.Security;</div><div class="line"></div><div class="line">using System.Security.Authentication;</div><div class="line"></div><div class="line">using System.Security.Cryptography.X509Certificates;</div></pre></td></tr></table></figure>
+<p>2，再重载CheckValidationResult方法，返回true</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">public bool CheckValidationResult(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors errors)</div><div class="line"></div><div class="line">    &#123;   // 总是接受</div><div class="line">        return true;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<p>3,然后在 <code>HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);</code>  前面加上如下一行代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ServicePointManager.ServerCertificateValidationCallback = </div><div class="line">    new System.Net.Security.RemoteCertificateValidationCallback(CheckValidationResult);//验证服务器证书回调自动验证</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;有时候调用https接口时会提示如下错误:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;基础连接已经关闭: 未能为 SSL/TLS 安全通道建立信任关系。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="C#" scheme="VickChen.win/tags/C/"/>
+    
+      <category term="API" scheme="VickChen.win/tags/API/"/>
+    
+  </entry>
+  
+  <entry>
     <title>最常用的正则表达式</title>
     <link href="VickChen.win/2017/regular-expression/"/>
     <id>VickChen.win/2017/regular-expression/</id>
     <published>2017-03-15T09:51:18.000Z</published>
-    <updated>2017-03-16T12:24:20.448Z</updated>
+    <updated>2017-03-16T12:19:56.000Z</updated>
     
     <content type="html"><![CDATA[<p>很多不太懂正则的朋友，在遇到需要用正则校验数据时，往往是在网上去找很久，结果找来的还是不很符合要求。所以我最近把开发中常用的一些正则表达式整理了一下，在这里分享一下。给自己留个底，也给朋友们做个参考。</p>
 <a id="more"></a>
