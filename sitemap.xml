@@ -2,30 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>VickChen.win/2017/how-to-access-https-api/</loc>
+    <loc>VickChen.win/2016/create-hexo-blog-on-github/</loc>
     
-    <lastmod>2017-07-10T09:23:44.650Z</lastmod>
+    <lastmod>2018-08-01T09:55:29.914Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2017/how-to-use-partial-views/</loc>
+    <loc>VickChen.win/2017/how-to-access-https-api/</loc>
     
-    <lastmod>2017-07-10T09:23:22.994Z</lastmod>
+    <lastmod>2017-07-10T09:23:44.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2017/How-to-use-partial-views%20(DESKTOP-SIULCUT%20%E7%9A%84%E5%86%B2%E7%AA%81%E5%89%AF%E6%9C%AC%202017-07-19)/</loc>
+    
+    <lastmod>2017-07-10T09:23:22.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>VickChen.win/2016/sql-timestamp-to-cshap/</loc>
     
-    <lastmod>2017-07-10T09:22:40.478Z</lastmod>
+    <lastmod>2017-07-10T09:22:40.000Z</lastmod>
     
   </url>
   
   <url>
     <loc>VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/</loc>
     
-    <lastmod>2017-07-10T09:19:07.278Z</lastmod>
+    <lastmod>2017-07-10T09:19:07.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2017/How-to-use-partial-views/</loc>
+    
+    <lastmod>2017-07-10T08:07:13.000Z</lastmod>
     
   </url>
   
@@ -54,13 +68,6 @@
     <loc>VickChen.win/2016/about-git-installation/</loc>
     
     <lastmod>2016-09-21T02:25:34.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2016/create-hexo-blog-on-github/</loc>
-    
-    <lastmod>2016-09-21T02:25:21.000Z</lastmod>
     
   </url>
   

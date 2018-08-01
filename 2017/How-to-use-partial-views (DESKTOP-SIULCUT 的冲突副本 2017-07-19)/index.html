@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="CSharp,MVC," />
 
 
 
@@ -86,12 +86,31 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vick's Blog">
-<meta property="og:url" content="VickChen.win/page/2/index.html">
+<meta name="description" content="提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。
+要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：
+
+分部视图可以使系统插件化。我现在非常推崇一个原则，就是可以分离的东西绝对不要让他们在一起，因为只有每个功能模块都是单独的，我们才可以在其他位置重用它。
+
+分部视图还可以带来一个优点，就是分工合作。现在是一个合作的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分部视图的使用">
+<meta property="og:url" content="VickChen.win/2017/How-to-use-partial-views (DESKTOP-SIULCUT 的冲突副本 2017-07-19)/index.html">
 <meta property="og:site_name" content="Vick's Blog">
+<meta property="og:description" content="提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。
+要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：
+
+分部视图可以使系统插件化。我现在非常推崇一个原则，就是可以分离的东西绝对不要让他们在一起，因为只有每个功能模块都是单独的，我们才可以在其他位置重用它。
+
+分部视图还可以带来一个优点，就是分工合作。现在是一个合作的">
+<meta property="og:updated_time" content="2017-07-10T09:23:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vick's Blog">
+<meta name="twitter:title" content="分部视图的使用">
+<meta name="twitter:description" content="提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。
+要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：
+
+分部视图可以使系统插件化。我现在非常推崇一个原则，就是可以分离的东西绝对不要让他们在一起，因为只有每个功能模块都是单独的，我们才可以在其他位置重用它。
+
+分部视图还可以带来一个优点，就是分工合作。现在是一个合作的">
 
 
 
@@ -112,9 +131,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/page/2/"/>
+  <link rel="canonical" href="VickChen.win/2017/How-to-use-partial-views (DESKTOP-SIULCUT 的冲突副本 2017-07-19)/"/>
 
-  <title> Vick's Blog </title>
+  <title> 分部视图的使用 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -135,9 +154,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,9 +251,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -256,10 +273,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/why-git/" itemprop="url">
-                  SVN 与 Git 的区别
-                </a>
+                分部视图的使用
               
             
           </h1>
@@ -271,8 +285,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-19T00:15:12+08:00" content="2016-09-19">
-              2016-09-19
+            <time itemprop="dateCreated" datetime="2017-05-21T01:10:52+08:00" content="2017-05-21">
+              2017-05-21
             </time>
           </span>
 
@@ -285,8 +299,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
                   </a>
                 </span>
 
@@ -318,174 +332,112 @@
       
 
       
-        
-          <ol>
-<li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
-<li><code>Git</code>: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。</li>
-<li><p><code>SVN</code>: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。</p>
-<p>  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：</p>
+        <p>提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。</p>
+<p>要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：</p>
 <ol>
-<li>跟踪修改过程。        </li>
-<li>自然的提交过程。这极大方便了代码细节演进过程的查看。</li>
-<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。</li>
+<li><p>分部视图可以使系统插件化。我现在非常推崇一个原则，就是可以分离的东西绝对不要让他们在一起，因为只有每个功能模块都是单独的，我们才可以在其他位置重用它。</p>
+</li>
+<li><p>分部视图还可以带来一个优点，就是分工合作。现在是一个合作的时代，没有任何一个人可以单独完成规定的任务而不与别人合作，牛人例外。分部视图可以带给我们开发不同模块中的分工合作。</p>
+</li>
+<li><p>分部视图还有一个在Mvc时代的优点，就是实现简单。我自从学习使用Mvc以后，我基本上就很少写web form的代码了，因为我感觉没有Mvc写的那么流畅。html.partial(partialName)就可以显示一个分部视图的页面。</p>
+</li>
 </ol>
+<a id="more"></a>
+<p>简单的叙述了一下优点，既然我们能发现优点存在，那么我们就想在实际项目中更好的使用它，毕竟程序员都追求懒，一段代码，三句可以搞定，绝对不会写三句半，当然最小化原则也是我们代码优化的最终目的。</p>
+<p>那么究竟在Mvc中有哪些可以实现分部视图的功能呢？以及我们要注意点什么呢？</p>
+<ul>
+<li><p>Html.Partial(partialName)和html.RenderPartial(partialName) 就是首选。<br>其实这两个方法我们可以指定任何的.cshtml文件，不一定只是分部视图。大家来回忆一下分部视图和视图的区别在哪里？就是视图有head、body标签，可以定义js，可以指定母板页，但是在我们用Vs右键添加分部视图的时候，我们会看到只是一些基本的html标签，没有任何的head、body，但是这不等于我们不可以添加，所以说partialName可以是任何的视图文件。但是我们最好是创建分部视图，因为我们最终是要把这些分部视图合并成为一个页面，如果只是分部视图的html标签，那么在整体页面中html标签就会显得很干净。</p>
+</li>
+<li><p>不要在分部视图中定义或者引用css以及js。如果需要我们在整体页面中定义或引用。原因有2：</p>
+<ol>
+<li><p>是我们的分部视图文件和整体页面的路径可能不在同一个目录下，那么会造成找不到css或js文件的情况。</p>
+</li>
+<li><p>对整体页面的html代码是一种伤害。</p>
+</li>
+</ol>
+</li>
+<li><p>html.Action和html.RenderAction()方法也可以用来作为分部视图使用.具体使用方式我想就不需要细说了，大家对htmlHelper都会非常熟悉，因为常用嘛。</p>
 </li>
 </ul>
+<p>这段时间就大量的使用到了分部视图，现在来总结一下，让后来的学习者少走一点弯路。</p>
+<ol>
+<li><p>如果可以，尽量使用母板页，这样可以很好的控制网站的样式。</p>
+</li>
+<li><p>采用单独的css文件，单独的js文件，尽量不要在分部视图中定义样式，而是在整体页面中。</p>
+</li>
+<li><p>分部视图的html标签应该尽可能的少，除了要显示的内容之外，不要有任何杂质存在。样式css、js等在整体页面添加。</p>
+</li>
+<li><p>如果可以，尽量采用html.partial(partialName)或html.RenderPartial(partialName)的方式，而不要用html.Action来作为分部视图的方式，因为这种方法会和控制器交互。</p>
+</li>
+<li><p>对分部视图的传值尽量采用Model的方式进行，如果一个分部视图需要传递两个参数，那么我建议你分成两个分部视图。</p>
+</li>
+<li><p>采用分部视图会对整体页面的样式调整带来困难，所以我建议先整体做出页面，然后再分成不同的分部视图。</p>
+</li>
+<li><p>过多的分部视图会增加服务器的延迟，所以分部视图的控制要得当，我建议控制在10个以内吧，如果服务器允许，更多也是可以的。</p>
+</li>
+<li><p>要注意分部视图的标签id的命名，最好采用固定的要规则的命名方式，尽量减少冲突的发生，毕竟同名的标签存在会对程序造成隐患。</p>
 </li>
 </ol>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/why-git/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
+
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/about-git-installation/" itemprop="url">
-                  Git的安装与配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-17T03:49:38+08:00" content="2016-09-17">
-              2016-09-17
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/工具/" itemprop="url" rel="index">
-                    <span itemprop="name">工具</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/CSharp/" rel="tag">#CSharp</a>
           
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/MVC/" rel="tag">#MVC</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/about-git-installation/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/How-to-use-partial-views/" rel="next" title="分部视图的使用">
+                <i class="fa fa-chevron-left"></i> 分部视图的使用
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/unlimited-length-RAS-encryption-and-decryption/" rel="prev" title="不限长度RAS加密解密">
+                不限长度RAS加密解密 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -493,6 +445,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -512,8 +468,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -599,6 +564,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -695,6 +671,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
