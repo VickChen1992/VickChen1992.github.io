@@ -257,6 +257,122 @@
             
               
                 
+                <a class="post-title-link" href="/2018/aspnet-core-security-authentication-cookie/" itemprop="url">
+                  ASP.NET Core 2.1 使用Cookie验证身份
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-08-01T18:46:01+08:00" content="2018-08-01">
+              2018-08-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
+<p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/aspnet-core-security-authentication-cookie/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2017/unlimited-length-RAS-encryption-and-decryption/" itemprop="url">
                   不限长度RAS加密解密
                 </a>
@@ -451,130 +567,6 @@
 </ol>
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/How-to-use-partial-views/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/How-to-use-partial-views (DESKTOP-SIULCUT 的冲突副本 2017-07-19)/" itemprop="url">
-                  分部视图的使用
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-21T01:10:52+08:00" content="2017-05-21">
-              2017-05-21
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。</p>
-<p>要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：</p>
-<ol>
-<li><p>分部视图可以使系统插件化。我现在非常推崇一个原则，就是可以分离的东西绝对不要让他们在一起，因为只有每个功能模块都是单独的，我们才可以在其他位置重用它。</p>
-</li>
-<li><p>分部视图还可以带来一个优点，就是分工合作。现在是一个合作的时代，没有任何一个人可以单独完成规定的任务而不与别人合作，牛人例外。分部视图可以带给我们开发不同模块中的分工合作。</p>
-</li>
-<li><p>分部视图还有一个在Mvc时代的优点，就是实现简单。我自从学习使用Mvc以后，我基本上就很少写web form的代码了，因为我感觉没有Mvc写的那么流畅。html.partial(partialName)就可以显示一个分部视图的页面。</p>
-</li>
-</ol>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/How-to-use-partial-views (DESKTOP-SIULCUT 的冲突副本 2017-07-19)/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1483,7 +1475,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

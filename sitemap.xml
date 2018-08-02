@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>VickChen.win/2018/aspnet-core-security-authentication-cookie/</loc>
+    
+    <lastmod>2018-08-02T03:14:29.029Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2016/about-git-installation/</loc>
+    
+    <lastmod>2018-08-01T10:51:35.522Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>VickChen.win/2016/create-hexo-blog-on-github/</loc>
     
     <lastmod>2018-08-01T09:55:29.914Z</lastmod>
@@ -12,13 +26,6 @@
     <loc>VickChen.win/2017/how-to-access-https-api/</loc>
     
     <lastmod>2017-07-10T09:23:44.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2017/How-to-use-partial-views%20(DESKTOP-SIULCUT%20%E7%9A%84%E5%86%B2%E7%AA%81%E5%89%AF%E6%9C%AC%202017-07-19)/</loc>
-    
-    <lastmod>2017-07-10T09:23:22.000Z</lastmod>
     
   </url>
   
@@ -61,13 +68,6 @@
     <loc>VickChen.win/2016/proc-generate-entity-class/</loc>
     
     <lastmod>2016-11-03T09:05:54.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2016/about-git-installation/</loc>
-    
-    <lastmod>2016-09-21T02:25:34.000Z</lastmod>
     
   </url>
   

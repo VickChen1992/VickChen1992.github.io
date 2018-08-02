@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2017-07-10T09:19:07.000Z</updated>
+  <updated>2018-08-02T03:14:29.029Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -14,6 +14,87 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>ASP.NET Core 2.1 使用Cookie验证身份</title>
+    <link href="VickChen.win/2018/aspnet-core-security-authentication-cookie/"/>
+    <id>VickChen.win/2018/aspnet-core-security-authentication-cookie/</id>
+    <published>2018-08-01T10:46:01.000Z</published>
+    <updated>2018-08-02T03:14:29.029Z</updated>
+    
+    <content type="html"><![CDATA[<p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
+<p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
+<a id="more"></a>
+<h2 id="添加配置"><a href="#添加配置" class="headerlink" title="添加配置"></a>添加配置</h2><p>按下列步骤操作：</p>
+<ol>
+<li><p>如果不使用 <code>Microsoft.AspNetCore.All</code> <a href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/metapackage" target="_blank" rel="external">元包</a>，则在您的项目中安装2.X版的 <code>Microsoft.AspNetCore.Authentication.Cookies</code> NuGet包。</p>
+</li>
+<li><p>在<em>Startup.cs</em>文件中的 <code>Configure</code> 方法中调用<code>UseAuthentication</code> 方法：<code>app.UseAuthentication();</code></p>
+</li>
+<li><p>在<em>Startup.cs</em>文件中的 <code>ConfigureServices</code> 方法中调用 <code>AddAuthentication</code> 和 <code>AddCookie</code> 方法：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">services.AddAuthentication(<span class="string">"MyCookieAuthenticationScheme"</span>)</div><div class="line">        .AddCookie(<span class="string">"MyCookieAuthenticationScheme"</span>, options =&gt; &#123;</div><div class="line">            options.AccessDeniedPath = <span class="string">"/Account/Forbidden/"</span>;</div><div class="line">            options.LoginPath = <span class="string">"/Account/Unauthorized/"</span>;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>上面的代码片段配置了以下部分或全部选项：</p>
+<ul>
+<li>AccessDeniedPath - 当用户尝试访问资源但没有通过任何授权策略时，这是请求会重定向的相对路径资源。</li>
+<li>AuthenticationScheme - 这是一个已知的特定Cookie认证方案的值。当有多个Cookie验证实例，并且您想限制对一个实例的授权时，这就非常有用。   </li>
+<li><p>LoginPath - 当用户尝试访问资源但尚未认证时，这是请求重定向的相对路径。</p>
+<p>其它选项包括为Cookie认证创建的设置选项，身份验证的Cookie的名称，Cookie的域和Cookie各种安全属性。默认情况下，Cookie身份验证为其创建的任何Cookie使用适当的安全选项，例如：</p>
+</li>
+<li>设置HttpOnly标志以防止客户端<code>JavaScript</code>中访问Cookie</li>
+<li>如果请求是通过HTTPS访问，则将Cookie限制为HTTPS</li>
+</ul>
+</li>
+</ol>
+<h2 id="创建身份认证Cookie"><a href="#创建身份认证Cookie" class="headerlink" title="创建身份认证Cookie"></a>创建身份认证Cookie</h2><p>要创建一个保存用户信息的cookie，您必须构建一个<a href="https://docs.microsoft.com/en-us/dotnet/api/system.security.claims.claimsprincipal?view=netframework-4.7.2" target="_blank" rel="external">ClaimsPrincipal</a>保存您希望序列化到Cookie中的信息。<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">await</span> HttpContext.SignInAsync(<span class="string">"MyCookieAuthenticationScheme"</span>, principal);</div></pre></td></tr></table></figure></p>
+<p>这将创建一个加密的Cookie并将其添加到当前响应中。在调用<code>SignInAsync</code>时，必须在配置中指定的<code>AuthenticationScheme</code><br>顺便提一下，使用的加密方式是ASP.NET Core的<a href="https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/configuration/overview?view=aspnetcore-2.1&amp;tabs=aspnetcore2x#data-protection-configuring" target="_blank" rel="external">Data Protection</a>系统。如果您在多台机器上进行托管、负载平衡或使用Web集群，则需要配置<a href="https://docs.microsoft.com/en-us/aspnet/core/security/data-protection/using-data-protection?view=aspnetcore-2.1#security-data-protection-getting-started" target="_blank" rel="external">Data Protection</a>才能使用相同的密钥和应用程序标识符。</p>
+<h2 id="Signing-out-登出"><a href="#Signing-out-登出" class="headerlink" title="Signing out(登出)"></a>Signing out(登出)</h2><p>要退出当前用户并删除其Cookie，请在控制器中调用以下方法：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">await</span> HttpContext.SignOutAsync(<span class="string">"MyCookieAuthenticationScheme"</span>);</div></pre></td></tr></table></figure></p>
+<h2 id="服务端变化反馈"><a href="#服务端变化反馈" class="headerlink" title="服务端变化反馈"></a>服务端变化反馈</h2><blockquote>
+<p>警告： 一旦创建了认证的Cookie，它将成为唯一的身份来源。即使您在服务系统中禁用用户，Cookie身份验证也无法了解此信息，只要Cookie有效，用户仍可登录。</p>
+</blockquote>
+<p>Cookie认证在其选项中提供了一系列事件。<code>ValidateAsync()</code>事件可用于拦截和重写Cookie身份验证。</p>
+<p>可以考虑在后端用户数据库中增加<code>LastChanged</code>列。为了在数据库更改时使Cookie无效，您应该首先在创建Cookie时添加一个<code>LastChanged</code>包含当前值的声明。数据库更改时，更新<code>LastChanged</code>例的值。</p>
+<p>要重写<code>ValidateAsync()</code>事件的实现，您必须编写一个具有以下签名的方法：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function">Task <span class="title">ValidateAsync</span>(<span class="params">CookieValidatePrincipalContext context</span>)</span>;</div></pre></td></tr></table></figure></p>
+<p>ASP.NET Core Identity 在<code>SecurityStampValidator</code>实现了这一逻辑，<a href="https://github.com/aspnet/Identity/blob/rel/2.0.0/src/Microsoft.AspNetCore.Identity/SecurityStampValidator.cs" target="_blank" rel="external">链接地址</a>。示例如下所示：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">class</span> <span class="title">LastChangedValidator</span></div><div class="line">  &#123;</div><div class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">async</span> Task <span class="title">ValidateAsync</span>(<span class="params">CookieValidatePrincipalContext context</span>)</span></div><div class="line">      &#123;</div><div class="line">          <span class="comment">// Pull database from registered DI services.</span></div><div class="line">          <span class="keyword">var</span> userRepository = context.HttpContext.RequestServices.GetRequiredService&lt;IUserRepository&gt;();</div><div class="line">          <span class="keyword">var</span> userPrincipal = context.Principal;</div><div class="line">  </div><div class="line">          <span class="comment">// Look for the last changed claim.</span></div><div class="line">          <span class="keyword">string</span> lastChanged;</div><div class="line">          lastChanged = (<span class="keyword">from</span> c <span class="keyword">in</span> userPrincipal.Claims</div><div class="line">                          <span class="keyword">where</span> c.Type == <span class="string">"LastUpdated"</span></div><div class="line">                          <span class="keyword">select</span> c.Value).FirstOrDefault();</div><div class="line">  </div><div class="line">          <span class="keyword">if</span> (<span class="keyword">string</span>.IsNullOrEmpty(lastChanged) ||</div><div class="line">              !userRepository.ValidateLastChanged(userPrincipal, lastChanged))</div><div class="line">          &#123;</div><div class="line">              context.RejectPrincipal();</div><div class="line">              <span class="keyword">await</span> context.HttpContext.SignOutAsync(<span class="string">"MyCookieAuthenticationScheme"</span>);</div><div class="line">          &#125;</div><div class="line">      &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure></p>
+<p>然后，将在<em>Startup.cs</em>的<code>ConfigureServices</code>方法中将Cookie服务注册进行配置：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">services.AddAuthentication(<span class="string">"MyCookieAuthenticationScheme"</span>)</div><div class="line">           .AddCookie(options =&gt;</div><div class="line">           &#123;</div><div class="line">               options.Events = <span class="keyword">new</span> CookieAuthenticationEvents</div><div class="line">               &#123;</div><div class="line">                   OnValidatePrincipal = LastChangedValidator.ValidateAsync</div><div class="line">               &#125;;</div><div class="line">           &#125;);</div></pre></td></tr></table></figure>
+<p>如果要非破坏性地更新用户主体，可以调用<code>context.ReplacePrincipal()</code>，并将<code>context.ShouldRenew</code>属性设置为<code>true</code>。</p>
+<h2 id="Cookie设置选项"><a href="#Cookie设置选项" class="headerlink" title="Cookie设置选项"></a>Cookie设置选项</h2><p><a href="https://docs.microsoft.com/aspnet/core/api/microsoft.aspnetcore.builder.cookieauthenticationoptions" target="_blank" rel="external">CookieAuthenticationOptions</a>类提供了各种配置选项，在创建时调整Cookie的配置。</p>
+<ul>
+<li><code>ClaimsIssuer</code>是由Cookie认证创建的任何声明时使用的Issuer属性。</li>
+<li><code>CookieBuilder.Domain</code>是提供Cookie的域名。默认情况下，这是发送请求的主机名。浏览器仅将Cookie提供给匹配的主机名。您可能希望对此进行调整，以便您的域中的任何主机都可以使用Cookie。例如，将Cookie域名设置为<code>.contoso.com</code>，可以使用Cookie的域名有<code>contoso.com</code>、<code>www.contoso.com</code>、<code>staging.www.contoso.com</code>等</li>
+<li><code>CookieBuilder.HttpOnly</code>是一个标识，指定Cookie是否只能由服务器访问。默认为true。如果您的应用程序具有Cross-Site Scripting(XSS)的问题，更改此值可能会导致Cookie被盗用。</li>
+<li><code>CookieBuilder.Path</code>可用于隔离在相同主机名上运行的应用程序。如果你有一个应用程序在<code>/app1</code>中运行，并希望限制发送的Cookie只发送到该应用程序，那么您应该将<code>CookiePath</code>属性设置为<code>/app1</code>。通过这样做，Cookie只适用于对<code>/app1</code>或其下任何内容的请求。</li>
+<li><code>CookieBuilder.SameSite</code>表示浏览器是否允许Cookie被附加到同一站点或跨站点的请求。默认为<code>SameSiteMode.Lax</code>。</li>
+<li><code>CookieBuilder.SecurePolicy</code>是一个标识，表示创建的Cookie是否应该被限制为HTTPS，HTTP或HTTPS，或与请求相同的协议。默认为<code>SameAsRequest</code>。</li>
+<li><code>ExpireTimeSpan</code>是TimeSpan类型，在此时间段之后Cookie将过期。将当前日期加上此时间段为创建Cookie的到期日期。</li>
+<li><code>SlidingExpiration</code>是一个标识，指示当超过一半的<code>ExpireTimeSpan</code>间隔时，Cookie到期日期是否复位。新的到期日是当前时间加上<code>ExpireTimespan</code>。调用<code>SignInAsync</code>时，可以使用<code>AuthenticationProperties</code>类设置绝对到期时间。绝对到期时间可以通过限制认证Cookie有效的时间来提高应用程序的安全性。<br>在<em>Startup.cs</em>的<code>ConfigureServices</code>方法中使用<code>CookieAuthenticationOptions</code>的例子如下：<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">services.AddAuthentication()</div><div class="line">        .AddCookie(options =&gt;</div><div class="line">        &#123;</div><div class="line">            options.Cookie.Name = <span class="string">"AuthCookie"</span>;</div><div class="line">            options.Cookie.Domain = <span class="string">"contoso.com"</span>;</div><div class="line">            options.Cookie.Path = <span class="string">"/"</span>;</div><div class="line">            options.Cookie.HttpOnly = <span class="literal">true</span>;</div><div class="line">            options.Cookie.SameSite = SameSiteMode.Lax;</div><div class="line">            options.Cookie.SecurePolicy = CookieSecurePolicy.Always;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="持久Cookie和绝对到期时间"><a href="#持久Cookie和绝对到期时间" class="headerlink" title="持久Cookie和绝对到期时间"></a>持久Cookie和绝对到期时间</h2><p>您可能希望Cookie在浏览器会话中持续存在，并希望设置身份和Cookie传输的绝对过期时间。这种持久性应该只能是用户显示同意，在登录时的“记住我”复选框或类似的机制启用。您可以通过在创建身份认证Cookie时调用的<code>SignInAsync</code>方法中使用<code>AuthenticationProperties</code>参数来执行这些操作。例如：<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">await</span> HttpContext.SignInAsync(</div><div class="line">      <span class="string">"MyCookieAuthenticationScheme"</span>,</div><div class="line">      principal,</div><div class="line">      <span class="keyword">new</span> AuthenticationProperties</div><div class="line">      &#123;</div><div class="line">          IsPersistent = <span class="literal">true</span></div><div class="line">      &#125;);</div></pre></td></tr></table></figure></p>
+<p>上面的代码段创建一个身份和相应的Cookie，直到浏览器关闭。以前通过Cookie设置选项配置的任何滑动过期设置仍然有效。如果Cookie在浏览器关闭时过期，浏览器会在重新启动后清除它。如果Cookie在浏览器关闭时过期，浏览器会在重新启动后清除它。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">await</span> HttpContext.SignInAsync(</div><div class="line">        <span class="string">"MyCookieAuthenticationScheme"</span>,</div><div class="line">        principal,</div><div class="line">        <span class="keyword">new</span> AuthenticationProperties</div><div class="line">        &#123;</div><div class="line">            ExpiresUtc = DateTime.UtcNow.AddMinutes(<span class="number">20</span>)</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<p>上述代码段创建一个持续20分钟的身份和相应的cookie。这将忽略以前通过Cookie设置选项配置的任何滑动过期设置。</p>
+<p><code>ExpiresUtc</code>和<code>IsPersistent</code>属性是互斥的。只能同时生效一个</p>
+<p>原文：<a href="https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?tabs=aspnetcore2x" target="_blank" rel="external">《Using Cookie Authentication without ASP.NET Core Identity》</a></p>
+<p>翻译：<a href="http://www.cnblogs.com/tdfblog" target="_blank" rel="external">Sweet Tang</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 &lt;code&gt;HttpContext.User&lt;/code&gt; 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。&lt;/p&gt;
+&lt;p&gt;ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在&lt;em&gt;Startup.cs&lt;/em&gt;文件中的Configure方法中的调用 &lt;code&gt;UseAuthentication&lt;/code&gt; 方法会添加设置 &lt;code&gt;HttpContext.User&lt;/code&gt; 属性的 &lt;code&gt;AuthenticationMiddleware&lt;/code&gt; 中间件。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
+    
+      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
+    
+  </entry>
   
   <entry>
     <title>不限长度RAS加密解密</title>
@@ -126,86 +207,7 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="MVC" scheme="VickChen.win/tags/MVC/"/>
-    
       <category term="C#" scheme="VickChen.win/tags/C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分部视图的使用</title>
-    <link href="VickChen.win/2017/How-to-use-partial-views%20(DESKTOP-SIULCUT%20%E7%9A%84%E5%86%B2%E7%AA%81%E5%89%AF%E6%9C%AC%202017-07-19)/"/>
-    <id>VickChen.win/2017/How-to-use-partial-views (DESKTOP-SIULCUT 的冲突副本 2017-07-19)/</id>
-    <published>2017-05-20T17:10:52.000Z</published>
-    <updated>2017-07-10T09:23:22.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。</p>
-<p>要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：</p>
-<ol>
-<li><p>分部视图可以使系统插件化。我现在非常推崇一个原则，就是可以分离的东西绝对不要让他们在一起，因为只有每个功能模块都是单独的，我们才可以在其他位置重用它。</p>
-</li>
-<li><p>分部视图还可以带来一个优点，就是分工合作。现在是一个合作的时代，没有任何一个人可以单独完成规定的任务而不与别人合作，牛人例外。分部视图可以带给我们开发不同模块中的分工合作。</p>
-</li>
-<li><p>分部视图还有一个在Mvc时代的优点，就是实现简单。我自从学习使用Mvc以后，我基本上就很少写web form的代码了，因为我感觉没有Mvc写的那么流畅。html.partial(partialName)就可以显示一个分部视图的页面。</p>
-</li>
-</ol>
-<a id="more"></a>
-<p>简单的叙述了一下优点，既然我们能发现优点存在，那么我们就想在实际项目中更好的使用它，毕竟程序员都追求懒，一段代码，三句可以搞定，绝对不会写三句半，当然最小化原则也是我们代码优化的最终目的。</p>
-<p>那么究竟在Mvc中有哪些可以实现分部视图的功能呢？以及我们要注意点什么呢？</p>
-<ul>
-<li><p>Html.Partial(partialName)和html.RenderPartial(partialName) 就是首选。<br>其实这两个方法我们可以指定任何的.cshtml文件，不一定只是分部视图。大家来回忆一下分部视图和视图的区别在哪里？就是视图有head、body标签，可以定义js，可以指定母板页，但是在我们用Vs右键添加分部视图的时候，我们会看到只是一些基本的html标签，没有任何的head、body，但是这不等于我们不可以添加，所以说partialName可以是任何的视图文件。但是我们最好是创建分部视图，因为我们最终是要把这些分部视图合并成为一个页面，如果只是分部视图的html标签，那么在整体页面中html标签就会显得很干净。</p>
-</li>
-<li><p>不要在分部视图中定义或者引用css以及js。如果需要我们在整体页面中定义或引用。原因有2：</p>
-<ol>
-<li><p>是我们的分部视图文件和整体页面的路径可能不在同一个目录下，那么会造成找不到css或js文件的情况。</p>
-</li>
-<li><p>对整体页面的html代码是一种伤害。</p>
-</li>
-</ol>
-</li>
-<li><p>html.Action和html.RenderAction()方法也可以用来作为分部视图使用.具体使用方式我想就不需要细说了，大家对htmlHelper都会非常熟悉，因为常用嘛。</p>
-</li>
-</ul>
-<p>这段时间就大量的使用到了分部视图，现在来总结一下，让后来的学习者少走一点弯路。</p>
-<ol>
-<li><p>如果可以，尽量使用母板页，这样可以很好的控制网站的样式。</p>
-</li>
-<li><p>采用单独的css文件，单独的js文件，尽量不要在分部视图中定义样式，而是在整体页面中。</p>
-</li>
-<li><p>分部视图的html标签应该尽可能的少，除了要显示的内容之外，不要有任何杂质存在。样式css、js等在整体页面添加。</p>
-</li>
-<li><p>如果可以，尽量采用html.partial(partialName)或html.RenderPartial(partialName)的方式，而不要用html.Action来作为分部视图的方式，因为这种方法会和控制器交互。</p>
-</li>
-<li><p>对分部视图的传值尽量采用Model的方式进行，如果一个分部视图需要传递两个参数，那么我建议你分成两个分部视图。</p>
-</li>
-<li><p>采用分部视图会对整体页面的样式调整带来困难，所以我建议先整体做出页面，然后再分成不同的分部视图。</p>
-</li>
-<li><p>过多的分部视图会增加服务器的延迟，所以分部视图的控制要得当，我建议控制在10个以内吧，如果服务器允许，更多也是可以的。</p>
-</li>
-<li><p>要注意分部视图的标签id的命名，最好采用固定的要规则的命名方式，尽量减少冲突的发生，毕竟同名的标签存在会对程序造成隐患。</p>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。&lt;/p&gt;
-&lt;p&gt;要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;分部视图可以使系统插件化。我现在非常推崇一个原则，就是可以分离的东西绝对不要让他们在一起，因为只有每个功能模块都是单独的，我们才可以在其他位置重用它。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;分部视图还可以带来一个优点，就是分工合作。现在是一个合作的时代，没有任何一个人可以单独完成规定的任务而不与别人合作，牛人例外。分部视图可以带给我们开发不同模块中的分工合作。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;分部视图还有一个在Mvc时代的优点，就是实现简单。我自从学习使用Mvc以后，我基本上就很少写web form的代码了，因为我感觉没有Mvc写的那么流畅。html.partial(partialName)就可以显示一个分部视图的页面。&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
       <category term="MVC" scheme="VickChen.win/tags/MVC/"/>
     
@@ -243,9 +245,9 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
-    
       <category term="API" scheme="VickChen.win/tags/API/"/>
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
   </entry>
   
@@ -553,9 +555,9 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
-    
       <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
+    
+      <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
     
   </entry>
   
@@ -1010,7 +1012,7 @@
     <link href="VickChen.win/2016/about-git-installation/"/>
     <id>VickChen.win/2016/about-git-installation/</id>
     <published>2016-09-16T19:49:38.000Z</published>
-    <updated>2016-09-21T02:25:34.000Z</updated>
+    <updated>2018-08-01T10:51:35.522Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
 <a id="more"></a>
