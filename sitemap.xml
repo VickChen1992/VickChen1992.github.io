@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>VickChen.win/2018/deploy-your-core-project-on-the-iis/</loc>
+    
+    <lastmod>2018-08-02T10:35:19.428Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>VickChen.win/2018/aspnet-core-security-authentication-cookie/</loc>
     
     <lastmod>2018-08-02T03:14:29.029Z</lastmod>
