@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2018-08-02T10:35:19.428Z</updated>
+  <updated>2018-08-04T04:09:30.820Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -20,19 +20,19 @@
     <link href="VickChen.win/2018/deploy-your-core-project-on-the-iis/"/>
     <id>VickChen.win/2018/deploy-your-core-project-on-the-iis/</id>
     <published>2018-08-02T11:40:31.000Z</published>
-    <updated>2018-08-02T10:35:19.428Z</updated>
+    <updated>2018-08-04T04:09:30.820Z</updated>
     
     <content type="html"><![CDATA[<p>与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是<code>AspNetCoreModule</code>，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。</p>
 <a id="more"></a>
 <ol>
 <li>在控制面板→程序→启用或关闭Windows功能→勾选Internet Information Services以及Web管理工具下的IIS管理控制台</li>
 </ol>
-<p><img src="https://images2018.cnblogs.com/blog/15305/201806/15305-20180617205633842-263052847.png" alt=""></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg" alt=""></p>
 <ol>
 <li>IIS 安装AspNetCoreModule 模块</li>
 </ol>
 <p>部署之前要确保你的IIS上已经安装了AspNetCoreModule托管模块，如果没有的话，点击<a href="https://www.microsoft.com/net/download/windows" target="_blank" rel="external">这里</a>进行下载并安装</p>
-<p><img src="https://images2018.cnblogs.com/blog/15305/201806/15305-20180617205443403-863396077.png" alt=""><br><strong>安装完后一定要重启，否则 Http Error 502</strong></p>
+<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1ftxjhhjtoaj20rm0gs0tc.jpg" alt=""><br><strong>安装完后一定要重启，否则 Http Error 502</strong></p>
 <ol>
 <li>发布</li>
 </ol>
@@ -41,7 +41,7 @@
 <li>添加网站</li>
 </ol>
 <p>添加一个网站，设置一下名称，并将路径指向你刚才发布的文件夹</p>
-<p>设置应用程序池的.NET CLR版本为“无托管代码” 。因为IIS是作为一个反向代理的角色，并不需要它来托管代码<br><img src="https://images2018.cnblogs.com/blog/15305/201806/15305-20180617210540581-86550743.png" alt=""><br><img src="https://images2018.cnblogs.com/blog/15305/201806/15305-20180617215120153-1448416605.png" alt=""></p>
+<p>设置应用程序池的.NET CLR版本为“无托管代码” 。因为IIS是作为一个反向代理的角色，并不需要它来托管代码<br><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1ftxjhhjecvj20kt0e1gmd.jpg" alt=""><br><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1ftxjhhlf4aj20y30jn0vv.jpg" alt=""></p>
 <p>OK!</p>
 ]]></content>
     
