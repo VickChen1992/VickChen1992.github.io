@@ -248,7 +248,7 @@
     <link href="VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/"/>
     <id>VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/</id>
     <published>2017-06-18T19:02:41.000Z</published>
-    <updated>2017-07-10T09:19:07.000Z</updated>
+    <updated>2018-11-04T17:45:05.532Z</updated>
     
     <content type="html"><![CDATA[<p>RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。</p>
 <p>.NET Framework 中提供的 RSA 算法规定：</p>
@@ -277,7 +277,7 @@
     
       <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
-      <category term="RAS" scheme="VickChen.win/tags/RAS/"/>
+      <category term="RSA" scheme="VickChen.win/tags/RSA/"/>
     
   </entry>
   
