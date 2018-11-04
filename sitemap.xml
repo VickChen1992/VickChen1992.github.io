@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>VickChen.win/2017/how-to-use-partial-views/</loc>
+    
+    <lastmod>2018-11-04T17:50:09.205Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/</loc>
     
     <lastmod>2018-11-04T17:48:57.580Z</lastmod>
@@ -68,13 +75,6 @@
     <loc>VickChen.win/2016/sql-timestamp-to-cshap/</loc>
     
     <lastmod>2017-07-10T09:22:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2017/how-to-use-partial-views/</loc>
-    
-    <lastmod>2017-07-10T08:07:13.000Z</lastmod>
     
   </url>
   
