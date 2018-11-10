@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="CSharp,.Net Core,DeBug," />
 
 
 
@@ -86,12 +86,25 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vick's Blog">
-<meta property="og:url" content="VickChen.win/tags/MVC/index.html">
+<meta name="description" content="“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”
+“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原……请确保将相同的设置用于 restore 和后续操作，例如 build 或 publish。 如果在 build 或 publish 期间设置了 RuntimeIdentifier 属性……”
+
+ 解决办法，将发布设置中">
+<meta property="og:type" content="article">
+<meta property="og:title" content="发布Core程序时遇到的错误">
+<meta property="og:url" content="VickChen.win/2018/error-in-publish-core-program/index.html">
 <meta property="og:site_name" content="Vick's Blog">
+<meta property="og:description" content="“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”
+“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原……请确保将相同的设置用于 restore 和后续操作，例如 build 或 publish。 如果在 build 或 publish 期间设置了 RuntimeIdentifier 属性……”
+
+ 解决办法，将发布设置中">
+<meta property="og:updated_time" content="2018-11-10T10:44:36.998Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vick's Blog">
+<meta name="twitter:title" content="发布Core程序时遇到的错误">
+<meta name="twitter:description" content="“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”
+“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原……请确保将相同的设置用于 restore 和后续操作，例如 build 或 publish。 如果在 build 或 publish 期间设置了 RuntimeIdentifier 属性……”
+
+ 解决办法，将发布设置中">
 
 
 
@@ -112,9 +125,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/tags/MVC/"/>
+  <link rel="canonical" href="VickChen.win/2018/error-in-publish-core-program/"/>
 
-  <title> 标签: MVC | Vick's Blog </title>
+  <title> 发布Core程序时遇到的错误 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -135,7 +148,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -233,46 +246,155 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        MVC
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                发布Core程序时遇到的错误
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-21T18:13:04+08:00" content="2018-09-21">
+              2018-09-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <ol>
+<li><h3 id="“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”"><a href="#“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”" class="headerlink" title="“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”"></a>“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”</h3><blockquote>
+<p>“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原……请确保将相同的设置用于 restore 和后续操作，例如 build 或 publish。 如果在 build 或 publish 期间设置了 RuntimeIdentifier 属性……”</p>
+</blockquote>
+<p> 解决办法，将发布设置中的部署模式设置为框架依赖，取消发布设置里的RuntimeIdentifier 设置，即中文版设置里的”目标运行时“选项，选回“可移植”即可。</p>
+</li>
+</ol>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/how-to-use-partial-views/" itemprop="url">
-              
-                <span itemprop="name">分部视图的使用</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-21T01:10:52+08:00"
-              content="2017-05-21" >
-          05-21
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSharp/" rel="tag">#CSharp</a>
+          
+            <a href="/tags/Net-Core/" rel="tag">#.Net Core</a>
+          
+            <a href="/tags/DeBug/" rel="tag">#DeBug</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/deploy-your-core-project-on-the-iis/" rel="next" title="在IIS上部署你的ASP.NET Core 2.1项目">
+                <i class="fa fa-chevron-left"></i> 在IIS上部署你的ASP.NET Core 2.1项目
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/database-migration-of-entity-framework-Core/" rel="prev" title="Entity Framework Core 之数据库迁移">
+                Entity Framework Core 之数据库迁移 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -280,6 +402,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -299,8 +425,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -386,6 +521,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”"><span class="nav-number">1.</span> <span class="nav-text">“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -482,6 +628,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2018-11-04T14:12:54.519Z</updated>
+  <updated>2018-11-04T14:12:54.000Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="VickChen.win/2018/database-migration-of-entity-framework-Core/"/>
     <id>VickChen.win/2018/database-migration-of-entity-framework-Core/</id>
     <published>2018-11-04T09:48:01.000Z</published>
-    <updated>2018-11-04T14:12:54.519Z</updated>
+    <updated>2018-11-04T14:12:54.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节</p>
 <a id="more"></a>
@@ -116,11 +116,45 @@
   </entry>
   
   <entry>
+    <title>发布Core程序时遇到的错误</title>
+    <link href="VickChen.win/2018/error-in-publish-core-program/"/>
+    <id>VickChen.win/2018/error-in-publish-core-program/</id>
+    <published>2018-09-21T10:13:04.000Z</published>
+    <updated>2018-11-10T10:44:36.998Z</updated>
+    
+    <content type="html"><![CDATA[<ol>
+<li><h3 id="“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”"><a href="#“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”" class="headerlink" title="“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”"></a>“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”</h3><blockquote>
+<p>“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原……请确保将相同的设置用于 restore 和后续操作，例如 build 或 publish。 如果在 build 或 publish 期间设置了 RuntimeIdentifier 属性……”</p>
+</blockquote>
+<p> 解决办法，将发布设置中的部署模式设置为框架依赖，取消发布设置里的RuntimeIdentifier 设置，即中文版设置里的”目标运行时“选项，选回“可移植”即可。</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;ol&gt;
+&lt;li&gt;&lt;h3 id=&quot;“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”&quot;&gt;&lt;a href=&quot;#“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”&quot; class=&quot;headerlink&quot; ti
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
+    
+      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
+    
+      <category term="DeBug" scheme="VickChen.win/tags/DeBug/"/>
+    
+  </entry>
+  
+  <entry>
     <title>在IIS上部署你的ASP.NET Core 2.1项目</title>
     <link href="VickChen.win/2018/deploy-your-core-project-on-the-iis/"/>
     <id>VickChen.win/2018/deploy-your-core-project-on-the-iis/</id>
     <published>2018-08-02T11:40:31.000Z</published>
-    <updated>2018-08-04T04:09:30.000Z</updated>
+    <updated>2018-08-04T04:09:30.820Z</updated>
     
     <content type="html"><![CDATA[<p>与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是<code>AspNetCoreModule</code>，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。</p>
 <a id="more"></a>
@@ -167,7 +201,7 @@
     <link href="VickChen.win/2018/aspnet-core-security-authentication-cookie/"/>
     <id>VickChen.win/2018/aspnet-core-security-authentication-cookie/</id>
     <published>2018-08-01T10:46:01.000Z</published>
-    <updated>2018-08-02T03:14:29.000Z</updated>
+    <updated>2018-08-02T03:14:29.029Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
 <p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
@@ -248,7 +282,7 @@
     <link href="VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/"/>
     <id>VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/</id>
     <published>2017-06-18T19:02:41.000Z</published>
-    <updated>2018-11-04T17:45:05.532Z</updated>
+    <updated>2018-11-04T17:44:39.000Z</updated>
     
     <content type="html"><![CDATA[<p>RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。</p>
 <p>.NET Framework 中提供的 RSA 算法规定：</p>
@@ -286,7 +320,7 @@
     <link href="VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/"/>
     <id>VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/</id>
     <published>2017-06-01T16:41:31.000Z</published>
-    <updated>2018-11-04T17:48:57.580Z</updated>
+    <updated>2018-11-04T17:48:57.000Z</updated>
     
     <content type="html"><![CDATA[<p>在数据安全上rsa起着非常大的作用，特别是数据网络通讯的安全上。当异构系统在数据网络通讯上对安全性有所要求时，rsa将作为其中的一种选择，此时rsa的互通性就显得尤为重要了。</p>
 <p>本文参考网络资料，提供了rsa互通性的一种可行的解决方案(c#,java,php),而这种互通性是在一定的局限性上达成的，比如密钥是1024位的(更高位没试过，应该也可行），基于PKCS1填充方式。</p>
@@ -348,7 +382,7 @@
     <link href="VickChen.win/2017/how-to-use-partial-views/"/>
     <id>VickChen.win/2017/how-to-use-partial-views/</id>
     <published>2017-05-20T17:10:52.000Z</published>
-    <updated>2018-11-04T17:50:09.205Z</updated>
+    <updated>2018-11-04T17:50:09.000Z</updated>
     
     <content type="html"><![CDATA[<p>提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。</p>
 <p>要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：</p>
@@ -830,7 +864,7 @@
     <link href="VickChen.win/2016/learn-markdown/"/>
     <id>VickChen.win/2016/learn-markdown/</id>
     <published>2016-09-20T04:47:54.000Z</published>
-    <updated>2018-11-04T14:06:58.557Z</updated>
+    <updated>2018-11-04T14:06:58.000Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="什么是Markdown语法？"><a href="#什么是Markdown语法？" class="headerlink" title="什么是Markdown语法？"></a>什么是Markdown语法？</h3> Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。</li>
@@ -973,7 +1007,7 @@
     <link href="VickChen.win/2016/create-hexo-blog-on-github/"/>
     <id>VickChen.win/2016/create-hexo-blog-on-github/</id>
     <published>2016-09-19T16:41:53.000Z</published>
-    <updated>2018-11-04T17:32:14.422Z</updated>
+    <updated>2018-11-04T17:32:14.000Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
@@ -1221,7 +1255,7 @@
     <link href="VickChen.win/2016/about-git-installation/"/>
     <id>VickChen.win/2016/about-git-installation/</id>
     <published>2016-09-16T19:49:38.000Z</published>
-    <updated>2018-08-01T10:51:35.000Z</updated>
+    <updated>2018-08-01T10:51:35.522Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
 <a id="more"></a>
