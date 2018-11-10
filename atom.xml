@@ -120,9 +120,11 @@
     <link href="VickChen.win/2018/error-in-publish-core-program/"/>
     <id>VickChen.win/2018/error-in-publish-core-program/</id>
     <published>2018-09-21T10:13:04.000Z</published>
-    <updated>2018-11-10T10:44:36.998Z</updated>
+    <updated>2018-11-10T11:01:04.083Z</updated>
     
-    <content type="html"><![CDATA[<ol>
+    <content type="html"><![CDATA[<p>此贴主要用于记录Core程序在发布时遇到的错误。</p>
+<a id="more"></a>
+<ol>
 <li><h3 id="“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”"><a href="#“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”" class="headerlink" title="“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”"></a>“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原”</h3><blockquote>
 <p>“该项目使用 Microsoft.NETCore.App 版本 2.1.0 进行了还原……请确保将相同的设置用于 restore 和后续操作，例如 build 或 publish。 如果在 build 或 publish 期间设置了 RuntimeIdentifier 属性……”</p>
 </blockquote>
@@ -133,8 +135,7 @@
     
     <summary type="html">
     
-      &lt;ol&gt;
-&lt;li&gt;&lt;h3 id=&quot;“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”&quot;&gt;&lt;a href=&quot;#“该项目使用-Microsoft-NETCore-App-版本-2-1-0-进行了还原”&quot; class=&quot;headerlink&quot; ti
+      &lt;p&gt;此贴主要用于记录Core程序在发布时遇到的错误。&lt;/p&gt;
     
     </summary>
     
