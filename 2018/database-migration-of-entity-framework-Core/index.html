@@ -104,7 +104,7 @@
 <meta property="og:image" content="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og0hvoj20if08a74k.jpg">
 <meta property="og:image" content="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og11llj20j9093q39.jpg">
 <meta property="og:image" content="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6ogsrvrj20yz0mrmz0.jpg">
-<meta property="og:updated_time" content="2018-11-04T14:12:54.000Z">
+<meta property="og:updated_time" content="2018-11-22T03:02:32.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Entity Framework Core 之数据库迁移">
 <meta name="twitter:description" content="最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节">
@@ -332,17 +332,10 @@
       
         <p>最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节</p>
 <a id="more"></a>
-<ol>
-<li><h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3></li>
-</ol>
-<p>首先EF CORE跟以前的EF6是有不同点的，<br>微软官网列出的不同点：[<a href="https://docs.microsoft.com/en-us/ef/efcore-and-ef6/index" target="_blank" rel="external">https://docs.microsoft.com/en-us/ef/efcore-and-ef6/index</a>]</p>
-<ol>
-<li><h3 id="安装-EF-核心-NuGet-包"><a href="#安装-EF-核心-NuGet-包" class="headerlink" title="安装 EF 核心 NuGet 包"></a>安装 EF 核心 NuGet 包</h3></li>
-</ol>
-<p>若要使用 EF 核心，请为你想要使用的数据库提供程序安装 NuGet 包。 例如，如果目标 SQL Server，你将安装Microsoft.EntityFrameworkCore.SqlServer。</p>
-<p>如果你打算使用迁移，则还应安装Microsoft.EntityFrameworkCore.Tools包。</p>
-<p><code>Install-Package Microsoft.EntityFrameworkCore.SqlServer</code></p>
-<p><code>Install-Package Microsoft.EntityFrameworkCore.Tools</code></p>
+<h3 id="1-区别"><a href="#1-区别" class="headerlink" title="1. 区别"></a>1. 区别</h3><p>首先EF CORE跟以前的EF6是有不同点的，<br>微软官网列出的不同点：[<a href="https://docs.microsoft.com/en-us/ef/efcore-and-ef6/index" target="_blank" rel="external">https://docs.microsoft.com/en-us/ef/efcore-and-ef6/index</a>]</p>
+<h3 id="2-安装-EF-核心-NuGet-包"><a href="#2-安装-EF-核心-NuGet-包" class="headerlink" title="2. 安装 EF 核心 NuGet 包"></a>2. 安装 EF 核心 NuGet 包</h3><p>若要使用 EF 核心，请为你想要使用的数据库提供程序安装 NuGet 包。 例如，如果目标 SQL Server，你将安装<code>Microsoft.EntityFrameworkCore.SqlServer</code>。</p>
+<p>如果你打算使用迁移，则还应安装<code>Microsoft.EntityFrameworkCore.Tools</code>包。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Install-Package Microsoft.EntityFrameworkCore.SqlServer</div><div class="line">Install-Package Microsoft.EntityFrameworkCore.Tools</div></pre></td></tr></table></figure>
 <p>首先新建一个 Model 类 SysUser:</p>
 <p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6nzsgi5j20l60gnq3i.jpg" alt=""></p>
 <p> 然后建立EFCoreContext类:</p>
@@ -351,10 +344,7 @@
 <p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6nzlzg4j20l30cijrv.jpg" alt=""></p>
 <p>此时我们的数据库和数据都已经有了:</p>
 <p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nzlsmhj20e407wglu.jpg" alt=""></p>
-<ol>
-<li><h3 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h3></li>
-</ol>
-<p>此时重点来了，当我们已经有数据库表的时候，我们需要修改字段，如何进行迁移?</p>
+<h3 id="3-数据迁移"><a href="#3-数据迁移" class="headerlink" title="3. 数据迁移"></a>3. 数据迁移</h3><p>此时重点来了，当我们已经有数据库表的时候，我们需要修改字段，如何进行迁移?</p>
 <p>首先打开VS-&gt;工具-&gt;NuGet包管理器-&gt;程序包管理控制台</p>
 <p>输入命令：<code>Add-Migration init</code>（执行此命令项目生成一个目录<migration>）</migration></p>
 <p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6o0e4lgj20sq08vmxu.jpg" alt=""></p>
@@ -380,26 +370,17 @@
 <p><code>Update-Database x2</code></p>
 <p>然后Email字段加上了，UserName长度也修改了，UserName的数据也还在。</p>
 <p><img src="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og0hvoj20if08a74k.jpg" alt=""></p>
-<ol>
-<li><h3 id="删除迁移"><a href="#删除迁移" class="headerlink" title="删除迁移"></a>删除迁移</h3></li>
-</ol>
-<p>有的时候我们刚刚创建了一个迁移,还没应用到数据库,就发现自己需要变更实体.那我们就可以删除这个没有应用的迁移版本.</p>
+<h3 id="4-删除迁移"><a href="#4-删除迁移" class="headerlink" title="4. 删除迁移"></a>4. 删除迁移</h3><p>有的时候我们刚刚创建了一个迁移,还没应用到数据库,就发现自己需要变更实体.那我们就可以删除这个没有应用的迁移版本.</p>
 <p>执行命令:<code>Remove-Migration</code></p>
 <p><em>注意,这里是没有应用过的迁移,可以删除.如果应用过了.则会收到错误信息</em></p>
-<ol>
-<li><h3 id="迁移回滚"><a href="#迁移回滚" class="headerlink" title="迁移回滚"></a>迁移回滚</h3></li>
-</ol>
-<p>有些时候,我们需要回滚到之前的一个迁移版本.,比如我们部署的时候,开发版本和稳定版本肯定不一样..</p>
+<h3 id="5-迁移回滚"><a href="#5-迁移回滚" class="headerlink" title="5. 迁移回滚"></a>5. 迁移回滚</h3><p>有些时候,我们需要回滚到之前的一个迁移版本.,比如我们部署的时候,开发版本和稳定版本肯定不一样..</p>
 <p>那么我们就会用到回滚命令.</p>
 <p>执行如下: </p>
 <p><code>Update-Database</code>  这里填写需要回滚的版本名称</p>
 <p>我们执行  <code>Update-Database</code>   这里填写需要回滚的版本名称</p>
 <p>然后我们会发现, x2中的长度已经回到30了，Email字段也没有了….</p>
 <p><img src="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og11llj20j9093q39.jpg" alt=""></p>
-<ol>
-<li><h3 id="生成迁移SQL"><a href="#生成迁移SQL" class="headerlink" title="生成迁移SQL"></a>生成迁移SQL</h3></li>
-</ol>
-<p>有的时候,我们的生产数据库,是需要用脚本来创建库的.所以我们也可以直接通过实体来生成SQL脚本.命令如下:</p>
+<h3 id="6-生成迁移SQL"><a href="#6-生成迁移SQL" class="headerlink" title="6. 生成迁移SQL"></a>6. 生成迁移SQL</h3><p>有的时候,我们的生产数据库,是需要用脚本来创建库的.所以我们也可以直接通过实体来生成SQL脚本.命令如下:</p>
 <p><code>Script-Migration</code></p>
 <p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6ogsrvrj20yz0mrmz0.jpg" alt=""></p>
 <p>举一反三：<code>Script-Migration x2</code>  这个脚本可以自定义需要迁移的版本号、文件名、需要生成迁移脚本的上下文</p>
@@ -595,7 +576,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#区别"><span class="nav-number">1.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-EF-核心-NuGet-包"><span class="nav-number">2.</span> <span class="nav-text">安装 EF 核心 NuGet 包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据迁移"><span class="nav-number">3.</span> <span class="nav-text">数据迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除迁移"><span class="nav-number">4.</span> <span class="nav-text">删除迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#迁移回滚"><span class="nav-number">5.</span> <span class="nav-text">迁移回滚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成迁移SQL"><span class="nav-number">6.</span> <span class="nav-text">生成迁移SQL</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-区别"><span class="nav-number">1.</span> <span class="nav-text">1. 区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装-EF-核心-NuGet-包"><span class="nav-number">2.</span> <span class="nav-text">2. 安装 EF 核心 NuGet 包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-数据迁移"><span class="nav-number">3.</span> <span class="nav-text">3. 数据迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-删除迁移"><span class="nav-number">4.</span> <span class="nav-text">4. 删除迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-迁移回滚"><span class="nav-number">5.</span> <span class="nav-text">5. 迁移回滚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-生成迁移SQL"><span class="nav-number">6.</span> <span class="nav-text">6. 生成迁移SQL</span></a></li></ol></div>
             
           </div>
         </section>

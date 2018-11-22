@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>VickChen.win/2018/database-migration-of-entity-framework-Core/</loc>
+    
+    <lastmod>2018-11-22T03:02:32.036Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>VickChen.win/2018/error-in-publish-core-program/</loc>
     
     <lastmod>2018-11-10T11:01:04.083Z</lastmod>
@@ -33,13 +40,6 @@
     <loc>VickChen.win/2016/create-hexo-blog-on-github/</loc>
     
     <lastmod>2018-11-04T17:32:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2018/database-migration-of-entity-framework-Core/</loc>
-    
-    <lastmod>2018-11-04T14:12:54.000Z</lastmod>
     
   </url>
   
