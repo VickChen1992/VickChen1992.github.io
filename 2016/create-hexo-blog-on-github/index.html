@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/9460f058gw1f7zaho7n5fj20mp0k2jvw.jpg">
 <meta property="og:image" content="http://ww2.sinaimg.cn/large/9460f058gw1f7zbcc4ekrj20g908cmyl.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/9460f058gw1f7zbi1z5y7j20fa06zjs5.jpg">
-<meta property="og:updated_time" content="2018-11-04T17:32:14.000Z">
+<meta property="og:updated_time" content="2018-11-22T03:27:51.068Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用hexo在GitHub上搭建自己的bolg">
 <meta name="twitter:description" content="前言：搭建博客的几大要素
@@ -349,10 +349,18 @@
 </ol>
 </li>
 <li><h3 id="使用Github-Pages生成博客"><a href="#使用Github-Pages生成博客" class="headerlink" title="使用Github Pages生成博客"></a>使用Github Pages生成博客</h3><ol>
-<li>在Github网站上新建一个仓库（repository），网站右上角：<br><img src="http://ww3.sinaimg.cn/large/9460f058gw1f7zaho97v0j20bo06ddgc.jpg" alt=""></li>
-<li>输入库的名字，注意：一定要以这种形式yourname.github.com进行命名，比如我的用户名是vickchen1992，于是我的命名就是vickchen1992.github.com<br><img src="http://ww4.sinaimg.cn/large/9460f058gw1f7zaho1bv9j20ke0ebtbh.jpg" alt=""></li>
-<li>创建完成之后进入这个界面后点击右边的设置。<br><img src="http://ww4.sinaimg.cn/large/9460f058gw1f7zahndv9nj20qu046wfc.jpg" alt=""></li>
-<li>把界面往下拉就可以看到一个“页面自动生成”按钮了，点击该按钮<br><img src="http://ww2.sinaimg.cn/large/9460f058gw1f7zaho7n5fj20mp0k2jvw.jpg" alt=""></li>
+<li><p>在Github网站上新建一个仓库（repository），网站右上角：</p>
+<p><img src="http://ww3.sinaimg.cn/large/9460f058gw1f7zaho97v0j20bo06ddgc.jpg" alt=""></p>
+</li>
+<li><p>输入库的名字，注意：一定要以这种形式yourname.github.com进行命名，比如我的用户名是vickchen1992，于是我的命名就是vickchen1992.github.com</p>
+<p><img src="http://ww4.sinaimg.cn/large/9460f058gw1f7zaho1bv9j20ke0ebtbh.jpg" alt=""></p>
+</li>
+<li><p>创建完成之后进入这个界面后点击右边的设置。</p>
+<p><img src="http://ww4.sinaimg.cn/large/9460f058gw1f7zahndv9nj20qu046wfc.jpg" alt=""></p>
+</li>
+<li><p>把界面往下拉就可以看到一个“页面自动生成”按钮了，点击该按钮</p>
+<p><img src="http://ww2.sinaimg.cn/large/9460f058gw1f7zaho7n5fj20mp0k2jvw.jpg" alt=""></p>
+</li>
 <li>然后进入Github自带的Markdown编辑器进行编辑，你可以随意修改写上几句自己的话。然后点击右下角的绿色按钮Continue to Layouts。</li>
 <li>然后你可以选择一个自己喜欢的主题，点击Publish就可以生成属于你自己的博客啦！</li>
 <li>试着在地址栏输入<code>http://yourname.github.io/</code> 就可以进入你刚刚创建的博客。</li>
@@ -377,6 +385,7 @@
 <p> 现在我们已经搭建起本地的hexo博客了，先在本地看看怎么样。在hexo安装的目录执行以下命令启动服务</p>
 <p> <code>hexo generate</code> //生成静态网页，简写方式为 hexo g</p>
 <p> <code>hexo server</code>  //启动本地服务，简写方式为 hexo s</p>
+<p>也可合并命令，如<code>hexo s -g</code> 表示先生成然后开启服务</p>
 <p> 然后到浏览器输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>即可</p>
 <p> 至此，本地博客已经搭建起来了。</p>
 </li>
@@ -398,7 +407,8 @@
 <p>OK,我们的博客已经完全搭建起来了，在浏览器访问 <a href="http://yourname.github.io/" target="_blank" rel="external">http://yourname.github.io/</a> 就能看到你的成果了！</p>
 <p>还有一点，有一些用户在hexo deploy之后会有个这个提示</p>
 <p><img src="http://ww1.sinaimg.cn/large/9460f058gw1f7zbi1z5y7j20fa06zjs5.jpg" alt=""></p>
-<p>那么我们要输入我们在git上验证的邮箱，再次hexo deploy便成功发布上去。<br>就可以访问我们的网站了。</p>
+<p>那么我们要输入我们在git上验证的邮箱，再次hexo deploy便成功发布上去。</p>
+<p>就可以访问我们的网站了。</p>
 </li>
 </ul>
 </li>
@@ -420,10 +430,17 @@
 <li><p>在github部署完成之后，马上访问出现404错误？</p>
 <p> 解决方法：这是正常的，（最多）等待十分钟左右就可以访问了。如果还不行，那很可能是 github 发送给你的验证邮件你没有打开看，验证后就没问题了。</p>
 </li>
-<li>shell 命令中输入密码时，你输入之后密码是不显示的，这是为了安全，并非是你没输上。</li>
-<li>出现乱码的，不要使用 windows 中的「记事本」打开并编辑文件，推荐使用 VS Code</li>
-<li>遇到什么其他的问题，不妨删除.deploy 和db.json 再重新生成试一试。</li>
-<li>hexo安装没错，也能成功运行。启动也没错，但就是无法访问<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>?<br> 你的电脑端口被占用了。hexo默认的端口是4000，如果你的电脑安装了福昕阅读器，就是他，没错.<br> 启动hexo s 的时候，用这个命令，换一个端口。<br> <code>hexo s -p 5000</code> </li>
+<li><p>shell 命令中输入密码时，你输入之后密码是不显示的，这是为了安全，并非是你没输上。</p>
+</li>
+<li><p>出现乱码的，不要使用 windows 中的「记事本」打开并编辑文件，推荐使用 VS Code</p>
+</li>
+<li><p>遇到什么其他的问题，不妨删除.deploy 和db.json 再重新生成试一试。</p>
+</li>
+<li><p>hexo安装没错，也能成功运行。启动也没错，但就是无法访问<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>?</p>
+<p> 你的电脑端口被占用了。hexo默认的端口是4000，如果你的电脑安装了福昕阅读器，就是他，没错.</p>
+<p> 启动hexo s 的时候，用这个命令，换一个端口。</p>
+<p> <code>hexo s -p 5000</code> </p>
+</li>
 </ol>
 </li>
 </ol>
