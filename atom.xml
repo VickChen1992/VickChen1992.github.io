@@ -132,6 +132,49 @@
   </entry>
   
   <entry>
+    <title>.Net Core使用 MiniProfiler 进行性能分析</title>
+    <link href="VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/"/>
+    <id>VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/</id>
+    <published>2018-08-31T18:11:52.000Z</published>
+    <updated>2018-11-27T09:42:53.722Z</updated>
+    
+    <content type="html"><![CDATA[<p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
+<p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
+<p>MiniProfiler此时就派上用场了，这是<a href="http://stackoverflow.com/" target="_blank" rel="external">Stack Overflow</a>团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引用、Ajax、Iframe形式访问的其它页面进行监控,监控内容包括数据库内容，并可以显示数据库访问的SQL（支持EF、EF CodeFirst等 ）。并且以很友好的方式展现在页面上。</p>
+<a id="more"></a>
+<p>官方文档： <a href="https://miniprofiler.com/dotnet/AspDotNetCore" target="_blank" rel="external">https://miniprofiler.com/dotnet/AspDotNetCore</a></p>
+<p>1、添加包 <a href="https://www.nuget.org/packages/MiniProfiler.AspNetCore.Mvc/" target="_blank" rel="external">MiniProfiler.AspNetCore.Mvc</a>   和    <a href="https://www.nuget.org/packages/MiniProfiler.EntityFrameworkCore" target="_blank" rel="external">MiniProfiler.EntityFrameworkCore</a></p>
+<p>2、在 Startup.cs 中的 ConfigureServices 下添加，也可以根据官方文档中的说明进行相应的配置</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">services.AddMiniProfiler().AddEntityFramework();</div></pre></td></tr></table></figure>
+<p>3、在 Startup.cs 中的 Configure 下添加</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.UseMiniProfiler();</div></pre></td></tr></table></figure>
+<p>4、修改 _ViewImports.cshtml </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">using</span> StackExchange.Profiling</div><div class="line">@addTagHelper *, MiniProfiler.AspNetCore.Mvc</div></pre></td></tr></table></figure>
+<p>5、将MiniProfiler添加到布局文件（Shared/_Layout.cshtml）中</p>
+<p>完成~</p>
+<mini-profiler>
+
+
+</mini-profiler>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。&lt;/p&gt;
+&lt;p&gt;虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。&lt;/p&gt;
+&lt;p&gt;MiniProfiler此时就派上用场了，这是&lt;a href=&quot;http://stackoverflow.com/&quot;&gt;Stack Overflow&lt;/a&gt;团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引用、Ajax、Iframe形式访问的其它页面进行监控,监控内容包括数据库内容，并可以显示数据库访问的SQL（支持EF、EF CodeFirst等 ）。并且以很友好的方式展现在页面上。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
+    
+      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
+    
+  </entry>
+  
+  <entry>
     <title>HangFire快速入门</title>
     <link href="VickChen.win/2018/how-to-use-hangfire-on-net-core/"/>
     <id>VickChen.win/2018/how-to-use-hangfire-on-net-core/</id>

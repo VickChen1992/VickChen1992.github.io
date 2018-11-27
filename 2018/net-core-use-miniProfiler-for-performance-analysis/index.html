@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="CSharp,.Net Core," />
 
 
 
@@ -86,12 +86,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vick's Blog">
-<meta property="og:url" content="VickChen.win/tags/SVN/index.html">
+<meta name="description" content="我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。
+虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。
+MiniProfiler此时就派上用场了，这是Stack Overflow团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".Net Core使用 MiniProfiler 进行性能分析">
+<meta property="og:url" content="VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/index.html">
 <meta property="og:site_name" content="Vick's Blog">
+<meta property="og:description" content="我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。
+虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。
+MiniProfiler此时就派上用场了，这是Stack Overflow团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引">
+<meta property="og:updated_time" content="2018-11-27T09:42:53.722Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vick's Blog">
+<meta name="twitter:title" content=".Net Core使用 MiniProfiler 进行性能分析">
+<meta name="twitter:description" content="我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。
+虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。
+MiniProfiler此时就派上用场了，这是Stack Overflow团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引">
 
 
 
@@ -112,9 +122,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/tags/SVN/"/>
+  <link rel="canonical" href="VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/"/>
 
-  <title> 标签: SVN | Vick's Blog </title>
+  <title> .Net Core使用 MiniProfiler 进行性能分析 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -135,7 +145,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -233,46 +243,163 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        SVN
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                .Net Core使用 MiniProfiler 进行性能分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-09-01T02:11:52+08:00" content="2018-09-01">
+              2018-09-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
+<p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
+<p>MiniProfiler此时就派上用场了，这是<a href="http://stackoverflow.com/" target="_blank" rel="external">Stack Overflow</a>团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引用、Ajax、Iframe形式访问的其它页面进行监控,监控内容包括数据库内容，并可以显示数据库访问的SQL（支持EF、EF CodeFirst等 ）。并且以很友好的方式展现在页面上。</p>
+<a id="more"></a>
+<p>官方文档： <a href="https://miniprofiler.com/dotnet/AspDotNetCore" target="_blank" rel="external">https://miniprofiler.com/dotnet/AspDotNetCore</a></p>
+<p>1、添加包 <a href="https://www.nuget.org/packages/MiniProfiler.AspNetCore.Mvc/" target="_blank" rel="external">MiniProfiler.AspNetCore.Mvc</a>   和    <a href="https://www.nuget.org/packages/MiniProfiler.EntityFrameworkCore" target="_blank" rel="external">MiniProfiler.EntityFrameworkCore</a></p>
+<p>2、在 Startup.cs 中的 ConfigureServices 下添加，也可以根据官方文档中的说明进行相应的配置</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">services.AddMiniProfiler().AddEntityFramework();</div></pre></td></tr></table></figure>
+<p>3、在 Startup.cs 中的 Configure 下添加</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">app.UseMiniProfiler();</div></pre></td></tr></table></figure>
+<p>4、修改 _ViewImports.cshtml </p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">using</span> StackExchange.Profiling</div><div class="line">@addTagHelper *, MiniProfiler.AspNetCore.Mvc</div></pre></td></tr></table></figure>
+<p>5、将MiniProfiler添加到布局文件（Shared/_Layout.cshtml）中</p>
+<p>完成~</p>
+<mini-profiler>
 
-      <h1 class="post-title">
+
+</mini-profiler>
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/why-git/" itemprop="url">
-              
-                <span itemprop="name">SVN 与 Git 的区别</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-19T00:15:12+08:00"
-              content="2016-09-19" >
-          09-19
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSharp/" rel="tag">#CSharp</a>
+          
+            <a href="/tags/Net-Core/" rel="tag">#.Net Core</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/how-to-use-hangfire-on-net-core/" rel="next" title="HangFire快速入门">
+                <i class="fa fa-chevron-left"></i> HangFire快速入门
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/error-in-publish-core-program/" rel="prev" title="发布Core程序时遇到的错误">
+                发布Core程序时遇到的错误 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -280,6 +407,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -299,8 +430,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.jpg"
@@ -386,6 +526,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -482,6 +633,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
