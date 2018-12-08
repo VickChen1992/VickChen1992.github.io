@@ -97,6 +97,57 @@
   </entry>
   
   <entry>
+    <title>jQuery实现滚动条到底部时加载数据</title>
+    <link href="VickChen.win/2018/jQuery-loads-data-when-scrollbar-to-bottom/"/>
+    <id>VickChen.win/2018/jQuery-loads-data-when-scrollbar-to-bottom/</id>
+    <published>2018-10-01T15:32:01.000Z</published>
+    <updated>2018-12-08T10:29:50.421Z</updated>
+    
+    <content type="html"><![CDATA[<p>滚动条到底部加载数据原理很简单，就是为window或者滚动元素添加一个scroll事件，浏览器每次触发scroll事件时判断是否滚动到了浏览器底部，如果到了底部则加载新数据。关键是计算滚动条是否滚动到了浏览器底部</p>
+<a id="more"></a>
+<p>滚动条卷起来的高度 + 窗口高度 &gt; 文档的总高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//滚动响应区域高度取50px</span></div><div class="line">    <span class="keyword">if</span>(scrollTop() + windowHeight() &gt;= (documentHeight() - <span class="number">50</span>))</div><div class="line">    &#123;</div><div class="line">        loadMore();</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadMore</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">//todo XXX</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>获取页面顶部被卷起来的高度函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取页面顶部被卷起来的高度</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">scrollTop</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(</div><div class="line">    <span class="comment">//chrome</span></div><div class="line">    <span class="built_in">document</span>.body.scrollTop,</div><div class="line">    <span class="comment">//firefox/IE</span></div><div class="line">    <span class="built_in">document</span>.documentElement.scrollTop);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em>chrome浏览器和Firefox/IE对滚动条是属于body还是html理解不同导致处理不同。</em></p>
+<p>获取页面文档的总高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取页面文档的总高度</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">documentHeight</span>(<span class="params"></span>)</span>&#123; </div><div class="line">    <span class="comment">//现代浏览器（IE9+和其他浏览器）和IE8的document.body.scrollHeight和</span></div><div class="line">    <span class="comment">//document.documentElement.scrollHeight都可以 </span></div><div class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(<span class="built_in">document</span>.body.scrollHeight,<span class="built_in">document</span>.documentElement.scrollHeight);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个算法和jQuery计算文档高度的方法一致。</p>
+<p>获取页面浏览器视口的高度</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">windowHeight</span>(<span class="params"></span>)</span>&#123;</div><div class="line">     <span class="keyword">return</span> (<span class="built_in">document</span>.compatMode == <span class="string">"CSS1Compat"</span>)? </div><div class="line">     <span class="built_in">document</span>.documentElement.clientHeight: <span class="built_in">document</span>.body.clientHeight;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>这里需要说明的是document.compatMode。很陌生，一般情况貌似没有遇到过。</p>
+<p><code>document.compatMode</code>有两个取值”<strong>BackCompat</strong>“和”<strong>CSS1Compat</strong>“。</p>
+<p>官方解释是BackCompat：标准兼容模式关闭。CSS1Compat：标准兼容模式开启。  </p>
+<p>　　IE对盒模型的渲染在 <code>Standards Mode</code>和<code>Quirks Mode</code>是有很大差别的，在<code>Standards Mode</code>下对于盒模型的解释和其他的标准浏览器是一样，</p>
+<p>但在<code>Quirks Mode</code>模式下则有很大差别，而在不声明Doctype的情况下，IE默认又是Quirks Mode。  </p>
+<p>　　举个例子说明两种模式之间的差别有多大。</p>
+<p>　　当document.compatMode等于BackCompat时，浏览器客户区宽度是<code>document.body.clientWidth</code></p>
+<p>　　当document.compatMode等于CSS1Compat时，浏览器客户区宽度是<code>document.documentElement.clientWidth</code></p>
+<p>　　还有其他属性类似。这里不说了，但是我们可以预见两种模式导致IE渲染的基石都更改了，可想而知构建出来的建筑物差别当有多大。</p>
+<p>　　所以请为每一个页面声明Doctype不仅仅是一个好习惯，而且是一个必要的处理。Quirks Mode可以进垃圾堆了。</p>
+<p>当用户滚动元素中到一个不同的地方时，scroll事件将发送到这个元素。它适用于<strong>window对象</strong>，但也可滚动框架与CSS overflow属性设置为scroll的元素</p>
+<h3 id="普通的div滚动到底部加载更多的方法"><a href="#普通的div滚动到底部加载更多的方法" class="headerlink" title="普通的div滚动到底部加载更多的方法"></a>普通的div滚动到底部加载更多的方法</h3><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div id="test"&gt;内容&lt;/div&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'#test'</span>).scroll(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</div><div class="line">		<span class="keyword">var</span> top = $(<span class="keyword">this</span>).scrollTop();</div><div class="line">		<span class="keyword">var</span> height = $(<span class="keyword">this</span>).height();</div><div class="line">		<span class="keyword">var</span> scrollHeight = $(<span class="keyword">this</span>).get(<span class="number">0</span>).scrollHeight;  </div><div class="line">		<span class="keyword">if</span>(scrollHeight &lt;= top+height)&#123;</div><div class="line">			loadMore();</div><div class="line">		&#125;</div><div class="line">	&#125;);</div></pre></td></tr></table></figure>
+<p>运行发现#test的div怎么样也不能接受scroll时间，最后经过查找资料和测试，发现要给div加上overflow和height的属性。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-id">#test</span>&#123;</div><div class="line">		<span class="attribute">overflow</span>:scroll;</div><div class="line">		<span class="attribute">height</span>:<span class="number">655px</span>;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h3 id="window滚动事件"><a href="#window滚动事件" class="headerlink" title="window滚动事件"></a>window滚动事件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">window</span>).scroll(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">     <span class="keyword">var</span> scrollTop = $(<span class="built_in">window</span>).scrollTop(); <span class="comment">// 滚动条距离顶部的高度</span></div><div class="line">     <span class="comment">//scrollHeight,windowHeight,scrollHeight1三个height相同，都是这个页面的高度</span></div><div class="line">     <span class="keyword">var</span> scrollHeight = $(<span class="built_in">document</span>).height(); <span class="comment">// 当前页面的总高度</span></div><div class="line">     <span class="comment">// 当前可视的页面高度，jquery获取的不是屏幕的高度，而是整个文档的高度</span></div><div class="line">     <span class="keyword">var</span> windowHeight = $(<span class="built_in">window</span>).height();</div><div class="line">     <span class="keyword">var</span> scrollHeight1 = $(<span class="string">"#test"</span>).get(<span class="number">0</span>).scrollHeight;</div><div class="line">     <span class="keyword">var</span> windowidth = $(<span class="built_in">window</span>).width();</div><div class="line">     <span class="keyword">var</span> documentwidtht = $(<span class="built_in">document</span>).width();</div><div class="line">     <span class="keyword">var</span> innerHeight = <span class="built_in">window</span>.innerHeight; <span class="comment">//window的高度，即手机的高度</span></div><div class="line">     <span class="keyword">var</span> clientHeight = <span class="built_in">document</span>.body.clientHeight; <span class="comment">//window的高度</span></div><div class="line">     <span class="comment">//这个是body的整个高度，chrom测试</span></div><div class="line">     <span class="keyword">var</span> clientHeight1 = <span class="built_in">document</span>.documentElement.clientHeight;</div><div class="line">     <span class="comment">// 距离顶部+当前高度 &gt;=文档总高度，即代表滑动到底部</span></div><div class="line">     <span class="keyword">if</span>(scrollTop + innerHeight &gt;= scrollHeight)&#123;</div><div class="line">         loadMore();</div><div class="line">     &#125;</div><div class="line"> &#125;);</div></pre></td></tr></table></figure>
+<p><em>原文链接：<a href="https://blog.csdn.net/wuyou1336/article/details/56035560" target="_blank" rel="external">https://blog.csdn.net/wuyou1336/article/details/56035560</a></em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;滚动条到底部加载数据原理很简单，就是为window或者滚动元素添加一个scroll事件，浏览器每次触发scroll事件时判断是否滚动到了浏览器底部，如果到了底部则加载新数据。关键是计算滚动条是否滚动到了浏览器底部&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="jQuery" scheme="VickChen.win/tags/jQuery/"/>
+    
+  </entry>
+  
+  <entry>
     <title>发布Core程序时遇到的错误</title>
     <link href="VickChen.win/2018/error-in-publish-core-program/"/>
     <id>VickChen.win/2018/error-in-publish-core-program/</id>
@@ -136,7 +187,7 @@
     <link href="VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/"/>
     <id>VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/</id>
     <published>2018-08-31T18:11:52.000Z</published>
-    <updated>2018-11-27T09:45:37.604Z</updated>
+    <updated>2018-11-28T11:02:49.079Z</updated>
     
     <content type="html"><![CDATA[<p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
 <p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
@@ -151,6 +202,7 @@
 <p>4、修改 _ViewImports.cshtml </p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">@<span class="keyword">using</span> StackExchange.Profiling</div><div class="line">@addTagHelper *, MiniProfiler.AspNetCore.Mvc</div></pre></td></tr></table></figure>
 <p>5、将MiniProfiler添加到布局文件（Shared/_Layout.cshtml）中</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;mini-profiler /&gt;</div></pre></td></tr></table></figure>
 <p>完成~</p>
 <mini-profiler>
 
