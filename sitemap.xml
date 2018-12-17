@@ -2,6 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>VickChen.win/2016/create-hexo-blog-on-github/</loc>
+    
+    <lastmod>2018-12-17T11:09:32.825Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2016/why-git/</loc>
+    
+    <lastmod>2018-12-17T11:08:43.465Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2018/aspnet-core-security-authentication-cookie/</loc>
+    
+    <lastmod>2018-12-17T11:06:24.738Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2017/getting-started-with-Emmet-syntax/</loc>
+    
+    <lastmod>2018-12-17T11:04:49.690Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>VickChen.win/2018/use-mailket-to-receive-and-send-mail/</loc>
     
     <lastmod>2018-12-14T11:18:10.927Z</lastmod>
@@ -26,13 +54,6 @@
     <loc>VickChen.win/2018/how-to-use-hangfire-on-net-core/</loc>
     
     <lastmod>2018-11-27T08:53:10.776Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2016/create-hexo-blog-on-github/</loc>
-    
-    <lastmod>2018-11-22T03:33:05.500Z</lastmod>
     
   </url>
   
@@ -86,13 +107,6 @@
   </url>
   
   <url>
-    <loc>VickChen.win/2018/aspnet-core-security-authentication-cookie/</loc>
-    
-    <lastmod>2018-08-02T03:14:29.029Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>VickChen.win/2016/about-git-installation/</loc>
     
     <lastmod>2018-08-01T10:51:35.522Z</lastmod>
@@ -131,13 +145,6 @@
     <loc>VickChen.win/2016/proc-generate-entity-class/</loc>
     
     <lastmod>2016-11-03T09:05:54.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2016/why-git/</loc>
-    
-    <lastmod>2016-09-21T02:23:50.000Z</lastmod>
     
   </url>
   

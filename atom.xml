@@ -381,8 +381,8 @@
     <title>ASP.NET Core 2.1 使用Cookie验证身份</title>
     <link href="VickChen.win/2018/aspnet-core-security-authentication-cookie/"/>
     <id>VickChen.win/2018/aspnet-core-security-authentication-cookie/</id>
-    <published>2018-08-01T10:46:01.000Z</published>
-    <updated>2018-08-02T03:14:29.029Z</updated>
+    <published>2018-06-13T10:46:01.000Z</published>
+    <updated>2018-12-17T11:06:24.738Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
 <p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
@@ -455,6 +455,152 @@
       <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
       <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Emmet语法入门</title>
+    <link href="VickChen.win/2017/getting-started-with-Emmet-syntax/"/>
+    <id>VickChen.win/2017/getting-started-with-Emmet-syntax/</id>
+    <published>2017-08-17T15:27:18.000Z</published>
+    <updated>2018-12-17T11:04:49.690Z</updated>
+    
+    <content type="html"><![CDATA[<p>Emmet是一个编辑器插件，以前被称作为 Zen Coding。使用类似于 CSS 选择器的语法描述元素在生成的文档树中的位置及其属性。</p>
+<p>使用 Emmet 可以帮助程序员快速的编写 HTML 和 CSS 代码，从而提高 Web前端开发的效率。<a href="https://www.emmet.io/" target="_blank" rel="external">官网</a>提供多编辑器支持。我一般使用<a href="https://code.visualstudio.com/" target="_blank" rel="external">Visual Studio Code</a>，下面就以VS Code插件举例。</p>
+<a id="more"></a>
+<h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p>在编辑器中输入<code>html:5</code>或<code>!</code>，按下Tab键，将会生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;!DOCTYPE html&gt;</div><div class="line">&lt;html lang="en"&gt;</div><div class="line">&lt;head&gt;</div><div class="line">    &lt;meta charset="UTF-8"&gt;</div><div class="line">    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</div><div class="line">    &lt;meta http-equiv="X-UA-Compatible" content="ie=edge"&gt;</div><div class="line">    &lt;title&gt;Document&lt;/title&gt;</div><div class="line">&lt;/head&gt;</div><div class="line">&lt;body&gt;</div><div class="line">    </div><div class="line"></div><div class="line">&lt;/body&gt;</div><div class="line">&lt;/html&gt;</div></pre></td></tr></table></figure>
+<p>是的，你没看错，生成这么一大段，你只需要输入一个<code>!</code></p>
+<h2 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h2><p>可以使用元素名（如 div 或者 p）来<em>生成</em> HTML 标签。Emmet 没有预定义的有效元素名的集合，可以把任何单词当作标签来生成和使用：<code>div</code> → <code>&lt;div&gt;&lt;/div&gt;</code>, <code>foo</code> → <code>&lt;foo&gt;&lt;/foo&gt;</code> 等。</p>
+<h2 id="层级操作符"><a href="#层级操作符" class="headerlink" title="层级操作符"></a>层级操作符</h2><p>嵌套运算符用于以缩写的方式安排元素在生成文档树中的位置：将其放在内部或成为相邻的元素。</p>
+<h3 id="子元素：-gt"><a href="#子元素：-gt" class="headerlink" title="子元素：&gt;"></a>子元素：&gt;</h3><p>可以使用 <code>&gt;</code> 运算符指定嵌套元素在另一个元素内部：</p>
+<p><code>div&gt;ul&gt;li</code></p>
+<p>生成的结果为：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">    &lt;ul&gt;</div><div class="line">        &lt;li&gt;&lt;/li&gt;</div><div class="line">    &lt;/ul&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<h3 id="兄弟元素："><a href="#兄弟元素：" class="headerlink" title="兄弟元素：+"></a>兄弟元素：+</h3><p>使用 <code>+</code> 运算符将相邻的其它元素处理为同级：</p>
+<p><code>div+p+bq</code></p>
+<p>生成的结果为：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;&lt;/div&gt;</div><div class="line">&lt;p&gt;&lt;/p&gt;</div><div class="line">&lt;blockquote&gt;&lt;/blockquote&gt;</div></pre></td></tr></table></figure>
+<h3 id="父元素："><a href="#父元素：" class="headerlink" title="父元素：^"></a>父元素：^</h3><p>使用 <code>&gt;</code> 运算符将会降低所有后续所有元素在生成树中的级别，每一级的兄弟元素也被解析成相同深度的元素：</p>
+<p><code>div+div&gt;p&gt;span+em</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;&lt;/div&gt;</div><div class="line">&lt;div&gt;</div><div class="line">    &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>使用 <code>^</code> 运算符，能够提升元素在生成树中的一个级别，并同时影响其后的元素：</p>
+<p><code>div+div&gt;p&gt;span+em^bq</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;&lt;/div&gt;</div><div class="line">&lt;div&gt;</div><div class="line">    &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;</div><div class="line">    &lt;blockquote&gt;&lt;/blockquote&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>可以连续使用多个 <code>^</code> 运算符，每次提高一个级别：</p>
+<p><code>div+div&gt;p&gt;span+em^^^bq</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;&lt;/div&gt;</div><div class="line">&lt;div&gt;</div><div class="line">    &lt;p&gt;&lt;span&gt;&lt;/span&gt;&lt;em&gt;&lt;/em&gt;&lt;/p&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;blockquote&gt;&lt;/blockquote&gt;</div></pre></td></tr></table></figure>
+<h3 id="重复："><a href="#重复：" class="headerlink" title="重复：*"></a>重复：*</h3><p>使用 <code>*</code> 运算符可以定义一组元素：</p>
+<p><code>ul&gt;li*5</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;/li&gt;</div><div class="line">    &lt;li&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<h3 id="分组："><a href="#分组：" class="headerlink" title="分组：()"></a>分组：()</h3><p>括号用于在复杂的 Emmet 缩写中处理一组子树：</p>
+<p><code>div&gt;(header&gt;ul&gt;li*2&gt;a)+footer&gt;p</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">    &lt;header&gt;</div><div class="line">        &lt;ul&gt;</div><div class="line">            &lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;</div><div class="line">            &lt;li&gt;&lt;a href=""&gt;&lt;/a&gt;&lt;/li&gt;</div><div class="line">        &lt;/ul&gt;</div><div class="line">    &lt;/header&gt;</div><div class="line">    &lt;footer&gt;</div><div class="line">        &lt;p&gt;&lt;/p&gt;</div><div class="line">    &lt;/footer&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>如果想与浏览器 DOM 协同工作，可能想要对文档片段分组：每个组包含一个子树，所有的后续元素都插入到与组中第一个元素相同的级别中。可以在组中嵌套组并且使用 <code>*</code> 运算符绑定它们：</p>
+<p><code>(div&gt;dl&gt;(dt+dd)*3)+footer&gt;p</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;</div><div class="line">    &lt;dl&gt;</div><div class="line">        &lt;dt&gt;&lt;/dt&gt;</div><div class="line">        &lt;dd&gt;&lt;/dd&gt;</div><div class="line">        &lt;dt&gt;&lt;/dt&gt;</div><div class="line">        &lt;dd&gt;&lt;/dd&gt;</div><div class="line">        &lt;dt&gt;&lt;/dt&gt;</div><div class="line">        &lt;dd&gt;&lt;/dd&gt;</div><div class="line">    &lt;/dl&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;footer&gt;</div><div class="line">    &lt;p&gt;&lt;/p&gt;</div><div class="line">&lt;/footer&gt;</div></pre></td></tr></table></figure>
+<p>使用分组，可以使用单个缩写逐个写出整页的标签，不过尽量不要这么做。</p>
+<h2 id="属性运算符"><a href="#属性运算符" class="headerlink" title="属性运算符"></a>属性运算符</h2><p>属性运算符用于编辑所生成的元素的属性，在 HTML 和 XML 中可以快速地为生成元素添加 <code>class</code> 属性。</p>
+<h3 id="ID和Class"><a href="#ID和Class" class="headerlink" title="ID和Class"></a>ID和Class</h3><p>在 CSS 中，可以使用 <code>elem#id</code> 和 <code>elem.class</code> 注解来达到为元素指定 <code>id</code> 或 <code>class 属性的目的。</code>在 Emmet 中，可以使用几乎相同的语法来为指定的元素添加这些属性：</p>
+<p><code>div#header+div.page+div#footer.class1.class2.class3</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id="header"&gt;&lt;/div&gt;</div><div class="line">&lt;div class="page"&gt;&lt;/div&gt;</div><div class="line">&lt;div id="footer" class="class1 class2 class3"&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<h3 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h3><p>可以使用 <code>[attr]</code> 注解（就像在 CSS 中一样）来为元素添加自定义属性：</p>
+<p><code>td[title=&quot;Hello world!&quot; colspan=3]</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;td title="Hello world!" colspan="3"&gt;&lt;/td&gt;</div></pre></td></tr></table></figure>
+<ol>
+<li>能够在方括号中放置许多属性。</li>
+<li>可以不为属性指定值： <code>td[colspan title]</code> 将生成 <code>&lt;td colspan=&quot;&quot; title=&quot;&quot;&gt;</code> ，如果你的编辑器支持，可以使用 Tab 来跳到每个空属性中填写。</li>
+<li>属性可以用单引号或双引号作为定界符。</li>
+<li>如果属性不包含空格，不需要用定界符括住它：<code>td[title=hello colspan=3]</code> 是正确的。</li>
+</ol>
+<h3 id="编号"><a href="#编号" class="headerlink" title="编号: $"></a>编号: $</h3><p>使用 <code>*</code> 运算符可以重复生成元素，如果带 <code>$</code> 就可以为它们编号。把 <code>$</code> 放在元素名、属性名或者属性值中，将为每个元素生成正确的编号：</p>
+<p><code>ul&gt;li.item$*5</code></p>
+<p>将生成</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li class="item1"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item2"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item3"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item4"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item5"&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<p>使用多 <code>$</code> 可以填充前导的零：</p>
+<p><code>ul&gt;li.item$$$*5</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li class="item001"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item002"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item003"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item004"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item005"&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<h4 id="改变编号的基数和方向"><a href="#改变编号的基数和方向" class="headerlink" title="改变编号的基数和方向"></a>改变编号的基数和方向</h4><p>使用 <code>@</code> ，可以改变数字的走向（升序或降序）和基数（例如起始值）。</p>
+<p>在 <code>$</code> 后添加 <code>@-</code> 来改变数字走向：</p>
+<p><code>ul&gt;li.item$@-*5</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li class="item5"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item4"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item3"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item2"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item1"&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<p>在 <code>$</code> 后面添加 <code>@N</code> 改变编号的基数：</p>
+<p><code>ul&gt;li.item$@3*5</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li class="item3"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item4"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item5"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item6"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item7"&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<p>这些附加的运算符可以同时使用：</p>
+<p><code>ul&gt;li.item$@-3*5</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt;</div><div class="line">    &lt;li class="item7"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item6"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item5"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item4"&gt;&lt;/li&gt;</div><div class="line">    &lt;li class="item3"&gt;&lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<h3 id="文本："><a href="#文本：" class="headerlink" title="文本：{}"></a>文本：{}</h3><p>可以用花括号向元素中添加文本：</p>
+<p><code>a{Click me}</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;a href=""&gt;Click me&lt;/a&gt;</div></pre></td></tr></table></figure>
+<p>注意，这个 <code>{text}</code> 是被当成独立元素解析的（类似于 <code>div</code>, <code>p</code> ），但当其跟在其它元素后面时则有所不同。例如， <code>a{click}</code> 和 <code>a&gt;{click}</code> 产生相同的输出，但是 <code>a{click}+b{here}</code> 和 <code>a&gt;{click}+b{here}</code> 的输出就不同了：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;!-- a&#123;click&#125;+b&#123;here&#125; --&gt;</div><div class="line">&lt;a href=""&gt;click&lt;/a&gt;&lt;b&gt;here&lt;/b&gt;</div><div class="line"></div><div class="line">&lt;!-- a&gt;&#123;click&#125;+b&#123;here&#125; --&gt;</div><div class="line">&lt;a href=""&gt;click&lt;b&gt;here&lt;/b&gt;&lt;/a&gt;</div></pre></td></tr></table></figure>
+<p>在第二示例中， <code>&lt;b&gt;</code> 元素放在了 <code>&lt;a&gt;</code> 元素的里面。差别如下：当 <code>{text}</code> 写在元素的后面，它不影响父元素的上下文。下面是展示这种差别的重要性的较复杂的例子：</p>
+<p><code>p&gt;{Click }+a{here}+{ to continue}</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;Click &lt;a href=""&gt;here&lt;/a&gt; to continue&lt;/p&gt;</div></pre></td></tr></table></figure>
+<p>在这个例子里， 我们用 <code>&gt;</code> 运算符明确的将 <code>Click here to continue</code> 下移一级，放在 <code>&lt;p&gt;</code> 元素内，但对于 <code>a</code> 元素的内容就不需要了，因为 <code>&lt;a&gt;</code> 仅有 <code>here</code> 这一部分内容，它不改变父元素的上下文。</p>
+<p>作为比较，下面是不带有 <code>&gt;</code> 运算符的相同缩写：</p>
+<p><code>p{Click }+a{here}+{ to continue}</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;Click &lt;/p&gt;</div><div class="line">&lt;a href=""&gt;here&lt;/a&gt; to continue</div></pre></td></tr></table></figure>
+<h2 id="生成测试文本"><a href="#生成测试文本" class="headerlink" title="生成测试文本"></a>生成测试文本</h2><h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><p>在编写HTML代码时，有时需要添加一些内容，Emmet提供了一段随机的看不懂的英文字段，作为测试数据我们就可以调用。而生成Lorem Ipsum文本也非常简单，输入<code>lorem</code>，按Tab键，就可以生成下面这段文字：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit, non, minima, voluptas ducimus    </div><div class="line">voluptatem perspiciatis id delectus maiores saepe porro aliquam sunt pariatur eaque. Enim,    </div><div class="line">voluptatem nesciunt voluptate ad veritatis.</div></pre></td></tr></table></figure>
+<h3 id="控制单词的数量"><a href="#控制单词的数量" class="headerlink" title="控制单词的数量"></a>控制单词的数量</h3><p>Emmet的lorem这一功能不仅仅只为生成一段文本，使用lorem默认生成30个单词的文本，可以为它指定单词的数量来随机生成一大段文本。</p>
+<p>比如：<code>lorem4</code>将生成下面的标题：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Lorem ipsum dolor sit.</div></pre></td></tr></table></figure>
+<h3 id="混合使用"><a href="#混合使用" class="headerlink" title="混合使用"></a>混合使用</h3><p>上面的例子只是生成单独的测试文本，与HTML标签一起编写也很简单，就像Emmet快速编写HTML代码文章中生成父子关系的代码一样：</p>
+<p><code>h2&gt;lorem4</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;h2&gt;Lorem ipsum dolor sit.&lt;/h2&gt;</div></pre></td></tr></table></figure>
+<p><code>p*4&gt;lorem4</code></p>
+<p>将生成：</p>
+<figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;p&gt;Lorem ipsum dolor sit.&lt;/p&gt;  </div><div class="line">&lt;p&gt;Dolores, similique veritatis reprehenderit.&lt;/p&gt;  </div><div class="line">&lt;p&gt;Cupiditate repudiandae numquam earum.&lt;/p&gt;  </div><div class="line">&lt;p&gt;Atque, sequi autem praesentium?&lt;/p&gt;</div></pre></td></tr></table></figure>
+<p>所以<code>lorem</code>为我们提供了强大的测试数据，提高了编写HTML代码的速度，让我们专心编写代码。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>当熟悉了 Emmet 的缩写语法后，可能会想要使用一些格式来生成更可读的缩写。例如，在元素和运算符之间使用空格间隔：</p>
+<p><code>(header &gt; ul.nav &gt; li*5) + footer</code></p>
+<p>但是这种写法是错误的，因为空格是 Emmet 停止缩写解析的标识符。</p>
+</li>
+<li><p>很多用户误以为每个缩写都应写在新行上，但是他们错了：可以在文本的任意位置键入和扩展缩写。</p>
+</li>
+</ol>
+<p>如果你仍然认为复杂的缩写需要一些格式使其更易读：</p>
+<ul>
+<li><p>缩写不是模板语言，它们不需要”易读“，它们必须”可快速扩展和移动“。</p>
+</li>
+<li><p>不需要写复杂的缩写。不要认为在 web 编程中”键入“是最慢的运算。想快速找出构建单个的复杂缩写比构造和键入一些较短较简单的缩写更慢。</p>
+</li>
+</ul>
+<p>参考：<a href="https://www.cnblogs.com/cnjava/p/3225174.html" target="_blank" rel="external">https://www.cnblogs.com/cnjava/p/3225174.html</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Emmet是一个编辑器插件，以前被称作为 Zen Coding。使用类似于 CSS 选择器的语法描述元素在生成的文档树中的位置及其属性。&lt;/p&gt;
+&lt;p&gt;使用 Emmet 可以帮助程序员快速的编写 HTML 和 CSS 代码，从而提高 Web前端开发的效率。&lt;a href=&quot;https://www.emmet.io/&quot;&gt;官网&lt;/a&gt;提供多编辑器支持。我一般使用&lt;a href=&quot;https://code.visualstudio.com/&quot;&gt;Visual Studio Code&lt;/a&gt;，下面就以VS Code插件举例。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Emmet" scheme="VickChen.win/tags/Emmet/"/>
+    
+      <category term="Html" scheme="VickChen.win/tags/Html/"/>
     
   </entry>
   
@@ -1195,11 +1341,138 @@
   </entry>
   
   <entry>
+    <title>Git的安装与配置</title>
+    <link href="VickChen.win/2016/about-git-installation/"/>
+    <id>VickChen.win/2016/about-git-installation/</id>
+    <published>2016-09-16T19:49:38.000Z</published>
+    <updated>2018-08-01T10:51:35.522Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
+<a id="more"></a>
+<h2 id="Git是什么"><a href="#Git是什么" class="headerlink" title="Git是什么"></a>Git是什么</h2><blockquote>
+<p>Git 是由 Linux 之父 Linus Tovalds 为了更好地管理linux内核开发而创立的分布式版本控制／软件配置管理软件。</p>
+</blockquote>
+<p>简单来说，Git 是一个管理你的「代码的历史记录」的工具。</p>
+<blockquote>
+<p>“Git是目前世界上最先进的分布式版本控制系统”</p>
+</blockquote>
+<h2 id="SVN与Git的最主要的区别"><a href="#SVN与Git的最主要的区别" class="headerlink" title="SVN与Git的最主要的区别"></a>SVN与Git的最主要的区别</h2><p>SVN是集中式版本控制系统，版本库是集中放在中央服务器的，而干活的时候，用的都是自己的电脑，所以首先要从中央服务器哪里得到最新的版本，然后干活，干完后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作，如果在局域网还可以，带宽够大，速度够快，如果在互联网下，如果网速慢的话，就郁闷了。</p>
+<p>Git是分布式版本控制系统，那么它就没有中央服务器的，每个人的电脑就是一个完整的版本库，这样，工作的时候就不需要联网了，因为版本都是在自己的电脑上。既然每个人的电脑都有一个完整的版本库，那多个人如何协作呢？比如说自己在电脑上改了文件A，其他人也在电脑上改了文件A，这时，你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。</p>
+<blockquote>
+<p>“SVN没有后悔药，Git有一堆后悔药”</p>
+</blockquote>
+<p>更多差异可以参考: <a href="http://vickchen.win/why-git/" target="_blank" rel="external">SVN 与 Git 的区别</a></p>
+<h2 id="Git与Github的区别"><a href="#Git与Github的区别" class="headerlink" title="Git与Github的区别"></a>Git与Github的区别</h2><p>Git是一个版本控制的工具，而Github有点类似于远程仓库，用于存放用Git管理的各种项目。</p>
+<h2 id="Git的安装与配置"><a href="#Git的安装与配置" class="headerlink" title="Git的安装与配置"></a>Git的安装与配置</h2><ol>
+<li><h3 id="Git客户端下载地址-https-git-scm-com-，下载后安装。"><a href="#Git客户端下载地址-https-git-scm-com-，下载后安装。" class="headerlink" title="Git客户端下载地址: https://git-scm.com/ ，下载后安装。"></a>Git客户端下载地址: <a href="https://git-scm.com/" target="_blank" rel="external">https://git-scm.com/</a> ，下载后安装。</h3></li>
+<li><h3 id="配置环境变量-新版的Git貌似可以自动设置环境变量"><a href="#配置环境变量-新版的Git貌似可以自动设置环境变量" class="headerlink" title="配置环境变量 (新版的Git貌似可以自动设置环境变量)"></a>配置环境变量 (<em>新版的Git貌似可以自动设置环境变量</em>)</h3><ol>
+<li><p>鼠标在桌面右键“我的电脑”&gt;属性&gt;高级系统设置&gt;</p>
+</li>
+<li><p>点击“环境变量”按钮</p>
+</li>
+<li><p>新建系统变量，变量名为 GIT_HOME，变量值为你刚刚安装的GIT所在目录（比如D:\Program Files\Git）</p>
+<p><img src="http://ww4.sinaimg.cn/mw690/9460f058gw1f7xnwm9o5cj20cp0hnmzl.jpg" alt=""></p>
+</li>
+<li><p>编辑系统Path变量 新增一向 %GIT_HOME%\bin (注意使用”;”半角分号来分割变量)</p>
+<p><img src="http://ww1.sinaimg.cn/mw690/9460f058gw1f7xnw8s2bwj20cl080gn3.jpg" alt=""></p>
+</li>
+<li><p>确定并保存</p>
+</li>
+<li><p>以上方法设置完成后，你可以新开一个CMD窗口，输入Git命令 ，如图即表示环境变量以及GIT客户端安装正确。</p>
+<p><img src="http://ww2.sinaimg.cn/large/9460f058gw1f7xnv4z0sij20it0a70va.jpg" alt=""></p>
+</li>
+</ol>
+</li>
+<li><p>配置ssh公钥 </p>
+<p> 单单是安装完成了，GIT还不能直接使用，我们还需要配置一下公钥，不然会每次都让输入账号密码，或拒绝你登录。</p>
+<ol>
+<li>首先启动一个Git Bash窗口（非Windows用户直接打开终端）</li>
+<li>执行 <code>cd ~/.ssh</code> 跳转至存储ssh密钥的目录，用于检测是否已生成ssh密钥<br>如果返回“… No such file or directory”，说明没有生成过SSH Key，直接进入第4步。否则进入第3步备份</li>
+<li>备份 <code>mkdir key_backup mv id_isa* key_backup</code></li>
+<li><code>git config --global user.name &quot;demo&quot;</code> 设置你的用户名，替换demo为自己的名字，<strong>不是注册账号</strong></li>
+<li><code>git config --global user.email &quot;demo@qq.com&quot;</code> 引号内的内容替换为你自己的邮箱 </li>
+<li><p><code>ssh-keygen -t rsa -C &quot;demo@qq.com&quot;</code> 生成密钥 <strong>-C 为大写</strong>  </p>
+<p> 输出显示</p>
+<blockquote>
+<p>Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</p>
+</blockquote>
+<p>  直接回车，不要修改默认路径</p>
+<blockquote>
+<p>Enter passphrase (empty for no passphrase): Enter same passphrase again:</p>
+</blockquote>
+<p>  设置一个密码短语，在每次远程操作之前会要求输入此密码。觉得麻烦也可以直接回车，不设置。</p>
+<p>  <em>注意:输入密码不会有任何显示 直接输入就可以了</em></p>
+</li>
+<li><p>成功:</p>
+<blockquote>
+<p>Your identification has been saved in /Users/your_user_directory/.ssh/id_rsa. Your public key has been saved in /Users/your_user_directory/.ssh/id_rsa.pub. The key fingerprint is: … …</p>
+</blockquote>
+</li>
+<li><p>提交公钥:</p>
+<ol>
+<li><p>找到.ssh文件夹，用文本编辑器打开“id_rsa.pub”文件，复制内容到剪贴板。</p>
+</li>
+<li><p>打开 <a href="https://github.com/settings/ssh" target="_blank" rel="external">https://github.com/settings/ssh</a> ，点击 New SSH Key 按钮，粘贴进去保存即可</p>
+</li>
+</ol>
+</li>
+<li><p>测试:</p>
+<p> 可以输入下面的命令，看看设置是否成功，git@github.com的部分不要修改:</p>
+<p> <code>ssh -T git@github.com</code><br> 如果是下面的反馈:</p>
+<blockquote>
+<p>The authenticity of host ‘github.com (207.97.227.239)’ can’t be established.<br> RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.<br> Are you sure you want to continue connecting (yes/no)?</p>
+</blockquote>
+<p> 不要紧张，输入yes就好，然后会看到:</p>
+<blockquote>
+<p>Hi cnfeat! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+</blockquote>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="Git使用规范提醒"><a href="#Git使用规范提醒" class="headerlink" title="Git使用规范提醒"></a>Git使用规范提醒</h2><ul>
+<li>使用Git过程中，必须通过创建分支进行开发，坚决禁止在主干分支上直接开发。review的同事有责任检查其他同事是否遵循分支规范。</li>
+<li>在Git中，默认是不会提交空目录的，如果想提交某个空目录到版本库中，需要在该目录下新建一个 .gitignore 的空白文件，就可以提交了</li>
+<li>把外部文件纳入到自己的 Git 分支来的时候一定要记得是先比对，确认所有修改都是自己修改的，然后再纳入。不然，容易出现代码回溯</li>
+<li>多人协作时，不要各自在自己的 Git 分支开发，然后发文件合并。正确的方法应该是开一个远程分支，然后一起在远程分支里协作。不然，容易出现代码回溯（即别人的代码被覆盖的情况）</li>
+<li>每个人提交代码是一定要 Git diff 看提交的东西是不是都是自己修改的。如果有不是自己修改的内容，很可能就是代码回溯</li>
+<li>review 代码的时候如果看到有被删除掉的代码，一定要确实是否是写代码的同事自己删除的。如果不是，很可能就是代码回溯</li>
+</ul>
+<h3 id="Git客户端"><a href="#Git客户端" class="headerlink" title="Git客户端"></a>Git客户端</h3><blockquote>
+<p>Git客户端可以按个人习惯来选择，遵守团队协作中的Git规范标准才是更重要的</p>
+</blockquote>
+<p>Git - <a href="https://git-scm.com/" target="_blank" rel="external">https://git-scm.com/</a></p>
+<pre><code>使用Git必须安装，可以与TortoiseGit配合使用。熟悉了Git的各种操作指令后可以尝试单独使用
+</code></pre><p>TortoiseGit - <a href="https://tortoisegit.org/" target="_blank" rel="external">https://tortoisegit.org/</a></p>
+<pre><code>与TortoiseSVN操作类似，但是功能更加强大。
+</code></pre><p><strong>扩展阅读</strong></p>
+<p>git简明指南 - <a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/index.zh.html</a></p>
+<p>常用 Git 命令清单 - <a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a></p>
+<p>猴子都能懂的GIT入门 - <a href="http://backlogtool.com/git-guide/cn/" target="_blank" rel="external">http://backlogtool.com/git-guide/cn/</a></p>
+<p>Git教程 - <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="Git" scheme="VickChen.win/tags/Git/"/>
+    
+      <category term="GitHub" scheme="VickChen.win/tags/GitHub/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用hexo在GitHub上搭建自己的bolg</title>
     <link href="VickChen.win/2016/create-hexo-blog-on-github/"/>
     <id>VickChen.win/2016/create-hexo-blog-on-github/</id>
-    <published>2016-09-19T16:41:53.000Z</published>
-    <updated>2018-11-22T03:33:05.500Z</updated>
+    <published>2016-08-31T17:22:53.000Z</published>
+    <updated>2018-12-17T11:09:32.825Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
@@ -1341,248 +1614,6 @@
       <category term="Nodejs" scheme="VickChen.win/tags/Nodejs/"/>
     
       <category term="npm" scheme="VickChen.win/tags/npm/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>SVN 与 Git 的区别</title>
-    <link href="VickChen.win/2016/why-git/"/>
-    <id>VickChen.win/2016/why-git/</id>
-    <published>2016-09-18T16:15:12.000Z</published>
-    <updated>2016-09-21T02:23:50.000Z</updated>
-    
-    <content type="html"><![CDATA[<ol>
-<li><h3 id="合并对提交过程的保留"><a href="#合并对提交过程的保留" class="headerlink" title="合并对提交过程的保留"></a>合并对提交过程的保留</h3><ul>
-<li><code>Git</code>: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。</li>
-<li><p><code>SVN</code>: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。</p>
-<p>  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：</p>
-<ol>
-<li>跟踪修改过程。        </li>
-<li>自然的提交过程。这极大方便了代码细节演进过程的查看。</li>
-<li>极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。</li>
-</ol>
-</li>
-</ul>
-</li>
-</ol>
-<a id="more"></a>
-<ol>
-<li><h3 id="修正提交"><a href="#修正提交" class="headerlink" title="修正提交"></a>修正提交</h3><ul>
-<li><p><code>Git</code>: 可以修正提交。</p>
-<p>使用功能分支工作流，在自己的分支可以方便修正提交而不会影响大家。</p>
-</li>
-<li><p><code>SVN</code>: 一旦提交就到服务器上，实际使用中就是不能修改。</p>
-<p><em><code>SVN</code>可以在服务器上修改，因为过程复杂需要权限实际上从不会这样做</em></p>
-<p>实际使用中会有误提交的情况（如提交了一个不该提交的日志文件），对于svn来说，就是让大家一遍又一遍看到这个垃圾文件。</p>
-<p>没有干净的提交，严重影响了Code Review，增加成本。</p>
-<p>另外对于想了解演进过程的同学，垃圾提交影响了了解效果。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="廉价好用的本地分支"><a href="#廉价好用的本地分支" class="headerlink" title="廉价好用的本地分支"></a>廉价好用的本地分支</h3><ul>
-<li><code>Git</code>: 有本地分支</li>
-<li><p><code>SVN</code>: 无本地分支</p>
-<p>git可以方便创建本地分支，且瞬间就可以完成创建。由于分支可以是本地的，也就不存在svn目录权限的问题。</p>
-<p>可以从想要工作点闪电般创建本地分支，本地实验不确定的修改，创建分支如此之廉价，git推荐创建分支来隔离修改。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="更强大智能的合并能力"><a href="#更强大智能的合并能力" class="headerlink" title="更强大智能的合并能力"></a>更强大智能的合并能力</h3><ul>
-<li><code>Git</code>: 重命名（无论文件还是目录）提交可以合并上文件重命名前的这些文件的提交。</li>
-<li><p><code>SVN</code>: 重命名（无论文件还是目录）提交后，你本地/或是分支上 有文件重命名前的这些文件的修改或提交，在做合并操作时，恭喜，你会碰上传说中难搞的树冲突！</p>
-<p>因为惧怕svn树冲突，在包名调整（重命名目录）或类名调整（重命名文件）前，我不得不先向一起开发的组员广播：</p>
-</li>
-</ul>
-<ol>
-<li>提交你的修改</li>
-<li>暂停相关类的修改</li>
-<li>我开始做调整</li>
-<li><p>等我修改好后，你再开始修改</p>
-<p>因为这个过程烦琐，结果就是影响了大家去做这样重构操作的积极性，进而影响项目的代码质量改进</p>
-</li>
-</ol>
-</li>
-<li><h3 id="灵活、迅速"><a href="#灵活、迅速" class="headerlink" title="灵活、迅速"></a>灵活、迅速</h3><ul>
-<li><p>打断开发</p>
-<p>  在开发新功能过程中，突然需要你去修复一个Bug，使用Git，你可以直接 保存贮藏/提交当前改动到本地，然后切换到主分支去修复Bug，之后 弹出贮藏/切换回你原来的分支 继续开发。</p>
-</li>
-<li><p>小步提交，互不干扰</p>
-<p>  并行开发过程中各开发人员可以随时多次commit代码且互不影响，最后在merage到主分支，并且能记录所有成员的所有commint记录。SVN只能大量的一次性提交到中心库。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="日志查看"><a href="#日志查看" class="headerlink" title="日志查看"></a>日志查看</h3><ul>
-<li><code>Git</code>: 本地包含了完整的日志，速度极快（并且无需网络)</li>
-<li><code>SVN</code>: 需要从服务拉取。</li>
-</ul>
-</li>
-<li><h3 id="Github-全球最大的开源社区"><a href="#Github-全球最大的开源社区" class="headerlink" title="Github-全球最大的开源社区"></a>Github-全球最大的开源社区</h3><ul>
-<li><p>全球顶级科技公司纷纷加入 GitHub ，并贡献他们自己的项目代码</p>
-<p>  Google: <a href="https://github.com/google" target="_blank" rel="external">https://github.com/google</a><br>  苹果: <a href="https://github.com/apple" target="_blank" rel="external">https://github.com/apple</a><br>  Facebook: <a href="https://github.com/facebook" target="_blank" rel="external">https://github.com/facebook</a><br>  Twitter：<a href="https://github.com/twitter" target="_blank" rel="external">https://github.com/twitter</a><br>  微软：<a href="https://github.com/microsoft" target="_blank" rel="external">https://github.com/microsoft</a><br>  Square：<a href="https://github.com/square" target="_blank" rel="external">https://github.com/square</a><br>  阿里：<a href="https://github.com/alibaba" target="_blank" rel="external">https://github.com/alibaba</a><br>  …</p>
-</li>
-<li><p>全球顶级开源项目都优先选择在 GitHub 上开源</p>
-<p>  Linux：<a href="https://github.com/torvalds/linux" target="_blank" rel="external">https://github.com/torvalds/linux</a><br>  Android：<a href="https://github.com/owncloud/android" target="_blank" rel="external">https://github.com/owncloud/android</a><br>  Rails：<a href="https://github.com/rails/rails" target="_blank" rel="external">https://github.com/rails/rails</a><br>  Nodejs：<a href="https://github.com/nodejs/node" target="_blank" rel="external">https://github.com/nodejs/node</a><br>  Swift：<a href="https://github.com/apple/swift" target="_blank" rel="external">https://github.com/apple/swift</a><br>  CoffeeScript：<a href="https://github.com/jashkenas/coffeescript" target="_blank" rel="external">https://github.com/jashkenas/coffeescript</a><br>  Ruby：<a href="https://github.com/ruby/ruby" target="_blank" rel="external">https://github.com/ruby/ruby</a><br>  …</p>
-</li>
-</ul>
-</li>
-</ol>
-<p><em>本文部分转载自 - <a href="https://github.com/xirong/my-git/blob/master/why-git.md" target="_blank" rel="external">SVN 和 Git 在日常使用中的明显差异</a></em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;&lt;h3 id=&quot;合并对提交过程的保留&quot;&gt;&lt;a href=&quot;#合并对提交过程的保留&quot; class=&quot;headerlink&quot; title=&quot;合并对提交过程的保留&quot;&gt;&lt;/a&gt;合并对提交过程的保留&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;Git&lt;/code&gt;: 合并操作保留原有的提交过程（即保留了合并来源的作者、提交次数、分离提交的内容）。&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;code&gt;SVN&lt;/code&gt;: 合并操作把来源多个提交合并成了一个合并提交，即在提交历史中Crash了自然的提交过程。&lt;/p&gt;
-&lt;p&gt;  保留原有的提交过程，可以无需繁琐追踪历史就方便实现以下目的：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;跟踪修改过程。        &lt;/li&gt;
-&lt;li&gt;自然的提交过程。这极大方便了代码细节演进过程的查看。&lt;/li&gt;
-&lt;li&gt;极大方便查出那行提交是什么时间、谁做出的。svn因为合并Crash了自然的提交过程，要追踪很痛苦。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Git" scheme="VickChen.win/tags/Git/"/>
-    
-      <category term="GitHub" scheme="VickChen.win/tags/GitHub/"/>
-    
-      <category term="SVN" scheme="VickChen.win/tags/SVN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git的安装与配置</title>
-    <link href="VickChen.win/2016/about-git-installation/"/>
-    <id>VickChen.win/2016/about-git-installation/</id>
-    <published>2016-09-16T19:49:38.000Z</published>
-    <updated>2018-08-01T10:51:35.522Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
-<a id="more"></a>
-<h2 id="Git是什么"><a href="#Git是什么" class="headerlink" title="Git是什么"></a>Git是什么</h2><blockquote>
-<p>Git 是由 Linux 之父 Linus Tovalds 为了更好地管理linux内核开发而创立的分布式版本控制／软件配置管理软件。</p>
-</blockquote>
-<p>简单来说，Git 是一个管理你的「代码的历史记录」的工具。</p>
-<blockquote>
-<p>“Git是目前世界上最先进的分布式版本控制系统”</p>
-</blockquote>
-<h2 id="SVN与Git的最主要的区别"><a href="#SVN与Git的最主要的区别" class="headerlink" title="SVN与Git的最主要的区别"></a>SVN与Git的最主要的区别</h2><p>SVN是集中式版本控制系统，版本库是集中放在中央服务器的，而干活的时候，用的都是自己的电脑，所以首先要从中央服务器哪里得到最新的版本，然后干活，干完后，需要把自己做完的活推送到中央服务器。集中式版本控制系统是必须联网才能工作，如果在局域网还可以，带宽够大，速度够快，如果在互联网下，如果网速慢的话，就郁闷了。</p>
-<p>Git是分布式版本控制系统，那么它就没有中央服务器的，每个人的电脑就是一个完整的版本库，这样，工作的时候就不需要联网了，因为版本都是在自己的电脑上。既然每个人的电脑都有一个完整的版本库，那多个人如何协作呢？比如说自己在电脑上改了文件A，其他人也在电脑上改了文件A，这时，你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了。</p>
-<blockquote>
-<p>“SVN没有后悔药，Git有一堆后悔药”</p>
-</blockquote>
-<p>更多差异可以参考: <a href="http://vickchen.win/why-git/" target="_blank" rel="external">SVN 与 Git 的区别</a></p>
-<h2 id="Git与Github的区别"><a href="#Git与Github的区别" class="headerlink" title="Git与Github的区别"></a>Git与Github的区别</h2><p>Git是一个版本控制的工具，而Github有点类似于远程仓库，用于存放用Git管理的各种项目。</p>
-<h2 id="Git的安装与配置"><a href="#Git的安装与配置" class="headerlink" title="Git的安装与配置"></a>Git的安装与配置</h2><ol>
-<li><h3 id="Git客户端下载地址-https-git-scm-com-，下载后安装。"><a href="#Git客户端下载地址-https-git-scm-com-，下载后安装。" class="headerlink" title="Git客户端下载地址: https://git-scm.com/ ，下载后安装。"></a>Git客户端下载地址: <a href="https://git-scm.com/" target="_blank" rel="external">https://git-scm.com/</a> ，下载后安装。</h3></li>
-<li><h3 id="配置环境变量-新版的Git貌似可以自动设置环境变量"><a href="#配置环境变量-新版的Git貌似可以自动设置环境变量" class="headerlink" title="配置环境变量 (新版的Git貌似可以自动设置环境变量)"></a>配置环境变量 (<em>新版的Git貌似可以自动设置环境变量</em>)</h3><ol>
-<li><p>鼠标在桌面右键“我的电脑”&gt;属性&gt;高级系统设置&gt;</p>
-</li>
-<li><p>点击“环境变量”按钮</p>
-</li>
-<li><p>新建系统变量，变量名为 GIT_HOME，变量值为你刚刚安装的GIT所在目录（比如D:\Program Files\Git）</p>
-<p><img src="http://ww4.sinaimg.cn/mw690/9460f058gw1f7xnwm9o5cj20cp0hnmzl.jpg" alt=""></p>
-</li>
-<li><p>编辑系统Path变量 新增一向 %GIT_HOME%\bin (注意使用”;”半角分号来分割变量)</p>
-<p><img src="http://ww1.sinaimg.cn/mw690/9460f058gw1f7xnw8s2bwj20cl080gn3.jpg" alt=""></p>
-</li>
-<li><p>确定并保存</p>
-</li>
-<li><p>以上方法设置完成后，你可以新开一个CMD窗口，输入Git命令 ，如图即表示环境变量以及GIT客户端安装正确。</p>
-<p><img src="http://ww2.sinaimg.cn/large/9460f058gw1f7xnv4z0sij20it0a70va.jpg" alt=""></p>
-</li>
-</ol>
-</li>
-<li><p>配置ssh公钥 </p>
-<p> 单单是安装完成了，GIT还不能直接使用，我们还需要配置一下公钥，不然会每次都让输入账号密码，或拒绝你登录。</p>
-<ol>
-<li>首先启动一个Git Bash窗口（非Windows用户直接打开终端）</li>
-<li>执行 <code>cd ~/.ssh</code> 跳转至存储ssh密钥的目录，用于检测是否已生成ssh密钥<br>如果返回“… No such file or directory”，说明没有生成过SSH Key，直接进入第4步。否则进入第3步备份</li>
-<li>备份 <code>mkdir key_backup mv id_isa* key_backup</code></li>
-<li><code>git config --global user.name &quot;demo&quot;</code> 设置你的用户名，替换demo为自己的名字，<strong>不是注册账号</strong></li>
-<li><code>git config --global user.email &quot;demo@qq.com&quot;</code> 引号内的内容替换为你自己的邮箱 </li>
-<li><p><code>ssh-keygen -t rsa -C &quot;demo@qq.com&quot;</code> 生成密钥 <strong>-C 为大写</strong>  </p>
-<p> 输出显示</p>
-<blockquote>
-<p>Generating public/private rsa key pair. Enter file in which to save the key (/Users/your_user_directory/.ssh/id_rsa):</p>
-</blockquote>
-<p>  直接回车，不要修改默认路径</p>
-<blockquote>
-<p>Enter passphrase (empty for no passphrase): Enter same passphrase again:</p>
-</blockquote>
-<p>  设置一个密码短语，在每次远程操作之前会要求输入此密码。觉得麻烦也可以直接回车，不设置。</p>
-<p>  <em>注意:输入密码不会有任何显示 直接输入就可以了</em></p>
-</li>
-<li><p>成功:</p>
-<blockquote>
-<p>Your identification has been saved in /Users/your_user_directory/.ssh/id_rsa. Your public key has been saved in /Users/your_user_directory/.ssh/id_rsa.pub. The key fingerprint is: … …</p>
-</blockquote>
-</li>
-<li><p>提交公钥:</p>
-<ol>
-<li><p>找到.ssh文件夹，用文本编辑器打开“id_rsa.pub”文件，复制内容到剪贴板。</p>
-</li>
-<li><p>打开 <a href="https://github.com/settings/ssh" target="_blank" rel="external">https://github.com/settings/ssh</a> ，点击 New SSH Key 按钮，粘贴进去保存即可</p>
-</li>
-</ol>
-</li>
-<li><p>测试:</p>
-<p> 可以输入下面的命令，看看设置是否成功，git@github.com的部分不要修改:</p>
-<p> <code>ssh -T git@github.com</code><br> 如果是下面的反馈:</p>
-<blockquote>
-<p>The authenticity of host ‘github.com (207.97.227.239)’ can’t be established.<br> RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.<br> Are you sure you want to continue connecting (yes/no)?</p>
-</blockquote>
-<p> 不要紧张，输入yes就好，然后会看到:</p>
-<blockquote>
-<p>Hi cnfeat! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
-</blockquote>
-</li>
-</ol>
-</li>
-</ol>
-<h2 id="Git使用规范提醒"><a href="#Git使用规范提醒" class="headerlink" title="Git使用规范提醒"></a>Git使用规范提醒</h2><ul>
-<li>使用Git过程中，必须通过创建分支进行开发，坚决禁止在主干分支上直接开发。review的同事有责任检查其他同事是否遵循分支规范。</li>
-<li>在Git中，默认是不会提交空目录的，如果想提交某个空目录到版本库中，需要在该目录下新建一个 .gitignore 的空白文件，就可以提交了</li>
-<li>把外部文件纳入到自己的 Git 分支来的时候一定要记得是先比对，确认所有修改都是自己修改的，然后再纳入。不然，容易出现代码回溯</li>
-<li>多人协作时，不要各自在自己的 Git 分支开发，然后发文件合并。正确的方法应该是开一个远程分支，然后一起在远程分支里协作。不然，容易出现代码回溯（即别人的代码被覆盖的情况）</li>
-<li>每个人提交代码是一定要 Git diff 看提交的东西是不是都是自己修改的。如果有不是自己修改的内容，很可能就是代码回溯</li>
-<li>review 代码的时候如果看到有被删除掉的代码，一定要确实是否是写代码的同事自己删除的。如果不是，很可能就是代码回溯</li>
-</ul>
-<h3 id="Git客户端"><a href="#Git客户端" class="headerlink" title="Git客户端"></a>Git客户端</h3><blockquote>
-<p>Git客户端可以按个人习惯来选择，遵守团队协作中的Git规范标准才是更重要的</p>
-</blockquote>
-<p>Git - <a href="https://git-scm.com/" target="_blank" rel="external">https://git-scm.com/</a></p>
-<pre><code>使用Git必须安装，可以与TortoiseGit配合使用。熟悉了Git的各种操作指令后可以尝试单独使用
-</code></pre><p>TortoiseGit - <a href="https://tortoisegit.org/" target="_blank" rel="external">https://tortoisegit.org/</a></p>
-<pre><code>与TortoiseSVN操作类似，但是功能更加强大。
-</code></pre><p><strong>扩展阅读</strong></p>
-<p>git简明指南 - <a href="http://rogerdudler.github.io/git-guide/index.zh.html" target="_blank" rel="external">http://rogerdudler.github.io/git-guide/index.zh.html</a></p>
-<p>常用 Git 命令清单 - <a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a></p>
-<p>猴子都能懂的GIT入门 - <a href="http://backlogtool.com/git-guide/cn/" target="_blank" rel="external">http://backlogtool.com/git-guide/cn/</a></p>
-<p>Git教程 - <a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000" target="_blank" rel="external">http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Git" scheme="VickChen.win/tags/Git/"/>
-    
-      <category term="GitHub" scheme="VickChen.win/tags/GitHub/"/>
     
   </entry>
   
