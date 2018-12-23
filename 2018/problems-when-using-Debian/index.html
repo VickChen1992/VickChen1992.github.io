@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="SQL," />
+  <meta name="keywords" content="Linux,Debian," />
 
 
 
@@ -86,19 +86,16 @@
 
 
 
-<meta name="description" content="有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。
-前提是要将这个存储过程放在所查询的数据库。">
+<meta name="description" content="目前在学习Debian，然后发现一路都是坑，与之前接触的Ubuntu在使用上还是有点差别的。Debian更加原生，也更加稳定，坑也更多。为了防止后来者继续踩坑，特意写了此文用于记录总结初学者在学习过程中遇到的各种问题。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="查询整个数据库中某个特定值所在的位置">
-<meta property="og:url" content="VickChen.win/2016/find-value-in-db/index.html">
+<meta property="og:title" content="使用Debian时遇到的问题">
+<meta property="og:url" content="VickChen.win/2018/problems-when-using-Debian/index.html">
 <meta property="og:site_name" content="Vick's Blog">
-<meta property="og:description" content="有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。
-前提是要将这个存储过程放在所查询的数据库。">
-<meta property="og:updated_time" content="2016-11-04T03:39:34.000Z">
+<meta property="og:description" content="目前在学习Debian，然后发现一路都是坑，与之前接触的Ubuntu在使用上还是有点差别的。Debian更加原生，也更加稳定，坑也更多。为了防止后来者继续踩坑，特意写了此文用于记录总结初学者在学习过程中遇到的各种问题。">
+<meta property="og:updated_time" content="2018-12-23T14:10:28.907Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="查询整个数据库中某个特定值所在的位置">
-<meta name="twitter:description" content="有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。
-前提是要将这个存储过程放在所查询的数据库。">
+<meta name="twitter:title" content="使用Debian时遇到的问题">
+<meta name="twitter:description" content="目前在学习Debian，然后发现一路都是坑，与之前接触的Ubuntu在使用上还是有点差别的。Debian更加原生，也更加稳定，坑也更多。为了防止后来者继续踩坑，特意写了此文用于记录总结初学者在学习过程中遇到的各种问题。">
 
 
 
@@ -119,9 +116,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/2016/find-value-in-db/"/>
+  <link rel="canonical" href="VickChen.win/2018/problems-when-using-Debian/"/>
 
-  <title> 查询整个数据库中某个特定值所在的位置 | Vick's Blog </title>
+  <title> 使用Debian时遇到的问题 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -261,7 +258,7 @@
             
             
               
-                查询整个数据库中某个特定值所在的位置
+                使用Debian时遇到的问题
               
             
           </h1>
@@ -273,8 +270,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-31T23:15:48+08:00" content="2016-10-31">
-              2016-10-31
+            <time itemprop="dateCreated" datetime="2018-12-20T01:10:05+08:00" content="2018-12-20">
+              2018-12-20
             </time>
           </span>
 
@@ -320,11 +317,82 @@
       
 
       
-        <p>有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。</p>
-<p>前提是要将这个存储过程放在所查询的数据库。</p>
+        <p>目前在学习Debian，然后发现一路都是坑，与之前接触的Ubuntu在使用上还是有点差别的。Debian更加原生，也更加稳定，坑也更多。为了防止后来者继续踩坑，特意写了此文用于记录总结初学者在学习过程中遇到的各种问题。</p>
 <a id="more"></a>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> [dbo].[SP_FindValueInDB]</div><div class="line">(</div><div class="line">    @<span class="keyword">value</span> <span class="built_in">VARCHAR</span>(<span class="number">1024</span>)</div><div class="line">)        </div><div class="line"><span class="keyword">AS</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">    <span class="comment">-- SET NOCOUNT ON added to prevent extra result sets from</span></div><div class="line">    <span class="comment">-- interfering with SELECT statements.</span></div><div class="line"><span class="keyword">SET</span> NOCOUNT <span class="keyword">ON</span>;</div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">sql</span> <span class="built_in">VARCHAR</span>(<span class="number">1024</span>) </div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">table</span> <span class="built_in">VARCHAR</span>(<span class="number">64</span>) </div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">column</span> <span class="built_in">VARCHAR</span>(<span class="number">64</span>) </div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #t ( </div><div class="line">    tablename <span class="built_in">VARCHAR</span>(<span class="number">64</span>), </div><div class="line">    columnname <span class="built_in">VARCHAR</span>(<span class="number">64</span>) </div><div class="line">) </div><div class="line"></div><div class="line"><span class="keyword">DECLARE</span> <span class="keyword">TABLES</span> <span class="keyword">CURSOR</span> </div><div class="line"><span class="keyword">FOR</span> </div><div class="line"></div><div class="line">    <span class="keyword">SELECT</span> o.name, c.name </div><div class="line">    <span class="keyword">FROM</span> syscolumns c </div><div class="line">    <span class="keyword">INNER</span> <span class="keyword">JOIN</span> sysobjects o <span class="keyword">ON</span> c.id = o.id </div><div class="line">    <span class="keyword">WHERE</span> o.type = <span class="string">'U'</span> <span class="keyword">AND</span> c.xtype <span class="keyword">IN</span> (<span class="number">167</span>, <span class="number">175</span>, <span class="number">231</span>, <span class="number">239</span>) </div><div class="line">    <span class="keyword">ORDER</span> <span class="keyword">BY</span> o.name, c.name </div><div class="line"></div><div class="line"><span class="keyword">OPEN</span> <span class="keyword">TABLES</span> </div><div class="line"></div><div class="line"><span class="keyword">FETCH</span> <span class="keyword">NEXT</span> <span class="keyword">FROM</span> <span class="keyword">TABLES</span> </div><div class="line"><span class="keyword">INTO</span> @<span class="keyword">table</span>, @<span class="keyword">column</span> </div><div class="line"></div><div class="line"><span class="keyword">WHILE</span> @@FETCH_STATUS = <span class="number">0</span> </div><div class="line"><span class="keyword">BEGIN</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = <span class="string">'IF EXISTS(SELECT NULL FROM ['</span> + @<span class="keyword">table</span> + <span class="string">'] '</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = @<span class="keyword">sql</span> + <span class="string">'WHERE RTRIM(LTRIM(['</span> + @<span class="keyword">column</span> + <span class="string">'])) LIKE ''%'</span> + @<span class="keyword">value</span> + <span class="string">'%'') '</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = @<span class="keyword">sql</span> + <span class="string">'INSERT INTO #t VALUES ('''</span> + @<span class="keyword">table</span> + <span class="string">''', '''</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = @<span class="keyword">sql</span> + @<span class="keyword">column</span> + <span class="string">''')'</span> </div><div class="line"></div><div class="line">    EXEC(@<span class="keyword">sql</span>) </div><div class="line"></div><div class="line">    <span class="keyword">FETCH</span> <span class="keyword">NEXT</span> <span class="keyword">FROM</span> <span class="keyword">TABLES</span> </div><div class="line">    <span class="keyword">INTO</span> @<span class="keyword">table</span>, @<span class="keyword">column</span> </div><div class="line"><span class="keyword">END</span> </div><div class="line"></div><div class="line"><span class="keyword">CLOSE</span> <span class="keyword">TABLES</span> </div><div class="line"><span class="keyword">DEALLOCATE</span> <span class="keyword">TABLES</span> </div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * </div><div class="line"><span class="keyword">FROM</span> #t </div><div class="line"></div><div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> #t </div><div class="line"></div><div class="line"><span class="keyword">End</span></div></pre></td></tr></table></figure>
-<p><em>参考:<a href="http://www.cnblogs.com/michaelxu/archive/2009/11/04/1596106.html" target="_blank" rel="external">徐洪军的博客</a></em></p>
+<h2 id="切换系统语言环境"><a href="#切换系统语言环境" class="headerlink" title="切换系统语言环境"></a>切换系统语言环境</h2><p>在Debian系统中，若是设置了中文环境后，在终端进行操作时，将会遇到中文错误提示等信息显示为乱码，这时候，部分朋友选择了重新安装系统，然而，其实并不用重新安装，只要进行语言的切换就可以了。</p>
+<p>命令行执行：</p>
+<p><code>$ sudo dpkg-reconfigure locales</code></p>
+<p>将打开一个选择语言的窗口，在此窗口中选择英文环境的字符集项，此例中选择en_US.utf-8，即按空格选中复选框，将中文环境的包 (<code>zh_CN.utf-8</code>) ，将复选框去掉选择后敲回车，确定安装即可。</p>
+<p>可使用以下命令查看是否安装成功：</p>
+<p><code>$ locale -a</code></p>
+<p>系统将输出如下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C</div><div class="line">C.UTF-8</div><div class="line">POSIX</div><div class="line">en_US.UTF-8</div></pre></td></tr></table></figure>
+<p>然后输入<code>$ reboot</code> 重启系统即可。</p>
+<p>若是担心英文环境下操作不方便也可切换为繁体中文(<code>zh_HK.utf-8</code>)</p>
+<h2 id="gedit找不到命令"><a href="#gedit找不到命令" class="headerlink" title="gedit找不到命令"></a>gedit找不到命令</h2><p>直接重装下gedit即可。</p>
+<p>打开终端，输入代码：</p>
+<p><code>sudo apt-get  remove gedit</code></p>
+<p>回车后输入：</p>
+<p><code>sudo apt-get install gedit</code></p>
+<h2 id="中文输入法不可用"><a href="#中文输入法不可用" class="headerlink" title="中文输入法不可用"></a>中文输入法不可用</h2><p>系统刚刚装好后随即安装了fcitx-googlepinyin输入法，发现输入法各种ctrl+space或者ctrl+shift一通乱按就是什么也看不到，几经折腾发现是因为根本就没有Ui控件…</p>
+<p>还需要安装输入法前端所需要的ui动态库</p>
+<p>打开终端，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install fcitx-ui-classic &amp;&amp; apt-get install fcitx-ui-light</div></pre></td></tr></table></figure>
+<p>安装完成后打开fcitx的配置工具，根据需要删除掉不需要的输入法。</p>
+<p>然后<code>reboot</code> 重启系统，就可以看到按下快捷键后输入法弹出来了。然而这里又有一个坑，因为 <strong>输入法默认字号是零</strong> ，记得在Appearance页签内重新设置字号。</p>
+<h2 id="更新163源"><a href="#更新163源" class="headerlink" title="更新163源"></a>更新163源</h2><p>终端输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gedit /etc/apt/sources.list</div></pre></td></tr></table></figure>
+<p>复制以下内容保存即可</p>
+<blockquote>
+<p> deb <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch main non-free contrib<br> deb <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch-updates main non-free contrib<br> deb <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch-backports main non-free contrib<br> deb-src <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch main non-free contrib<br> deb-src <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch-updates main non-free contrib<br> deb-src <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch-backports main non-free contrib<br> deb <a href="http://mirrors.163.com/debian-security/" target="_blank" rel="external">http://mirrors.163.com/debian-security/</a> stretch/updates main non-free contrib<br> deb-src <a href="http://mirrors.163.com/debian-security/" target="_blank" rel="external">http://mirrors.163.com/debian-security/</a> stretch/updates main non-free contrib</p>
+</blockquote>
+<p>直接保存即可</p>
+<p>然后运行下面的命令用于更新配置</p>
+<p><code>apt-get update</code></p>
+<h2 id="切换系统用户"><a href="#切换系统用户" class="headerlink" title="切换系统用户"></a>切换系统用户</h2><p>更新源的时候可能会遇到无法保存的问题，是因为这个权限不够，这时候有两个办法。</p>
+<p>这里先说第一个办法，切换系统用户到root后再执行上述命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su root</div></pre></td></tr></table></figure>
+<p>然后会让你输入root用户密码，此处密码无输入效果。输入后按回车即可。</p>
+<p>然后就可以看到看到系统用户已经成功改为root最高权限用户了。</p>
+<p>以此类推，切换回原来用户只需要再执行一遍<code>su username</code> 指令后输入该用户对应的密码即可。</p>
+<p>另外，<code>sudo su</code> 指令同样可以切换用户。但是可能会报下面的错误</p>
+<h2 id="sudo指令报错"><a href="#sudo指令报错" class="headerlink" title="sudo指令报错"></a>sudo指令报错</h2><p>上面说的另一个办法就是在语句前加sudo 用临时权限执行。</p>
+<p>初次使用这个指令可能会报错：</p>
+<blockquote>
+<p>当前用户不在sudoers文件(/etc/sudoers)里面，直接使用sudo命令是不允许的，会被系统记录并向root反馈</p>
+</blockquote>
+<p>处理这个问题很简单，但应该先理解其原理再操作。<br>首先要明白root的密码一般用户是不应改知道的，但一般用户有时可能要用到root的一些权限。<br>这里就有了一个 /etc/sudoers 文件，用来保存一些用户，使这些用户可以通过sudo命令来暂时获取root的权限。这些用户使用sudo时输入的密码是当前用户密码，而不是root密码。还可一在sudoers文件里限制一般用户的权限，这样就有了安全保证。</p>
+<p>那么我们就来解决这个问题：</p>
+<ol>
+<li><p>切换到root用户</p>
+<p><code>$ su root</code></p>
+</li>
+<li><p>查看/etc/sudoers权限</p>
+<p><code>$ ls -all /etc/sudoers</code></p>
+</li>
+<li><p>更改权限为777</p>
+<p><code>$ chmod 777 /etc/sudoers</code></p>
+</li>
+<li><p>编辑/etc/sudoers</p>
+<p><code>$ vi /etc/sudoers</code></p>
+<p>这个命令的意思是使用vi编辑器打开文件。</p>
+</li>
+<li><p>添加当前用户</p>
+<p>可以看到打开的文件内容为：</p>
+<blockquote>
+<p>root ALL=(ALL:ALL) ALL</p>
+</blockquote>
+<p>在后面追加一行</p>
+<blockquote>
+<p>vick ALL=(ALL:ALL) ALL</p>
+</blockquote>
+<p>vi中刚进去是命令模式 按 <code>i</code> 或者 <code>insert</code> 进入编辑模式，编辑完了之后按ctrl+c或者esc退出编辑模式。之后输入命令 <code>:wq</code> ，保存离开。</p>
+</li>
+<li><p>把/etc/sudoers权限改回原来数据</p>
+<p><code>$ chmod 690 /etc/sudoers</code></p>
+</li>
+</ol>
+<p><strong>亲测：这里也可以不查看及修改权限，直接用root用户打开并修改文件后，使用<code>:wq!</code> 指令强制保存并离开。不过最好重新打开看下有没有保存成功</strong></p>
 
       
     </div>
@@ -347,7 +415,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SQL/" rel="tag">#SQL</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
+          
+            <a href="/tags/Debian/" rel="tag">#Debian</a>
           
         </div>
       
@@ -356,17 +426,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/proc-generate-entity-class/" rel="next" title="用存储过程生成实体类">
-                <i class="fa fa-chevron-left"></i> 用存储过程生成实体类
+              <a href="/2018/use-mailket-to-receive-and-send-mail/" rel="next" title=".Net Core使用mailket收取和发送邮件">
+                <i class="fa fa-chevron-left"></i> .Net Core使用mailket收取和发送邮件
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/sql-timestamp-to-cshap/" rel="prev" title="解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题">
-                解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -516,7 +582,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#切换系统语言环境"><span class="nav-number">1.</span> <span class="nav-text">切换系统语言环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gedit找不到命令"><span class="nav-number">2.</span> <span class="nav-text">gedit找不到命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中文输入法不可用"><span class="nav-number">3.</span> <span class="nav-text">中文输入法不可用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新163源"><span class="nav-number">4.</span> <span class="nav-text">更新163源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#切换系统用户"><span class="nav-number">5.</span> <span class="nav-text">切换系统用户</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sudo指令报错"><span class="nav-number">6.</span> <span class="nav-text">sudo指令报错</span></a></li></ol></div>
             
           </div>
         </section>

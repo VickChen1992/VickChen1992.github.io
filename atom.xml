@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2018-12-14T11:18:10.927Z</updated>
+  <updated>2018-12-23T14:10:28.907Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,11 +16,111 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>使用Debian时遇到的问题</title>
+    <link href="VickChen.win/2018/problems-when-using-Debian/"/>
+    <id>VickChen.win/2018/problems-when-using-Debian/</id>
+    <published>2018-12-19T17:10:05.000Z</published>
+    <updated>2018-12-23T14:10:28.907Z</updated>
+    
+    <content type="html"><![CDATA[<p>目前在学习Debian，然后发现一路都是坑，与之前接触的Ubuntu在使用上还是有点差别的。Debian更加原生，也更加稳定，坑也更多。为了防止后来者继续踩坑，特意写了此文用于记录总结初学者在学习过程中遇到的各种问题。</p>
+<a id="more"></a>
+<h2 id="切换系统语言环境"><a href="#切换系统语言环境" class="headerlink" title="切换系统语言环境"></a>切换系统语言环境</h2><p>在Debian系统中，若是设置了中文环境后，在终端进行操作时，将会遇到中文错误提示等信息显示为乱码，这时候，部分朋友选择了重新安装系统，然而，其实并不用重新安装，只要进行语言的切换就可以了。</p>
+<p>命令行执行：</p>
+<p><code>$ sudo dpkg-reconfigure locales</code></p>
+<p>将打开一个选择语言的窗口，在此窗口中选择英文环境的字符集项，此例中选择en_US.utf-8，即按空格选中复选框，将中文环境的包 (<code>zh_CN.utf-8</code>) ，将复选框去掉选择后敲回车，确定安装即可。</p>
+<p>可使用以下命令查看是否安装成功：</p>
+<p><code>$ locale -a</code></p>
+<p>系统将输出如下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">C</div><div class="line">C.UTF-8</div><div class="line">POSIX</div><div class="line">en_US.UTF-8</div></pre></td></tr></table></figure>
+<p>然后输入<code>$ reboot</code> 重启系统即可。</p>
+<p>若是担心英文环境下操作不方便也可切换为繁体中文(<code>zh_HK.utf-8</code>)</p>
+<h2 id="gedit找不到命令"><a href="#gedit找不到命令" class="headerlink" title="gedit找不到命令"></a>gedit找不到命令</h2><p>直接重装下gedit即可。</p>
+<p>打开终端，输入代码：</p>
+<p><code>sudo apt-get  remove gedit</code></p>
+<p>回车后输入：</p>
+<p><code>sudo apt-get install gedit</code></p>
+<h2 id="中文输入法不可用"><a href="#中文输入法不可用" class="headerlink" title="中文输入法不可用"></a>中文输入法不可用</h2><p>系统刚刚装好后随即安装了fcitx-googlepinyin输入法，发现输入法各种ctrl+space或者ctrl+shift一通乱按就是什么也看不到，几经折腾发现是因为根本就没有Ui控件…</p>
+<p>还需要安装输入法前端所需要的ui动态库</p>
+<p>打开终端，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install fcitx-ui-classic &amp;&amp; apt-get install fcitx-ui-light</div></pre></td></tr></table></figure>
+<p>安装完成后打开fcitx的配置工具，根据需要删除掉不需要的输入法。</p>
+<p>然后<code>reboot</code> 重启系统，就可以看到按下快捷键后输入法弹出来了。然而这里又有一个坑，因为 <strong>输入法默认字号是零</strong> ，记得在Appearance页签内重新设置字号。</p>
+<h2 id="更新163源"><a href="#更新163源" class="headerlink" title="更新163源"></a>更新163源</h2><p>终端输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gedit /etc/apt/sources.list</div></pre></td></tr></table></figure>
+<p>复制以下内容保存即可</p>
+<blockquote>
+<p> deb <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch main non-free contrib<br> deb <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch-updates main non-free contrib<br> deb <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch-backports main non-free contrib<br> deb-src <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch main non-free contrib<br> deb-src <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch-updates main non-free contrib<br> deb-src <a href="http://mirrors.163.com/debian/" target="_blank" rel="external">http://mirrors.163.com/debian/</a> stretch-backports main non-free contrib<br> deb <a href="http://mirrors.163.com/debian-security/" target="_blank" rel="external">http://mirrors.163.com/debian-security/</a> stretch/updates main non-free contrib<br> deb-src <a href="http://mirrors.163.com/debian-security/" target="_blank" rel="external">http://mirrors.163.com/debian-security/</a> stretch/updates main non-free contrib</p>
+</blockquote>
+<p>直接保存即可</p>
+<p>然后运行下面的命令用于更新配置</p>
+<p><code>apt-get update</code></p>
+<h2 id="切换系统用户"><a href="#切换系统用户" class="headerlink" title="切换系统用户"></a>切换系统用户</h2><p>更新源的时候可能会遇到无法保存的问题，是因为这个权限不够，这时候有两个办法。</p>
+<p>这里先说第一个办法，切换系统用户到root后再执行上述命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su root</div></pre></td></tr></table></figure>
+<p>然后会让你输入root用户密码，此处密码无输入效果。输入后按回车即可。</p>
+<p>然后就可以看到看到系统用户已经成功改为root最高权限用户了。</p>
+<p>以此类推，切换回原来用户只需要再执行一遍<code>su username</code> 指令后输入该用户对应的密码即可。</p>
+<p>另外，<code>sudo su</code> 指令同样可以切换用户。但是可能会报下面的错误</p>
+<h2 id="sudo指令报错"><a href="#sudo指令报错" class="headerlink" title="sudo指令报错"></a>sudo指令报错</h2><p>上面说的另一个办法就是在语句前加sudo 用临时权限执行。</p>
+<p>初次使用这个指令可能会报错：</p>
+<blockquote>
+<p>当前用户不在sudoers文件(/etc/sudoers)里面，直接使用sudo命令是不允许的，会被系统记录并向root反馈</p>
+</blockquote>
+<p>处理这个问题很简单，但应该先理解其原理再操作。<br>首先要明白root的密码一般用户是不应改知道的，但一般用户有时可能要用到root的一些权限。<br>这里就有了一个 /etc/sudoers 文件，用来保存一些用户，使这些用户可以通过sudo命令来暂时获取root的权限。这些用户使用sudo时输入的密码是当前用户密码，而不是root密码。还可一在sudoers文件里限制一般用户的权限，这样就有了安全保证。</p>
+<p>那么我们就来解决这个问题：</p>
+<ol>
+<li><p>切换到root用户</p>
+<p><code>$ su root</code></p>
+</li>
+<li><p>查看/etc/sudoers权限</p>
+<p><code>$ ls -all /etc/sudoers</code></p>
+</li>
+<li><p>更改权限为777</p>
+<p><code>$ chmod 777 /etc/sudoers</code></p>
+</li>
+<li><p>编辑/etc/sudoers</p>
+<p><code>$ vi /etc/sudoers</code></p>
+<p>这个命令的意思是使用vi编辑器打开文件。</p>
+</li>
+<li><p>添加当前用户</p>
+<p>可以看到打开的文件内容为：</p>
+<blockquote>
+<p>root ALL=(ALL:ALL) ALL</p>
+</blockquote>
+<p>在后面追加一行</p>
+<blockquote>
+<p>vick ALL=(ALL:ALL) ALL</p>
+</blockquote>
+<p>vi中刚进去是命令模式 按 <code>i</code> 或者 <code>insert</code> 进入编辑模式，编辑完了之后按ctrl+c或者esc退出编辑模式。之后输入命令 <code>:wq</code> ，保存离开。</p>
+</li>
+<li><p>把/etc/sudoers权限改回原来数据</p>
+<p><code>$ chmod 690 /etc/sudoers</code></p>
+</li>
+</ol>
+<p><strong>亲测：这里也可以不查看及修改权限，直接用root用户打开并修改文件后，使用<code>:wq!</code> 指令强制保存并离开。不过最好重新打开看下有没有保存成功</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;目前在学习Debian，然后发现一路都是坑，与之前接触的Ubuntu在使用上还是有点差别的。Debian更加原生，也更加稳定，坑也更多。为了防止后来者继续踩坑，特意写了此文用于记录总结初学者在学习过程中遇到的各种问题。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
+    
+      <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
+    
+  </entry>
+  
+  <entry>
     <title>.Net Core使用mailket收取和发送邮件</title>
     <link href="VickChen.win/2018/use-mailket-to-receive-and-send-mail/"/>
     <id>VickChen.win/2018/use-mailket-to-receive-and-send-mail/</id>
     <published>2018-11-22T18:12:00.000Z</published>
-    <updated>2018-12-14T11:18:10.927Z</updated>
+    <updated>2018-12-14T11:18:10.000Z</updated>
     
     <content type="html"><![CDATA[<p>邮件服务是一般的系统都会拥有和需要的功能，但是对于.Net项目来说，邮件服务的创建和使用会较为的麻烦。.NET对于邮件功能提供了System.Net.Mail用于创建邮件服务，该基础服务提供邮件的基础操作，并且使用也较为的简单。对于真正将该功能使用于项目的人，就会慢慢发现其中的优缺点，甚至有些时候不能忍受其中的问题。在这里介绍一种微软用于替代System.Net.Mail的邮件服务组件MailKit和MimeKit，官网地址：<a href="http://www.mimekit.net/" target="_blank" rel="external">http://www.mimekit.net/</a> GitHub地址：<a href="https://github.com/jstedfast/MimeKit" target="_blank" rel="external">https://github.com/jstedfast/MimeKit</a></p>
 <a id="more"></a>
@@ -70,7 +170,7 @@
     <link href="VickChen.win/2018/database-migration-of-entity-framework-Core/"/>
     <id>VickChen.win/2018/database-migration-of-entity-framework-Core/</id>
     <published>2018-11-04T09:48:01.000Z</published>
-    <updated>2018-11-22T03:05:18.360Z</updated>
+    <updated>2018-11-22T03:05:18.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节</p>
 <a id="more"></a>
@@ -151,7 +251,7 @@
     <link href="VickChen.win/2018/jQuery-loads-data-when-scrollbar-to-bottom/"/>
     <id>VickChen.win/2018/jQuery-loads-data-when-scrollbar-to-bottom/</id>
     <published>2018-10-01T15:32:01.000Z</published>
-    <updated>2018-12-08T10:29:50.421Z</updated>
+    <updated>2018-12-08T10:29:50.000Z</updated>
     
     <content type="html"><![CDATA[<p>滚动条到底部加载数据原理很简单，就是为window或者滚动元素添加一个scroll事件，浏览器每次触发scroll事件时判断是否滚动到了浏览器底部，如果到了底部则加载新数据。关键是计算滚动条是否滚动到了浏览器底部</p>
 <a id="more"></a>
@@ -202,7 +302,7 @@
     <link href="VickChen.win/2018/error-in-publish-core-program/"/>
     <id>VickChen.win/2018/error-in-publish-core-program/</id>
     <published>2018-09-21T10:13:04.000Z</published>
-    <updated>2018-11-10T11:01:04.083Z</updated>
+    <updated>2018-11-10T11:01:04.000Z</updated>
     
     <content type="html"><![CDATA[<p>此贴主要用于记录Core程序在发布时遇到的错误。</p>
 <a id="more"></a>
@@ -237,7 +337,7 @@
     <link href="VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/"/>
     <id>VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/</id>
     <published>2018-08-31T18:11:52.000Z</published>
-    <updated>2018-11-28T11:02:49.079Z</updated>
+    <updated>2018-11-28T11:02:49.000Z</updated>
     
     <content type="html"><![CDATA[<p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
 <p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
@@ -272,9 +372,9 @@
     
       <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
-      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
-    
       <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
+    
+      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
     
   </entry>
   
@@ -283,7 +383,7 @@
     <link href="VickChen.win/2018/how-to-use-hangfire-on-net-core/"/>
     <id>VickChen.win/2018/how-to-use-hangfire-on-net-core/</id>
     <published>2018-08-27T13:48:07.000Z</published>
-    <updated>2018-11-27T08:53:10.776Z</updated>
+    <updated>2018-11-27T08:52:37.000Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://github.com/HangfireIO/Hangfire" target="_blank" rel="external">Hangfire</a>作为一款高人气且容易上手的分布式后台执行服务，支持多种数据库。在.net core的环境中，由Core自带的DI管理着生命周期，免去了在NF4.X环境中配置<a href="http://docs.hangfire.io/en/latest/deployment-to-production/making-aspnet-app-always-running.html" target="_blank" rel="external">always running</a>的麻烦，真正做到开箱即用。</p>
 <a id="more"></a>
@@ -333,7 +433,7 @@
     <link href="VickChen.win/2018/deploy-your-core-project-on-the-iis/"/>
     <id>VickChen.win/2018/deploy-your-core-project-on-the-iis/</id>
     <published>2018-08-02T11:40:31.000Z</published>
-    <updated>2018-11-22T03:15:56.717Z</updated>
+    <updated>2018-11-22T03:15:32.000Z</updated>
     
     <content type="html"><![CDATA[<p>与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是<code>AspNetCoreModule</code>，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。</p>
 <a id="more"></a>
@@ -382,7 +482,7 @@
     <link href="VickChen.win/2018/aspnet-core-security-authentication-cookie/"/>
     <id>VickChen.win/2018/aspnet-core-security-authentication-cookie/</id>
     <published>2018-06-13T10:46:01.000Z</published>
-    <updated>2018-12-17T11:06:24.738Z</updated>
+    <updated>2018-12-17T11:06:24.000Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
 <p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
@@ -463,7 +563,7 @@
     <link href="VickChen.win/2017/getting-started-with-Emmet-syntax/"/>
     <id>VickChen.win/2017/getting-started-with-Emmet-syntax/</id>
     <published>2017-08-17T15:27:18.000Z</published>
-    <updated>2018-12-17T11:04:49.690Z</updated>
+    <updated>2018-12-17T11:04:49.000Z</updated>
     
     <content type="html"><![CDATA[<p>Emmet是一个编辑器插件，以前被称作为 Zen Coding。使用类似于 CSS 选择器的语法描述元素在生成的文档树中的位置及其属性。</p>
 <p>使用 Emmet 可以帮助程序员快速的编写 HTML 和 CSS 代码，从而提高 Web前端开发的效率。<a href="https://www.emmet.io/" target="_blank" rel="external">官网</a>提供多编辑器支持。我一般使用<a href="https://code.visualstudio.com/" target="_blank" rel="external">Visual Studio Code</a>，下面就以VS Code插件举例。</p>
@@ -609,7 +709,7 @@
     <link href="VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/"/>
     <id>VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/</id>
     <published>2017-06-18T19:02:41.000Z</published>
-    <updated>2018-11-04T17:44:39.000Z</updated>
+    <updated>2018-11-04T17:45:05.532Z</updated>
     
     <content type="html"><![CDATA[<p>RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。</p>
 <p>.NET Framework 中提供的 RSA 算法规定：</p>
@@ -647,7 +747,7 @@
     <link href="VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/"/>
     <id>VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/</id>
     <published>2017-06-01T16:41:31.000Z</published>
-    <updated>2018-11-22T03:24:13.201Z</updated>
+    <updated>2018-11-22T03:24:13.000Z</updated>
     
     <content type="html"><![CDATA[<p>在数据安全上rsa起着非常大的作用，特别是数据网络通讯的安全上。当异构系统在数据网络通讯上对安全性有所要求时，rsa将作为其中的一种选择，此时rsa的互通性就显得尤为重要了。</p>
 <p>本文参考网络资料，提供了rsa互通性的一种可行的解决方案(c#,java,php),而这种互通性是在一定的局限性上达成的，比如密钥是1024位的(更高位没试过，应该也可行），基于PKCS1填充方式。</p>
@@ -720,7 +820,7 @@
     <link href="VickChen.win/2017/how-to-use-partial-views/"/>
     <id>VickChen.win/2017/how-to-use-partial-views/</id>
     <published>2017-05-20T17:10:52.000Z</published>
-    <updated>2018-11-04T17:50:09.000Z</updated>
+    <updated>2018-11-04T17:50:09.205Z</updated>
     
     <content type="html"><![CDATA[<p>提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。</p>
 <p>要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：</p>
@@ -1202,7 +1302,7 @@
     <link href="VickChen.win/2016/learn-markdown/"/>
     <id>VickChen.win/2016/learn-markdown/</id>
     <published>2016-09-20T04:47:54.000Z</published>
-    <updated>2018-11-04T14:06:58.000Z</updated>
+    <updated>2018-11-04T14:06:58.557Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="什么是Markdown语法？"><a href="#什么是Markdown语法？" class="headerlink" title="什么是Markdown语法？"></a>什么是Markdown语法？</h3> Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。</li>
@@ -1345,7 +1445,7 @@
     <link href="VickChen.win/2016/about-git-installation/"/>
     <id>VickChen.win/2016/about-git-installation/</id>
     <published>2016-09-16T19:49:38.000Z</published>
-    <updated>2018-08-01T10:51:35.522Z</updated>
+    <updated>2018-08-01T10:51:35.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在2005年的某一天，Linux之父Linus Torvalds 发布了他的又一个里程碑作品——Git。它的出现改变了软件开发流程，大大地提高了开发流畅度，直到现在仍十分流行，完全没有衰退的迹象。其实一般情况下，只需要掌握Git的几个常用命令即可，但是在使用的过程中难免会遇到各种复杂的需求，这时候经常需要搜索，非常麻烦，故总结了一下自己平常会用到的Git操作。本文根据团队实践记录Git入门指南和Git常用命令，文章中不仅记录了Git的搭建和使用教程，还参考了大量Git团队使用规范上的经验，希望大家可以结合自己团队的实际应用场景让Git协作优雅的落地。</p>
 <a id="more"></a>
@@ -1464,156 +1564,6 @@
       <category term="Git" scheme="VickChen.win/tags/Git/"/>
     
       <category term="GitHub" scheme="VickChen.win/tags/GitHub/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>使用hexo在GitHub上搭建自己的bolg</title>
-    <link href="VickChen.win/2016/create-hexo-blog-on-github/"/>
-    <id>VickChen.win/2016/create-hexo-blog-on-github/</id>
-    <published>2016-08-31T17:22:53.000Z</published>
-    <updated>2018-12-17T11:09:32.825Z</updated>
-    
-    <content type="html"><![CDATA[<ol>
-<li><h3 id="前言：搭建博客的几大要素"><a href="#前言：搭建博客的几大要素" class="headerlink" title="前言：搭建博客的几大要素"></a>前言：搭建博客的几大要素</h3><ul>
-<li>一个服务器（即博客的代码存放的地方，这里选用github）</li>
-<li>一个Blog生成工具（这里选用Hexo，类似的还有 WordPress，jekyll）</li>
-</ul>
-</li>
-</ol>
-<a id="more"></a>
-<ol>
-<li><h3 id="介绍Git和GitHub"><a href="#介绍Git和GitHub" class="headerlink" title="介绍Git和GitHub"></a>介绍Git和GitHub</h3><p> Git，一个非常强大的版本管理工具。</p>
-<p> GitHub,一个基于Git的日益流行的开源项目托管库，也就是你的“代码仓库”（repository）。</p>
-<p> 你可以在本地或者网上对自己的代码进行修改，而Github就是一个将你对代码的任何修改和更改说明（commit）进行同步的一个工具，并且可以进行版本管理。在我们搭建博客的过程中，它就扮演着一个“云仓库”服务器的角色，存放我们的博客代码</p>
-</li>
-<li><h3 id="Github的安装和配置"><a href="#Github的安装和配置" class="headerlink" title="Github的安装和配置"></a>Github的安装和配置</h3><ol>
-<li>注册，这个总会吧，官网-<a href="https://github.com/" target="_blank" rel="external">https://github.com/</a></li>
-<li>安装及配置可以看<a href="http://vickchen.win/about-git-installation/" target="_blank" rel="external">这里</a></li>
-</ol>
-</li>
-<li><h3 id="使用Github-Pages生成博客"><a href="#使用Github-Pages生成博客" class="headerlink" title="使用Github Pages生成博客"></a>使用Github Pages生成博客</h3><ol>
-<li><p>在Github网站上新建一个仓库（repository），网站右上角：</p>
-<p><img src="http://ww3.sinaimg.cn/large/9460f058gw1f7zaho97v0j20bo06ddgc.jpg" alt=""></p>
-</li>
-<li><p>输入库的名字，注意：一定要以这种形式yourname.github.com进行命名，比如我的用户名是vickchen1992，于是我的命名就是vickchen1992.github.com</p>
-<p><img src="http://ww4.sinaimg.cn/large/9460f058gw1f7zaho1bv9j20ke0ebtbh.jpg" alt=""></p>
-</li>
-<li><p>创建完成之后进入这个界面后点击右边的设置。</p>
-<p><img src="http://ww4.sinaimg.cn/large/9460f058gw1f7zahndv9nj20qu046wfc.jpg" alt=""></p>
-</li>
-<li><p>把界面往下拉就可以看到一个“页面自动生成”按钮了，点击该按钮</p>
-<p><img src="http://ww2.sinaimg.cn/large/9460f058gw1f7zaho7n5fj20mp0k2jvw.jpg" alt=""></p>
-</li>
-<li>然后进入Github自带的Markdown编辑器进行编辑，你可以随意修改写上几句自己的话。然后点击右下角的绿色按钮Continue to Layouts。</li>
-<li>然后你可以选择一个自己喜欢的主题，点击Publish就可以生成属于你自己的博客啦！</li>
-<li>试着在地址栏输入<code>http://yourname.github.io/</code> 就可以进入你刚刚创建的博客。</li>
-</ol>
-</li>
-<li><h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><ul>
-<li>在 Windows 环境下安装 Node.js 非常简单，仅须<a href="http://nodejs.org/" target="_blank" rel="external">下载</a>安装文件并执行即可完成安装。</li>
-</ul>
-</li>
-<li><h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><ol>
-<li><p>利用 npm 命令即可安装。（在任意位置点击鼠标右键，选择 Git bash ）</p>
-<p> <code>npm install -g hexo</code></p>
-</li>
-<li><p>创建hexo文件夹</p>
-<p> 安装完成后，在你喜爱的文件夹下（如 D:\hexo），点击鼠标右键，选择 Git bash 执行以下指令，Hexo 即会自动在目标文件夹建立网站所需要的所有文件。</p>
-<p> <code>hexo init</code></p>
-</li>
-<li><p>安装依赖包</p>
-<p> <code>npm install</code></p>
-</li>
-<li><p>本地预览</p>
-<p> 现在我们已经搭建起本地的hexo博客了，先在本地看看怎么样。在hexo安装的目录执行以下命令启动服务</p>
-<p> <code>hexo generate</code> //生成静态网页，简写方式为 hexo g</p>
-<p> <code>hexo server</code>  //启动本地服务，简写方式为 hexo s</p>
-<p>也可合并命令，如<code>hexo s -g</code> 表示先生成然后开启服务</p>
-<p> 然后到浏览器输入<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>即可</p>
-<p> 至此，本地博客已经搭建起来了。</p>
-</li>
-</ol>
-</li>
-<li><h3 id="博客部署到Github"><a href="#博客部署到Github" class="headerlink" title="博客部署到Github"></a>博客部署到Github</h3><ul>
-<li><p>修改配置文件</p>
-<p>  打开安装目录下的 _config.yml(在 D:\hexo下)，找到deploy并进行如下修改，记得把相应的地方改成你自己的账号或URL。</p>
-<blockquote>
-<p>别告诉我你不知道你github pages的git提交地址。。。好吧，我还是附上一张截图吧，进入到你的github刚创建好的那个github pages仓库就能看到了。</p>
-</blockquote>
-<p>  <img src="http://ww2.sinaimg.cn/large/9460f058gw1f7zbcc4ekrj20g908cmyl.jpg" alt=""></p>
-<p>  <strong>执行下列指令完成部署</strong></p>
-<p>  <code>hexo generate</code> //可简写为 hexo g</p>
-<p>  <code>hexo deploy</code> //发布至GitHub 可简写为 hexo d</p>
-</li>
-<li><p>注意</p>
-<p>  <strong>每次修改本地文件后，需要 hexo generate才能保存。每次使用命令时，都要在 D:\hexo目录下。</strong></p>
-<p>OK,我们的博客已经完全搭建起来了，在浏览器访问 <a href="http://yourname.github.io/" target="_blank" rel="external">http://yourname.github.io/</a> 就能看到你的成果了！</p>
-<p>还有一点，有一些用户在hexo deploy之后会有个这个提示</p>
-<p><img src="http://ww1.sinaimg.cn/large/9460f058gw1f7zbi1z5y7j20fa06zjs5.jpg" alt=""></p>
-<p>那么我们要输入我们在git上验证的邮箱，再次hexo deploy便成功发布上去。</p>
-<p>就可以访问我们的网站了。</p>
-</li>
-</ul>
-</li>
-<li><h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
-<li><p>配置文件_config.yml 编辑了title subtile之类的信息保存后，在git下输入hexo server(或其他指令)，出现大量报错，形如’…can not read a block mapping entry…‘？</p>
-<p> 解决方法：检查_config.yml内容，<strong>特别注意冒号后面需要有一个空格</strong></p>
-</li>
-<li><p>hexo deploy之后报错 ERROR Deployer not found: github ?</p>
-<p> 解决方法：在安装目录下（D:\hexo）右键Git Bash执行命令</p>
-<p> <code>npm install hexo -deployer -git --save</code></p>
-<p> 然后检查根目录下配置文件_config.yml，将deploy 的 type由github改为git</p>
-</li>
-<li><p>hexo deploy之后出现 fatal: ‘username.github.io’ does not appear to be a git repository？</p>
-<p> 解决方法：一是检查 repo 的名字是否合乎规范、是否含有大写字母、config.yml 中的 deploy 配置是否正确，二是把 git bash 关掉，重新打开再执行命令。</p>
-</li>
-<li><p>右键菜单中没有 git bash选项？</p>
-<p> 解决方法：可以进入开始菜单找到 git bash，然后通过 cd进入相应目录执行命令。</p>
-</li>
-<li><p>在github部署完成之后，马上访问出现404错误？</p>
-<p> 解决方法：这是正常的，（最多）等待十分钟左右就可以访问了。如果还不行，那很可能是 github 发送给你的验证邮件你没有打开看，验证后就没问题了。</p>
-</li>
-<li><p>shell 命令中输入密码时，你输入之后密码是不显示的，这是为了安全，并非是你没输上。</p>
-</li>
-<li><p>出现乱码的，不要使用 windows 中的「记事本」打开并编辑文件，推荐使用 VS Code</p>
-</li>
-<li><p>遇到什么其他的问题，不妨删除.deploy 和db.json 再重新生成试一试。</p>
-</li>
-<li><p>hexo安装没错，也能成功运行。启动也没错，但就是无法访问<a href="http://localhost:4000" target="_blank" rel="external">http://localhost:4000</a>?</p>
-<p> 你的电脑端口被占用了。hexo默认的端口是4000，如果你的电脑安装了福昕阅读器，就是他，没错.</p>
-<p> 启动hexo s 的时候，用这个命令，换一个端口。</p>
-<p> <code>hexo s -p 5000</code> </p>
-</li>
-</ol>
-</li>
-</ol>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;ol&gt;
-&lt;li&gt;&lt;h3 id=&quot;前言：搭建博客的几大要素&quot;&gt;&lt;a href=&quot;#前言：搭建博客的几大要素&quot; class=&quot;headerlink&quot; title=&quot;前言：搭建博客的几大要素&quot;&gt;&lt;/a&gt;前言：搭建博客的几大要素&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;一个服务器（即博客的代码存放的地方，这里选用github）&lt;/li&gt;
-&lt;li&gt;一个Blog生成工具（这里选用Hexo，类似的还有 WordPress，jekyll）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Git" scheme="VickChen.win/tags/Git/"/>
-    
-      <category term="GitHub" scheme="VickChen.win/tags/GitHub/"/>
-    
-      <category term="Hexo" scheme="VickChen.win/tags/Hexo/"/>
-    
-      <category term="Nodejs" scheme="VickChen.win/tags/Nodejs/"/>
-    
-      <category term="npm" scheme="VickChen.win/tags/npm/"/>
     
   </entry>
   
