@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2019-01-16T03:27:17.937Z</updated>
+  <updated>2019-01-16T03:42:47.802Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -20,12 +20,11 @@
     <link href="VickChen.win/2018/Debian-installs-VMware-Tools/"/>
     <id>VickChen.win/2018/Debian-installs-VMware-Tools/</id>
     <published>2018-12-23T16:20:11.000Z</published>
-    <updated>2019-01-16T03:27:17.937Z</updated>
+    <updated>2019-01-16T03:42:47.802Z</updated>
     
     <content type="html"><![CDATA[<p>VMware Tools是VMware虚拟机中自带的一种增强工具，相当于VirtualBox中的增强功能（Sun VirtualBox Guest Additions），是VMware提供的增强虚拟显卡和硬盘性能、以及同步虚拟机与主机时钟的驱动程序。</p>
 <a id="more"></a>
-<p>那么在debian系统下,如何进行VMware Tools的安装？</p>
-<p>首先选择VMware导航栏的 虚拟机&gt;安装VMware Tools</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>首先选择VMware导航栏的 虚拟机&gt;安装VMware Tools</p>
 <p>之后打开  文件&gt;VMware Tools</p>
 <p>将VMwareTools.tar.gz文件复制至home目录下</p>
 <p>打开home文件中打开命令行,利用tar -zxvf解压VMwareTools.tar.gz</p>
@@ -39,6 +38,19 @@
 <p>开始安装VMwareTools</p>
 <p><code>sudo /usr/src/VMware-Tools-distrib/vmware-install.pl</code></p>
 <p>之后一直按回车键,直到安装完成后重启</p>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
+<li><p>debian 9解决安装vm tools 不生效</p>
+<p><code>apt install open-vm-tools open-vm-tools-desktop open-vm-tools-dkmsb</code></p>
+</li>
+<li><p>卸载</p>
+<p>查找其卸载程序位置</p>
+<p><code>find / ./vmware-uninstall-tools.pl</code></p>
+<p>一般是在/usr/bin/目录下，找到后在其所在目录执行它。</p>
+<p><code>./vmware-uninstall-tools.pl</code></p>
+<p>完全删除其配置文件命令如下(请谨慎使用，勿敲错！数据无价，本人概不负责)。</p>
+<p><code>find / vmware*  -exec rm -rfv {} \;</code></p>
+</li>
+</ol>
 ]]></content>
     
     <summary type="html">
@@ -63,7 +75,7 @@
     <link href="VickChen.win/2018/problems-when-using-Debian/"/>
     <id>VickChen.win/2018/problems-when-using-Debian/</id>
     <published>2018-12-19T17:10:05.000Z</published>
-    <updated>2018-12-23T14:23:53.200Z</updated>
+    <updated>2018-12-23T14:23:53.000Z</updated>
     
     <content type="html"><![CDATA[<p>目前在学习Debian，然后发现一路都是坑，与之前接触的Ubuntu在使用上还是有点差别的。Debian更加原生，也更加稳定，坑也更多。为了防止后来者继续踩坑，特意写了此文用于记录总结初学者在学习过程中遇到的各种问题。</p>
 <a id="more"></a>
@@ -163,7 +175,7 @@
     <link href="VickChen.win/2018/use-mailket-to-receive-and-send-mail/"/>
     <id>VickChen.win/2018/use-mailket-to-receive-and-send-mail/</id>
     <published>2018-11-22T18:12:00.000Z</published>
-    <updated>2018-12-14T11:18:10.000Z</updated>
+    <updated>2018-12-14T11:18:10.927Z</updated>
     
     <content type="html"><![CDATA[<p>邮件服务是一般的系统都会拥有和需要的功能，但是对于.Net项目来说，邮件服务的创建和使用会较为的麻烦。.NET对于邮件功能提供了System.Net.Mail用于创建邮件服务，该基础服务提供邮件的基础操作，并且使用也较为的简单。对于真正将该功能使用于项目的人，就会慢慢发现其中的优缺点，甚至有些时候不能忍受其中的问题。在这里介绍一种微软用于替代System.Net.Mail的邮件服务组件MailKit和MimeKit，官网地址：<a href="http://www.mimekit.net/" target="_blank" rel="external">http://www.mimekit.net/</a> GitHub地址：<a href="https://github.com/jstedfast/MimeKit" target="_blank" rel="external">https://github.com/jstedfast/MimeKit</a></p>
 <a id="more"></a>
@@ -213,7 +225,7 @@
     <link href="VickChen.win/2018/database-migration-of-entity-framework-Core/"/>
     <id>VickChen.win/2018/database-migration-of-entity-framework-Core/</id>
     <published>2018-11-04T09:48:01.000Z</published>
-    <updated>2018-11-22T03:05:18.000Z</updated>
+    <updated>2018-11-22T03:05:18.360Z</updated>
     
     <content type="html"><![CDATA[<p>最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节</p>
 <a id="more"></a>
@@ -294,7 +306,7 @@
     <link href="VickChen.win/2018/jQuery-loads-data-when-scrollbar-to-bottom/"/>
     <id>VickChen.win/2018/jQuery-loads-data-when-scrollbar-to-bottom/</id>
     <published>2018-10-01T15:32:01.000Z</published>
-    <updated>2018-12-08T10:29:50.000Z</updated>
+    <updated>2018-12-08T10:29:50.421Z</updated>
     
     <content type="html"><![CDATA[<p>滚动条到底部加载数据原理很简单，就是为window或者滚动元素添加一个scroll事件，浏览器每次触发scroll事件时判断是否滚动到了浏览器底部，如果到了底部则加载新数据。关键是计算滚动条是否滚动到了浏览器底部</p>
 <a id="more"></a>
@@ -345,7 +357,7 @@
     <link href="VickChen.win/2018/error-in-publish-core-program/"/>
     <id>VickChen.win/2018/error-in-publish-core-program/</id>
     <published>2018-09-21T10:13:04.000Z</published>
-    <updated>2018-11-10T11:01:04.000Z</updated>
+    <updated>2018-11-10T11:01:04.083Z</updated>
     
     <content type="html"><![CDATA[<p>此贴主要用于记录Core程序在发布时遇到的错误。</p>
 <a id="more"></a>
@@ -380,7 +392,7 @@
     <link href="VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/"/>
     <id>VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/</id>
     <published>2018-08-31T18:11:52.000Z</published>
-    <updated>2018-11-28T11:02:49.000Z</updated>
+    <updated>2018-11-28T11:02:49.079Z</updated>
     
     <content type="html"><![CDATA[<p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
 <p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
@@ -426,7 +438,7 @@
     <link href="VickChen.win/2018/how-to-use-hangfire-on-net-core/"/>
     <id>VickChen.win/2018/how-to-use-hangfire-on-net-core/</id>
     <published>2018-08-27T13:48:07.000Z</published>
-    <updated>2018-11-27T08:52:37.000Z</updated>
+    <updated>2018-11-27T08:53:10.776Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://github.com/HangfireIO/Hangfire" target="_blank" rel="external">Hangfire</a>作为一款高人气且容易上手的分布式后台执行服务，支持多种数据库。在.net core的环境中，由Core自带的DI管理着生命周期，免去了在NF4.X环境中配置<a href="http://docs.hangfire.io/en/latest/deployment-to-production/making-aspnet-app-always-running.html" target="_blank" rel="external">always running</a>的麻烦，真正做到开箱即用。</p>
 <a id="more"></a>
@@ -476,7 +488,7 @@
     <link href="VickChen.win/2018/deploy-your-core-project-on-the-iis/"/>
     <id>VickChen.win/2018/deploy-your-core-project-on-the-iis/</id>
     <published>2018-08-02T11:40:31.000Z</published>
-    <updated>2018-11-22T03:15:32.000Z</updated>
+    <updated>2018-11-22T03:15:56.717Z</updated>
     
     <content type="html"><![CDATA[<p>与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是<code>AspNetCoreModule</code>，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。</p>
 <a id="more"></a>
@@ -525,7 +537,7 @@
     <link href="VickChen.win/2018/aspnet-core-security-authentication-cookie/"/>
     <id>VickChen.win/2018/aspnet-core-security-authentication-cookie/</id>
     <published>2018-06-13T10:46:01.000Z</published>
-    <updated>2018-12-17T11:06:24.000Z</updated>
+    <updated>2018-12-17T11:06:24.738Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
 <p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
@@ -606,7 +618,7 @@
     <link href="VickChen.win/2017/getting-started-with-Emmet-syntax/"/>
     <id>VickChen.win/2017/getting-started-with-Emmet-syntax/</id>
     <published>2017-08-17T15:27:18.000Z</published>
-    <updated>2018-12-17T11:04:49.000Z</updated>
+    <updated>2018-12-17T11:04:49.690Z</updated>
     
     <content type="html"><![CDATA[<p>Emmet是一个编辑器插件，以前被称作为 Zen Coding。使用类似于 CSS 选择器的语法描述元素在生成的文档树中的位置及其属性。</p>
 <p>使用 Emmet 可以帮助程序员快速的编写 HTML 和 CSS 代码，从而提高 Web前端开发的效率。<a href="https://www.emmet.io/" target="_blank" rel="external">官网</a>提供多编辑器支持。我一般使用<a href="https://code.visualstudio.com/" target="_blank" rel="external">Visual Studio Code</a>，下面就以VS Code插件举例。</p>
@@ -752,7 +764,7 @@
     <link href="VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/"/>
     <id>VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/</id>
     <published>2017-06-18T19:02:41.000Z</published>
-    <updated>2018-11-04T17:45:05.532Z</updated>
+    <updated>2018-11-04T17:44:39.000Z</updated>
     
     <content type="html"><![CDATA[<p>RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。</p>
 <p>.NET Framework 中提供的 RSA 算法规定：</p>
@@ -790,7 +802,7 @@
     <link href="VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/"/>
     <id>VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/</id>
     <published>2017-06-01T16:41:31.000Z</published>
-    <updated>2018-11-22T03:24:13.000Z</updated>
+    <updated>2018-11-22T03:24:13.201Z</updated>
     
     <content type="html"><![CDATA[<p>在数据安全上rsa起着非常大的作用，特别是数据网络通讯的安全上。当异构系统在数据网络通讯上对安全性有所要求时，rsa将作为其中的一种选择，此时rsa的互通性就显得尤为重要了。</p>
 <p>本文参考网络资料，提供了rsa互通性的一种可行的解决方案(c#,java,php),而这种互通性是在一定的局限性上达成的，比如密钥是1024位的(更高位没试过，应该也可行），基于PKCS1填充方式。</p>
@@ -863,7 +875,7 @@
     <link href="VickChen.win/2017/how-to-use-partial-views/"/>
     <id>VickChen.win/2017/how-to-use-partial-views/</id>
     <published>2017-05-20T17:10:52.000Z</published>
-    <updated>2018-11-04T17:50:09.205Z</updated>
+    <updated>2018-11-04T17:50:09.000Z</updated>
     
     <content type="html"><![CDATA[<p>提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。</p>
 <p>要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：</p>
@@ -1345,7 +1357,7 @@
     <link href="VickChen.win/2016/learn-markdown/"/>
     <id>VickChen.win/2016/learn-markdown/</id>
     <published>2016-09-20T04:47:54.000Z</published>
-    <updated>2018-11-04T14:06:58.557Z</updated>
+    <updated>2018-11-04T14:06:58.000Z</updated>
     
     <content type="html"><![CDATA[<ol>
 <li><h3 id="什么是Markdown语法？"><a href="#什么是Markdown语法？" class="headerlink" title="什么是Markdown语法？"></a>什么是Markdown语法？</h3> Markdown 是一种轻量级标记语言，目标是实现「易读易写」。越来越多的网站开始采用了Markdown语法，比如 GitHub、Coding、简书、有道云笔记 等。</li>

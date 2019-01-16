@@ -92,7 +92,7 @@
 <meta property="og:url" content="VickChen.win/2018/Debian-installs-VMware-Tools/index.html">
 <meta property="og:site_name" content="Vick's Blog">
 <meta property="og:description" content="VMware Tools是VMware虚拟机中自带的一种增强工具，相当于VirtualBox中的增强功能（Sun VirtualBox Guest Additions），是VMware提供的增强虚拟显卡和硬盘性能、以及同步虚拟机与主机时钟的驱动程序。">
-<meta property="og:updated_time" content="2019-01-16T03:27:17.937Z">
+<meta property="og:updated_time" content="2019-01-16T03:42:47.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Debian 安装 VMware Tools">
 <meta name="twitter:description" content="VMware Tools是VMware虚拟机中自带的一种增强工具，相当于VirtualBox中的增强功能（Sun VirtualBox Guest Additions），是VMware提供的增强虚拟显卡和硬盘性能、以及同步虚拟机与主机时钟的驱动程序。">
@@ -319,8 +319,7 @@
       
         <p>VMware Tools是VMware虚拟机中自带的一种增强工具，相当于VirtualBox中的增强功能（Sun VirtualBox Guest Additions），是VMware提供的增强虚拟显卡和硬盘性能、以及同步虚拟机与主机时钟的驱动程序。</p>
 <a id="more"></a>
-<p>那么在debian系统下,如何进行VMware Tools的安装？</p>
-<p>首先选择VMware导航栏的 虚拟机&gt;安装VMware Tools</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>首先选择VMware导航栏的 虚拟机&gt;安装VMware Tools</p>
 <p>之后打开  文件&gt;VMware Tools</p>
 <p>将VMwareTools.tar.gz文件复制至home目录下</p>
 <p>打开home文件中打开命令行,利用tar -zxvf解压VMwareTools.tar.gz</p>
@@ -334,6 +333,19 @@
 <p>开始安装VMwareTools</p>
 <p><code>sudo /usr/src/VMware-Tools-distrib/vmware-install.pl</code></p>
 <p>之后一直按回车键,直到安装完成后重启</p>
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h3><ol>
+<li><p>debian 9解决安装vm tools 不生效</p>
+<p><code>apt install open-vm-tools open-vm-tools-desktop open-vm-tools-dkmsb</code></p>
+</li>
+<li><p>卸载</p>
+<p>查找其卸载程序位置</p>
+<p><code>find / ./vmware-uninstall-tools.pl</code></p>
+<p>一般是在/usr/bin/目录下，找到后在其所在目录执行它。</p>
+<p><code>./vmware-uninstall-tools.pl</code></p>
+<p>完全删除其配置文件命令如下(请谨慎使用，勿敲错！数据无价，本人概不负责)。</p>
+<p><code>find / vmware*  -exec rm -rfv {} \;</code></p>
+</li>
+</ol>
 
       
     </div>
@@ -525,7 +537,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见问题"><span class="nav-number">2.</span> <span class="nav-text">常见问题</span></a></li></ol></div>
             
           </div>
         </section>
