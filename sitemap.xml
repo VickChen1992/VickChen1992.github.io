@@ -2,7 +2,14 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>VickChen.win/2018/Debian-installs-VMware-Tools/</loc>
+    <loc>VickChen.win/2019/Debian-installation-Redis/</loc>
+    
+    <lastmod>2019-01-22T08:46:54.389Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2018/Debian-installation-VMware-Tools/</loc>
     
     <lastmod>2019-01-16T03:42:47.802Z</lastmod>
     
