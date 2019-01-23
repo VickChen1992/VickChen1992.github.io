@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>VickChen.win/2018/use-mailkit-to-receive-and-send-mail/</loc>
+    
+    <lastmod>2019-01-23T03:04:51.304Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>VickChen.win/2019/Debian-installation-Redis-MySql/</loc>
     
     <lastmod>2019-01-23T02:59:42.072Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>VickChen.win/2017/getting-started-with-Emmet-syntax/</loc>
     
     <lastmod>2018-12-17T11:04:49.690Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2018/use-mailket-to-receive-and-send-mail/</loc>
-    
-    <lastmod>2018-12-14T11:18:10.927Z</lastmod>
     
   </url>
   
