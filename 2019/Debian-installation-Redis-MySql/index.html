@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058ly1fzgalkchhrj20ob0gsabk.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/9460f058ly1fzgaf3wc54j20rs0d447p.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058gy1fzgav214e7j20h504pmz9.jpg">
-<meta property="og:updated_time" content="2019-01-23T02:49:48.905Z">
+<meta property="og:updated_time" content="2019-01-23T02:54:02.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Debian 安装 Redis、MySql">
 <meta name="twitter:description" content="项目中需要用到的三件套安装、配置以及常见错误">
@@ -350,7 +350,7 @@
 <p>远程访问，主机为x.x.x.x</p>
 <p><code>redis-cli -a password -h x.x.x.x</code></p>
 <h2 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h2><p>MySql是目前最受欢迎的关系型数据库之一。 由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，很多中小型网站的开发都选择将 MySql作为网站数据库。</p>
-<h3 id="配置源"><a href="#配置源" class="headerlink" title="配置源"></a>配置源</h3><p>debian下安装软件的指令为apt-get，在使用apt-get安装MySQL之前，需要先下载MySQL官网提供的DEB包，以将MySQL的仓库添加到apt-get的源中。</p>
+<h3 id="配置源"><a href="#配置源" class="headerlink" title="配置源"></a>配置源</h3><p>debian下安装软件的指令为apt-get，在使用apt-get安装之前，需要先下载官网提供的Deb包，以将MySql的仓库添加到apt-get的源中。</p>
 <ol>
 <li><p>获取下载链接</p>
 <p>打开网站<a href="https://link.jianshu.com/?t=https%3A%2F%2Fdev.mysql.com%2Fdownloads%2Frepo%2Fapt%2F" target="_blank" rel="external">MySQL APT Respository</a></p>
@@ -390,7 +390,7 @@
 <p>然后就是漫长的等待，因为安装包200多M…..</p>
 <p>中途会让你输入root密码，自己输入一个记住就行了。</p>
 <h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ol>
-<li><p>开启MySQL服务</p>
+<li><p>开启MySql服务</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service mysql start</div></pre></td></tr></table></figure>
 </li>
 <li><p>关闭服务</p>
@@ -401,11 +401,11 @@
 </li>
 <li><p>登陆</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div></pre></td></tr></table></figure>
-<p>输入密码即可登陆到mysql</p>
+<p>输入密码即可登陆</p>
 </li>
 </ol>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>因为MySql刚刚安装完成的时候不允许从远程访问，这对于开发不太友好。</p>
-<p>另外，MySql刚刚安装完成的时候，只能使用root用户登录，这也是一个不安全的地方。</p>
+<p>另外，MySql初始状态只能使用root用户登录，这也是一个不安全的地方。</p>
 <p>所以我们应该创建一个用于开发的数据库账户，并且为它设置远程访问权限。</p>
 <p>当然，<strong>在真正投入生成环境之后，我们应该移除远程访问的权限</strong></p>
 <ol>
@@ -425,7 +425,8 @@
 <li><p>如果还是不行的话，打开下面的文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/mysql/mysql.conf.d/mysqlld.cnf</div></pre></td></tr></table></figure>
 </li>
-<li><p>把bind-adress那一行的127.0.0.1改成0.0.0.0(当然，投入生产时记得改回来！)</p>
+<li><p>把bind-adress那一行的127.0.0.1改成0.0.0.0 </p>
+<p><strong>切记：投入生产时记得改回来</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># By default we only accept connections from localhost</span></div><div class="line"><span class="comment"># bind-address    = 127.0.0.1 #先注释此行</span></div><div class="line"><span class="built_in">bind</span>-address    = 0.0.0.0</div></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -557,7 +558,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
