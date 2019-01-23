@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,Debian,Redis,MySql," />
+  <meta name="keywords" content="Linux,Debian,Redis,mysql," />
 
 
 
@@ -86,20 +86,26 @@
 
 
 
-<meta name="description" content="项目中需要用到的三件套安装、配置以及常见错误">
+<meta name="description" content="项目中需要用到的三件套安装
+RedisRedis 是一个高性能的key-value数据库。 在部分场合可以对关系数据库起到很好的补充作用。是当前比较热门的NOSQL系统之一。它提供了C#，Java，PHP，JavaScript，Python，Ruby等客户端，使用很方便。
+下载并解压123456# 跳转至目录cd /usr/local/src# 下载wget http://download.re">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Debian 安装 Redis、MySql">
-<meta property="og:url" content="VickChen.win/2019/Debian-installation-Redis/index.html">
+<meta property="og:title" content="Debian 安装 Redis">
+<meta property="og:url" content="VickChen.win/2019/Debian-installation-Redis_Mysql/index.html">
 <meta property="og:site_name" content="Vick's Blog">
-<meta property="og:description" content="项目中需要用到的三件套安装、配置以及常见错误">
+<meta property="og:description" content="项目中需要用到的三件套安装
+RedisRedis 是一个高性能的key-value数据库。 在部分场合可以对关系数据库起到很好的补充作用。是当前比较热门的NOSQL系统之一。它提供了C#，Java，PHP，JavaScript，Python，Ruby等客户端，使用很方便。
+下载并解压123456# 跳转至目录cd /usr/local/src# 下载wget http://download.re">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058ly1fzgaj3o70yj20s005fjrp.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058ly1fzgalkchhrj20ob0gsabk.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/9460f058ly1fzgaf3wc54j20rs0d447p.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058gy1fzgav214e7j20h504pmz9.jpg">
-<meta property="og:updated_time" content="2019-01-23T02:43:11.356Z">
+<meta property="og:updated_time" content="2019-01-23T02:33:26.809Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Debian 安装 Redis、MySql">
-<meta name="twitter:description" content="项目中需要用到的三件套安装、配置以及常见错误">
+<meta name="twitter:title" content="Debian 安装 Redis">
+<meta name="twitter:description" content="项目中需要用到的三件套安装
+RedisRedis 是一个高性能的key-value数据库。 在部分场合可以对关系数据库起到很好的补充作用。是当前比较热门的NOSQL系统之一。它提供了C#，Java，PHP，JavaScript，Python，Ruby等客户端，使用很方便。
+下载并解压123456# 跳转至目录cd /usr/local/src# 下载wget http://download.re">
 <meta name="twitter:image" content="https://ws1.sinaimg.cn/large/9460f058ly1fzgaj3o70yj20s005fjrp.jpg">
 
 
@@ -121,9 +127,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/2019/Debian-installation-Redis/"/>
+  <link rel="canonical" href="VickChen.win/2019/Debian-installation-Redis_Mysql/"/>
 
-  <title> Debian 安装 Redis、MySql | Vick's Blog </title>
+  <title> Debian 安装 Redis | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +269,7 @@
             
             
               
-                Debian 安装 Redis、MySql
+                Debian 安装 Redis
               
             
           </h1>
@@ -322,8 +328,8 @@
       
 
       
-        <p>项目中需要用到的三件套安装、配置以及常见错误</p>
-<a id="more"></a>
+        <a id="more"></a>
+<p>项目中需要用到的三件套安装</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>Redis 是一个高性能的key-value数据库。 在部分场合可以对关系数据库起到很好的补充作用。是当前比较热门的NOSQL系统之一。它提供了C#，Java，PHP，JavaScript，Python，Ruby等客户端，使用很方便。</p>
 <h3 id="下载并解压"><a href="#下载并解压" class="headerlink" title="下载并解压"></a>下载并解压</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 跳转至目录</span></div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src</div><div class="line"><span class="comment"># 下载</span></div><div class="line">wget http://download.redis.io/releases/redis-stable.tar.gz</div><div class="line"><span class="comment"># 解压</span></div><div class="line">tar xzf redis-stable.tar.gz</div></pre></td></tr></table></figure>
 <h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><p>Redis基于C开发，因此确保电脑安装有gcc和make。</p>
@@ -349,7 +355,7 @@
 <p><code>redis-cli -a password</code></p>
 <p>远程访问，主机为x.x.x.x</p>
 <p><code>redis-cli -a password -h x.x.x.x</code></p>
-<h2 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h2><p>MySql是目前最受欢迎的关系型数据库之一。 由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，很多中小型网站的开发都选择将 MySql作为网站数据库。</p>
+<h2 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h2><p>MySQL所使用的 SQL 语言是用于访问数据库的最常用标准化语言。 软件采用了双授权政策，分为社区版和商业版，由于其体积小、速度快、总体拥有成本低，尤其是开放源码这一特点，一般中小型网站的开发都选择 MySQL 作为网站数据库。</p>
 <h3 id="配置源"><a href="#配置源" class="headerlink" title="配置源"></a>配置源</h3><p>debian下安装软件的指令为apt-get，在使用apt-get安装MySQL之前，需要先下载MySQL官网提供的DEB包，以将MySQL的仓库添加到apt-get的源中。</p>
 <ol>
 <li><p>获取下载链接</p>
@@ -420,7 +426,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
 </li>
 <li><p>如果还是不行的话，打开下面的文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/mysql/mysql.conf.d/mysqlld.cnf</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/mysql/mysql.conf.d/mysqlld.cnf</div></pre></td></tr></table></figure>
 </li>
 <li><p>把bind-adress那一行的127.0.0.1改成0.0.0.0(当然，投入生产时记得改回来！)</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># By default we only accept connections from localhost</span></div><div class="line"><span class="comment"># bind-address    = 127.0.0.1 #先注释此行</span></div><div class="line"></div><div class="line"><span class="built_in">bind</span>-address    = 0.0.0.0</div></pre></td></tr></table></figure>
@@ -454,7 +460,7 @@
           
             <a href="/tags/Redis/" rel="tag">#Redis</a>
           
-            <a href="/tags/MySql/" rel="tag">#MySql</a>
+            <a href="/tags/mysql/" rel="tag">#mysql</a>
           
         </div>
       
@@ -463,13 +469,17 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/Debian-installation-Redis_Mysql/" rel="next" title="Debian 安装 Redis">
-                <i class="fa fa-chevron-left"></i> Debian 安装 Redis
+              <a href="/2018/Debian-installation-VMware-Tools/" rel="next" title="Debian 安装 VMware Tools">
+                <i class="fa fa-chevron-left"></i> Debian 安装 VMware Tools
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/Debian-installation-Redis/" rel="prev" title="Debian 安装 Redis、MySql">
+                Debian 安装 Redis、MySql <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
