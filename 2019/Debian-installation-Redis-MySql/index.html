@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058ly1fzgalkchhrj20ob0gsabk.jpg">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/9460f058ly1fzgaf3wc54j20rs0d447p.jpg">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058gy1fzgav214e7j20h504pmz9.jpg">
-<meta property="og:updated_time" content="2019-01-23T02:59:42.072Z">
+<meta property="og:updated_time" content="2019-01-24T04:07:33.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Debian 安装 Redis、MySql">
 <meta name="twitter:description" content="项目中需要用到的三件套安装、配置以及常见错误">
@@ -403,6 +403,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p</div></pre></td></tr></table></figure>
 <p>输入密码即可登陆</p>
 </li>
+<li><p>指定端口号登录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -u root -p -P 3306</div></pre></td></tr></table></figure>
+<p>注意指定端口的字母P为大写，而标识密码的p为小写。MySql默认端口号为3306</p>
+</li>
+<li><p>指定IP地址和端口号登录MySQL数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql -h 127.0.0.1 -u root -p -P 3306</div></pre></td></tr></table></figure>
+</li>
 </ol>
 <h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>因为MySql刚安装完成不允许从远程访问而且只有一个root用户，这对于开发不太友好也比较不安全。</p>
 <p>所以我们应该创建一个用于开发的数据库账户，并且为它设置远程访问权限。</p>
@@ -421,10 +428,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
 </li>
 <li><p>如果还是不行的话，打开下面的文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/mysql/mysql.conf.d/mysqlld.cnf</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf</div></pre></td></tr></table></figure>
 </li>
 <li><p>把bind-adress那一行的127.0.0.1改成0.0.0.0 </p>
-<p><strong>切记：投入生产时记得改回来</strong></p>
+<p><strong>重要提示：投入生产时记得改回来</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># By default we only accept connections from localhost</span></div><div class="line"><span class="comment"># bind-address    = 127.0.0.1 #先注释此行</span></div><div class="line"><span class="built_in">bind</span>-address    = 0.0.0.0</div></pre></td></tr></table></figure>
 </li>
 </ol>
