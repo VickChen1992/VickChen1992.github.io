@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2019-01-24T04:07:33.646Z</updated>
+  <updated>2019-02-15T09:48:48.190Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,13 +16,125 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Debian使用Docker安装redis和mysql</title>
+    <link href="VickChen.win/2019/Debian-uses-docker-to-install-redis-and-mysql/"/>
+    <id>VickChen.win/2019/Debian-uses-docker-to-install-redis-and-mysql/</id>
+    <published>2019-02-14T17:22:01.000Z</published>
+    <updated>2019-02-15T09:48:48.190Z</updated>
+    
+    <content type="html"><![CDATA[<p>Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。</p>
+<p>这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。</p>
+<a id="more"></a>
+<h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>官方Debian存储库中提供的Docker安装包可能不是最新版本。为了确保我们获得最新版本，我们将从官方Docker存储库安装Docker。为此，我们将添加一个新的包源，从Docker添加GPG密钥以确保下载有效，然后安装该包。</p>
+<p>首先，更新现有的包列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt update</div></pre></td></tr></table></figure>
+<p>接下来，安装一些允许apt使用包通过HTTPS的必备软件包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common</div></pre></td></tr></table></figure>
+<p>然后将官方Docker存储库的GPG密钥添加到您的系统：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -</div></pre></td></tr></table></figure>
+<p>将Docker存储库添加到APT源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository <span class="string">"deb [arch=amd64] https://download.docker.com/linux/debian <span class="variable">$(lsb_release -cs)</span> stable"</span></div></pre></td></tr></table></figure>
+<p>接下来，使用新添加的repo中的Docker包更新包数据库：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt update</div></pre></td></tr></table></figure>
+<p>确保您要从Docker repo而不是默认的Debian repo安装：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-cache policy docker-ce</div></pre></td></tr></table></figure>
+<p>虽然Docker的版本号可能不同，但您会看到这样的输出：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker-ce:</div><div class="line">  Installed: (none)</div><div class="line">  Candidate: 18.06.1~ce~3-0~debian</div><div class="line">  Version table:</div><div class="line">     18.06.1~ce~3-0~debian 500</div><div class="line">        500 https://download.docker.com/linux/debian stretch/stable amd64 Packages</div></pre></td></tr></table></figure>
+<p>请注意，<code>docker-ce</code>未安装，但安装的候选者来自Debian 9（stretch）的Docker存储库。</p>
+<p>最后，安装Docker：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install docker-ce</div></pre></td></tr></table></figure>
+<p>现在应该安装Docker，守护进程启动，并启用进程启动进程。检查它是否正在运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo systemctl status docker</div></pre></td></tr></table></figure>
+<p>输出应类似于以下内容，表明该服务处于活动状态并正在运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">docker.service - Docker Application Container Engine</div><div class="line">   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)</div><div class="line">   Active: active (running) since Thu 2018-07-05 15:08:39 UTC; 2min 55s ago</div><div class="line">     Docs: https://docs.docker.com</div><div class="line">  Main PID: 21319 (dockerd)</div><div class="line">   CGroup: /system.slice/docker.service</div><div class="line">           ├─21319 /usr/bin/dockerd -H fd://</div><div class="line">           └─21326 docker-containerd --config /var/run/docker/containerd/containerd.toml</div></pre></td></tr></table></figure>
+<h3 id="使用Docker镜像"><a href="#使用Docker镜像" class="headerlink" title="使用Docker镜像"></a>使用Docker镜像</h3><p>Docker容器是从Docker镜像构建的。默认情况下，Docker从Docker Hub中获取这些映像，Docker Hub是由Docker管理的Docker注册表，Docker项目背后的公司。任何人都可以在Docker Hub上托管他们的Docker镜像，因此您需要的大多数应用程序和Linux发行版都将在那里托管图像。</p>
+<p>要检查您是否可以从Docker Hub访问和下载图像，请键入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run hello-world</div></pre></td></tr></table></figure>
+<p>输出将指示Docker正常工作：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Unable to find image <span class="string">'hello-world:latest'</span> locally</div><div class="line">latest: Pulling from library/hello-world</div><div class="line">9db2ca6ccae0: Pull complete</div><div class="line">Digest: sha256:4b8ff392a12ed9ea17784bd3c9a8b1fa3299cac44aca35a85c90c5e3c7afacdc</div><div class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</div><div class="line">​</div><div class="line">Hello from Docker!</div><div class="line">This message shows that your installation appears to be working correctly.</div><div class="line">...</div></pre></td></tr></table></figure>
+<p>Docker最初无法在本地找到hello-world图像，因此它从Docker Hub下载了图像，Docker Hub是默认存储库。下载映像后，Docker从映像创建了一个容器，并在容器中执行了应用程序，显示了该消息。</p>
+<h3 id="操作镜像"><a href="#操作镜像" class="headerlink" title="操作镜像"></a>操作镜像</h3><h4 id="查看本机镜像"><a href="#查看本机镜像" class="headerlink" title="查看本机镜像"></a>查看本机镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vick@debian:~$ sudo docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">mysql               5.7                 e47e309f72c8        9 days ago          372MB</div><div class="line">redis               3.2                 87856cc39862        4 months ago        76MB</div></pre></td></tr></table></figure>
+<h4 id="查看本机运行中的容器"><a href="#查看本机运行中的容器" class="headerlink" title="查看本机运行中的容器"></a>查看本机运行中的容器</h4><p><img src="https://ws1.sinaimg.cn/large/9460f058ly1g078v22tp7j20th023ab1.jpg" alt=""></p>
+<h4 id="查看本机所有容器"><a href="#查看本机所有容器" class="headerlink" title="查看本机所有容器"></a>查看本机所有容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker ps <span class="_">-a</span></div></pre></td></tr></table></figure>
+<h4 id="启动某个容器"><a href="#启动某个容器" class="headerlink" title="启动某个容器"></a>启动某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker start XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
+<h4 id="停止某个容器"><a href="#停止某个容器" class="headerlink" title="停止某个容器"></a>停止某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker stop XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
+<h4 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker rmi XXXX <span class="comment">#XXXX可以是镜像的id也可以是镜像的name</span></div></pre></td></tr></table></figure>
+<h4 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker rm XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
+<p>注意：</p>
+<ol>
+<li><p>删除前需要保证容器是停止的  stop</p>
+</li>
+<li><p>需要注意删除镜像和容器的命令不一样。 docker rmi ID  ,其中 容器(rm)  和 镜像(rmi)</p>
+</li>
+<li><p>顺序需要先删除容器再删除镜像</p>
+</li>
+</ol>
+<h2 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>搜索mysql镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker search mysql</div></pre></td></tr></table></figure>
+<p>下载mysql 5.7镜像：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull mysql:5.7 <span class="comment">#不带版本号默认最新</span></div></pre></td></tr></table></figure>
+<p>启动mysql：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name mysql -p 3306:3306 -v /home/vick/mysql/data:/var/lib/mysql <span class="_">-e</span> MYSQL_ROOT_PASSWORD=lanhe <span class="_">-d</span> mysql:5.7</div></pre></td></tr></table></figure>
+<p>注意，这里的容器名字叫：mysql ，root用户密码是：123456 ，映射宿主机子的端口3306到容器的端口3306，</p>
+<p>并且将mysql的/var/lib/mysql目录映射到/home/vick/mysql/data文件夹。</p>
+<h3 id="设置可远程访问"><a href="#设置可远程访问" class="headerlink" title="设置可远程访问"></a>设置可远程访问</h3><p>进入mysql容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vick@debian:~$ sudo docker <span class="built_in">exec</span> -it mysql bash</div><div class="line">root@943fd585094f:/<span class="comment">#</span></div></pre></td></tr></table></figure>
+<p>在容器内登陆Mysql：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">root@943fd585094f:/<span class="comment"># mysql -uroot -p  </span></div><div class="line"></div><div class="line">Enter password: </div><div class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 12</div><div class="line">Server version: 5.7.25 MySQL Community Server (GPL)</div><div class="line"></div><div class="line">Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.</div><div class="line"></div><div class="line">Oracle is a registered trademark of Oracle Corporation and/or its</div><div class="line">affiliates. Other names may be trademarks of their respective</div><div class="line">owners.</div><div class="line"></div><div class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<p>查看用户信息</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select host,user,plugin,authentication_string from mysql.user;                                                                                            </div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+                                                                </div><div class="line">| host      | user          | plugin                | authentication_string                     |</div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+</div><div class="line">| localhost | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</div><div class="line">| localhost | mysql.session | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</div><div class="line">| localhost | mysql.sys     | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</div><div class="line">| %         | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+</div><div class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</div></pre></td></tr></table></figure>
+<p>host为 % 表示不限制ip   localhost表示本机使用    plugin非mysql_native_password 则需要修改密码。</p>
+<p>连接时错误提示：</p>
+<p><img src="https://ws1.sinaimg.cn/large/9460f058ly1g078c9yh35j20o701f0t3.jpg" alt=""></p>
+<p>解决方法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql&gt; ALTER user <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'123456'</span>;  </div><div class="line">Query OK, 0 rows affected (0.01 sec)  </div><div class="line">mysql&gt;   </div><div class="line">mysql&gt; FLUSH PRIVILEGES;  </div><div class="line">Query OK, 0 rows affected (0.01 sec)</div></pre></td></tr></table></figure>
+<p>连接数据库：</p>
+<p><img src="https://ws1.sinaimg.cn/large/9460f058ly1g0788grm0gj20fq0ilgm0.jpg" alt=""></p>
+<p>连接成功了。</p>
+<h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>安装步骤与mysql类似：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker search  redis</div><div class="line">docker pull  redis:3.2</div></pre></td></tr></table></figure>
+<p>运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name redis -p 6379:6379 -v /home/vick/redis/data:/data  <span class="_">-d</span> redis:3.2 redis-server --appendonly yes</div></pre></td></tr></table></figure>
+<p>命令说明：</p>
+<p><code>--name redis</code> :将容器命名为redis</p>
+<p><code>-p 6379:6379</code> : 将容器的6379端口映射到主机的6379端口</p>
+<p><code>-v /home/vick/redis/data:/data</code> : 将主机中/home/vick/redis/data目录挂载到容器的/data</p>
+<p><code>redis-server --appendonly yes</code> : 在容器执行redis-server启动命令，并打开redis持久化配置</p>
+<p>连接、查看容器:</p>
+<p>使用redis镜像执行redis-cli命令连接到刚启动的容器,主机IP为172.17.0.1</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">vick@debian:~$ sudo docker <span class="built_in">exec</span> -it redis redis-cli</div><div class="line">127.0.0.1:6379&gt; info</div><div class="line"><span class="comment"># Server</span></div><div class="line">redis_version:3.2.12</div><div class="line">redis_git_sha1:00000000</div><div class="line">redis_git_dirty:0</div><div class="line">redis_build_id:b0df607ad3315254</div><div class="line">redis_mode:standalone</div><div class="line">os:Linux 4.9.0-8-amd64 x86_64</div><div class="line">arch_bits:64</div><div class="line">multiplexing_api:epoll</div><div class="line">gcc_version:6.3.0</div><div class="line">process_id:1</div><div class="line">run_id:54ef1808535f61b18b9713<span class="built_in">cd</span>9455c09396f032b4</div><div class="line">tcp_port:6379</div><div class="line">uptime_in_seconds:5065</div><div class="line">uptime_in_days:0</div><div class="line">hz:10</div><div class="line">lru_clock:6719318</div><div class="line">executable:/data/redis-server</div><div class="line">config_file:</div><div class="line"></div><div class="line"><span class="comment"># Clients</span></div><div class="line">connected_clients:1</div><div class="line">client_longest_output_list:0</div><div class="line">client_biggest_input_buf:0</div><div class="line">blocked_clients:0</div><div class="line">...</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。&lt;/p&gt;
+&lt;p&gt;这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
+    
+      <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
+    
+      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
+    
+      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
+    
+      <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Debian 安装 Redis、MySql</title>
     <link href="VickChen.win/2019/Debian-installation-Redis-MySql/"/>
     <id>VickChen.win/2019/Debian-installation-Redis-MySql/</id>
     <published>2019-01-22T05:40:32.000Z</published>
-    <updated>2019-01-24T04:07:33.646Z</updated>
+    <updated>2019-02-15T06:37:47.064Z</updated>
     
-    <content type="html"><![CDATA[<p>项目中需要用到的三件套安装、配置以及常见错误</p>
+    <content type="html"><![CDATA[<p>项目中需要用到的数据库安装、配置以及常见错误</p>
 <a id="more"></a>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>Redis 是一个高性能的key-value数据库。 在部分场合可以对关系数据库起到很好的补充作用。是当前比较热门的NOSQL系统之一。它提供了C#，Java，PHP，JavaScript，Python，Ruby等客户端，使用很方便。</p>
 <h3 id="下载并解压"><a href="#下载并解压" class="headerlink" title="下载并解压"></a>下载并解压</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 跳转至目录</span></div><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/src</div><div class="line"><span class="comment"># 下载</span></div><div class="line">wget http://download.redis.io/releases/redis-stable.tar.gz</div><div class="line"><span class="comment"># 解压</span></div><div class="line">tar xzf redis-stable.tar.gz</div></pre></td></tr></table></figure>
@@ -139,7 +251,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;项目中需要用到的三件套安装、配置以及常见错误&lt;/p&gt;
+      &lt;p&gt;项目中需要用到的数据库安装、配置以及常见错误&lt;/p&gt;
     
     </summary>
     
@@ -1456,33 +1568,6 @@
     
       &lt;p&gt;有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。&lt;/p&gt;
 &lt;p&gt;前提是要将这个存储过程放在所查询的数据库。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>用存储过程生成实体类</title>
-    <link href="VickChen.win/2016/proc-generate-entity-class/"/>
-    <id>VickChen.win/2016/proc-generate-entity-class/</id>
-    <published>2016-10-26T13:46:18.000Z</published>
-    <updated>2016-11-03T09:05:54.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>其实网上已经有有很多实体类生成工具的存在,但多了解点知识总是没错的.</p>
-<a id="more"></a>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line">IF EXISTS (<span class="keyword">select</span> * <span class="keyword">FROM</span> dbo.sysobjects <span class="keyword">WHERE</span> <span class="keyword">id</span> = object_id(N<span class="string">'procGenerateEntityClass'</span>) <span class="keyword">AND</span> OBJECTPROPERTY(<span class="keyword">id</span>, N<span class="string">'IsProcedure'</span>) = <span class="number">1</span>)</div><div class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> procGenerateEntityClass</div><div class="line"><span class="keyword">GO</span></div><div class="line"><span class="comment">/*======================================================================</span></div><div class="line">Business Entity Class Generator</div><div class="line">This SP accepts a DATABASE object (table, view) name's parameter AND</div><div class="line">generates (C# code) custom entity class based ON the object's fields</div><div class="line">======================================================================*/</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> procGenerateEntityClass</div><div class="line">@ObjectName <span class="built_in">varchar</span>(<span class="number">100</span>)</div><div class="line"><span class="keyword">AS</span></div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">name</span> <span class="built_in">varchar</span>(<span class="number">20</span>),</div><div class="line">  @<span class="keyword">type</span> <span class="built_in">varchar</span>(<span class="number">20</span>)</div><div class="line"><span class="keyword">DECLARE</span> objCursor <span class="keyword">CURSOR</span></div><div class="line"><span class="keyword">FOR</span></div><div class="line"><span class="keyword">SELECT</span> sc.name, st.name <span class="keyword">type</span> <span class="keyword">FROM</span> syscolumns sc</div><div class="line"><span class="keyword">INNER</span> <span class="keyword">JOIN</span> systypes st</div><div class="line"><span class="keyword">ON</span> st.xusertype = sc.xusertype</div><div class="line"><span class="keyword">WHERE</span> <span class="keyword">Id</span>=OBJECT_ID(@ObjectName)</div><div class="line"><span class="keyword">DECLARE</span> @propertyCodes <span class="built_in">varchar</span>(<span class="number">8000</span>)</div><div class="line"><span class="keyword">SET</span> @propertyCodes = <span class="string">''</span></div><div class="line"><span class="keyword">OPEN</span> objCursor</div><div class="line"><span class="keyword">FETCH</span> <span class="keyword">NEXT</span> <span class="keyword">FROM</span> objCursor</div><div class="line"><span class="keyword">INTO</span> @<span class="keyword">name</span>, @<span class="keyword">type</span></div><div class="line"><span class="keyword">DECLARE</span> @cType <span class="built_in">varchar</span>(<span class="number">20</span>)<span class="comment">-- C# type</span></div><div class="line"><span class="keyword">IF</span> @@FETCH_STATUS &lt;&gt; <span class="number">0</span></div><div class="line">    <span class="keyword">BEGIN</span></div><div class="line">  <span class="keyword">CLOSE</span> objCursor</div><div class="line">  <span class="keyword">DEALLOCATE</span> objCursor</div><div class="line">  PRINT <span class="string">'Error... Please CHECK passed parameter'</span></div><div class="line">  <span class="keyword">RETURN</span></div><div class="line"> <span class="keyword">END</span></div><div class="line"><span class="keyword">WHILE</span> @@FETCH_STATUS = <span class="number">0</span></div><div class="line">    <span class="keyword">BEGIN</span></div><div class="line">  <span class="comment">-- 将SQL Server数据库数据类型转换为C#数据类型</span></div><div class="line">  <span class="keyword">SET</span> @cType =</div><div class="line">  <span class="keyword">CASE</span></div><div class="line">  <span class="keyword">WHEN</span> @<span class="keyword">type</span> <span class="keyword">LIKE</span> <span class="string">'%char%'</span> <span class="keyword">OR</span> @<span class="keyword">type</span> <span class="keyword">LIKE</span> <span class="string">'%text%'</span></div><div class="line">   <span class="keyword">THEN</span> <span class="string">'string'</span></div><div class="line">  <span class="keyword">WHEN</span> @<span class="keyword">type</span> <span class="keyword">IN</span> (<span class="string">'decimal'</span>, <span class="string">'numeric'</span>)</div><div class="line">   <span class="keyword">THEN</span> <span class="string">'decimal'</span></div><div class="line">  <span class="keyword">WHEN</span> @<span class="keyword">type</span> = <span class="string">'real'</span></div><div class="line">   <span class="keyword">THEN</span> <span class="string">'float'</span></div><div class="line">  <span class="keyword">WHEN</span> @<span class="keyword">type</span> <span class="keyword">LIKE</span> <span class="string">'%money%'</span></div><div class="line">   <span class="keyword">THEN</span> <span class="string">'decimal'</span></div><div class="line">  <span class="keyword">WHEN</span> @<span class="keyword">type</span> = <span class="string">'bit'</span></div><div class="line">   <span class="keyword">THEN</span> <span class="string">'bool'</span></div><div class="line">  <span class="keyword">WHEN</span> @<span class="keyword">type</span> <span class="keyword">IN</span> (<span class="string">'bigint'</span>, <span class="string">'timestamp'</span>)  </div><div class="line">   <span class="keyword">THEN</span> <span class="string">'long'</span></div><div class="line">  <span class="keyword">WHEN</span> @<span class="keyword">type</span> <span class="keyword">LIKE</span> <span class="string">'%int%'</span></div><div class="line">   <span class="keyword">THEN</span> <span class="string">'int'</span></div><div class="line">  <span class="keyword">WHEN</span> @<span class="keyword">type</span> = <span class="string">'datetime'</span></div><div class="line">   <span class="keyword">THEN</span> <span class="string">'DateTime'</span> </div><div class="line">   <span class="keyword">WHEN</span> @<span class="keyword">type</span> = <span class="string">'uniqueidentifier'</span></div><div class="line">   <span class="keyword">THEN</span> <span class="string">'Guid'</span>  </div><div class="line">  <span class="keyword">ELSE</span></div><div class="line">   @<span class="keyword">type</span></div><div class="line">  <span class="keyword">END</span></div><div class="line">  <span class="keyword">SET</span> @propertyCodes = @propertyCodes + <span class="built_in">CHAR</span>(<span class="number">9</span>) + <span class="string">'public '</span> + @ctype + <span class="string">' '</span> + @<span class="keyword">name</span> + <span class="string">'&#123; get; set; &#125;'</span> + <span class="built_in">CHAR</span>(<span class="number">13</span>) + <span class="built_in">CHAR</span>(<span class="number">13</span>)</div><div class="line">  <span class="keyword">FETCH</span> <span class="keyword">NEXT</span> <span class="keyword">FROM</span> objCursor</div><div class="line">  <span class="keyword">INTO</span> @<span class="keyword">name</span>, @<span class="keyword">type</span></div><div class="line"> <span class="keyword">END</span></div><div class="line"><span class="comment">--PRINT '[Serializable]'</span></div><div class="line">PRINT <span class="string">'public class '</span> + @ObjectName + <span class="string">'Info'</span></div><div class="line">PRINT <span class="string">'&#123;'</span></div><div class="line">PRINT <span class="string">''</span></div><div class="line">PRINT <span class="built_in">CHAR</span>(<span class="number">9</span>) + <span class="string">'public '</span> + @ObjectName + <span class="string">'Info()'</span></div><div class="line">PRINT <span class="built_in">CHAR</span>(<span class="number">9</span>) + <span class="string">'&#123;'</span></div><div class="line">PRINT <span class="built_in">CHAR</span>(<span class="number">9</span>) + <span class="string">'&#125;'</span></div><div class="line">PRINT <span class="string">''</span></div><div class="line">PRINT @propertyCodes</div><div class="line">PRINT <span class="string">'&#125;'</span></div><div class="line"><span class="keyword">CLOSE</span> objCursor</div><div class="line"><span class="keyword">DEALLOCATE</span> objCursor</div></pre></td></tr></table></figure>
-<p>使用方法:<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">EXEC procGenerateEntityClass 'tabname'</div></pre></td></tr></table></figure></p>
-<p><em>参考地址: <a href="http://www.cnblogs.com/jacktang/archive/2008/12/10/1352176.html" target="_blank" rel="external">Jack Tang的博客</a></em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;其实网上已经有有很多实体类生成工具的存在,但多了解点知识总是没错的.&lt;/p&gt;
     
     </summary>
     
