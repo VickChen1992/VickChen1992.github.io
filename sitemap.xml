@@ -2,175 +2,182 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>VickChen.win/2019/Debian-uses-docker-to-install-redis-and-mysql/</loc>
+    <loc>VickChen.win/2019/201905050112/</loc>
     
-    <lastmod>2019-02-15T09:48:48.190Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2019/Debian-installation-Redis-MySql/</loc>
-    
-    <lastmod>2019-02-15T06:37:47.064Z</lastmod>
+    <lastmod>2019-07-20T06:48:17.731Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2018/use-mailkit-to-receive-and-send-mail/</loc>
+    <loc>VickChen.win/2018/201811230212/</loc>
     
-    <lastmod>2019-01-23T03:04:51.304Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2018/Debian-installation-VMware-Tools/</loc>
-    
-    <lastmod>2019-01-16T03:42:47.802Z</lastmod>
+    <lastmod>2019-07-20T06:37:28.916Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2018/problems-when-using-Debian/</loc>
+    <loc>VickChen.win/2017/201706190302/</loc>
+    
+    <lastmod>2019-07-20T06:37:02.144Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2016/201611032106/</loc>
+    
+    <lastmod>2019-07-20T06:35:45.899Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2018/201809010211/</loc>
+    
+    <lastmod>2019-07-20T06:33:38.940Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2016/201609201247/</loc>
+    
+    <lastmod>2019-07-20T06:32:04.990Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2018/201808272148/</loc>
+    
+    <lastmod>2019-07-20T06:31:08.429Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2017/201705071034/</loc>
+    
+    <lastmod>2019-07-20T06:29:46.302Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2016/201609010122/</loc>
+    
+    <lastmod>2019-07-20T06:25:03.722Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2019/201902150122/</loc>
+    
+    <lastmod>2019-02-15T09:48:48.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2019/201901221340/</loc>
+    
+    <lastmod>2019-02-15T06:37:47.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2018/201812240020/</loc>
+    
+    <lastmod>2019-01-16T03:42:47.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2018/201812200110/</loc>
     
     <lastmod>2018-12-23T14:23:53.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2016/create-hexo-blog-on-github/</loc>
+    <loc>VickChen.win/2016/201607020015/</loc>
     
-    <lastmod>2018-12-17T11:09:32.825Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2016/why-git/</loc>
-    
-    <lastmod>2018-12-17T11:08:43.465Z</lastmod>
+    <lastmod>2018-12-17T11:08:43.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2018/aspnet-core-security-authentication-cookie/</loc>
+    <loc>VickChen.win/2018/201806131846/</loc>
     
-    <lastmod>2018-12-17T11:06:24.738Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2017/getting-started-with-Emmet-syntax/</loc>
-    
-    <lastmod>2018-12-17T11:04:49.690Z</lastmod>
+    <lastmod>2018-12-17T11:06:24.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2018/jQuery-loads-data-when-scrollbar-to-bottom/</loc>
+    <loc>VickChen.win/2017/201708172327/</loc>
     
-    <lastmod>2018-12-08T10:29:50.421Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/</loc>
-    
-    <lastmod>2018-11-28T11:02:49.079Z</lastmod>
+    <lastmod>2018-12-17T11:04:49.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2018/how-to-use-hangfire-on-net-core/</loc>
+    <loc>VickChen.win/2018/201810012332/</loc>
     
-    <lastmod>2018-11-27T08:53:10.776Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/</loc>
-    
-    <lastmod>2018-11-22T03:24:13.201Z</lastmod>
+    <lastmod>2018-12-08T10:29:50.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2018/deploy-your-core-project-on-the-iis/</loc>
+    <loc>VickChen.win/2017/201706020041/</loc>
     
-    <lastmod>2018-11-22T03:15:56.717Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2018/database-migration-of-entity-framework-Core/</loc>
-    
-    <lastmod>2018-11-22T03:05:18.360Z</lastmod>
+    <lastmod>2018-11-22T03:24:13.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2018/error-in-publish-core-program/</loc>
+    <loc>VickChen.win/2018/201808021940/</loc>
     
-    <lastmod>2018-11-10T11:01:04.083Z</lastmod>
+    <lastmod>2018-11-22T03:15:32.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2017/how-to-use-partial-views/</loc>
+    <loc>VickChen.win/2018/201811041748/</loc>
+    
+    <lastmod>2018-11-22T03:05:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2018/201809211813/</loc>
+    
+    <lastmod>2018-11-10T11:01:04.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>VickChen.win/2017/201705210110/</loc>
     
     <lastmod>2018-11-04T17:50:09.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/</loc>
+    <loc>VickChen.win/2016/201609170349/</loc>
     
-    <lastmod>2018-11-04T17:44:39.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2016/learn-markdown/</loc>
-    
-    <lastmod>2018-11-04T14:06:58.000Z</lastmod>
+    <lastmod>2018-08-01T10:51:35.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2016/about-git-installation/</loc>
-    
-    <lastmod>2018-08-01T10:51:35.522Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2017/how-to-access-https-api/</loc>
-    
-    <lastmod>2017-07-10T09:23:44.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2016/sql-timestamp-to-cshap/</loc>
-    
-    <lastmod>2017-07-10T09:22:40.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>VickChen.win/2017/regular-expression/</loc>
+    <loc>VickChen.win/2017/201703151751/</loc>
     
     <lastmod>2017-03-16T12:19:56.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2016/find-value-in-db/</loc>
+    <loc>VickChen.win/2016/201610312315/</loc>
     
     <lastmod>2016-11-04T03:39:34.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>VickChen.win/2016/proc-generate-entity-class/</loc>
+    <loc>VickChen.win/2016/201610262146/</loc>
     
     <lastmod>2016-11-03T09:05:54.000Z</lastmod>
     

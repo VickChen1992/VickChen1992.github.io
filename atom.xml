@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2019-02-15T09:48:48.190Z</updated>
+  <updated>2019-07-20T06:48:17.731Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,11 +16,46 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>解决微博图床防盗链的问题</title>
+    <link href="VickChen.win/2019/201905050112/"/>
+    <id>VickChen.win/2019/201905050112/</id>
+    <published>2019-05-04T17:12:01.000Z</published>
+    <updated>2019-07-20T06:48:17.731Z</updated>
+    
+    <content type="html"><![CDATA[<p>对于不少自己搭建博客的人来说，使用什么图床可能比较难以选择，以前还有各种免费好用的图床工具，例如七牛云、SM.MS、Imgur、GitHub、微博图床等，当然还有腾讯云、阿里云的云存储服务，但是免费的意味着不稳定，说不定哪天图片就没有了，有一些国外的访问速度又不行，国内的云存储服务商价格也比较高，而且单一个博客也不需要太大空间，有点浪费。</p>
+<p>本来刚刚开始写博客时用的是七牛云，后来涨价了，转到免费的 微博图床 。用了好几年没啥问题，没想到最近【2019 年 4 月份】微博图床出问题了，所有图片全部挂掉，访问图片链接全部是返回 403 状态码，表示拒绝访问，其实是微博图床开启了防盗链，本文就提供了一种简单有效的解决方案。</p>
+<a id="more"></a>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>随机抽了一些图片链接在浏览器中直接打开看，发现是可以看到图片的，然后在博客中还是看不到图片，如果在博客中选择图片链接，使用右键 在新标签页中打开 ，也是不能看到。这就说明微博图床开始检测请求的合法性了，对于不正常的请求统统拒绝。</p>
+<p>当然，如果直接使用图片的链接在浏览器中单独打开，是可以看到图片的，紧接着在博客中就可以看到对应的图片了，但是这并不是说明图片可以使用了，其实是浏览器的缓存作用，如果及时清除浏览器的缓存，发现又不能使用了。</p>
+<p>原来，近期微博图床对图片 CDN 添加了引用来源【Referer】检测，非微博站内引用将会返回 403 错误码，即拒绝访问。那能不能伪造或者清除这个参数呢，其实是可以的，只不过伪造、清除都需要增加一些 Javascript 动态脚本来处理，需要一些技术支持。</p>
+<p>如果选择清除 Referer 参数，可以先验证一下，把图片的链接直接复制到浏览器中访问，就不会有这个参数，发现可以正常访问，没有 403 错误</p>
+<h3 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h3><p>在静态网页的head 标记中添加如下配置项:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"referrer"</span> <span class="attr">content</span>=<span class="string">"no-referrer"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>它的作用就是阻止浏览器发送 Referer 信息，对整个页面的所有链接生效。<br>这样一来微博图床就不知道请求的引用来源了，可以达到和直接在浏览器中访问一样的效果。 但是要注意，<strong>不是每种浏览器都支持这种语法的，此设置对有的浏览器来说无效。</strong></p>
+<p>那么在 Hexo 框架中怎么增加呢，显然不会有相关配置项，只能更改源代码，而且使用了 Next 主题，应该要更改主题的源代码，以保证 Hexo 在渲染静态页面为每个页面都增加这个配置。查阅文档，了解了渲染模板所在位置，打开 <strong>themes/next/layout/_partials/head.swig</strong> 文件，在里面添加 meta 标记就行。</p>
+<p>修改完成后查看页面的源代码，已经有这个属性了，并且所有的图片都可以正常访问了，完美。</p>
+<p>后续肯定会抽时间迁移图床的，先用着吧</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;对于不少自己搭建博客的人来说，使用什么图床可能比较难以选择，以前还有各种免费好用的图床工具，例如七牛云、SM.MS、Imgur、GitHub、微博图床等，当然还有腾讯云、阿里云的云存储服务，但是免费的意味着不稳定，说不定哪天图片就没有了，有一些国外的访问速度又不行，国内的云存储服务商价格也比较高，而且单一个博客也不需要太大空间，有点浪费。&lt;/p&gt;
+&lt;p&gt;本来刚刚开始写博客时用的是七牛云，后来涨价了，转到免费的 微博图床 。用了好几年没啥问题，没想到最近【2019 年 4 月份】微博图床出问题了，所有图片全部挂掉，访问图片链接全部是返回 403 状态码，表示拒绝访问，其实是微博图床开启了防盗链，本文就提供了一种简单有效的解决方案。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="Hexo" scheme="VickChen.win/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Debian使用Docker安装redis和mysql</title>
-    <link href="VickChen.win/2019/Debian-uses-docker-to-install-redis-and-mysql/"/>
-    <id>VickChen.win/2019/Debian-uses-docker-to-install-redis-and-mysql/</id>
+    <link href="VickChen.win/2019/201902150122/"/>
+    <id>VickChen.win/2019/201902150122/</id>
     <published>2019-02-14T17:22:01.000Z</published>
-    <updated>2019-02-15T09:48:48.190Z</updated>
+    <updated>2019-02-15T09:48:48.000Z</updated>
     
     <content type="html"><![CDATA[<p>Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。</p>
 <p>这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。</p>
@@ -119,20 +154,20 @@
     
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
     
-      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
-    
       <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
+    
+      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
     
   </entry>
   
   <entry>
     <title>Debian 安装 Redis、MySql</title>
-    <link href="VickChen.win/2019/Debian-installation-Redis-MySql/"/>
-    <id>VickChen.win/2019/Debian-installation-Redis-MySql/</id>
+    <link href="VickChen.win/2019/201901221340/"/>
+    <id>VickChen.win/2019/201901221340/</id>
     <published>2019-01-22T05:40:32.000Z</published>
-    <updated>2019-02-15T06:37:47.064Z</updated>
+    <updated>2019-02-15T06:37:47.000Z</updated>
     
     <content type="html"><![CDATA[<p>项目中需要用到的数据库安装、配置以及常见错误</p>
 <a id="more"></a>
@@ -270,10 +305,10 @@
   
   <entry>
     <title>Debian 安装 VMware Tools</title>
-    <link href="VickChen.win/2018/Debian-installation-VMware-Tools/"/>
-    <id>VickChen.win/2018/Debian-installation-VMware-Tools/</id>
+    <link href="VickChen.win/2018/201812240020/"/>
+    <id>VickChen.win/2018/201812240020/</id>
     <published>2018-12-23T16:20:11.000Z</published>
-    <updated>2019-01-16T03:42:47.802Z</updated>
+    <updated>2019-01-16T03:42:47.000Z</updated>
     
     <content type="html"><![CDATA[<p>VMware Tools是VMware虚拟机中自带的一种增强工具，相当于VirtualBox中的增强功能（Sun VirtualBox Guest Additions），是VMware提供的增强虚拟显卡和硬盘性能、以及同步虚拟机与主机时钟的驱动程序。</p>
 <a id="more"></a>
@@ -325,8 +360,8 @@
   
   <entry>
     <title>使用Debian时遇到的问题</title>
-    <link href="VickChen.win/2018/problems-when-using-Debian/"/>
-    <id>VickChen.win/2018/problems-when-using-Debian/</id>
+    <link href="VickChen.win/2018/201812200110/"/>
+    <id>VickChen.win/2018/201812200110/</id>
     <published>2018-12-19T17:10:05.000Z</published>
     <updated>2018-12-23T14:23:53.000Z</updated>
     
@@ -425,10 +460,10 @@
   
   <entry>
     <title>.Net Core使用mailkit收取和发送邮件</title>
-    <link href="VickChen.win/2018/use-mailkit-to-receive-and-send-mail/"/>
-    <id>VickChen.win/2018/use-mailkit-to-receive-and-send-mail/</id>
+    <link href="VickChen.win/2018/201811230212/"/>
+    <id>VickChen.win/2018/201811230212/</id>
     <published>2018-11-22T18:12:00.000Z</published>
-    <updated>2019-01-23T03:04:51.304Z</updated>
+    <updated>2019-07-20T06:37:28.916Z</updated>
     
     <content type="html"><![CDATA[<p>邮件服务是一般的系统都会拥有和需要的功能，但是对于.Net项目来说，邮件服务的创建和使用会较为的麻烦。.NET对于邮件功能提供了System.Net.Mail用于创建邮件服务，该基础服务提供邮件的基础操作，并且使用也较为的简单。对于真正将该功能使用于项目的人，就会慢慢发现其中的优缺点，甚至有些时候不能忍受其中的问题。在这里介绍一种微软用于替代System.Net.Mail的邮件服务组件MailKit和MimeKit，官网地址：<a href="http://www.mimekit.net/" target="_blank" rel="external">http://www.mimekit.net/</a> GitHub地址：<a href="https://github.com/jstedfast/MimeKit" target="_blank" rel="external">https://github.com/jstedfast/MimeKit</a></p>
 <a id="more"></a>
@@ -475,10 +510,10 @@
   
   <entry>
     <title>Entity Framework Core 之数据库迁移</title>
-    <link href="VickChen.win/2018/database-migration-of-entity-framework-Core/"/>
-    <id>VickChen.win/2018/database-migration-of-entity-framework-Core/</id>
+    <link href="VickChen.win/2018/201811041748/"/>
+    <id>VickChen.win/2018/201811041748/</id>
     <published>2018-11-04T09:48:01.000Z</published>
-    <updated>2018-11-22T03:05:18.360Z</updated>
+    <updated>2018-11-22T03:05:18.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节</p>
 <a id="more"></a>
@@ -556,10 +591,10 @@
   
   <entry>
     <title>jQuery实现滚动条到底部时加载数据</title>
-    <link href="VickChen.win/2018/jQuery-loads-data-when-scrollbar-to-bottom/"/>
-    <id>VickChen.win/2018/jQuery-loads-data-when-scrollbar-to-bottom/</id>
+    <link href="VickChen.win/2018/201810012332/"/>
+    <id>VickChen.win/2018/201810012332/</id>
     <published>2018-10-01T15:32:01.000Z</published>
-    <updated>2018-12-08T10:29:50.421Z</updated>
+    <updated>2018-12-08T10:29:50.000Z</updated>
     
     <content type="html"><![CDATA[<p>滚动条到底部加载数据原理很简单，就是为window或者滚动元素添加一个scroll事件，浏览器每次触发scroll事件时判断是否滚动到了浏览器底部，如果到了底部则加载新数据。关键是计算滚动条是否滚动到了浏览器底部</p>
 <a id="more"></a>
@@ -607,10 +642,10 @@
   
   <entry>
     <title>发布Core程序时遇到的错误</title>
-    <link href="VickChen.win/2018/error-in-publish-core-program/"/>
-    <id>VickChen.win/2018/error-in-publish-core-program/</id>
+    <link href="VickChen.win/2018/201809211813/"/>
+    <id>VickChen.win/2018/201809211813/</id>
     <published>2018-09-21T10:13:04.000Z</published>
-    <updated>2018-11-10T11:01:04.083Z</updated>
+    <updated>2018-11-10T11:01:04.000Z</updated>
     
     <content type="html"><![CDATA[<p>此贴主要用于记录Core程序在发布时遇到的错误。</p>
 <a id="more"></a>
@@ -642,10 +677,10 @@
   
   <entry>
     <title>.Net Core使用 MiniProfiler 进行性能分析</title>
-    <link href="VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/"/>
-    <id>VickChen.win/2018/net-core-use-miniProfiler-for-performance-analysis/</id>
+    <link href="VickChen.win/2018/201809010211/"/>
+    <id>VickChen.win/2018/201809010211/</id>
     <published>2018-08-31T18:11:52.000Z</published>
-    <updated>2018-11-28T11:02:49.079Z</updated>
+    <updated>2019-07-20T06:33:38.940Z</updated>
     
     <content type="html"><![CDATA[<p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
 <p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
@@ -688,10 +723,10 @@
   
   <entry>
     <title>HangFire快速入门</title>
-    <link href="VickChen.win/2018/how-to-use-hangfire-on-net-core/"/>
-    <id>VickChen.win/2018/how-to-use-hangfire-on-net-core/</id>
+    <link href="VickChen.win/2018/201808272148/"/>
+    <id>VickChen.win/2018/201808272148/</id>
     <published>2018-08-27T13:48:07.000Z</published>
-    <updated>2018-11-27T08:53:10.776Z</updated>
+    <updated>2019-07-20T06:31:08.429Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://github.com/HangfireIO/Hangfire" target="_blank" rel="external">Hangfire</a>作为一款高人气且容易上手的分布式后台执行服务，支持多种数据库。在.net core的环境中，由Core自带的DI管理着生命周期，免去了在NF4.X环境中配置<a href="http://docs.hangfire.io/en/latest/deployment-to-production/making-aspnet-app-always-running.html" target="_blank" rel="external">always running</a>的麻烦，真正做到开箱即用。</p>
 <a id="more"></a>
@@ -738,10 +773,10 @@
   
   <entry>
     <title>在IIS上部署你的ASP.NET Core 2.1项目</title>
-    <link href="VickChen.win/2018/deploy-your-core-project-on-the-iis/"/>
-    <id>VickChen.win/2018/deploy-your-core-project-on-the-iis/</id>
+    <link href="VickChen.win/2018/201808021940/"/>
+    <id>VickChen.win/2018/201808021940/</id>
     <published>2018-08-02T11:40:31.000Z</published>
-    <updated>2018-11-22T03:15:56.717Z</updated>
+    <updated>2018-11-22T03:15:32.000Z</updated>
     
     <content type="html"><![CDATA[<p>与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是<code>AspNetCoreModule</code>，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。</p>
 <a id="more"></a>
@@ -787,10 +822,10 @@
   
   <entry>
     <title>ASP.NET Core 2.1 使用Cookie验证身份</title>
-    <link href="VickChen.win/2018/aspnet-core-security-authentication-cookie/"/>
-    <id>VickChen.win/2018/aspnet-core-security-authentication-cookie/</id>
+    <link href="VickChen.win/2018/201806131846/"/>
+    <id>VickChen.win/2018/201806131846/</id>
     <published>2018-06-13T10:46:01.000Z</published>
-    <updated>2018-12-17T11:06:24.738Z</updated>
+    <updated>2018-12-17T11:06:24.000Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
 <p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
@@ -868,10 +903,10 @@
   
   <entry>
     <title>Emmet语法入门</title>
-    <link href="VickChen.win/2017/getting-started-with-Emmet-syntax/"/>
-    <id>VickChen.win/2017/getting-started-with-Emmet-syntax/</id>
+    <link href="VickChen.win/2017/201708172327/"/>
+    <id>VickChen.win/2017/201708172327/</id>
     <published>2017-08-17T15:27:18.000Z</published>
-    <updated>2018-12-17T11:04:49.690Z</updated>
+    <updated>2018-12-17T11:04:49.000Z</updated>
     
     <content type="html"><![CDATA[<p>Emmet是一个编辑器插件，以前被称作为 Zen Coding。使用类似于 CSS 选择器的语法描述元素在生成的文档树中的位置及其属性。</p>
 <p>使用 Emmet 可以帮助程序员快速的编写 HTML 和 CSS 代码，从而提高 Web前端开发的效率。<a href="https://www.emmet.io/" target="_blank" rel="external">官网</a>提供多编辑器支持。我一般使用<a href="https://code.visualstudio.com/" target="_blank" rel="external">Visual Studio Code</a>，下面就以VS Code插件举例。</p>
@@ -1014,10 +1049,10 @@
   
   <entry>
     <title>不限长度RAS加密解密</title>
-    <link href="VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/"/>
-    <id>VickChen.win/2017/unlimited-length-RAS-encryption-and-decryption/</id>
+    <link href="VickChen.win/2017/201706190302/"/>
+    <id>VickChen.win/2017/201706190302/</id>
     <published>2017-06-18T19:02:41.000Z</published>
-    <updated>2018-11-04T17:44:39.000Z</updated>
+    <updated>2019-07-20T06:37:02.144Z</updated>
     
     <content type="html"><![CDATA[<p>RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。</p>
 <p>.NET Framework 中提供的 RSA 算法规定：</p>
@@ -1052,10 +1087,10 @@
   
   <entry>
     <title>rsa互通密钥对生成及互通加解密(c#,java,php)</title>
-    <link href="VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/"/>
-    <id>VickChen.win/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/</id>
+    <link href="VickChen.win/2017/201706020041/"/>
+    <id>VickChen.win/2017/201706020041/</id>
     <published>2017-06-01T16:41:31.000Z</published>
-    <updated>2018-11-22T03:24:13.201Z</updated>
+    <updated>2018-11-22T03:24:13.000Z</updated>
     
     <content type="html"><![CDATA[<p>在数据安全上rsa起着非常大的作用，特别是数据网络通讯的安全上。当异构系统在数据网络通讯上对安全性有所要求时，rsa将作为其中的一种选择，此时rsa的互通性就显得尤为重要了。</p>
 <p>本文参考网络资料，提供了rsa互通性的一种可行的解决方案(c#,java,php),而这种互通性是在一定的局限性上达成的，比如密钥是1024位的(更高位没试过，应该也可行），基于PKCS1填充方式。</p>
@@ -1125,8 +1160,8 @@
   
   <entry>
     <title>分部视图的使用</title>
-    <link href="VickChen.win/2017/how-to-use-partial-views/"/>
-    <id>VickChen.win/2017/how-to-use-partial-views/</id>
+    <link href="VickChen.win/2017/201705210110/"/>
+    <id>VickChen.win/2017/201705210110/</id>
     <published>2017-05-20T17:10:52.000Z</published>
     <updated>2018-11-04T17:50:09.000Z</updated>
     
@@ -1204,10 +1239,10 @@
   
   <entry>
     <title>访问https接口出现未能为SSL/TLS安全通道建立信任关系错误</title>
-    <link href="VickChen.win/2017/how-to-access-https-api/"/>
-    <id>VickChen.win/2017/how-to-access-https-api/</id>
+    <link href="VickChen.win/2017/201705071034/"/>
+    <id>VickChen.win/2017/201705071034/</id>
     <published>2017-05-07T02:34:21.000Z</published>
-    <updated>2017-07-10T09:23:44.000Z</updated>
+    <updated>2019-07-20T06:29:46.302Z</updated>
     
     <content type="html"><![CDATA[<p>有时候调用https接口时会提示如下错误:</p>
 <blockquote>
@@ -1242,8 +1277,8 @@
   
   <entry>
     <title>最常用的正则表达式</title>
-    <link href="VickChen.win/2017/regular-expression/"/>
-    <id>VickChen.win/2017/regular-expression/</id>
+    <link href="VickChen.win/2017/201703151751/"/>
+    <id>VickChen.win/2017/201703151751/</id>
     <published>2017-03-15T09:51:18.000Z</published>
     <updated>2017-03-16T12:19:56.000Z</updated>
     
@@ -1504,12 +1539,12 @@
   
   <entry>
     <title>解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题</title>
-    <link href="VickChen.win/2016/sql-timestamp-to-cshap/"/>
-    <id>VickChen.win/2016/sql-timestamp-to-cshap/</id>
+    <link href="VickChen.win/2016/201611032106/"/>
+    <id>VickChen.win/2016/201611032106/</id>
     <published>2016-11-03T13:06:29.000Z</published>
-    <updated>2017-07-10T09:22:40.000Z</updated>
+    <updated>2019-07-20T06:35:45.899Z</updated>
     
-    <content type="html"><![CDATA[<p> 项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。</p>
+    <content type="html"><![CDATA[<p>项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。</p>
 <a id="more"></a>
 <ul>
 <li><h3 id="SQL-Server-中timestamp类型的定义"><a href="#SQL-Server-中timestamp类型的定义" class="headerlink" title="SQL Server 中timestamp类型的定义"></a>SQL Server 中timestamp类型的定义</h3></li>
@@ -1537,7 +1572,7 @@
     
     <summary type="html">
     
-      &lt;p&gt; 项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。&lt;/p&gt;
+      &lt;p&gt;项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。&lt;/p&gt;
     
     </summary>
     
@@ -1545,34 +1580,6 @@
     
     
       <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
-    
-      <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>查询整个数据库中某个特定值所在的位置</title>
-    <link href="VickChen.win/2016/find-value-in-db/"/>
-    <id>VickChen.win/2016/find-value-in-db/</id>
-    <published>2016-10-31T15:15:48.000Z</published>
-    <updated>2016-11-04T03:39:34.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。</p>
-<p>前提是要将这个存储过程放在所查询的数据库。</p>
-<a id="more"></a>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> [dbo].[SP_FindValueInDB]</div><div class="line">(</div><div class="line">    @<span class="keyword">value</span> <span class="built_in">VARCHAR</span>(<span class="number">1024</span>)</div><div class="line">)        </div><div class="line"><span class="keyword">AS</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line">    <span class="comment">-- SET NOCOUNT ON added to prevent extra result sets from</span></div><div class="line">    <span class="comment">-- interfering with SELECT statements.</span></div><div class="line"><span class="keyword">SET</span> NOCOUNT <span class="keyword">ON</span>;</div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">sql</span> <span class="built_in">VARCHAR</span>(<span class="number">1024</span>) </div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">table</span> <span class="built_in">VARCHAR</span>(<span class="number">64</span>) </div><div class="line"><span class="keyword">DECLARE</span> @<span class="keyword">column</span> <span class="built_in">VARCHAR</span>(<span class="number">64</span>) </div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #t ( </div><div class="line">    tablename <span class="built_in">VARCHAR</span>(<span class="number">64</span>), </div><div class="line">    columnname <span class="built_in">VARCHAR</span>(<span class="number">64</span>) </div><div class="line">) </div><div class="line"></div><div class="line"><span class="keyword">DECLARE</span> <span class="keyword">TABLES</span> <span class="keyword">CURSOR</span> </div><div class="line"><span class="keyword">FOR</span> </div><div class="line"></div><div class="line">    <span class="keyword">SELECT</span> o.name, c.name </div><div class="line">    <span class="keyword">FROM</span> syscolumns c </div><div class="line">    <span class="keyword">INNER</span> <span class="keyword">JOIN</span> sysobjects o <span class="keyword">ON</span> c.id = o.id </div><div class="line">    <span class="keyword">WHERE</span> o.type = <span class="string">'U'</span> <span class="keyword">AND</span> c.xtype <span class="keyword">IN</span> (<span class="number">167</span>, <span class="number">175</span>, <span class="number">231</span>, <span class="number">239</span>) </div><div class="line">    <span class="keyword">ORDER</span> <span class="keyword">BY</span> o.name, c.name </div><div class="line"></div><div class="line"><span class="keyword">OPEN</span> <span class="keyword">TABLES</span> </div><div class="line"></div><div class="line"><span class="keyword">FETCH</span> <span class="keyword">NEXT</span> <span class="keyword">FROM</span> <span class="keyword">TABLES</span> </div><div class="line"><span class="keyword">INTO</span> @<span class="keyword">table</span>, @<span class="keyword">column</span> </div><div class="line"></div><div class="line"><span class="keyword">WHILE</span> @@FETCH_STATUS = <span class="number">0</span> </div><div class="line"><span class="keyword">BEGIN</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = <span class="string">'IF EXISTS(SELECT NULL FROM ['</span> + @<span class="keyword">table</span> + <span class="string">'] '</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = @<span class="keyword">sql</span> + <span class="string">'WHERE RTRIM(LTRIM(['</span> + @<span class="keyword">column</span> + <span class="string">'])) LIKE ''%'</span> + @<span class="keyword">value</span> + <span class="string">'%'') '</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = @<span class="keyword">sql</span> + <span class="string">'INSERT INTO #t VALUES ('''</span> + @<span class="keyword">table</span> + <span class="string">''', '''</span> </div><div class="line">    <span class="keyword">SET</span> @<span class="keyword">sql</span> = @<span class="keyword">sql</span> + @<span class="keyword">column</span> + <span class="string">''')'</span> </div><div class="line"></div><div class="line">    EXEC(@<span class="keyword">sql</span>) </div><div class="line"></div><div class="line">    <span class="keyword">FETCH</span> <span class="keyword">NEXT</span> <span class="keyword">FROM</span> <span class="keyword">TABLES</span> </div><div class="line">    <span class="keyword">INTO</span> @<span class="keyword">table</span>, @<span class="keyword">column</span> </div><div class="line"><span class="keyword">END</span> </div><div class="line"></div><div class="line"><span class="keyword">CLOSE</span> <span class="keyword">TABLES</span> </div><div class="line"><span class="keyword">DEALLOCATE</span> <span class="keyword">TABLES</span> </div><div class="line"></div><div class="line"><span class="keyword">SELECT</span> * </div><div class="line"><span class="keyword">FROM</span> #t </div><div class="line"></div><div class="line"><span class="keyword">DROP</span> <span class="keyword">TABLE</span> #t </div><div class="line"></div><div class="line"><span class="keyword">End</span></div></pre></td></tr></table></figure>
-<p><em>参考:<a href="http://www.cnblogs.com/michaelxu/archive/2009/11/04/1596106.html" target="_blank" rel="external">徐洪军的博客</a></em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。&lt;/p&gt;
-&lt;p&gt;前提是要将这个存储过程放在所查询的数据库。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
     
       <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
     

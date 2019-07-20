@@ -10,6 +10,7 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="referrer" content="no-referrer" />
 
 
 
@@ -257,7 +258,122 @@
             
               
                 
-                <a class="post-title-link" href="/2018/deploy-your-core-project-on-the-iis/" itemprop="url">
+                <a class="post-title-link" href="/2018/201808272148/" itemprop="url">
+                  HangFire快速入门
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-08-27T21:48:07+08:00" content="2018-08-27">
+              2018-08-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://github.com/HangfireIO/Hangfire">Hangfire</a>作为一款高人气且容易上手的分布式后台执行服务，支持多种数据库。在.net core的环境中，由Core自带的DI管理着生命周期，免去了在NF4.X环境中配置<a href="http://docs.hangfire.io/en/latest/deployment-to-production/making-aspnet-app-always-running.html">always running</a>的麻烦，真正做到开箱即用。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2018/201808272148/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2018/201808021940/" itemprop="url">
                   在IIS上部署你的ASP.NET Core 2.1项目
                 </a>
               
@@ -321,7 +437,7 @@
         
           <p>与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是<code>AspNetCoreModule</code>，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2018/deploy-your-core-project-on-the-iis/#more" rel="contents">
+            <a class="btn" href="/2018/201808021940/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -372,7 +488,7 @@
             
               
                 
-                <a class="post-title-link" href="/2018/aspnet-core-security-authentication-cookie/" itemprop="url">
+                <a class="post-title-link" href="/2018/201806131846/" itemprop="url">
                   ASP.NET Core 2.1 使用Cookie验证身份
                 </a>
               
@@ -437,7 +553,7 @@
           <p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
 <p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2018/aspnet-core-security-authentication-cookie/#more" rel="contents">
+            <a class="btn" href="/2018/201806131846/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -488,7 +604,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/getting-started-with-Emmet-syntax/" itemprop="url">
+                <a class="post-title-link" href="/2017/201708172327/" itemprop="url">
                   Emmet语法入门
                 </a>
               
@@ -553,7 +669,7 @@
           <p>Emmet是一个编辑器插件，以前被称作为 Zen Coding。使用类似于 CSS 选择器的语法描述元素在生成的文档树中的位置及其属性。</p>
 <p>使用 Emmet 可以帮助程序员快速的编写 HTML 和 CSS 代码，从而提高 Web前端开发的效率。<a href="https://www.emmet.io/">官网</a>提供多编辑器支持。我一般使用<a href="https://code.visualstudio.com/">Visual Studio Code</a>，下面就以VS Code插件举例。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/getting-started-with-Emmet-syntax/#more" rel="contents">
+            <a class="btn" href="/2017/201708172327/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -604,7 +720,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/unlimited-length-RAS-encryption-and-decryption/" itemprop="url">
+                <a class="post-title-link" href="/2017/201706190302/" itemprop="url">
                   不限长度RAS加密解密
                 </a>
               
@@ -673,7 +789,7 @@
 </blockquote>
 <p>所以，如果要加密较长的数据，则可以采用分段加解密的方式，实现方式如下：</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/unlimited-length-RAS-encryption-and-decryption/#more" rel="contents">
+            <a class="btn" href="/2017/201706190302/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -724,7 +840,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/" itemprop="url">
+                <a class="post-title-link" href="/2017/201706020041/" itemprop="url">
                   rsa互通密钥对生成及互通加解密(c#,java,php)
                 </a>
               
@@ -790,7 +906,7 @@
 <p>本文参考网络资料，提供了rsa互通性的一种可行的解决方案(c#,java,php),而这种互通性是在一定的局限性上达成的，比如密钥是1024位的(更高位没试过，应该也可行），基于PKCS1填充方式。</p>
 <p>所编写的代码有一部分使用了硬编码，同时注重了功能的实现，在类结构设计上关注不多，有需要的可自行修改重构。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/RSA-key-pair-generate-and-interwork-encryp-decryp/#more" rel="contents">
+            <a class="btn" href="/2017/201706020041/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -841,7 +957,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/how-to-use-partial-views/" itemprop="url">
+                <a class="post-title-link" href="/2017/201705210110/" itemprop="url">
                   分部视图的使用
                 </a>
               
@@ -914,7 +1030,7 @@
 </li>
 </ol>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/how-to-use-partial-views/#more" rel="contents">
+            <a class="btn" href="/2017/201705210110/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -965,7 +1081,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/how-to-access-https-api/" itemprop="url">
+                <a class="post-title-link" href="/2017/201705071034/" itemprop="url">
                   访问https接口出现未能为SSL/TLS安全通道建立信任关系错误
                 </a>
               
@@ -1032,7 +1148,7 @@
 <p>基础连接已经关闭: 未能为 SSL/TLS 安全通道建立信任关系。</p>
 </blockquote>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/how-to-access-https-api/#more" rel="contents">
+            <a class="btn" href="/2017/201705071034/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1083,7 +1199,7 @@
             
               
                 
-                <a class="post-title-link" href="/2017/regular-expression/" itemprop="url">
+                <a class="post-title-link" href="/2017/201703151751/" itemprop="url">
                   最常用的正则表达式
                 </a>
               
@@ -1147,7 +1263,7 @@
         
           <p>很多不太懂正则的朋友，在遇到需要用正则校验数据时，往往是在网上去找很久，结果找来的还是不很符合要求。所以我最近把开发中常用的一些正则表达式整理了一下，在这里分享一下。给自己留个底，也给朋友们做个参考。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/regular-expression/#more" rel="contents">
+            <a class="btn" href="/2017/201703151751/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1198,7 +1314,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/sql-timestamp-to-cshap/" itemprop="url">
+                <a class="post-title-link" href="/2016/201611032106/" itemprop="url">
                   解决C#获取SQL的timestamp类型到程序中为byte[]类型的问题
                 </a>
               
@@ -1260,125 +1376,9 @@
 
       
         
-          <p> 项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。</p>
+          <p>项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。</p>
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/sql-timestamp-to-cshap/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/find-value-in-db/" itemprop="url">
-                  查询整个数据库中某个特定值所在的位置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-31T23:15:48+08:00" content="2016-10-31">
-              2016-10-31
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/技术/" itemprop="url" rel="index">
-                    <span itemprop="name">技术</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>有时候我们想通过一个值知道这个值来自数据库的哪个表以及哪个字段，在网上搜了一下，找到一个比较好的方法，通过一个存储过程实现的。只需要传入一个想要查找的值，即可查询出这个值所在的表和字段名。</p>
-<p>前提是要将这个存储过程放在所查询的数据库。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/find-value-in-db/#more" rel="contents">
+            <a class="btn" href="/2016/201611032106/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1453,7 +1453,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">26</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
