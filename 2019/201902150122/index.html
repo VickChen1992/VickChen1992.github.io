@@ -10,7 +10,6 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="referrer" content="no-referrer" />
 
 
 
@@ -69,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,Debian,Redis,MySql,Docker," />
+  <meta name="keywords" content="Linux,Debian,Docker,Redis,MySql," />
 
 
 
@@ -95,15 +94,15 @@
 <meta property="og:site_name" content="Vick's Blog">
 <meta property="og:description" content="Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。
 这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058ly1g078v22tp7j20th023ab1.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058ly1g078c9yh35j20o701f0t3.jpg">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/9460f058ly1g0788grm0gj20fq0ilgm0.jpg">
-<meta property="og:updated_time" content="2019-02-15T09:48:48.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078v22tp7j20th023ab1.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078c9yh35j20o701f0t3.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g0788grm0gj20fq0ilgm0.jpg">
+<meta property="og:updated_time" content="2019-07-20T08:07:03.909Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Debian使用Docker安装redis和mysql">
 <meta name="twitter:description" content="Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。
 这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/9460f058ly1g078v22tp7j20th023ab1.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078v22tp7j20th023ab1.jpg">
 
 
 
@@ -357,7 +356,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Unable to find image <span class="string">'hello-world:latest'</span> locally</div><div class="line">latest: Pulling from library/hello-world</div><div class="line">9db2ca6ccae0: Pull complete</div><div class="line">Digest: sha256:4b8ff392a12ed9ea17784bd3c9a8b1fa3299cac44aca35a85c90c5e3c7afacdc</div><div class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</div><div class="line">​</div><div class="line">Hello from Docker!</div><div class="line">This message shows that your installation appears to be working correctly.</div><div class="line">...</div></pre></td></tr></table></figure>
 <p>Docker最初无法在本地找到hello-world图像，因此它从Docker Hub下载了图像，Docker Hub是默认存储库。下载映像后，Docker从映像创建了一个容器，并在容器中执行了应用程序，显示了该消息。</p>
 <h3 id="操作镜像"><a href="#操作镜像" class="headerlink" title="操作镜像"></a>操作镜像</h3><h4 id="查看本机镜像"><a href="#查看本机镜像" class="headerlink" title="查看本机镜像"></a>查看本机镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vick@debian:~$ sudo docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">mysql               5.7                 e47e309f72c8        9 days ago          372MB</div><div class="line">redis               3.2                 87856cc39862        4 months ago        76MB</div></pre></td></tr></table></figure>
-<h4 id="查看本机运行中的容器"><a href="#查看本机运行中的容器" class="headerlink" title="查看本机运行中的容器"></a>查看本机运行中的容器</h4><p><img src="https://ws1.sinaimg.cn/large/9460f058ly1g078v22tp7j20th023ab1.jpg" alt=""></p>
+<h4 id="查看本机运行中的容器"><a href="#查看本机运行中的容器" class="headerlink" title="查看本机运行中的容器"></a>查看本机运行中的容器</h4><p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078v22tp7j20th023ab1.jpg" alt=""></p>
 <h4 id="查看本机所有容器"><a href="#查看本机所有容器" class="headerlink" title="查看本机所有容器"></a>查看本机所有容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker ps <span class="_">-a</span></div></pre></td></tr></table></figure>
 <h4 id="启动某个容器"><a href="#启动某个容器" class="headerlink" title="启动某个容器"></a>启动某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker start XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
 <h4 id="停止某个容器"><a href="#停止某个容器" class="headerlink" title="停止某个容器"></a>停止某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker stop XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
@@ -388,11 +387,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select host,user,plugin,authentication_string from mysql.user;                                                                                            </div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+                                                                </div><div class="line">| host      | user          | plugin                | authentication_string                     |</div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+</div><div class="line">| localhost | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</div><div class="line">| localhost | mysql.session | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</div><div class="line">| localhost | mysql.sys     | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</div><div class="line">| %         | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+</div><div class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</div></pre></td></tr></table></figure>
 <p>host为 % 表示不限制ip   localhost表示本机使用    plugin非mysql_native_password 则需要修改密码。</p>
 <p>连接时错误提示：</p>
-<p><img src="https://ws1.sinaimg.cn/large/9460f058ly1g078c9yh35j20o701f0t3.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078c9yh35j20o701f0t3.jpg" alt=""></p>
 <p>解决方法：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql&gt; ALTER user <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'123456'</span>;  </div><div class="line">Query OK, 0 rows affected (0.01 sec)  </div><div class="line">mysql&gt;   </div><div class="line">mysql&gt; FLUSH PRIVILEGES;  </div><div class="line">Query OK, 0 rows affected (0.01 sec)</div></pre></td></tr></table></figure>
 <p>连接数据库：</p>
-<p><img src="https://ws1.sinaimg.cn/large/9460f058ly1g0788grm0gj20fq0ilgm0.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g0788grm0gj20fq0ilgm0.jpg" alt=""></p>
 <p>连接成功了。</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>安装步骤与mysql类似：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker search  redis</div><div class="line">docker pull  redis:3.2</div></pre></td></tr></table></figure>
@@ -432,11 +431,11 @@
           
             <a href="/tags/Debian/" rel="tag">#Debian</a>
           
+            <a href="/tags/Docker/" rel="tag">#Docker</a>
+          
             <a href="/tags/Redis/" rel="tag">#Redis</a>
           
             <a href="/tags/MySql/" rel="tag">#MySql</a>
-          
-            <a href="/tags/Docker/" rel="tag">#Docker</a>
           
         </div>
       

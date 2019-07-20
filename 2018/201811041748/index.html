@@ -10,7 +10,6 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="referrer" content="no-referrer" />
 
 
 
@@ -93,23 +92,23 @@
 <meta property="og:url" content="VickChen.win/2018/201811041748/index.html">
 <meta property="og:site_name" content="Vick's Blog">
 <meta property="og:description" content="最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节">
-<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6nzsgi5j20l60gnq3i.jpg">
-<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nyoge5j20oq0cddga.jpg">
-<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6nzlzg4j20l30cijrv.jpg">
-<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nzlsmhj20e407wglu.jpg">
-<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6o0e4lgj20sq08vmxu.jpg">
-<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6ny8zauj208e021743.jpg">
-<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6o0qqmmj20wj0g7wfc.jpg">
-<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nyzk0kj20il06t749.jpg">
-<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6o0ztg0j20kj0fwaak.jpg">
-<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og0hvoj20if08a74k.jpg">
-<meta property="og:image" content="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og11llj20j9093q39.jpg">
-<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6ogsrvrj20yz0mrmz0.jpg">
-<meta property="og:updated_time" content="2018-11-22T03:05:18.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzsgi5j20l60gnq3i.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nyoge5j20oq0cddga.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzlzg4j20l30cijrv.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzlsmhj20e407wglu.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6o0e4lgj20sq08vmxu.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6ny8zauj208e021743.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6o0qqmmj20wj0g7wfc.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nyzk0kj20il06t749.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6o0ztg0j20kj0fwaak.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6og0hvoj20if08a74k.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6og11llj20j9093q39.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6ogsrvrj20yz0mrmz0.jpg">
+<meta property="og:updated_time" content="2019-07-20T08:06:36.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Entity Framework Core 之数据库迁移">
 <meta name="twitter:description" content="最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节">
-<meta name="twitter:image" content="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6nzsgi5j20l60gnq3i.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzsgi5j20l60gnq3i.jpg">
 
 
 
@@ -338,39 +337,39 @@
 <p>如果你打算使用迁移，则还应安装<code>Microsoft.EntityFrameworkCore.Tools</code>包。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Install-Package Microsoft.EntityFrameworkCore.SqlServer</div><div class="line">Install-Package Microsoft.EntityFrameworkCore.Tools</div></pre></td></tr></table></figure>
 <p>首先新建一个 Model 类 SysUser:</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6nzsgi5j20l60gnq3i.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzsgi5j20l60gnq3i.jpg" alt=""></p>
 <p> 然后建立EFCoreContext类:</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nyoge5j20oq0cddga.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nyoge5j20oq0cddga.jpg" alt=""></p>
 <p>自动创建数据库:</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6nzlzg4j20l30cijrv.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzlzg4j20l30cijrv.jpg" alt=""></p>
 <p>此时我们的数据库和数据都已经有了:</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nzlsmhj20e407wglu.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzlsmhj20e407wglu.jpg" alt=""></p>
 <h3 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h3><p>此时重点来了，当我们已经有数据库表的时候，我们需要修改字段，如何进行迁移?</p>
 <p>首先打开VS-&gt;工具-&gt;NuGet包管理器-&gt;程序包管理控制台</p>
 <p>输入命令：<code>Add-Migration init</code>（执行此命令项目生成一个目录<migration>）</migration></p>
-<p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6o0e4lgj20sq08vmxu.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6o0e4lgj20sq08vmxu.jpg" alt=""></p>
 <p>我们会发现Model程序集下多了一个文件夹为Migrations里面有3个文件.如下:</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6ny8zauj208e021743.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6ny8zauj208e021743.jpg" alt=""></p>
 <p>xxxxxxx_init.cs主迁移文件。包含应用迁移（in Up()）和恢复（in Down()）所需的操作。</p>
 <p>xxxxxxx_init.Designer.cs - 迁移元数据文件。包含EF使用的信息。</p>
 <p>EFCoreContextModelSnapshot.cs - 当前模型的快照。主要用于确定添加下一次迁移时发生了哪些变化.</p>
 <p>然后我们执行命令: <code>Update-Database</code></p>
 <p>如果你的数据库没创建,是第一次,就会执行成功。如果你前期创建过数据库.但是是第一次创建迁移，就会提示我们的表结构已经存在了。</p>
 <p>我们看看xxxxxx_init.cs文件：</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6o0qqmmj20wj0g7wfc.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6o0qqmmj20wj0g7wfc.jpg" alt=""></p>
 <p>可以看到，这里第一次生成的迁移方法是按照新增来迁移的..而不是修改。</p>
 <p>我们把<code>Up()</code>  <code>Down()</code>里面的代码删掉</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nyzk0kj20il06t749.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nyzk0kj20il06t749.jpg" alt=""></p>
 <p>这样就相当于 本次的迁移，没有做任何操作。</p>
 <p>然后我们来创建真正的迁移版本：</p>
 <p>首先添加一个Email字段,然后把UserName的长度改为60</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6o0ztg0j20kj0fwaak.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6o0ztg0j20kj0fwaak.jpg" alt=""></p>
 <p>然后我们开始迁移：</p>
 <p><code>Add-Migration  x2</code> （这里是迁移版本名称，可自定义，可以根据版本回滚）</p>
 <p>成功创建迁移文件之后,我们更新数据库.</p>
 <p><code>Update-Database x2</code></p>
 <p>然后Email字段加上了，UserName长度也修改了，UserName的数据也还在。</p>
-<p><img src="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og0hvoj20if08a74k.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6og0hvoj20if08a74k.jpg" alt=""></p>
 <h3 id="删除迁移"><a href="#删除迁移" class="headerlink" title="删除迁移"></a>删除迁移</h3><p>有的时候我们刚刚创建了一个迁移,还没应用到数据库,就发现自己需要变更实体.那我们就可以删除这个没有应用的迁移版本.</p>
 <p>执行命令:<code>Remove-Migration</code></p>
 <p><em>注意,这里是没有应用过的迁移,可以删除.如果应用过了.则会收到错误信息</em></p>
@@ -380,10 +379,10 @@
 <p><code>Update-Database</code>  这里填写需要回滚的版本名称</p>
 <p>我们执行  <code>Update-Database</code>   这里填写需要回滚的版本名称</p>
 <p>然后我们会发现, x2中的长度已经回到30了，Email字段也没有了….</p>
-<p><img src="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og11llj20j9093q39.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6og11llj20j9093q39.jpg" alt=""></p>
 <h3 id="生成迁移SQL"><a href="#生成迁移SQL" class="headerlink" title="生成迁移SQL"></a>生成迁移SQL</h3><p>有的时候,我们的生产数据库,是需要用脚本来创建库的.所以我们也可以直接通过实体来生成SQL脚本.命令如下:</p>
 <p><code>Script-Migration</code></p>
-<p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6ogsrvrj20yz0mrmz0.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6ogsrvrj20yz0mrmz0.jpg" alt=""></p>
 <p>举一反三：<code>Script-Migration x2</code>  这个脚本可以自定义需要迁移的版本号、文件名、需要生成迁移脚本的上下文</p>
 <p><em>原文地址：<a href="https://www.cnblogs.com/shumin/p/8877297.html" target="_blank" rel="external">https://www.cnblogs.com/shumin/p/8877297.html</a></em></p>
 

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2019-07-20T06:48:17.731Z</updated>
+  <updated>2019-07-20T08:07:03.910Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="VickChen.win/2019/201905050112/"/>
     <id>VickChen.win/2019/201905050112/</id>
     <published>2019-05-04T17:12:01.000Z</published>
-    <updated>2019-07-20T06:48:17.731Z</updated>
+    <updated>2019-07-20T08:07:03.910Z</updated>
     
     <content type="html"><![CDATA[<p>对于不少自己搭建博客的人来说，使用什么图床可能比较难以选择，以前还有各种免费好用的图床工具，例如七牛云、SM.MS、Imgur、GitHub、微博图床等，当然还有腾讯云、阿里云的云存储服务，但是免费的意味着不稳定，说不定哪天图片就没有了，有一些国外的访问速度又不行，国内的云存储服务商价格也比较高，而且单一个博客也不需要太大空间，有点浪费。</p>
 <p>本来刚刚开始写博客时用的是七牛云，后来涨价了，转到免费的 微博图床 。用了好几年没啥问题，没想到最近【2019 年 4 月份】微博图床出问题了，所有图片全部挂掉，访问图片链接全部是返回 403 状态码，表示拒绝访问，其实是微博图床开启了防盗链，本文就提供了一种简单有效的解决方案。</p>
@@ -55,7 +55,7 @@
     <link href="VickChen.win/2019/201902150122/"/>
     <id>VickChen.win/2019/201902150122/</id>
     <published>2019-02-14T17:22:01.000Z</published>
-    <updated>2019-02-15T09:48:48.000Z</updated>
+    <updated>2019-07-20T08:07:03.909Z</updated>
     
     <content type="html"><![CDATA[<p>Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。</p>
 <p>这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。</p>
@@ -89,7 +89,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Unable to find image <span class="string">'hello-world:latest'</span> locally</div><div class="line">latest: Pulling from library/hello-world</div><div class="line">9db2ca6ccae0: Pull complete</div><div class="line">Digest: sha256:4b8ff392a12ed9ea17784bd3c9a8b1fa3299cac44aca35a85c90c5e3c7afacdc</div><div class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</div><div class="line">​</div><div class="line">Hello from Docker!</div><div class="line">This message shows that your installation appears to be working correctly.</div><div class="line">...</div></pre></td></tr></table></figure>
 <p>Docker最初无法在本地找到hello-world图像，因此它从Docker Hub下载了图像，Docker Hub是默认存储库。下载映像后，Docker从映像创建了一个容器，并在容器中执行了应用程序，显示了该消息。</p>
 <h3 id="操作镜像"><a href="#操作镜像" class="headerlink" title="操作镜像"></a>操作镜像</h3><h4 id="查看本机镜像"><a href="#查看本机镜像" class="headerlink" title="查看本机镜像"></a>查看本机镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vick@debian:~$ sudo docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">mysql               5.7                 e47e309f72c8        9 days ago          372MB</div><div class="line">redis               3.2                 87856cc39862        4 months ago        76MB</div></pre></td></tr></table></figure>
-<h4 id="查看本机运行中的容器"><a href="#查看本机运行中的容器" class="headerlink" title="查看本机运行中的容器"></a>查看本机运行中的容器</h4><p><img src="https://ws1.sinaimg.cn/large/9460f058ly1g078v22tp7j20th023ab1.jpg" alt=""></p>
+<h4 id="查看本机运行中的容器"><a href="#查看本机运行中的容器" class="headerlink" title="查看本机运行中的容器"></a>查看本机运行中的容器</h4><p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078v22tp7j20th023ab1.jpg" alt=""></p>
 <h4 id="查看本机所有容器"><a href="#查看本机所有容器" class="headerlink" title="查看本机所有容器"></a>查看本机所有容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker ps <span class="_">-a</span></div></pre></td></tr></table></figure>
 <h4 id="启动某个容器"><a href="#启动某个容器" class="headerlink" title="启动某个容器"></a>启动某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker start XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
 <h4 id="停止某个容器"><a href="#停止某个容器" class="headerlink" title="停止某个容器"></a>停止某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker stop XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
@@ -120,11 +120,11 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select host,user,plugin,authentication_string from mysql.user;                                                                                            </div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+                                                                </div><div class="line">| host      | user          | plugin                | authentication_string                     |</div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+</div><div class="line">| localhost | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</div><div class="line">| localhost | mysql.session | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</div><div class="line">| localhost | mysql.sys     | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</div><div class="line">| %         | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+</div><div class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</div></pre></td></tr></table></figure>
 <p>host为 % 表示不限制ip   localhost表示本机使用    plugin非mysql_native_password 则需要修改密码。</p>
 <p>连接时错误提示：</p>
-<p><img src="https://ws1.sinaimg.cn/large/9460f058ly1g078c9yh35j20o701f0t3.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078c9yh35j20o701f0t3.jpg" alt=""></p>
 <p>解决方法：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql&gt; ALTER user <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'123456'</span>;  </div><div class="line">Query OK, 0 rows affected (0.01 sec)  </div><div class="line">mysql&gt;   </div><div class="line">mysql&gt; FLUSH PRIVILEGES;  </div><div class="line">Query OK, 0 rows affected (0.01 sec)</div></pre></td></tr></table></figure>
 <p>连接数据库：</p>
-<p><img src="https://ws1.sinaimg.cn/large/9460f058ly1g0788grm0gj20fq0ilgm0.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g0788grm0gj20fq0ilgm0.jpg" alt=""></p>
 <p>连接成功了。</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>安装步骤与mysql类似：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker search  redis</div><div class="line">docker pull  redis:3.2</div></pre></td></tr></table></figure>
@@ -154,11 +154,11 @@
     
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
     
+      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
+    
       <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
-    
-      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
     
   </entry>
   
@@ -167,7 +167,7 @@
     <link href="VickChen.win/2019/201901221340/"/>
     <id>VickChen.win/2019/201901221340/</id>
     <published>2019-01-22T05:40:32.000Z</published>
-    <updated>2019-02-15T06:37:47.000Z</updated>
+    <updated>2019-07-20T08:06:52.747Z</updated>
     
     <content type="html"><![CDATA[<p>项目中需要用到的数据库安装、配置以及常见错误</p>
 <a id="more"></a>
@@ -201,10 +201,10 @@
 <ol>
 <li><p>获取下载链接</p>
 <p>打开网站<a href="https://link.jianshu.com/?t=https%3A%2F%2Fdev.mysql.com%2Fdownloads%2Frepo%2Fapt%2F" target="_blank" rel="external">MySQL APT Respository</a></p>
-<p><img src="https://ws1.sinaimg.cn/large/9460f058ly1fzgaj3o70yj20s005fjrp.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1fzgaj3o70yj20s005fjrp.jpg" alt=""></p>
 </li>
 <li><p>点击Download，跳转到下载页面</p>
-<p><img src="https://ws1.sinaimg.cn/large/9460f058ly1fzgalkchhrj20ob0gsabk.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1fzgalkchhrj20ob0gsabk.jpg" alt=""></p>
 </li>
 <li><p>右键点击No thanks，just start my download复制链接</p>
 </li>
@@ -218,7 +218,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo dpkg -i ./mysql-apt-config_0.8.12-1_all.deb</div></pre></td></tr></table></figure>
 </li>
 <li><p>然后会弹出MySql的源配置界面</p>
-<p><img src="http://ww1.sinaimg.cn/large/9460f058ly1fzgaf3wc54j20rs0d447p.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1fzgaf3wc54j20rs0d447p.jpg" alt=""></p>
 <p>我们仅需选择版本，下面两个选项默认即可</p>
 </li>
 <li><p>更新源</p>
@@ -227,7 +227,7 @@
 </ol>
 <h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mysql-server</div></pre></td></tr></table></figure>
 <p>这一步可能会提示错误:</p>
-<p><img src="https://ws1.sinaimg.cn/large/9460f058gy1fzgav214e7j20h504pmz9.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fzgav214e7j20h504pmz9.jpg" alt=""></p>
 <p>可以换个命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo aptitude install &lt;mysql-server&gt;</div></pre></td></tr></table></figure>
 <p>因为aptitude会自动把所有依赖的库都帮你顺着找到，并下载好。</p>
@@ -308,7 +308,7 @@
     <link href="VickChen.win/2018/201812240020/"/>
     <id>VickChen.win/2018/201812240020/</id>
     <published>2018-12-23T16:20:11.000Z</published>
-    <updated>2019-01-16T03:42:47.000Z</updated>
+    <updated>2019-07-20T08:06:36.575Z</updated>
     
     <content type="html"><![CDATA[<p>VMware Tools是VMware虚拟机中自带的一种增强工具，相当于VirtualBox中的增强功能（Sun VirtualBox Guest Additions），是VMware提供的增强虚拟显卡和硬盘性能、以及同步虚拟机与主机时钟的驱动程序。</p>
 <a id="more"></a>
@@ -363,7 +363,7 @@
     <link href="VickChen.win/2018/201812200110/"/>
     <id>VickChen.win/2018/201812200110/</id>
     <published>2018-12-19T17:10:05.000Z</published>
-    <updated>2018-12-23T14:23:53.000Z</updated>
+    <updated>2019-07-20T08:06:36.573Z</updated>
     
     <content type="html"><![CDATA[<p>目前在学习Debian，然后发现一路都是坑，与之前接触的Ubuntu在使用上还是有点差别的。Debian更加原生，也更加稳定，坑也更多。为了防止后来者继续踩坑，特意写了此文用于记录总结初学者在学习过程中遇到的各种问题。</p>
 <a id="more"></a>
@@ -463,7 +463,7 @@
     <link href="VickChen.win/2018/201811230212/"/>
     <id>VickChen.win/2018/201811230212/</id>
     <published>2018-11-22T18:12:00.000Z</published>
-    <updated>2019-07-20T06:37:28.916Z</updated>
+    <updated>2019-07-20T08:06:36.570Z</updated>
     
     <content type="html"><![CDATA[<p>邮件服务是一般的系统都会拥有和需要的功能，但是对于.Net项目来说，邮件服务的创建和使用会较为的麻烦。.NET对于邮件功能提供了System.Net.Mail用于创建邮件服务，该基础服务提供邮件的基础操作，并且使用也较为的简单。对于真正将该功能使用于项目的人，就会慢慢发现其中的优缺点，甚至有些时候不能忍受其中的问题。在这里介绍一种微软用于替代System.Net.Mail的邮件服务组件MailKit和MimeKit，官网地址：<a href="http://www.mimekit.net/" target="_blank" rel="external">http://www.mimekit.net/</a> GitHub地址：<a href="https://github.com/jstedfast/MimeKit" target="_blank" rel="external">https://github.com/jstedfast/MimeKit</a></p>
 <a id="more"></a>
@@ -513,7 +513,7 @@
     <link href="VickChen.win/2018/201811041748/"/>
     <id>VickChen.win/2018/201811041748/</id>
     <published>2018-11-04T09:48:01.000Z</published>
-    <updated>2018-11-22T03:05:18.000Z</updated>
+    <updated>2019-07-20T08:06:36.566Z</updated>
     
     <content type="html"><![CDATA[<p>最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节</p>
 <a id="more"></a>
@@ -522,39 +522,39 @@
 <p>如果你打算使用迁移，则还应安装<code>Microsoft.EntityFrameworkCore.Tools</code>包。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Install-Package Microsoft.EntityFrameworkCore.SqlServer</div><div class="line">Install-Package Microsoft.EntityFrameworkCore.Tools</div></pre></td></tr></table></figure>
 <p>首先新建一个 Model 类 SysUser:</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6nzsgi5j20l60gnq3i.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzsgi5j20l60gnq3i.jpg" alt=""></p>
 <p> 然后建立EFCoreContext类:</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nyoge5j20oq0cddga.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nyoge5j20oq0cddga.jpg" alt=""></p>
 <p>自动创建数据库:</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6nzlzg4j20l30cijrv.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzlzg4j20l30cijrv.jpg" alt=""></p>
 <p>此时我们的数据库和数据都已经有了:</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nzlsmhj20e407wglu.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nzlsmhj20e407wglu.jpg" alt=""></p>
 <h3 id="数据迁移"><a href="#数据迁移" class="headerlink" title="数据迁移"></a>数据迁移</h3><p>此时重点来了，当我们已经有数据库表的时候，我们需要修改字段，如何进行迁移?</p>
 <p>首先打开VS-&gt;工具-&gt;NuGet包管理器-&gt;程序包管理控制台</p>
 <p>输入命令：<code>Add-Migration init</code>（执行此命令项目生成一个目录<migration>）</migration></p>
-<p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6o0e4lgj20sq08vmxu.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6o0e4lgj20sq08vmxu.jpg" alt=""></p>
 <p>我们会发现Model程序集下多了一个文件夹为Migrations里面有3个文件.如下:</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6ny8zauj208e021743.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6ny8zauj208e021743.jpg" alt=""></p>
 <p>xxxxxxx_init.cs主迁移文件。包含应用迁移（in Up()）和恢复（in Down()）所需的操作。</p>
 <p>xxxxxxx_init.Designer.cs - 迁移元数据文件。包含EF使用的信息。</p>
 <p>EFCoreContextModelSnapshot.cs - 当前模型的快照。主要用于确定添加下一次迁移时发生了哪些变化.</p>
 <p>然后我们执行命令: <code>Update-Database</code></p>
 <p>如果你的数据库没创建,是第一次,就会执行成功。如果你前期创建过数据库.但是是第一次创建迁移，就会提示我们的表结构已经存在了。</p>
 <p>我们看看xxxxxx_init.cs文件：</p>
-<p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6o0qqmmj20wj0g7wfc.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6o0qqmmj20wj0g7wfc.jpg" alt=""></p>
 <p>可以看到，这里第一次生成的迁移方法是按照新增来迁移的..而不是修改。</p>
 <p>我们把<code>Up()</code>  <code>Down()</code>里面的代码删掉</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1fww6nyzk0kj20il06t749.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6nyzk0kj20il06t749.jpg" alt=""></p>
 <p>这样就相当于 本次的迁移，没有做任何操作。</p>
 <p>然后我们来创建真正的迁移版本：</p>
 <p>首先添加一个Email字段,然后把UserName的长度改为60</p>
-<p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1fww6o0ztg0j20kj0fwaak.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6o0ztg0j20kj0fwaak.jpg" alt=""></p>
 <p>然后我们开始迁移：</p>
 <p><code>Add-Migration  x2</code> （这里是迁移版本名称，可自定义，可以根据版本回滚）</p>
 <p>成功创建迁移文件之后,我们更新数据库.</p>
 <p><code>Update-Database x2</code></p>
 <p>然后Email字段加上了，UserName长度也修改了，UserName的数据也还在。</p>
-<p><img src="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og0hvoj20if08a74k.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6og0hvoj20if08a74k.jpg" alt=""></p>
 <h3 id="删除迁移"><a href="#删除迁移" class="headerlink" title="删除迁移"></a>删除迁移</h3><p>有的时候我们刚刚创建了一个迁移,还没应用到数据库,就发现自己需要变更实体.那我们就可以删除这个没有应用的迁移版本.</p>
 <p>执行命令:<code>Remove-Migration</code></p>
 <p><em>注意,这里是没有应用过的迁移,可以删除.如果应用过了.则会收到错误信息</em></p>
@@ -564,10 +564,10 @@
 <p><code>Update-Database</code>  这里填写需要回滚的版本名称</p>
 <p>我们执行  <code>Update-Database</code>   这里填写需要回滚的版本名称</p>
 <p>然后我们会发现, x2中的长度已经回到30了，Email字段也没有了….</p>
-<p><img src="https://wx1.sinaimg.cn/mw690/9460f058gy1fww6og11llj20j9093q39.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6og11llj20j9093q39.jpg" alt=""></p>
 <h3 id="生成迁移SQL"><a href="#生成迁移SQL" class="headerlink" title="生成迁移SQL"></a>生成迁移SQL</h3><p>有的时候,我们的生产数据库,是需要用脚本来创建库的.所以我们也可以直接通过实体来生成SQL脚本.命令如下:</p>
 <p><code>Script-Migration</code></p>
-<p><img src="https://wx4.sinaimg.cn/mw690/9460f058gy1fww6ogsrvrj20yz0mrmz0.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fww6ogsrvrj20yz0mrmz0.jpg" alt=""></p>
 <p>举一反三：<code>Script-Migration x2</code>  这个脚本可以自定义需要迁移的版本号、文件名、需要生成迁移脚本的上下文</p>
 <p><em>原文地址：<a href="https://www.cnblogs.com/shumin/p/8877297.html" target="_blank" rel="external">https://www.cnblogs.com/shumin/p/8877297.html</a></em></p>
 ]]></content>
@@ -594,7 +594,7 @@
     <link href="VickChen.win/2018/201810012332/"/>
     <id>VickChen.win/2018/201810012332/</id>
     <published>2018-10-01T15:32:01.000Z</published>
-    <updated>2018-12-08T10:29:50.000Z</updated>
+    <updated>2019-07-20T08:05:53.821Z</updated>
     
     <content type="html"><![CDATA[<p>滚动条到底部加载数据原理很简单，就是为window或者滚动元素添加一个scroll事件，浏览器每次触发scroll事件时判断是否滚动到了浏览器底部，如果到了底部则加载新数据。关键是计算滚动条是否滚动到了浏览器底部</p>
 <a id="more"></a>
@@ -645,7 +645,7 @@
     <link href="VickChen.win/2018/201809211813/"/>
     <id>VickChen.win/2018/201809211813/</id>
     <published>2018-09-21T10:13:04.000Z</published>
-    <updated>2018-11-10T11:01:04.000Z</updated>
+    <updated>2019-07-20T08:05:53.820Z</updated>
     
     <content type="html"><![CDATA[<p>此贴主要用于记录Core程序在发布时遇到的错误。</p>
 <a id="more"></a>
@@ -680,7 +680,7 @@
     <link href="VickChen.win/2018/201809010211/"/>
     <id>VickChen.win/2018/201809010211/</id>
     <published>2018-08-31T18:11:52.000Z</published>
-    <updated>2019-07-20T06:33:38.940Z</updated>
+    <updated>2019-07-20T08:05:53.819Z</updated>
     
     <content type="html"><![CDATA[<p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
 <p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
@@ -726,7 +726,7 @@
     <link href="VickChen.win/2018/201808272148/"/>
     <id>VickChen.win/2018/201808272148/</id>
     <published>2018-08-27T13:48:07.000Z</published>
-    <updated>2019-07-20T06:31:08.429Z</updated>
+    <updated>2019-07-20T08:05:53.816Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://github.com/HangfireIO/Hangfire" target="_blank" rel="external">Hangfire</a>作为一款高人气且容易上手的分布式后台执行服务，支持多种数据库。在.net core的环境中，由Core自带的DI管理着生命周期，免去了在NF4.X环境中配置<a href="http://docs.hangfire.io/en/latest/deployment-to-production/making-aspnet-app-always-running.html" target="_blank" rel="external">always running</a>的麻烦，真正做到开箱即用。</p>
 <a id="more"></a>
@@ -776,20 +776,20 @@
     <link href="VickChen.win/2018/201808021940/"/>
     <id>VickChen.win/2018/201808021940/</id>
     <published>2018-08-02T11:40:31.000Z</published>
-    <updated>2018-11-22T03:15:32.000Z</updated>
+    <updated>2019-07-20T08:05:53.815Z</updated>
     
     <content type="html"><![CDATA[<p>与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是<code>AspNetCoreModule</code>，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。</p>
 <a id="more"></a>
 <ol>
 <li><p>开启控制台</p>
 <p>在控制面板→程序→启用或关闭Windows功能→勾选Internet Information Services以及Web管理工具下的IIS管理控制台</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg" alt=""></p>
 </li>
 <li><p>IIS 安装AspNetCoreModule 模块</p>
 <p>部署之前要确保你的IIS上已经安装了AspNetCoreModule托管模块，如果没有的话，点击<a href="https://www.microsoft.com/net/download/windows" target="_blank" rel="external">这里</a>进行下载并安装</p>
 </li>
 </ol>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1ftxjhhjtoaj20rm0gs0tc.jpg" alt=""><br><strong>安装完后一定要重启，否则 Http Error 502</strong></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhjtoaj20rm0gs0tc.jpg" alt=""><br><strong>安装完后一定要重启，否则 Http Error 502</strong></p>
 <ol>
 <li><p>发布</p>
 <p>项目右键–发布</p>
@@ -799,7 +799,7 @@
 <p>设置应用程序池的.NET CLR版本为“无托管代码” 。因为IIS是作为一个反向代理的角色，并不需要它来托管代码</p>
 </li>
 </ol>
-<p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1ftxjhhjecvj20kt0e1gmd.jpg" alt=""><br><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1ftxjhhlf4aj20y30jn0vv.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhjecvj20kt0e1gmd.jpg" alt=""><br><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhlf4aj20y30jn0vv.jpg" alt=""></p>
 <p>OK!</p>
 ]]></content>
     
@@ -825,7 +825,7 @@
     <link href="VickChen.win/2018/201806131846/"/>
     <id>VickChen.win/2018/201806131846/</id>
     <published>2018-06-13T10:46:01.000Z</published>
-    <updated>2018-12-17T11:06:24.000Z</updated>
+    <updated>2019-07-20T08:05:37.252Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
 <p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
@@ -906,7 +906,7 @@
     <link href="VickChen.win/2017/201708172327/"/>
     <id>VickChen.win/2017/201708172327/</id>
     <published>2017-08-17T15:27:18.000Z</published>
-    <updated>2018-12-17T11:04:49.000Z</updated>
+    <updated>2019-07-20T08:05:37.251Z</updated>
     
     <content type="html"><![CDATA[<p>Emmet是一个编辑器插件，以前被称作为 Zen Coding。使用类似于 CSS 选择器的语法描述元素在生成的文档树中的位置及其属性。</p>
 <p>使用 Emmet 可以帮助程序员快速的编写 HTML 和 CSS 代码，从而提高 Web前端开发的效率。<a href="https://www.emmet.io/" target="_blank" rel="external">官网</a>提供多编辑器支持。我一般使用<a href="https://code.visualstudio.com/" target="_blank" rel="external">Visual Studio Code</a>，下面就以VS Code插件举例。</p>
@@ -1052,7 +1052,7 @@
     <link href="VickChen.win/2017/201706190302/"/>
     <id>VickChen.win/2017/201706190302/</id>
     <published>2017-06-18T19:02:41.000Z</published>
-    <updated>2019-07-20T06:37:02.144Z</updated>
+    <updated>2019-07-20T08:05:37.250Z</updated>
     
     <content type="html"><![CDATA[<p>RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。</p>
 <p>.NET Framework 中提供的 RSA 算法规定：</p>
@@ -1090,7 +1090,7 @@
     <link href="VickChen.win/2017/201706020041/"/>
     <id>VickChen.win/2017/201706020041/</id>
     <published>2017-06-01T16:41:31.000Z</published>
-    <updated>2018-11-22T03:24:13.000Z</updated>
+    <updated>2019-07-20T08:05:37.249Z</updated>
     
     <content type="html"><![CDATA[<p>在数据安全上rsa起着非常大的作用，特别是数据网络通讯的安全上。当异构系统在数据网络通讯上对安全性有所要求时，rsa将作为其中的一种选择，此时rsa的互通性就显得尤为重要了。</p>
 <p>本文参考网络资料，提供了rsa互通性的一种可行的解决方案(c#,java,php),而这种互通性是在一定的局限性上达成的，比如密钥是1024位的(更高位没试过，应该也可行），基于PKCS1填充方式。</p>
@@ -1163,7 +1163,7 @@
     <link href="VickChen.win/2017/201705210110/"/>
     <id>VickChen.win/2017/201705210110/</id>
     <published>2017-05-20T17:10:52.000Z</published>
-    <updated>2018-11-04T17:50:09.000Z</updated>
+    <updated>2019-07-20T08:11:37.579Z</updated>
     
     <content type="html"><![CDATA[<p>提到分部视图，我相信大家会想到和web form时代的对应物ascx分部控件，我们在Mvc时代可以更加轻松的控制分部视图。</p>
 <p>要说明分部视图，我们先来讨论一下分部视图可以带给我们的优点：</p>
@@ -1242,7 +1242,7 @@
     <link href="VickChen.win/2017/201705071034/"/>
     <id>VickChen.win/2017/201705071034/</id>
     <published>2017-05-07T02:34:21.000Z</published>
-    <updated>2019-07-20T06:29:46.302Z</updated>
+    <updated>2019-07-20T08:05:37.247Z</updated>
     
     <content type="html"><![CDATA[<p>有时候调用https接口时会提示如下错误:</p>
 <blockquote>
@@ -1280,7 +1280,7 @@
     <link href="VickChen.win/2017/201703151751/"/>
     <id>VickChen.win/2017/201703151751/</id>
     <published>2017-03-15T09:51:18.000Z</published>
-    <updated>2017-03-16T12:19:56.000Z</updated>
+    <updated>2019-07-20T08:05:37.247Z</updated>
     
     <content type="html"><![CDATA[<p>很多不太懂正则的朋友，在遇到需要用正则校验数据时，往往是在网上去找很久，结果找来的还是不很符合要求。所以我最近把开发中常用的一些正则表达式整理了一下，在这里分享一下。给自己留个底，也给朋友们做个参考。</p>
 <a id="more"></a>
@@ -1542,7 +1542,7 @@
     <link href="VickChen.win/2016/201611032106/"/>
     <id>VickChen.win/2016/201611032106/</id>
     <published>2016-11-03T13:06:29.000Z</published>
-    <updated>2019-07-20T06:35:45.899Z</updated>
+    <updated>2019-07-20T08:05:37.244Z</updated>
     
     <content type="html"><![CDATA[<p>项目中由于需求设计，数据库中需要一个timestamp时间戳类型的字段来作为区别数据添加和修改的标识。由于在SQL SERVER 中,不可为空的timestamp类型在语义上等同于binary(8)类型,可为空的 timestamp类型在语义上等同于varbinary(8)类型，这将导致在C#程序中获取到的timestamp类型则变成了byte[]类型。所以如果我们需要从数据库中获取并使用这个时间戳的话就必需经过转换。</p>
 <a id="more"></a>
@@ -1564,7 +1564,7 @@
 </ul>
 <p>在程序中我们发现，通过ADO.NET获取数据库中timestamp字段值到程序中，结果类型为byte[]。假设在数据库中timestamp的值为0x00000000000007D6，那么获取到.net程序中的值就不是这样了，一把来说会变成byte[]的数组类型。那么我们的解决方式有两种，第一种方式是直接在数据库中将timestamp进行转换，可以转换成十六进制字符串类型或者BIGINT的长整形，这也是我推荐的方法。还有一种是在.NET 程序中使用BitConverter方法进行转换。以下是两种方式的代码：</p>
 <h4 id="方法一（在SQL中转换）："><a href="#方法一（在SQL中转换）：" class="headerlink" title="方法一（在SQL中转换）："></a>方法一（在SQL中转换）：</h4> <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SELECT</span> TS</div><div class="line">,<span class="keyword">CAST</span>(TS <span class="keyword">AS</span> VARBINARY(<span class="number">8</span>)) <span class="keyword">AS</span> <span class="string">'timestamp转十六进制字符串'</span> </div><div class="line">,<span class="keyword">CONVERT</span>(<span class="built_in">BIGINT</span>,TS) <span class="keyword">AS</span> <span class="string">'timestamp转bigint类型'</span></div><div class="line"><span class="keyword">FROM</span> tb_Ts</div></pre></td></tr></table></figure>
-<p> 这样一来我们就可以获取到timestamp的十六进制字符串或者bigint，最终查询出来的结果如下图：<br> <img src="http://shiyousan.com/UserFiles/images/2014/06/635373323909511292/000001.jpg" alt=""></p>
+<p> 这样一来我们就可以获取到timestamp的十六进制字符串或者bigint，最终查询出来的结果如下图：<br> <img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/000001.jpg" alt=""></p>
 <p> 另外要说明的一点是，VARBINARY(8)对应的c# 类型是byte[]，所以建议直接转换成bigint类型，否则在C#中还要调用下面的方法</p>
 <h4 id="方法二（在程序中转换-调用下面的方法即可）："><a href="#方法二（在程序中转换-调用下面的方法即可）：" class="headerlink" title="方法二（在程序中转换,调用下面的方法即可）："></a>方法二（在程序中转换,调用下面的方法即可）：</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 将数据库中timespan转换成十六进制字符串</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="objTs"&gt;</span>从数据库中获取的timespan值<span class="doctag">&lt;/param&gt;</span>      </span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>timespan十六进制字符串<span class="doctag">&lt;/returns&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">public</span>  <span class="keyword">string</span> <span class="title">ConvertToTimeSpanString</span>(<span class="params"><span class="keyword">object</span> objTs</span>)</span></div><div class="line">&#123;</div><div class="line"><span class="keyword">byte</span>[] btTsArray=objTs <span class="keyword">as</span> <span class="keyword">byte</span>[];</div><div class="line">String strTimeSpan = <span class="string">"0x"</span>+ BitConverter.ToString(btTsArray).Replace(<span class="string">"-"</span>,<span class="string">""</span>);</div><div class="line"><span class="keyword">return</span> strTimeSpan;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><em>参考:<a href="http://shiyousan.com/post/635373323909511292" target="_blank" rel="external">十有三博客</a></em></p>

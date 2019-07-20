@@ -10,7 +10,6 @@
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="referrer" content="no-referrer" />
 
 
 
@@ -93,15 +92,15 @@
 <meta property="og:url" content="VickChen.win/2018/201808021940/index.html">
 <meta property="og:site_name" content="Vick's Blog">
 <meta property="og:description" content="与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户">
-<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg">
-<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/9460f058gy1ftxjhhjtoaj20rm0gs0tc.jpg">
-<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/9460f058gy1ftxjhhjecvj20kt0e1gmd.jpg">
-<meta property="og:image" content="https://wx3.sinaimg.cn/mw690/9460f058gy1ftxjhhlf4aj20y30jn0vv.jpg">
-<meta property="og:updated_time" content="2018-11-22T03:15:32.000Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhjtoaj20rm0gs0tc.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhjecvj20kt0e1gmd.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhlf4aj20y30jn0vv.jpg">
+<meta property="og:updated_time" content="2019-07-20T08:05:53.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在IIS上部署你的ASP.NET Core 2.1项目">
 <meta name="twitter:description" content="与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户">
-<meta name="twitter:image" content="https://wx2.sinaimg.cn/mw690/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg">
 
 
 
@@ -328,13 +327,13 @@
 <ol>
 <li><p>开启控制台</p>
 <p>在控制面板→程序→启用或关闭Windows功能→勾选Internet Information Services以及Web管理工具下的IIS管理控制台</p>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg" alt=""></p>
 </li>
 <li><p>IIS 安装AspNetCoreModule 模块</p>
 <p>部署之前要确保你的IIS上已经安装了AspNetCoreModule托管模块，如果没有的话，点击<a href="https://www.microsoft.com/net/download/windows" target="_blank" rel="external">这里</a>进行下载并安装</p>
 </li>
 </ol>
-<p><img src="https://wx2.sinaimg.cn/mw690/9460f058gy1ftxjhhjtoaj20rm0gs0tc.jpg" alt=""><br><strong>安装完后一定要重启，否则 Http Error 502</strong></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhjtoaj20rm0gs0tc.jpg" alt=""><br><strong>安装完后一定要重启，否则 Http Error 502</strong></p>
 <ol>
 <li><p>发布</p>
 <p>项目右键–发布</p>
@@ -344,7 +343,7 @@
 <p>设置应用程序池的.NET CLR版本为“无托管代码” 。因为IIS是作为一个反向代理的角色，并不需要它来托管代码</p>
 </li>
 </ol>
-<p><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1ftxjhhjecvj20kt0e1gmd.jpg" alt=""><br><img src="https://wx3.sinaimg.cn/mw690/9460f058gy1ftxjhhlf4aj20y30jn0vv.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhjecvj20kt0e1gmd.jpg" alt=""><br><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhlf4aj20y30jn0vv.jpg" alt=""></p>
 <p>OK!</p>
 
       
