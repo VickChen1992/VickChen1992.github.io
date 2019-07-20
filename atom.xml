@@ -88,7 +88,7 @@
     <link href="VickChen.win/2019/201902150122/"/>
     <id>VickChen.win/2019/201902150122/</id>
     <published>2019-02-14T17:22:01.000Z</published>
-    <updated>2019-07-20T08:07:03.909Z</updated>
+    <updated>2019-07-20T09:59:49.421Z</updated>
     
     <content type="html"><![CDATA[<p>Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。</p>
 <p>这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。</p>
@@ -143,7 +143,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull mysql:5.7 <span class="comment">#不带版本号默认最新</span></div></pre></td></tr></table></figure>
 <p>启动mysql：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name mysql -p 3306:3306 -v /home/vick/mysql/data:/var/lib/mysql <span class="_">-e</span> MYSQL_ROOT_PASSWORD=lanhe <span class="_">-d</span> mysql:5.7</div></pre></td></tr></table></figure>
-<p>注意，这里的容器名字叫：mysql ，root用户密码是：123456 ，映射宿主机子的端口3306到容器的端口3306，</p>
+<p>注意，这里的容器名字叫：mysql ，root用户密码是：lanhe，映射宿主机子的端口3306到容器的端口3306，</p>
 <p>并且将mysql的/var/lib/mysql目录映射到/home/vick/mysql/data文件夹。</p>
 <h3 id="设置可远程访问"><a href="#设置可远程访问" class="headerlink" title="设置可远程访问"></a>设置可远程访问</h3><p>进入mysql容器：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vick@debian:~$ sudo docker <span class="built_in">exec</span> -it mysql bash</div><div class="line">root@943fd585094f:/<span class="comment">#</span></div></pre></td></tr></table></figure>
@@ -187,11 +187,11 @@
     
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
     
-      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
-    
       <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
+    
+      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
     
   </entry>
   
