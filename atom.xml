@@ -713,11 +713,11 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
+      <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
+    
       <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
       <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
-    
-      <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
     
   </entry>
   
@@ -1579,9 +1579,9 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
-    
       <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
   </entry>
   
