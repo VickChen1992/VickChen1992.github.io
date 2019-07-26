@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Linux,Debian,Redis,MySql," />
+  <meta name="keywords" content="Linux,Redis,Debian,MySql," />
 
 
 
@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1fzgalkchhrj20ob0gsabk.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1fzgaf3wc54j20rs0d447p.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fzgav214e7j20h504pmz9.jpg">
-<meta property="og:updated_time" content="2019-07-20T08:06:52.747Z">
+<meta property="og:updated_time" content="2019-07-26T03:00:28.383Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Debian 安装 Redis、MySql">
 <meta name="twitter:description" content="项目中需要用到的数据库安装、配置以及常见错误">
@@ -383,10 +383,10 @@
 <p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1fzgav214e7j20h504pmz9.jpg" alt=""></p>
 <p>可以换个命令</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo aptitude install &lt;mysql-server&gt;</div></pre></td></tr></table></figure>
-<p>因为aptitude会自动把所有依赖的库都帮你顺着找到，并下载好。</p>
-<p>而apt-get下载某个包中它的所有依赖项都必须存在。</p>
-<p>这就是为什么我们每次执行apt-get的时候都需要先<code>apt-get update</code>的更新软件包的原因。</p>
-<p>如果提示找不到aptitude，可以先使用<code>sudo apt-get install aptitude</code>进行下载</p>
+<p>因为<code>aptitude</code>会自动把所有依赖的库都帮你顺着找到，并下载好。</p>
+<p>而<code>apt-get</code>下载某个包中它的所有依赖项都必须存在。</p>
+<p>这就是为什么我们每次执行<code>apt-get</code>的时候都需要先<code>apt-get update</code>的更新软件包的原因。</p>
+<p>如果提示找不到<code>aptitude</code>，可以先使用<code>sudo apt-get install aptitude</code>进行下载</p>
 <p>然后就是漫长的等待，因为安装包200多M…..</p>
 <p>中途会让你输入root密码，自己输入一个记住就行了。</p>
 <h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ol>
@@ -428,7 +428,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
 </li>
 <li><p>如果还是不行的话，打开下面的文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf</div></pre></td></tr></table></figure>
 </li>
 <li><p>把bind-adress那一行的127.0.0.1改成0.0.0.0 </p>
 <p><strong>重要提示：投入生产时记得改回来</strong></p>
@@ -459,9 +459,9 @@
           
             <a href="/tags/Linux/" rel="tag">#Linux</a>
           
-            <a href="/tags/Debian/" rel="tag">#Debian</a>
-          
             <a href="/tags/Redis/" rel="tag">#Redis</a>
+          
+            <a href="/tags/Debian/" rel="tag">#Debian</a>
           
             <a href="/tags/MySql/" rel="tag">#MySql</a>
           
@@ -550,7 +550,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">31</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -567,7 +567,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
