@@ -187,11 +187,11 @@
     
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
     
+      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
+    
       <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
-    
-      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
     
   </entry>
   
