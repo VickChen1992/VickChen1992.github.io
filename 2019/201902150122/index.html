@@ -6,15 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -63,45 +63,44 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Linux,Debian,Redis,MySql,Docker," />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1" />
+  <meta name="keywords" content="Linux,Redis,Debian,MySql,Docker,">
 
 
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml">
 
-<meta name="description" content="Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。
-这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。">
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。 这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。">
+<meta name="keywords" content="Linux,Redis,Debian,MySql,Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Debian使用Docker安装redis和mysql">
 <meta property="og:url" content="VickChen.win/2019/201902150122/index.html">
-<meta property="og:site_name" content="Vick's Blog">
-<meta property="og:description" content="Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。
-这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。">
+<meta property="og:site_name" content="Vick&#39;s Blog">
+<meta property="og:description" content="Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。 这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078v22tp7j20th023ab1.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078c9yh35j20o701f0t3.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g0788grm0gj20fq0ilgm0.jpg">
 <meta property="og:updated_time" content="2019-07-20T09:59:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Debian使用Docker安装redis和mysql">
-<meta name="twitter:description" content="Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。
-这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。">
+<meta name="twitter:description" content="Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。 这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078v22tp7j20th023ab1.jpg">
 
 
@@ -123,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/2019/201902150122/"/>
+  <link rel="canonical" href="VickChen.win/2019/201902150122/">
 
   <title> Debian使用Docker安装redis和mysql | Vick's Blog </title>
 </head>
@@ -154,7 +153,7 @@
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vick's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -181,7 +180,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -191,7 +190,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -201,7 +200,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -211,7 +210,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -221,7 +220,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -283,7 +282,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -329,39 +328,39 @@
 <a id="more"></a>
 <h2 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>官方Debian存储库中提供的Docker安装包可能不是最新版本。为了确保我们获得最新版本，我们将从官方Docker存储库安装Docker。为此，我们将添加一个新的包源，从Docker添加GPG密钥以确保下载有效，然后安装该包。</p>
 <p>首先，更新现有的包列表：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt update</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
 <p>接下来，安装一些允许apt使用包通过HTTPS的必备软件包：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install apt-transport-https ca-certificates curl gnupg2 software-properties-common</span><br></pre></td></tr></table></figure>
 <p>然后将官方Docker存储库的GPG密钥添加到您的系统：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -</span><br></pre></td></tr></table></figure>
 <p>将Docker存储库添加到APT源：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo add-apt-repository <span class="string">"deb [arch=amd64] https://download.docker.com/linux/debian <span class="variable">$(lsb_release -cs)</span> stable"</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository <span class="string">"deb [arch=amd64] https://download.docker.com/linux/debian <span class="variable">$(lsb_release -cs)</span> stable"</span></span><br></pre></td></tr></table></figure>
 <p>接下来，使用新添加的repo中的Docker包更新包数据库：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt update</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
 <p>确保您要从Docker repo而不是默认的Debian repo安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-cache policy docker-ce</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-cache policy docker-ce</span><br></pre></td></tr></table></figure>
 <p>虽然Docker的版本号可能不同，但您会看到这样的输出：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">docker-ce:</div><div class="line">  Installed: (none)</div><div class="line">  Candidate: 18.06.1~ce~3-0~debian</div><div class="line">  Version table:</div><div class="line">     18.06.1~ce~3-0~debian 500</div><div class="line">        500 https://download.docker.com/linux/debian stretch/stable amd64 Packages</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker-ce:</span><br><span class="line">  Installed: (none)</span><br><span class="line">  Candidate: 18.06.1~ce~3-0~debian</span><br><span class="line">  Version table:</span><br><span class="line">     18.06.1~ce~3-0~debian 500</span><br><span class="line">        500 https://download.docker.com/linux/debian stretch/stable amd64 Packages</span><br></pre></td></tr></table></figure>
 <p>请注意，<code>docker-ce</code>未安装，但安装的候选者来自Debian 9（stretch）的Docker存储库。</p>
 <p>最后，安装Docker：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt install docker-ce</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install docker-ce</span><br></pre></td></tr></table></figure>
 <p>现在应该安装Docker，守护进程启动，并启用进程启动进程。检查它是否正在运行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo systemctl status docker</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl status docker</span><br></pre></td></tr></table></figure>
 <p>输出应类似于以下内容，表明该服务处于活动状态并正在运行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">docker.service - Docker Application Container Engine</div><div class="line">   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)</div><div class="line">   Active: active (running) since Thu 2018-07-05 15:08:39 UTC; 2min 55s ago</div><div class="line">     Docs: https://docs.docker.com</div><div class="line">  Main PID: 21319 (dockerd)</div><div class="line">   CGroup: /system.slice/docker.service</div><div class="line">           ├─21319 /usr/bin/dockerd -H fd://</div><div class="line">           └─21326 docker-containerd --config /var/run/docker/containerd/containerd.toml</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">docker.service - Docker Application Container Engine</span><br><span class="line">   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)</span><br><span class="line">   Active: active (running) since Thu 2018-07-05 15:08:39 UTC; 2min 55s ago</span><br><span class="line">     Docs: https://docs.docker.com</span><br><span class="line">  Main PID: 21319 (dockerd)</span><br><span class="line">   CGroup: /system.slice/docker.service</span><br><span class="line">           ├─21319 /usr/bin/dockerd -H fd://</span><br><span class="line">           └─21326 docker-containerd --config /var/run/docker/containerd/containerd.toml</span><br></pre></td></tr></table></figure>
 <h3 id="使用Docker镜像"><a href="#使用Docker镜像" class="headerlink" title="使用Docker镜像"></a>使用Docker镜像</h3><p>Docker容器是从Docker镜像构建的。默认情况下，Docker从Docker Hub中获取这些映像，Docker Hub是由Docker管理的Docker注册表，Docker项目背后的公司。任何人都可以在Docker Hub上托管他们的Docker镜像，因此您需要的大多数应用程序和Linux发行版都将在那里托管图像。</p>
 <p>要检查您是否可以从Docker Hub访问和下载图像，请键入：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run hello-world</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
 <p>输出将指示Docker正常工作：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Unable to find image <span class="string">'hello-world:latest'</span> locally</div><div class="line">latest: Pulling from library/hello-world</div><div class="line">9db2ca6ccae0: Pull complete</div><div class="line">Digest: sha256:4b8ff392a12ed9ea17784bd3c9a8b1fa3299cac44aca35a85c90c5e3c7afacdc</div><div class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</div><div class="line">​</div><div class="line">Hello from Docker!</div><div class="line">This message shows that your installation appears to be working correctly.</div><div class="line">...</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Unable to find image <span class="string">'hello-world:latest'</span> locally</span><br><span class="line">latest: Pulling from library/hello-world</span><br><span class="line">9db2ca6ccae0: Pull complete</span><br><span class="line">Digest: sha256:4b8ff392a12ed9ea17784bd3c9a8b1fa3299cac44aca35a85c90c5e3c7afacdc</span><br><span class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</span><br><span class="line">​</span><br><span class="line">Hello from Docker!</span><br><span class="line">This message shows that your installation appears to be working correctly.</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>Docker最初无法在本地找到hello-world图像，因此它从Docker Hub下载了图像，Docker Hub是默认存储库。下载映像后，Docker从映像创建了一个容器，并在容器中执行了应用程序，显示了该消息。</p>
-<h3 id="操作镜像"><a href="#操作镜像" class="headerlink" title="操作镜像"></a>操作镜像</h3><h4 id="查看本机镜像"><a href="#查看本机镜像" class="headerlink" title="查看本机镜像"></a>查看本机镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">vick@debian:~$ sudo docker images</div><div class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</div><div class="line">mysql               5.7                 e47e309f72c8        9 days ago          372MB</div><div class="line">redis               3.2                 87856cc39862        4 months ago        76MB</div></pre></td></tr></table></figure>
-<h4 id="查看本机运行中的容器"><a href="#查看本机运行中的容器" class="headerlink" title="查看本机运行中的容器"></a>查看本机运行中的容器</h4><p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078v22tp7j20th023ab1.jpg" alt=""></p>
-<h4 id="查看本机所有容器"><a href="#查看本机所有容器" class="headerlink" title="查看本机所有容器"></a>查看本机所有容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker ps <span class="_">-a</span></div></pre></td></tr></table></figure>
-<h4 id="启动某个容器"><a href="#启动某个容器" class="headerlink" title="启动某个容器"></a>启动某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker start XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
-<h4 id="停止某个容器"><a href="#停止某个容器" class="headerlink" title="停止某个容器"></a>停止某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker stop XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
-<h4 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker rmi XXXX <span class="comment">#XXXX可以是镜像的id也可以是镜像的name</span></div></pre></td></tr></table></figure>
-<h4 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker rm XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></div></pre></td></tr></table></figure>
+<h3 id="操作镜像"><a href="#操作镜像" class="headerlink" title="操作镜像"></a>操作镜像</h3><h4 id="查看本机镜像"><a href="#查看本机镜像" class="headerlink" title="查看本机镜像"></a>查看本机镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vick@debian:~$ sudo docker images</span><br><span class="line">REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE</span><br><span class="line">mysql               5.7                 e47e309f72c8        9 days ago          372MB</span><br><span class="line">redis               3.2                 87856cc39862        4 months ago        76MB</span><br></pre></td></tr></table></figure>
+<h4 id="查看本机运行中的容器"><a href="#查看本机运行中的容器" class="headerlink" title="查看本机运行中的容器"></a>查看本机运行中的容器</h4><p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078v22tp7j20th023ab1.jpg" alt></p>
+<h4 id="查看本机所有容器"><a href="#查看本机所有容器" class="headerlink" title="查看本机所有容器"></a>查看本机所有容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker ps -a</span><br></pre></td></tr></table></figure>
+<h4 id="启动某个容器"><a href="#启动某个容器" class="headerlink" title="启动某个容器"></a>启动某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker start XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></span><br></pre></td></tr></table></figure>
+<h4 id="停止某个容器"><a href="#停止某个容器" class="headerlink" title="停止某个容器"></a>停止某个容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker stop XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除镜像"><a href="#删除镜像" class="headerlink" title="删除镜像"></a>删除镜像</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker rmi XXXX <span class="comment">#XXXX可以是镜像的id也可以是镜像的name</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除容器"><a href="#删除容器" class="headerlink" title="删除容器"></a>删除容器</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker rm XXXX <span class="comment">#XXXX可以是容器的id也可以是容器的name</span></span><br></pre></td></tr></table></figure>
 <p>注意：</p>
 <ol>
 <li><p>删除前需要保证容器是停止的  stop</p>
@@ -372,31 +371,31 @@
 </li>
 </ol>
 <h2 id="MySql"><a href="#MySql" class="headerlink" title="MySql"></a>MySql</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><p>搜索mysql镜像：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker search mysql</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search mysql</span><br></pre></td></tr></table></figure>
 <p>下载mysql 5.7镜像：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull mysql:5.7 <span class="comment">#不带版本号默认最新</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull mysql:5.7 <span class="comment">#不带版本号默认最新</span></span><br></pre></td></tr></table></figure>
 <p>启动mysql：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name mysql -p 3306:3306 -v /home/vick/mysql/data:/var/lib/mysql <span class="_">-e</span> MYSQL_ROOT_PASSWORD=lanhe <span class="_">-d</span> mysql:5.7</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name mysql -p 3306:3306 -v /home/vick/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=lanhe -d mysql:5.7</span><br></pre></td></tr></table></figure>
 <p>注意，这里的容器名字叫：mysql ，root用户密码是：lanhe，映射宿主机子的端口3306到容器的端口3306，</p>
 <p>并且将mysql的/var/lib/mysql目录映射到/home/vick/mysql/data文件夹。</p>
 <h3 id="设置可远程访问"><a href="#设置可远程访问" class="headerlink" title="设置可远程访问"></a>设置可远程访问</h3><p>进入mysql容器：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vick@debian:~$ sudo docker <span class="built_in">exec</span> -it mysql bash</div><div class="line">root@943fd585094f:/<span class="comment">#</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vick@debian:~$ sudo docker <span class="built_in">exec</span> -it mysql bash</span><br><span class="line">root@943fd585094f:/<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 <p>在容器内登陆Mysql：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">root@943fd585094f:/<span class="comment"># mysql -uroot -p  </span></div><div class="line"></div><div class="line">Enter password: </div><div class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</div><div class="line">Your MySQL connection id is 12</div><div class="line">Server version: 5.7.25 MySQL Community Server (GPL)</div><div class="line"></div><div class="line">Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.</div><div class="line"></div><div class="line">Oracle is a registered trademark of Oracle Corporation and/or its</div><div class="line">affiliates. Other names may be trademarks of their respective</div><div class="line">owners.</div><div class="line"></div><div class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> help. Type <span class="string">'\c'</span> to clear the current input statement.</div><div class="line"></div><div class="line">mysql&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">root@943fd585094f:/<span class="comment"># mysql -uroot -p  </span></span><br><span class="line"></span><br><span class="line">Enter password: </span><br><span class="line">Welcome to the MySQL monitor.  Commands end with ; or \g.</span><br><span class="line">Your MySQL connection id is 12</span><br><span class="line">Server version: 5.7.25 MySQL Community Server (GPL)</span><br><span class="line"></span><br><span class="line">Copyright (c) 2000, 2019, Oracle and/or its affiliates. All rights reserved.</span><br><span class="line"></span><br><span class="line">Oracle is a registered trademark of Oracle Corporation and/or its</span><br><span class="line">affiliates. Other names may be trademarks of their respective</span><br><span class="line">owners.</span><br><span class="line"></span><br><span class="line">Type <span class="string">'help;'</span> or <span class="string">'\h'</span> <span class="keyword">for</span> <span class="built_in">help</span>. Type <span class="string">'\c'</span> to clear the current input statement.</span><br><span class="line"></span><br><span class="line">mysql&gt;</span><br></pre></td></tr></table></figure>
 <p>查看用户信息</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">mysql&gt; select host,user,plugin,authentication_string from mysql.user;                                                                                            </div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+                                                                </div><div class="line">| host      | user          | plugin                | authentication_string                     |</div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+</div><div class="line">| localhost | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</div><div class="line">| localhost | mysql.session | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</div><div class="line">| localhost | mysql.sys     | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</div><div class="line">| %         | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</div><div class="line">+-----------+---------------+-----------------------+-------------------------------------------+</div><div class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; select host,user,plugin,authentication_string from mysql.user;                                                                                            </span><br><span class="line">+-----------+---------------+-----------------------+-------------------------------------------+                                                                </span><br><span class="line">| host      | user          | plugin                | authentication_string                     |</span><br><span class="line">+-----------+---------------+-----------------------+-------------------------------------------+</span><br><span class="line">| localhost | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</span><br><span class="line">| localhost | mysql.session | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</span><br><span class="line">| localhost | mysql.sys     | mysql_native_password | *THISISNOTAVALIDPASSWORDTHATCANBEUSEDHERE |</span><br><span class="line">| %         | root          | mysql_native_password | *A980E23A5D33A160CCCDE9D0A4DA20115167B799 |</span><br><span class="line">+-----------+---------------+-----------------------+-------------------------------------------+</span><br><span class="line">4 rows <span class="keyword">in</span> <span class="built_in">set</span> (0.00 sec)</span><br></pre></td></tr></table></figure>
 <p>host为 % 表示不限制ip   localhost表示本机使用    plugin非mysql_native_password 则需要修改密码。</p>
 <p>连接时错误提示：</p>
-<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078c9yh35j20o701f0t3.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g078c9yh35j20o701f0t3.jpg" alt></p>
 <p>解决方法：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql&gt; ALTER user <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'123456'</span>;  </div><div class="line">Query OK, 0 rows affected (0.01 sec)  </div><div class="line">mysql&gt;   </div><div class="line">mysql&gt; FLUSH PRIVILEGES;  </div><div class="line">Query OK, 0 rows affected (0.01 sec)</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; ALTER user <span class="string">'root'</span>@<span class="string">'%'</span> IDENTIFIED WITH mysql_native_password BY <span class="string">'123456'</span>;  </span><br><span class="line">Query OK, 0 rows affected (0.01 sec)  </span><br><span class="line">mysql&gt;   </span><br><span class="line">mysql&gt; FLUSH PRIVILEGES;  </span><br><span class="line">Query OK, 0 rows affected (0.01 sec)</span><br></pre></td></tr></table></figure>
 <p>连接数据库：</p>
-<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g0788grm0gj20fq0ilgm0.jpg" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058ly1g0788grm0gj20fq0ilgm0.jpg" alt></p>
 <p>连接成功了。</p>
 <h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><p>安装步骤与mysql类似：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker search  redis</div><div class="line">docker pull  redis:3.2</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker search  redis</span><br><span class="line">docker pull  redis:3.2</span><br></pre></td></tr></table></figure>
 <p>运行：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name redis -p 6379:6379 -v /home/vick/redis/data:/data  <span class="_">-d</span> redis:3.2 redis-server --appendonly yes</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name redis -p 6379:6379 -v /home/vick/redis/data:/data  -d redis:3.2 redis-server --appendonly yes</span><br></pre></td></tr></table></figure>
 <p>命令说明：</p>
 <p><code>--name redis</code> :将容器命名为redis</p>
 <p><code>-p 6379:6379</code> : 将容器的6379端口映射到主机的6379端口</p>
@@ -404,7 +403,7 @@
 <p><code>redis-server --appendonly yes</code> : 在容器执行redis-server启动命令，并打开redis持久化配置</p>
 <p>连接、查看容器:</p>
 <p>使用redis镜像执行redis-cli命令连接到刚启动的容器,主机IP为172.17.0.1</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">vick@debian:~$ sudo docker <span class="built_in">exec</span> -it redis redis-cli</div><div class="line">127.0.0.1:6379&gt; info</div><div class="line"><span class="comment"># Server</span></div><div class="line">redis_version:3.2.12</div><div class="line">redis_git_sha1:00000000</div><div class="line">redis_git_dirty:0</div><div class="line">redis_build_id:b0df607ad3315254</div><div class="line">redis_mode:standalone</div><div class="line">os:Linux 4.9.0-8-amd64 x86_64</div><div class="line">arch_bits:64</div><div class="line">multiplexing_api:epoll</div><div class="line">gcc_version:6.3.0</div><div class="line">process_id:1</div><div class="line">run_id:54ef1808535f61b18b9713<span class="built_in">cd</span>9455c09396f032b4</div><div class="line">tcp_port:6379</div><div class="line">uptime_in_seconds:5065</div><div class="line">uptime_in_days:0</div><div class="line">hz:10</div><div class="line">lru_clock:6719318</div><div class="line">executable:/data/redis-server</div><div class="line">config_file:</div><div class="line"></div><div class="line"><span class="comment"># Clients</span></div><div class="line">connected_clients:1</div><div class="line">client_longest_output_list:0</div><div class="line">client_biggest_input_buf:0</div><div class="line">blocked_clients:0</div><div class="line">...</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">vick@debian:~$ sudo docker <span class="built_in">exec</span> -it redis redis-cli</span><br><span class="line">127.0.0.1:6379&gt; info</span><br><span class="line"><span class="comment"># Server</span></span><br><span class="line">redis_version:3.2.12</span><br><span class="line">redis_git_sha1:00000000</span><br><span class="line">redis_git_dirty:0</span><br><span class="line">redis_build_id:b0df607ad3315254</span><br><span class="line">redis_mode:standalone</span><br><span class="line">os:Linux 4.9.0-8-amd64 x86_64</span><br><span class="line">arch_bits:64</span><br><span class="line">multiplexing_api:epoll</span><br><span class="line">gcc_version:6.3.0</span><br><span class="line">process_id:1</span><br><span class="line">run_id:54ef1808535f61b18b9713cd9455c09396f032b4</span><br><span class="line">tcp_port:6379</span><br><span class="line">uptime_in_seconds:5065</span><br><span class="line">uptime_in_days:0</span><br><span class="line">hz:10</span><br><span class="line">lru_clock:6719318</span><br><span class="line">executable:/data/redis-server</span><br><span class="line">config_file:</span><br><span class="line"></span><br><span class="line"><span class="comment"># Clients</span></span><br><span class="line">connected_clients:1</span><br><span class="line">client_longest_output_list:0</span><br><span class="line">client_biggest_input_buf:0</span><br><span class="line">blocked_clients:0</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -429,9 +428,9 @@
           
             <a href="/tags/Linux/" rel="tag">#Linux</a>
           
-            <a href="/tags/Debian/" rel="tag">#Debian</a>
-          
             <a href="/tags/Redis/" rel="tag">#Redis</a>
+          
+            <a href="/tags/Debian/" rel="tag">#Debian</a>
           
             <a href="/tags/MySql/" rel="tag">#MySql</a>
           
@@ -502,7 +501,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -513,9 +512,7 @@
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="Vick" />
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Vick">
           <p class="site-author-name" itemprop="name">Vick</p>
           <p class="site-description motion-element" itemprop="description"></p>
         </div>
@@ -620,7 +617,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

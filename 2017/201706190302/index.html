@@ -6,15 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -63,48 +63,41 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="CSharp,RSA," />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1" />
+  <meta name="keywords" content="CSharp,RSA,">
 
 
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml">
 
-<meta name="description" content="RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。
-.NET Framework 中提供的 RSA 算法规定：
 
-待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoSe">
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。 .NET Framework 中提供的 RSA 算法规定：  待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoSe">
+<meta name="keywords" content="CSharp,RSA">
 <meta property="og:type" content="article">
 <meta property="og:title" content="不限长度RAS加密解密">
 <meta property="og:url" content="VickChen.win/2017/201706190302/index.html">
-<meta property="og:site_name" content="Vick's Blog">
-<meta property="og:description" content="RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。
-.NET Framework 中提供的 RSA 算法规定：
-
-待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoSe">
+<meta property="og:site_name" content="Vick&#39;s Blog">
+<meta property="og:description" content="RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。 .NET Framework 中提供的 RSA 算法规定：  待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoSe">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2019-07-20T08:05:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="不限长度RAS加密解密">
-<meta name="twitter:description" content="RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。
-.NET Framework 中提供的 RSA 算法规定：
-
-待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoSe">
+<meta name="twitter:description" content="RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。 .NET Framework 中提供的 RSA 算法规定：  待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoSe">
 
 
 
@@ -125,7 +118,7 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/2017/201706190302/"/>
+  <link rel="canonical" href="VickChen.win/2017/201706190302/">
 
   <title> 不限长度RAS加密解密 | Vick's Blog </title>
 </head>
@@ -156,7 +149,7 @@
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vick's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -183,7 +176,7 @@
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -193,7 +186,7 @@
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -203,7 +196,7 @@
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -213,7 +206,7 @@
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -223,7 +216,7 @@
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -285,7 +278,7 @@
           </span>
 
           
-            <span class="post-category" >
+            <span class="post-category">
               &nbsp; | &nbsp;
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -333,8 +326,8 @@
 </blockquote>
 <p>所以，如果要加密较长的数据，则可以采用分段加解密的方式，实现方式如下：</p>
 <a id="more"></a>
-<p>加密部分代码如下:<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Encrypt</span>(<span class="params"><span class="keyword">string</span> xmlPublicKey, <span class="keyword">string</span> EncryptString</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</div><div class="line">    &#123;</div><div class="line">        RSACryptography.FromXmlString(xmlPublicKey);</div><div class="line">        Byte[] PlaintextData = Encoding.UTF8.GetBytes(EncryptString);</div><div class="line">        <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span> - <span class="number">11</span>;    <span class="comment">//加密块最大长度限制</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> (PlaintextData.Length &lt;= MaxBlockSize)</div><div class="line">            <span class="keyword">return</span> Convert.ToBase64String(RSACryptography.Encrypt(PlaintextData, <span class="literal">false</span>));</div><div class="line"></div><div class="line">        <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream(PlaintextData))</div><div class="line">        <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream())</div><div class="line">        &#123;</div><div class="line">            Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</div><div class="line">            <span class="keyword">int</span> BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line"></div><div class="line">            <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                Byte[] ToEncrypt = <span class="keyword">new</span> Byte[BlockSize];</div><div class="line">                Array.Copy(Buffer, <span class="number">0</span>, ToEncrypt, <span class="number">0</span>, BlockSize);</div><div class="line"></div><div class="line">                Byte[] Cryptograph = RSACryptography.Encrypt(ToEncrypt, <span class="literal">false</span>);</div><div class="line">                CrypStream.Write(Cryptograph, <span class="number">0</span>, Cryptograph.Length);</div><div class="line"></div><div class="line">                BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> Convert.ToBase64String(CrypStream.ToArray(), Base64FormattingOptions.None);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>//解密部分代码如下<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Decrypt</span>(<span class="params"><span class="keyword">string</span> xmlPrivateKey, <span class="keyword">string</span> EncryptString</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</div><div class="line">    &#123;</div><div class="line"></div><div class="line">        <span class="keyword">try</span></div><div class="line">        &#123;</div><div class="line">            RSACryptography.FromXmlString(xmlPrivateKey);</div><div class="line">            Byte[] CiphertextData = Convert.FromBase64String(EncryptString);</div><div class="line">            <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span>;    <span class="comment">//解密块最大长度限制</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> (CiphertextData.Length &lt;= MaxBlockSize)</div><div class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(RSACryptography.Decrypt(CiphertextData, <span class="literal">false</span>));</div><div class="line"></div><div class="line">            <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream(CiphertextData))</div><div class="line">            <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream())</div><div class="line">            &#123;</div><div class="line">                Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</div><div class="line">                <span class="keyword">int</span> BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line"></div><div class="line">                <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    Byte[] ToDecrypt = <span class="keyword">new</span> Byte[BlockSize];</div><div class="line">                    Array.Copy(Buffer, <span class="number">0</span>, ToDecrypt, <span class="number">0</span>, BlockSize);</div><div class="line"></div><div class="line">                    Byte[] Plaintext = RSACryptography.Decrypt(ToDecrypt, <span class="literal">false</span>);</div><div class="line">                    PlaiStream.Write(Plaintext, <span class="number">0</span>, Plaintext.Length);</div><div class="line"></div><div class="line">                    BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(PlaiStream.ToArray());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">catch</span> (Exception)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"解密失败,请检查传输数据"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>加密部分代码如下:<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Encrypt</span>(<span class="params"><span class="keyword">string</span> xmlPublicKey, <span class="keyword">string</span> EncryptString</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</span><br><span class="line">    &#123;</span><br><span class="line">        RSACryptography.FromXmlString(xmlPublicKey);</span><br><span class="line">        Byte[] PlaintextData = Encoding.UTF8.GetBytes(EncryptString);</span><br><span class="line">        <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span> - <span class="number">11</span>;    <span class="comment">//加密块最大长度限制</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (PlaintextData.Length &lt;= MaxBlockSize)</span><br><span class="line">            <span class="keyword">return</span> Convert.ToBase64String(RSACryptography.Encrypt(PlaintextData, <span class="literal">false</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream(PlaintextData))</span><br><span class="line">        <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream())</span><br><span class="line">        &#123;</span><br><span class="line">            Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</span><br><span class="line">            <span class="keyword">int</span> BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</span><br><span class="line"></span><br><span class="line">            <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                Byte[] ToEncrypt = <span class="keyword">new</span> Byte[BlockSize];</span><br><span class="line">                Array.Copy(Buffer, <span class="number">0</span>, ToEncrypt, <span class="number">0</span>, BlockSize);</span><br><span class="line"></span><br><span class="line">                Byte[] Cryptograph = RSACryptography.Encrypt(ToEncrypt, <span class="literal">false</span>);</span><br><span class="line">                CrypStream.Write(Cryptograph, <span class="number">0</span>, Cryptograph.Length);</span><br><span class="line"></span><br><span class="line">                BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> Convert.ToBase64String(CrypStream.ToArray(), Base64FormattingOptions.None);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>//解密部分代码如下<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Decrypt</span>(<span class="params"><span class="keyword">string</span> xmlPrivateKey, <span class="keyword">string</span> EncryptString</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</span><br><span class="line">    &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            RSACryptography.FromXmlString(xmlPrivateKey);</span><br><span class="line">            Byte[] CiphertextData = Convert.FromBase64String(EncryptString);</span><br><span class="line">            <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span>;    <span class="comment">//解密块最大长度限制</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (CiphertextData.Length &lt;= MaxBlockSize)</span><br><span class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(RSACryptography.Decrypt(CiphertextData, <span class="literal">false</span>));</span><br><span class="line"></span><br><span class="line">            <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream(CiphertextData))</span><br><span class="line">            <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream())</span><br><span class="line">            &#123;</span><br><span class="line">                Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</span><br><span class="line">                <span class="keyword">int</span> BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    Byte[] ToDecrypt = <span class="keyword">new</span> Byte[BlockSize];</span><br><span class="line">                    Array.Copy(Buffer, <span class="number">0</span>, ToDecrypt, <span class="number">0</span>, BlockSize);</span><br><span class="line"></span><br><span class="line">                    Byte[] Plaintext = RSACryptography.Decrypt(ToDecrypt, <span class="literal">false</span>);</span><br><span class="line">                    PlaiStream.Write(Plaintext, <span class="number">0</span>, Plaintext.Length);</span><br><span class="line"></span><br><span class="line">                    BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(PlaiStream.ToArray());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span> (Exception)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"解密失败,请检查传输数据"</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -426,7 +419,7 @@
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -437,9 +430,7 @@
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="Vick" />
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Vick">
           <p class="site-author-name" itemprop="name">Vick</p>
           <p class="site-description motion-element" itemprop="description"></p>
         </div>
@@ -544,7 +535,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>

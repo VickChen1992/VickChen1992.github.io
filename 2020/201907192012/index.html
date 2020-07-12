@@ -6,15 +6,15 @@
 
 
 <html class="theme-next mist use-motion">
-<head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
 
 
@@ -29,7 +29,7 @@
 
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
 
 
 
@@ -63,45 +63,40 @@
 
 
 
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml" />
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1" />
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
 
 
+  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml">
 
-<meta name="description" content="title:三种MySql避免重复插入记录方法date:2019-07-19 20:12:05categories:技术
-tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update
-注意，除非表有一个PRIMARY KEY">
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="title:三种MySql避免重复插入记录方法date:2019-07-19 20:12:05categories:技术 tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update 注意，除非表有一个PRIMARY KEY">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vick's Blog">
+<meta property="og:title" content="Vick&#39;s Blog">
 <meta property="og:url" content="VickChen.win/2020/201907192012/index.html">
-<meta property="og:site_name" content="Vick's Blog">
-<meta property="og:description" content="title:三种MySql避免重复插入记录方法date:2019-07-19 20:12:05categories:技术
-tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update
-注意，除非表有一个PRIMARY KEY">
+<meta property="og:site_name" content="Vick&#39;s Blog">
+<meta property="og:description" content="title:三种MySql避免重复插入记录方法date:2019-07-19 20:12:05categories:技术 tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update 注意，除非表有一个PRIMARY KEY">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2020-07-10T13:23:47.157Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vick's Blog">
-<meta name="twitter:description" content="title:三种MySql避免重复插入记录方法date:2019-07-19 20:12:05categories:技术
-tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update
-注意，除非表有一个PRIMARY KEY">
+<meta name="twitter:title" content="Vick&#39;s Blog">
+<meta name="twitter:description" content="title:三种MySql避免重复插入记录方法date:2019-07-19 20:12:05categories:技术 tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update 注意，除非表有一个PRIMARY KEY">
 
 
 
@@ -122,7 +117,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
 
 
 
-  <link rel="canonical" href="VickChen.win/2020/201907192012/"/>
+  <link rel="canonical" href="VickChen.win/2020/201907192012/">
 
   <title>  | Vick's Blog </title>
 </head>
@@ -153,7 +148,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
   
 
   <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <span class="site-title">Vick's Blog</span>
       <span class="logo-line-after"><i></i></span>
@@ -180,7 +175,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
         <li class="menu-item menu-item-home">
           <a href="/" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             首页
           </a>
@@ -190,7 +185,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
         <li class="menu-item menu-item-categories">
           <a href="/categories" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
             
             分类
           </a>
@@ -200,7 +195,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
             
             归档
           </a>
@@ -210,7 +205,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
             
             标签
           </a>
@@ -220,7 +215,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
             
             关于
           </a>
@@ -312,18 +307,18 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
 <h2 id="insert-ignore"><a href="#insert-ignore" class="headerlink" title="insert ignore"></a>insert ignore</h2><ul>
 <li>insert ignore会忽略数据库中已经存在的数据(根据主键或者唯一索引判断)，如果数据库没有数据，就插入新的数据，如果有数据的话就跳过这条数据。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INSERT IGNORE INTO `table_name` (`email`, `phone`, `user_id`) </div><div class="line">VALUES (&apos;test9@163.com&apos;, &apos;99999&apos;, &apos;9999&apos;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT IGNORE INTO `table_name` (`email`, `phone`, `user_id`) </span><br><span class="line">VALUES (&apos;test9@163.com&apos;, &apos;99999&apos;, &apos;9999&apos;);</span><br></pre></td></tr></table></figure>
 <p>这样当有重复记录就会忽略,执行后返回数字0</p>
 <p>还有个应用就是复制表,避免重复记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INSERT IGNORE INTO `table_1` (`name`) SELECT `name` FROM `table_2`;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT IGNORE INTO `table_1` (`name`) SELECT `name` FROM `table_2`;</span><br></pre></td></tr></table></figure>
 <h2 id="replace-into"><a href="#replace-into" class="headerlink" title="replace into"></a>replace into</h2><ul>
 <li>replace into 首先尝试插入数据到表中。 如果发现表中已经有此行数据(根据主键或者唯一索引判断)则先删除此行数据，然后插入新的数据，否则，直接插入新数据。</li>
 <li>使用replace into，你必须具有delete和insert权限。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">REPLACE INTO `table_name`(`col_name`, ...) VALUES (...);</div><div class="line">REPLACE INTO `table_name` (`col_name`, ...) SELECT ...;</div><div class="line">REPLACE INTO `table_name` SET `col_name`=&apos;value&apos;,...</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REPLACE INTO `table_name`(`col_name`, ...) VALUES (...);</span><br><span class="line">REPLACE INTO `table_name` (`col_name`, ...) SELECT ...;</span><br><span class="line">REPLACE INTO `table_name` SET `col_name`=&apos;value&apos;,...</span><br></pre></td></tr></table></figure>
 <h2 id="insert-on-duplicate-key-update"><a href="#insert-on-duplicate-key-update" class="headerlink" title="insert on duplicate key update"></a>insert on duplicate key update</h2><ul>
 <li><p>如果在insert into 语句末尾指定了on duplicate key update，并且插入行后会导致在一个UNIQUE索引或PRIMARY KEY中出现重复值，则在出现重复值的行执行UPDATE；如果不会导致重复的问题，则插入新行，跟普通的insert into一样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">--如果列a被定义为UNIQUE，并且包含值1，则以下两个语句具有相同的效果</div><div class="line">INSERT INTO `table` (`a`, `b`, `c`) VALUES (1, 2, 3) </div><div class="line">ON DUPLICATE KEY UPDATE `c`=`c`+1; </div><div class="line"></div><div class="line">UPDATE `table` SET `c`=`c`+1 WHERE `a`=1;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--如果列a被定义为UNIQUE，并且包含值1，则以下两个语句具有相同的效果</span><br><span class="line">INSERT INTO `table` (`a`, `b`, `c`) VALUES (1, 2, 3) </span><br><span class="line">ON DUPLICATE KEY UPDATE `c`=`c`+1; </span><br><span class="line"></span><br><span class="line">UPDATE `table` SET `c`=`c`+1 WHERE `a`=1;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <ul>
@@ -347,7 +342,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
 </li>
 <li>特别说明：UNIQUE索引将会对null字段失效，也就是说(a字段上建立唯一索引)：<code>INSERT INTO</code>test<code>(</code>a<code>) VALUES (NULL);</code> 是可以重复插入的（联合唯一索引也一样）。</li>
 </ol>
-<p><em>本文部分出自 - <a href="https://www.jianshu.com/p/751299bd5669" target="_blank" rel="external">MySQL避免插入重复记录的方法</a></em></p>
+<p><em>本文部分出自 - <a href="https://www.jianshu.com/p/751299bd5669" target="_blank" rel="noopener">MySQL避免插入重复记录的方法</a></em></p>
 
       
     </div>
@@ -427,7 +422,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
 
       
         <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
             文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview">
@@ -438,9 +433,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
 
       <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.jpg"
-               alt="Vick" />
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Vick">
           <p class="site-author-name" itemprop="name">Vick</p>
           <p class="site-description motion-element" itemprop="description"></p>
         </div>
@@ -545,7 +538,7 @@ tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据�
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright" >
+        <div class="copyright">
   
   &copy; 
   <span itemprop="copyrightYear">2020</span>
