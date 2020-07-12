@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="SQL,CSharp,.Net Core,">
+  <meta name="keywords" content="CSharp,.Net Core,Excel,NPOI,">
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。 虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。 MiniProfiler此时就派上用场了，这是Stack Overflow团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引">
-<meta name="keywords" content="SQL,CSharp,.Net Core">
+<meta name="description" content="读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行excel导入。 为了方便之后的开发，特意将之前写的代码进行记录。">
+<meta name="keywords" content="CSharp,.Net Core,Excel,NPOI">
 <meta property="og:type" content="article">
-<meta property="og:title" content=".Net Core使用 MiniProfiler 进行性能分析">
-<meta property="og:url" content="VickChen.win/2018/201809010211/index.html">
+<meta property="og:title" content="将Excel中的数据读取到DataTable中">
+<meta property="og:url" content="VickChen.win/2018/201807102136/index.html">
 <meta property="og:site_name" content="Vick&#39;s Blog">
-<meta property="og:description" content="我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。 虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。 MiniProfiler此时就派上用场了，这是Stack Overflow团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引">
+<meta property="og:description" content="读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行excel导入。 为了方便之后的开发，特意将之前写的代码进行记录。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-20T08:05:53.000Z">
+<meta property="og:updated_time" content="2020-07-12T13:41:49.770Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content=".Net Core使用 MiniProfiler 进行性能分析">
-<meta name="twitter:description" content="我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。 虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。 MiniProfiler此时就派上用场了，这是Stack Overflow团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引">
+<meta name="twitter:title" content="将Excel中的数据读取到DataTable中">
+<meta name="twitter:description" content="读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行excel导入。 为了方便之后的开发，特意将之前写的代码进行记录。">
 
 
 
@@ -118,9 +118,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/2018/201809010211/">
+  <link rel="canonical" href="VickChen.win/2018/201807102136/">
 
-  <title> .Net Core使用 MiniProfiler 进行性能分析 | Vick's Blog </title>
+  <title> 将Excel中的数据读取到DataTable中 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
             
             
               
-                .Net Core使用 MiniProfiler 进行性能分析
+                将Excel中的数据读取到DataTable中
               
             
           </h1>
@@ -272,8 +272,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2018-09-01T02:11:52+08:00" content="2018-09-01">
-              2018-09-01
+            <time itemprop="dateCreated" datetime="2018-07-10T21:36:50+08:00" content="2018-07-10">
+              2018-07-10
             </time>
           </span>
 
@@ -319,25 +319,12 @@
       
 
       
-        <p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
-<p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
-<p>MiniProfiler此时就派上用场了，这是<a href="http://stackoverflow.com/" target="_blank" rel="noopener">Stack Overflow</a>团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引用、Ajax、Iframe形式访问的其它页面进行监控,监控内容包括数据库内容，并可以显示数据库访问的SQL（支持EF、EF CodeFirst等 ）。并且以很友好的方式展现在页面上。</p>
+        <p>读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行excel导入。</p>
+<p>为了方便之后的开发，特意将之前写的代码进行记录。</p>
 <a id="more"></a>
-<p>官方文档： <a href="https://miniprofiler.com/dotnet/AspDotNetCore" target="_blank" rel="noopener">https://miniprofiler.com/dotnet/AspDotNetCore</a></p>
-<p>1、添加包 <a href="https://www.nuget.org/packages/MiniProfiler.AspNetCore.Mvc/" target="_blank" rel="noopener">MiniProfiler.AspNetCore.Mvc</a>   和    <a href="https://www.nuget.org/packages/MiniProfiler.EntityFrameworkCore" target="_blank" rel="noopener">MiniProfiler.EntityFrameworkCore</a></p>
-<p>2、在 Startup.cs 中的 ConfigureServices 下添加，也可以根据官方文档中的说明进行相应的配置</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services.AddMiniProfiler().AddEntityFramework();</span><br></pre></td></tr></table></figure>
-<p>3、在 Startup.cs 中的 Configure 下添加</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.UseMiniProfiler();</span><br></pre></td></tr></table></figure>
-<p>4、修改 _ViewImports.cshtml </p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">using</span> StackExchange.Profiling</span><br><span class="line">@addTagHelper *, MiniProfiler.AspNetCore.Mvc</span><br></pre></td></tr></table></figure>
-<p>5、将MiniProfiler添加到布局文件（Shared/_Layout.cshtml）中</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mini-profiler /&gt;</span><br></pre></td></tr></table></figure>
-<p>完成~</p>
-<mini-profiler>
+<p>首先需要引用NPOI的NuGet包，注意：有分Core版本(DotNetCore.NPOI)和非Core版本(NPOI)，注意区分。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">public DataTable ReadExcelToDataTable(string fileName, bool isFirstRowColumn = true)</span><br><span class="line">       &#123;</span><br><span class="line">           //定义要返回的dataTable对象</span><br><span class="line">           var data = new DataTable();</span><br><span class="line">           try</span><br><span class="line">           &#123;</span><br><span class="line">               if (!System.IO.File.Exists(fileName))</span><br><span class="line">               &#123;</span><br><span class="line">                   return null;</span><br><span class="line">               &#125;</span><br><span class="line">               //根据指定路径读取文件</span><br><span class="line">               var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);</span><br><span class="line">               //根据文件流创建excel数据结构</span><br><span class="line">               var workbook = WorkbookFactory.Create(fs);</span><br><span class="line">               var sheet = workbook.GetSheetAt(0);</span><br><span class="line">               if (sheet == null) return data;</span><br><span class="line">               var firstRow = sheet.GetRow(0);</span><br><span class="line">               //一行最后一个cell的编号 即总的列数</span><br><span class="line">               int cellCount = firstRow.LastCellNum;</span><br><span class="line">               //如果第一行是标题列名</span><br><span class="line">               int startRow;</span><br><span class="line">               if (isFirstRowColumn)</span><br><span class="line">               &#123;</span><br><span class="line">                   for (int i = firstRow.FirstCellNum; i &lt; cellCount; ++i)</span><br><span class="line">                   &#123;</span><br><span class="line">                       var cell = firstRow.GetCell(i);</span><br><span class="line">                       var cellValue = cell?.StringCellValue;</span><br><span class="line">                       if (cellValue == null) continue;</span><br><span class="line">                       var column = new DataColumn(cellValue);</span><br><span class="line">                       data.Columns.Add(column);</span><br><span class="line">                   &#125;</span><br><span class="line">                   startRow = sheet.FirstRowNum + 1;//需要跳过的标题行</span><br><span class="line">               &#125;</span><br><span class="line">               else</span><br><span class="line">                   startRow = sheet.FirstRowNum;</span><br><span class="line"></span><br><span class="line">               //最后一列的标号</span><br><span class="line">               var rowCount = sheet.LastRowNum;</span><br><span class="line">               for (int i = startRow; i &lt;= rowCount; ++i)</span><br><span class="line">               &#123;</span><br><span class="line">                   var row = sheet.GetRow(i);</span><br><span class="line">                   if (row == null) continue; //没有数据的行默认是null</span><br><span class="line">                   var dataRow = data.NewRow();</span><br><span class="line">                   for (int j = row.FirstCellNum; j &lt; cellCount; ++j)</span><br><span class="line">                   &#123;</span><br><span class="line">                       if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null</span><br><span class="line">                           dataRow[j] = row.GetCell(j).ToString();</span><br><span class="line">                   &#125;</span><br><span class="line">                   data.Rows.Add(dataRow);</span><br><span class="line">               &#125;</span><br><span class="line">               return data;</span><br><span class="line">           &#125;</span><br><span class="line">           catch (Exception ex)</span><br><span class="line">           &#123;</span><br><span class="line">               throw ex;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 
-
-</mini-profiler>
       
     </div>
 
@@ -359,11 +346,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/SQL/" rel="tag">#SQL</a>
-          
             <a href="/tags/CSharp/" rel="tag">#CSharp</a>
           
             <a href="/tags/Net-Core/" rel="tag">#.Net Core</a>
+          
+            <a href="/tags/Excel/" rel="tag">#Excel</a>
+          
+            <a href="/tags/NPOI/" rel="tag">#NPOI</a>
           
         </div>
       
@@ -372,16 +361,16 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/201808272148/" rel="next" title="HangFire快速入门">
-                <i class="fa fa-chevron-left"></i> HangFire快速入门
+              <a href="/2018/201806131846/" rel="next" title="ASP.NET Core 2.1 使用Cookie验证身份">
+                <i class="fa fa-chevron-left"></i> ASP.NET Core 2.1 使用Cookie验证身份
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/201809172351/" rel="prev" title="Linux下IDEA无法输入中文问题">
-                Linux下IDEA无法输入中文问题 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/201808021940/" rel="prev" title="在IIS上部署你的ASP.NET Core 2.1项目">
+                在IIS上部署你的ASP.NET Core 2.1项目 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
