@@ -1111,9 +1111,9 @@
     <link href="VickChen.win/2018/201807102136/"/>
     <id>VickChen.win/2018/201807102136/</id>
     <published>2018-07-10T13:36:50.000Z</published>
-    <updated>2020-07-12T13:41:49.770Z</updated>
+    <updated>2020-07-12T13:55:07.240Z</updated>
     
-    <content type="html"><![CDATA[<p>读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行excel导入。</p>
+    <content type="html"><![CDATA[<p>读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行Excel导入。</p>
 <p>为了方便之后的开发，特意将之前写的代码进行记录。</p>
 <a id="more"></a>
 <p>首先需要引用NPOI的NuGet包，注意：有分Core版本(DotNetCore.NPOI)和非Core版本(NPOI)，注意区分。</p>
@@ -1122,7 +1122,7 @@
     
     <summary type="html">
     
-      &lt;p&gt;读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行excel导入。&lt;/p&gt;
+      &lt;p&gt;读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行Excel导入。&lt;/p&gt;
 &lt;p&gt;为了方便之后的开发，特意将之前写的代码进行记录。&lt;/p&gt;
     
     </summary>

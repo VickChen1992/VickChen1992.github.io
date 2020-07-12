@@ -100,7 +100,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gw1f7zaho7n5fj20mp0k2jvw.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gw1f7zbcc4ekrj20g908cmyl.jpg">
 <meta property="og:image" content="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gw1f7zbi1z5y7j20fa06zjs5.jpg">
-<meta property="og:updated_time" content="2020-07-10T08:18:29.434Z">
+<meta property="og:updated_time" content="2020-07-12T14:05:41.315Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用hexo在GitHub上搭建自己的bolg">
 <meta name="twitter:description" content="前言：搭建博客的几大要素 一个服务器（即博客的代码存放的地方，这里选用github） 一个Blog生成工具（这里选用Hexo，类似的还有 WordPress，jekyll）">
@@ -419,6 +419,13 @@
 </li>
 <li><p>hexo deploy之后出现 fatal: ‘username.github.io’ does not appear to be a git repository？</p>
 <p> 解决方法：一是检查 repo 的名字是否合乎规范、是否含有大写字母、config.yml 中的 deploy 配置是否正确，二是把 git bash 关掉，重新打开再执行命令。</p>
+</li>
+<li><p>hexo deploy之后出现 Error: EBUSY: resource busy or locked, rmdir ‘D:\Dropbox\Blog.deploy_git\categories’</p>
+<p> 解决方法：这个问题一般是因为文件夹被占用或者权限不够引起，设置下取消只读或者提高权限即可。</p>
+</li>
+<li><p>hexo deploy之后出现 error: failed to execute prompt script (exit code 1) fatal: could not read Username for ‘<a href="https://github.com" target="_blank" rel="noopener">https://github.com</a>‘: No error</p>
+<p> 解决方法：检查_config.yml 文件中的deploy-&gt;repo链接是否为https方式？改为ssh方式(git@github.com:XX/XX.github.io.git)</p>
+<p> <strong>如果ssh方式报错，则运行<code>ssh -T git@github.com</code> 用于测试ssh是否正确配置</strong></p>
 </li>
 <li><p>右键菜单中没有 git bash选项？</p>
 <p> 解决方法：可以进入开始菜单找到 git bash，然后通过 cd进入相应目录执行命令。</p>
