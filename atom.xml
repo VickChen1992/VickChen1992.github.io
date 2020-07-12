@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2019-07-20T09:03:24.843Z</updated>
+  <updated>2020-07-10T13:23:47.157Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,11 +16,106 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title></title>
+    <link href="VickChen.win/2020/201907192012/"/>
+    <id>VickChen.win/2020/201907192012/</id>
+    <published>2020-07-10T12:37:57.976Z</published>
+    <updated>2020-07-10T13:23:47.157Z</updated>
+    
+    <content type="html"><![CDATA[<hr>
+<p>title:三种MySql避免重复插入记录方法<br>date:2019-07-19 20:12:05<br>categories:技术</p>
+<h2 id="tag-MySql"><a href="#tag-MySql" class="headerlink" title="tag:[MySql]"></a>tag:[MySql]</h2><p>mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:<br>1、insert ignore<br>2、replace into<br>3、insert on duplicate key update</p>
+<p>注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。</p>
+<a id="more"></a>
+<h2 id="insert-ignore"><a href="#insert-ignore" class="headerlink" title="insert ignore"></a>insert ignore</h2><ul>
+<li>insert ignore会忽略数据库中已经存在的数据(根据主键或者唯一索引判断)，如果数据库没有数据，就插入新的数据，如果有数据的话就跳过这条数据。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">INSERT IGNORE INTO `table_name` (`email`, `phone`, `user_id`) </div><div class="line">VALUES (&apos;test9@163.com&apos;, &apos;99999&apos;, &apos;9999&apos;);</div></pre></td></tr></table></figure>
+<p>这样当有重复记录就会忽略,执行后返回数字0</p>
+<p>还有个应用就是复制表,避免重复记录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">INSERT IGNORE INTO `table_1` (`name`) SELECT `name` FROM `table_2`;</div></pre></td></tr></table></figure>
+<h2 id="replace-into"><a href="#replace-into" class="headerlink" title="replace into"></a>replace into</h2><ul>
+<li>replace into 首先尝试插入数据到表中。 如果发现表中已经有此行数据(根据主键或者唯一索引判断)则先删除此行数据，然后插入新的数据，否则，直接插入新数据。</li>
+<li>使用replace into，你必须具有delete和insert权限。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">REPLACE INTO `table_name`(`col_name`, ...) VALUES (...);</div><div class="line">REPLACE INTO `table_name` (`col_name`, ...) SELECT ...;</div><div class="line">REPLACE INTO `table_name` SET `col_name`=&apos;value&apos;,...</div></pre></td></tr></table></figure>
+<h2 id="insert-on-duplicate-key-update"><a href="#insert-on-duplicate-key-update" class="headerlink" title="insert on duplicate key update"></a>insert on duplicate key update</h2><ul>
+<li><p>如果在insert into 语句末尾指定了on duplicate key update，并且插入行后会导致在一个UNIQUE索引或PRIMARY KEY中出现重复值，则在出现重复值的行执行UPDATE；如果不会导致重复的问题，则插入新行，跟普通的insert into一样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">--如果列a被定义为UNIQUE，并且包含值1，则以下两个语句具有相同的效果</div><div class="line">INSERT INTO `table` (`a`, `b`, `c`) VALUES (1, 2, 3) </div><div class="line">ON DUPLICATE KEY UPDATE `c`=`c`+1; </div><div class="line"></div><div class="line">UPDATE `table` SET `c`=`c`+1 WHERE `a`=1;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>使用insert into，你必须具有insert和update权限。</p>
+</li>
+<li><p>如果有新记录被插入，则受影响行的值显示1；如果原有的记录被更新，则受影响行的值显示2；如果记录被更新前后值是一样的，则受影响行数的值显示0。 </p>
+</li>
+<li><p>当您使用on duplicate key update时，insert delayed (延迟插入)选项被忽略。</p>
+</li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
+<li><p>这三种方法都能避免主键或者唯一索引重复导致的插入失败问题。</p>
+</li>
+<li><p>insert ignore 能忽略重复数据，只插入不重复的数据。</p>
+</li>
+<li><p>replace into 和 insert … on duplicate key update 都是替换原有的重复数据。</p>
+</li>
+<li><p>replace into 是删除原有的行后，在插入新行，如有自增id，这个会造成自增id的改变；</p>
+</li>
+<li><p>insert … on duplicate key update在遇到重复行时，会直接更新原有的行，具体更新哪些字段怎么更新，取决于update后的语句。</p>
+</li>
+<li>特别说明：UNIQUE索引将会对null字段失效，也就是说(a字段上建立唯一索引)：<code>INSERT INTO</code>test<code>(</code>a<code>) VALUES (NULL);</code> 是可以重复插入的（联合唯一索引也一样）。</li>
+</ol>
+<p><em>本文部分出自 - <a href="https://www.jianshu.com/p/751299bd5669" target="_blank" rel="external">MySQL避免插入重复记录的方法</a></em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;hr&gt;
+&lt;p&gt;title:三种MySql避免重复插入记录方法&lt;br&gt;date:2019-07-19 20:12:05&lt;br&gt;categories:技术&lt;/p&gt;
+&lt;h2 id=&quot;tag-MySql&quot;&gt;&lt;a href=&quot;#tag-MySql&quot; class=&quot;headerlink&quot; title=&quot;tag:[MySql]&quot;&gt;&lt;/a&gt;tag:[MySql]&lt;/h2&gt;&lt;p&gt;mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:&lt;br&gt;1、insert ignore&lt;br&gt;2、replace into&lt;br&gt;3、insert on duplicate key update&lt;/p&gt;
+&lt;p&gt;注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>layui table 工具栏列隐藏状态本地永久化保存</title>
+    <link href="VickChen.win/2019/201906012003/"/>
+    <id>VickChen.win/2019/201906012003/</id>
+    <published>2019-06-01T12:03:32.000Z</published>
+    <updated>2020-07-10T12:32:25.898Z</updated>
+    
+    <content type="html"><![CDATA[<p>由于table列比较多，有时候用户不需要看那么多列，虽然layui提供了隐藏列的接口。但页面刷新后就会复原，这时候就可以将数据保存至localStorage中实现本地永久化保存</p>
+<a id="more"></a>
+<p>只需要改他的几行源码。然后在那个界面写上一句<code>var tableFlag = &quot;xxx&quot;;</code></p>
+<p> table.js便会根据这个来区分是在操作哪个表的数据。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/1.png" alt=""><br><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/2.png" alt=""><br><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/3.png" alt=""></p>
+<p><em>本文部分转载自 - <a href="https://fly.layui.com/jie/47318/" target="_blank" rel="external">Layui官方社区</a></em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;由于table列比较多，有时候用户不需要看那么多列，虽然layui提供了隐藏列的接口。但页面刷新后就会复原，这时候就可以将数据保存至localStorage中实现本地永久化保存&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="JavaScript" scheme="VickChen.win/tags/JavaScript/"/>
+    
+      <category term="layui" scheme="VickChen.win/tags/layui/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用PicGo批量迁移图床</title>
     <link href="VickChen.win/2019/201905270004/"/>
     <id>VickChen.win/2019/201905270004/</id>
     <published>2019-05-26T16:04:32.000Z</published>
-    <updated>2019-07-20T09:03:24.843Z</updated>
+    <updated>2019-07-20T09:03:24.000Z</updated>
     
     <content type="html"><![CDATA[<p>上次折腾完之后，感觉还是不太踏实，毕竟新浪已经准备禁止图床了，索性抽点时间一步到位的换个图床。</p>
 <a id="more"></a>
@@ -53,7 +148,7 @@
     <link href="VickChen.win/2019/201905050112/"/>
     <id>VickChen.win/2019/201905050112/</id>
     <published>2019-05-04T17:12:01.000Z</published>
-    <updated>2019-07-20T08:07:03.910Z</updated>
+    <updated>2019-07-20T08:07:03.000Z</updated>
     
     <content type="html"><![CDATA[<p>对于不少自己搭建博客的人来说，使用什么图床可能比较难以选择，以前还有各种免费好用的图床工具，例如七牛云、SM.MS、Imgur、GitHub、微博图床等，当然还有腾讯云、阿里云的云存储服务，但是免费的意味着不稳定，说不定哪天图片就没有了，有一些国外的访问速度又不行，国内的云存储服务商价格也比较高，而且单一个博客也不需要太大空间，有点浪费。</p>
 <p>本来刚刚开始写博客时用的是七牛云，后来涨价了，转到免费的 微博图床 。用了好几年没啥问题，没想到最近【2019 年 4 月份】微博图床出问题了，所有图片全部挂掉，访问图片链接全部是返回 403 状态码，表示拒绝访问，其实是微博图床开启了防盗链，本文就提供了一种简单有效的解决方案。</p>
@@ -88,7 +183,7 @@
     <link href="VickChen.win/2019/201902150122/"/>
     <id>VickChen.win/2019/201902150122/</id>
     <published>2019-02-14T17:22:01.000Z</published>
-    <updated>2019-07-20T09:59:49.421Z</updated>
+    <updated>2019-07-20T09:59:49.000Z</updated>
     
     <content type="html"><![CDATA[<p>Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。</p>
 <p>这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。</p>
@@ -185,9 +280,9 @@
     
       <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
     
-      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
-    
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
+    
+      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
     
@@ -200,7 +295,7 @@
     <link href="VickChen.win/2019/201901221340/"/>
     <id>VickChen.win/2019/201901221340/</id>
     <published>2019-01-22T05:40:32.000Z</published>
-    <updated>2019-07-26T03:00:28.383Z</updated>
+    <updated>2019-07-26T03:00:28.000Z</updated>
     
     <content type="html"><![CDATA[<p>项目中需要用到的数据库安装、配置以及常见错误</p>
 <a id="more"></a>
@@ -328,9 +423,9 @@
     
       <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
     
-      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
-    
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
+    
+      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
     
@@ -341,7 +436,7 @@
     <link href="VickChen.win/2018/201812240020/"/>
     <id>VickChen.win/2018/201812240020/</id>
     <published>2018-12-23T16:20:11.000Z</published>
-    <updated>2019-07-20T08:06:36.575Z</updated>
+    <updated>2019-07-20T08:06:36.000Z</updated>
     
     <content type="html"><![CDATA[<p>VMware Tools是VMware虚拟机中自带的一种增强工具，相当于VirtualBox中的增强功能（Sun VirtualBox Guest Additions），是VMware提供的增强虚拟显卡和硬盘性能、以及同步虚拟机与主机时钟的驱动程序。</p>
 <a id="more"></a>
@@ -396,7 +491,7 @@
     <link href="VickChen.win/2018/201812200110/"/>
     <id>VickChen.win/2018/201812200110/</id>
     <published>2018-12-19T17:10:05.000Z</published>
-    <updated>2019-07-26T02:59:04.428Z</updated>
+    <updated>2019-07-26T02:59:04.000Z</updated>
     
     <content type="html"><![CDATA[<p>目前在学习Debian，然后发现一路都是坑，与之前接触的Ubuntu在使用上还是有点差别的。Debian更加原生，也更加稳定，坑也更多。为了防止后来者继续踩坑，特意写了此文用于记录总结初学者在学习过程中遇到的各种问题。</p>
 <a id="more"></a>
@@ -496,7 +591,7 @@
     <link href="VickChen.win/2018/201811230212/"/>
     <id>VickChen.win/2018/201811230212/</id>
     <published>2018-11-22T18:12:00.000Z</published>
-    <updated>2019-07-26T02:57:43.519Z</updated>
+    <updated>2019-07-26T02:57:43.000Z</updated>
     
     <content type="html"><![CDATA[<p>邮件服务是一般的系统都会拥有和需要的功能，但是对于.Net项目来说，邮件服务的创建和使用会较为的麻烦。.NET对于邮件功能提供了System.Net.Mail用于创建邮件服务，该基础服务提供邮件的基础操作，并且使用也较为的简单。对于真正将该功能使用于项目的人，就会慢慢发现其中的优缺点，甚至有些时候不能忍受其中的问题。在这里介绍一种微软用于替代System.Net.Mail的邮件服务组件MailKit和MimeKit，官网地址：<a href="http://www.mimekit.net/" target="_blank" rel="external">http://www.mimekit.net/</a> GitHub地址：<a href="https://github.com/jstedfast/MimeKit" target="_blank" rel="external">https://github.com/jstedfast/MimeKit</a></p>
 <a id="more"></a>
@@ -546,7 +641,7 @@
     <link href="VickChen.win/2018/201811041748/"/>
     <id>VickChen.win/2018/201811041748/</id>
     <published>2018-11-04T09:48:01.000Z</published>
-    <updated>2019-07-20T08:06:36.566Z</updated>
+    <updated>2019-07-20T08:06:36.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近项目中用到了Entity Framework Core，发现网上很多文章讲的都是之前版本的用法，对于刚接触EF core的朋友来说可能有点懵。特意整理了几个细节</p>
 <a id="more"></a>
@@ -627,7 +722,7 @@
     <link href="VickChen.win/2018/201810202143/"/>
     <id>VickChen.win/2018/201810202143/</id>
     <published>2018-10-20T13:43:31.000Z</published>
-    <updated>2019-07-26T03:43:13.898Z</updated>
+    <updated>2019-07-26T03:43:13.000Z</updated>
     
     <content type="html"><![CDATA[<p> redis没有实现访问控制这个功能，但是它提供了一个轻量级的认证方式，可以编辑redis.conf配置来启用认证。</p>
 <a id="more"></a>
@@ -667,7 +762,7 @@
     <link href="VickChen.win/2018/201810122240/"/>
     <id>VickChen.win/2018/201810122240/</id>
     <published>2018-10-12T14:40:31.000Z</published>
-    <updated>2019-07-26T03:39:41.288Z</updated>
+    <updated>2019-07-26T03:39:41.000Z</updated>
     
     <content type="html"><![CDATA[<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>使用 idea 访问 git 项目时，无论是 pull/push。每次都要输入密码。</p>
 <a id="more"></a>
@@ -697,7 +792,7 @@
     <link href="VickChen.win/2018/201810012332/"/>
     <id>VickChen.win/2018/201810012332/</id>
     <published>2018-10-01T15:32:01.000Z</published>
-    <updated>2019-07-20T08:05:53.821Z</updated>
+    <updated>2019-07-20T08:05:53.000Z</updated>
     
     <content type="html"><![CDATA[<p>滚动条到底部加载数据原理很简单，就是为window或者滚动元素添加一个scroll事件，浏览器每次触发scroll事件时判断是否滚动到了浏览器底部，如果到了底部则加载新数据。关键是计算滚动条是否滚动到了浏览器底部</p>
 <a id="more"></a>
@@ -748,7 +843,7 @@
     <link href="VickChen.win/2018/201809211813/"/>
     <id>VickChen.win/2018/201809211813/</id>
     <published>2018-09-21T10:13:04.000Z</published>
-    <updated>2019-07-20T08:05:53.820Z</updated>
+    <updated>2019-07-20T08:05:53.000Z</updated>
     
     <content type="html"><![CDATA[<p>此贴主要用于记录Core程序在发布时遇到的错误。</p>
 <a id="more"></a>
@@ -783,7 +878,7 @@
     <link href="VickChen.win/2018/201809172351/"/>
     <id>VickChen.win/2018/201809172351/</id>
     <published>2018-09-17T15:51:09.000Z</published>
-    <updated>2019-07-26T03:19:20.305Z</updated>
+    <updated>2019-07-26T03:19:20.000Z</updated>
     
     <content type="html"><![CDATA[<p>最近在Debian下使用Idea编写Java，感觉还不错，但偶尔会发生无法使用中文的情况，导致写注释很不方便，奇怪的是在Idea外面没问题。</p>
 <a id="more"></a>
@@ -800,9 +895,9 @@
       <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
-    
       <category term="Idea" scheme="VickChen.win/tags/Idea/"/>
+    
+      <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
     
   </entry>
   
@@ -811,7 +906,7 @@
     <link href="VickChen.win/2018/201809010211/"/>
     <id>VickChen.win/2018/201809010211/</id>
     <published>2018-08-31T18:11:52.000Z</published>
-    <updated>2019-07-20T08:05:53.819Z</updated>
+    <updated>2019-07-20T08:05:53.000Z</updated>
     
     <content type="html"><![CDATA[<p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
 <p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
@@ -857,7 +952,7 @@
     <link href="VickChen.win/2018/201808272148/"/>
     <id>VickChen.win/2018/201808272148/</id>
     <published>2018-08-27T13:48:07.000Z</published>
-    <updated>2019-07-20T08:05:53.816Z</updated>
+    <updated>2019-07-20T08:05:53.000Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://github.com/HangfireIO/Hangfire" target="_blank" rel="external">Hangfire</a>作为一款高人气且容易上手的分布式后台执行服务，支持多种数据库。在.net core的环境中，由Core自带的DI管理着生命周期，免去了在NF4.X环境中配置<a href="http://docs.hangfire.io/en/latest/deployment-to-production/making-aspnet-app-always-running.html" target="_blank" rel="external">always running</a>的麻烦，真正做到开箱即用。</p>
 <a id="more"></a>
@@ -907,7 +1002,7 @@
     <link href="VickChen.win/2018/201808021940/"/>
     <id>VickChen.win/2018/201808021940/</id>
     <published>2018-08-02T11:40:31.000Z</published>
-    <updated>2019-07-20T08:05:53.815Z</updated>
+    <updated>2019-07-20T08:05:53.000Z</updated>
     
     <content type="html"><![CDATA[<p>与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是<code>AspNetCoreModule</code>，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。</p>
 <a id="more"></a>
@@ -956,7 +1051,7 @@
     <link href="VickChen.win/2018/201806131846/"/>
     <id>VickChen.win/2018/201806131846/</id>
     <published>2018-06-13T10:46:01.000Z</published>
-    <updated>2019-07-20T08:05:37.252Z</updated>
+    <updated>2019-07-20T08:05:37.000Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 1.x提供了通过Cookie 中间件将用户主体序列化为一个加密的Cookie，然后在后续请求中验证Cookie并重新创建主体，并将其分配给 <code>HttpContext.User</code> 属性。如果您要提供自己的登录界面和用户数据库，可以使用作为独立功能的Cookie中间件。</p>
 <p>ASP.NET Core 2.x的一个主要变化是不再存在Cookie中间件。取而代之的是在<em>Startup.cs</em>文件中的Configure方法中的调用 <code>UseAuthentication</code> 方法会添加设置 <code>HttpContext.User</code> 属性的 <code>AuthenticationMiddleware</code> 中间件。</p>
@@ -1037,7 +1132,7 @@
     <link href="VickChen.win/2017/201708172327/"/>
     <id>VickChen.win/2017/201708172327/</id>
     <published>2017-08-17T15:27:18.000Z</published>
-    <updated>2019-07-20T08:05:37.251Z</updated>
+    <updated>2019-07-20T08:05:37.000Z</updated>
     
     <content type="html"><![CDATA[<p>Emmet是一个编辑器插件，以前被称作为 Zen Coding。使用类似于 CSS 选择器的语法描述元素在生成的文档树中的位置及其属性。</p>
 <p>使用 Emmet 可以帮助程序员快速的编写 HTML 和 CSS 代码，从而提高 Web前端开发的效率。<a href="https://www.emmet.io/" target="_blank" rel="external">官网</a>提供多编辑器支持。我一般使用<a href="https://code.visualstudio.com/" target="_blank" rel="external">Visual Studio Code</a>，下面就以VS Code插件举例。</p>
@@ -1175,117 +1270,6 @@
       <category term="Emmet" scheme="VickChen.win/tags/Emmet/"/>
     
       <category term="Html" scheme="VickChen.win/tags/Html/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>不限长度RAS加密解密</title>
-    <link href="VickChen.win/2017/201706190302/"/>
-    <id>VickChen.win/2017/201706190302/</id>
-    <published>2017-06-18T19:02:41.000Z</published>
-    <updated>2019-07-20T08:05:37.250Z</updated>
-    
-    <content type="html"><![CDATA[<p>RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。</p>
-<p>.NET Framework 中提供的 RSA 算法规定：</p>
-<blockquote>
-<p>待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoServiceProvider.KeySize / 8）。</p>
-</blockquote>
-<p>所以，如果要加密较长的数据，则可以采用分段加解密的方式，实现方式如下：</p>
-<a id="more"></a>
-<p>加密部分代码如下:<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Encrypt</span>(<span class="params"><span class="keyword">string</span> xmlPublicKey, <span class="keyword">string</span> EncryptString</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</div><div class="line">    &#123;</div><div class="line">        RSACryptography.FromXmlString(xmlPublicKey);</div><div class="line">        Byte[] PlaintextData = Encoding.UTF8.GetBytes(EncryptString);</div><div class="line">        <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span> - <span class="number">11</span>;    <span class="comment">//加密块最大长度限制</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> (PlaintextData.Length &lt;= MaxBlockSize)</div><div class="line">            <span class="keyword">return</span> Convert.ToBase64String(RSACryptography.Encrypt(PlaintextData, <span class="literal">false</span>));</div><div class="line"></div><div class="line">        <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream(PlaintextData))</div><div class="line">        <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream())</div><div class="line">        &#123;</div><div class="line">            Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</div><div class="line">            <span class="keyword">int</span> BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line"></div><div class="line">            <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</div><div class="line">            &#123;</div><div class="line">                Byte[] ToEncrypt = <span class="keyword">new</span> Byte[BlockSize];</div><div class="line">                Array.Copy(Buffer, <span class="number">0</span>, ToEncrypt, <span class="number">0</span>, BlockSize);</div><div class="line"></div><div class="line">                Byte[] Cryptograph = RSACryptography.Encrypt(ToEncrypt, <span class="literal">false</span>);</div><div class="line">                CrypStream.Write(Cryptograph, <span class="number">0</span>, Cryptograph.Length);</div><div class="line"></div><div class="line">                BlockSize = PlaiStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">return</span> Convert.ToBase64String(CrypStream.ToArray(), Base64FormattingOptions.None);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>//解密部分代码如下<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">Decrypt</span>(<span class="params"><span class="keyword">string</span> xmlPrivateKey, <span class="keyword">string</span> EncryptString</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">using</span> (RSACryptoServiceProvider RSACryptography = <span class="keyword">new</span> RSACryptoServiceProvider())</div><div class="line">    &#123;</div><div class="line"></div><div class="line">        <span class="keyword">try</span></div><div class="line">        &#123;</div><div class="line">            RSACryptography.FromXmlString(xmlPrivateKey);</div><div class="line">            Byte[] CiphertextData = Convert.FromBase64String(EncryptString);</div><div class="line">            <span class="keyword">int</span> MaxBlockSize = RSACryptography.KeySize / <span class="number">8</span>;    <span class="comment">//解密块最大长度限制</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> (CiphertextData.Length &lt;= MaxBlockSize)</div><div class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(RSACryptography.Decrypt(CiphertextData, <span class="literal">false</span>));</div><div class="line"></div><div class="line">            <span class="keyword">using</span> (MemoryStream CrypStream = <span class="keyword">new</span> MemoryStream(CiphertextData))</div><div class="line">            <span class="keyword">using</span> (MemoryStream PlaiStream = <span class="keyword">new</span> MemoryStream())</div><div class="line">            &#123;</div><div class="line">                Byte[] Buffer = <span class="keyword">new</span> Byte[MaxBlockSize];</div><div class="line">                <span class="keyword">int</span> BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line"></div><div class="line">                <span class="keyword">while</span> (BlockSize &gt; <span class="number">0</span>)</div><div class="line">                &#123;</div><div class="line">                    Byte[] ToDecrypt = <span class="keyword">new</span> Byte[BlockSize];</div><div class="line">                    Array.Copy(Buffer, <span class="number">0</span>, ToDecrypt, <span class="number">0</span>, BlockSize);</div><div class="line"></div><div class="line">                    Byte[] Plaintext = RSACryptography.Decrypt(ToDecrypt, <span class="literal">false</span>);</div><div class="line">                    PlaiStream.Write(Plaintext, <span class="number">0</span>, Plaintext.Length);</div><div class="line"></div><div class="line">                    BlockSize = CrypStream.Read(Buffer, <span class="number">0</span>, MaxBlockSize);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                <span class="keyword">return</span> Encoding.UTF8.GetString(PlaiStream.ToArray());</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">catch</span> (Exception)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"解密失败,请检查传输数据"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;RSA 是常用的非对称加密算法。最近使用时却出现了提示“不正确的长度”，排查发现是由于待加密的数据超长所致。&lt;/p&gt;
-&lt;p&gt;.NET Framework 中提供的 RSA 算法规定：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;待加密的字节数不能超过密钥的长度值除以 8 再减去 11（即：RSACryptoServiceProvider.KeySize / 8 - 11），而加密后得到密文的字节数，正好是密钥的长度值除以 8（即：RSACryptoServiceProvider.KeySize / 8）。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;所以，如果要加密较长的数据，则可以采用分段加解密的方式，实现方式如下：&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
-    
-      <category term="RSA" scheme="VickChen.win/tags/RSA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>rsa互通密钥对生成及互通加解密(c#,java,php)</title>
-    <link href="VickChen.win/2017/201706020041/"/>
-    <id>VickChen.win/2017/201706020041/</id>
-    <published>2017-06-01T16:41:31.000Z</published>
-    <updated>2019-07-20T08:05:37.249Z</updated>
-    
-    <content type="html"><![CDATA[<p>在数据安全上rsa起着非常大的作用，特别是数据网络通讯的安全上。当异构系统在数据网络通讯上对安全性有所要求时，rsa将作为其中的一种选择，此时rsa的互通性就显得尤为重要了。</p>
-<p>本文参考网络资料，提供了rsa互通性的一种可行的解决方案(c#,java,php),而这种互通性是在一定的局限性上达成的，比如密钥是1024位的(更高位没试过，应该也可行），基于PKCS1填充方式。</p>
-<p>所编写的代码有一部分使用了硬编码，同时注重了功能的实现，在类结构设计上关注不多，有需要的可自行修改重构。</p>
-<a id="more"></a>
-<p>相关的程序集或包或代码请详见本文末尾附件。</p>
-<h3 id="生成互通密钥对"><a href="#生成互通密钥对" class="headerlink" title="生成互通密钥对"></a>生成互通密钥对</h3><p>重点参考了Jeffrey Walton（<a href="http://www.codeproject.com/Articles/25487/Cryptographic-Interoperability-Keys" target="_blank" rel="external">http://www.codeproject.com/Articles/25487/Cryptographic-Interoperability-Keys</a>）</p>
-<p>1.C#</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> Cn.Ubingo.Security.RSA.Core;</div><div class="line"><span class="keyword">using</span> Cn.Ubingo.Security.RSA.Key;</div><div class="line"><span class="comment">//生成公私钥对</span></div><div class="line">KeyPair keyPair = KeyGenerator.GenerateKeyPair();</div><div class="line"><span class="comment">//转换成不同的格式</span></div><div class="line">KeyPair asnKeyPair = keyPair.ToASNKeyPair();</div><div class="line">KeyPair xmlKeyPair = asnKeyPair.ToXMLKeyPair();</div><div class="line">KeyPair pemKeyPair = xmlKeyPair.ToPEMKeyPair();</div><div class="line"></div><div class="line"><span class="comment">//获取公私钥，以xml格式的为例</span></div><div class="line"><span class="keyword">string</span> privateKey = xmlKeyPair.PrivateKey;</div><div class="line"><span class="keyword">string</span> publicKey = xmlKeyPair.PublicKey;</div></pre></td></tr></table></figure>
-<p>2.Java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cn.ubingo.security.rsa.core.*;</div><div class="line"><span class="keyword">import</span> cn.ubingo.security.rsa.key.*;</div><div class="line"><span class="comment">//生成密钥对</span></div><div class="line">KeyPair keyPair = KeyGenerator.generateKeyPair();</div><div class="line"><span class="comment">//转换成不同的格式</span></div><div class="line">KeyPair asnKeyPair = keyPair.toASNKeyPair();</div><div class="line">KeyPair xmlKeyPair = asnKeyPair.toXMLKeyPair();</div><div class="line">KeyPair pemKeyPair = xmlKeyPair.toPEMKeyPair();</div><div class="line"><span class="comment">//获取公私钥，以asn格式的为例</span></div><div class="line">String publicKey = asnKeyPair.getPublicKey();</div><div class="line">String privateKey = asnKeyPair.getPrivateKey();</div></pre></td></tr></table></figure>
-<p>3.密钥格式</p>
-<p>a.XML—c#平台惯用</p>
-<p>私钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">&lt;RSAKeyValue&gt;</div><div class="line">&lt;Modulus&gt;</div><div class="line">ociVSjfhJzxxAd9msplL4mllmaknjoB4OPgb+hVo1QGcQ9QWLyMHuPyCo3qbp3ahKqqa4nEkRkTHFOJeITXH69LE78Zyizne9N4hamAHZSVmuBa8dtsQmT06yJWxR4siG8JNMR9aQkMN7kGtxsJBN2+CbIomxSMWSQ2pqvFAyks=</div><div class="line">&lt;/Modulus&gt;</div><div class="line">&lt;Exponent&gt;AQAB&lt;/Exponent&gt;</div><div class="line">&lt;P&gt;0ekRMBZU0GhIYbTZSbnd/TC7QHtE4TCFfg98nOC8EBGBE6U5i3zgRofY0JdWBYmWNE5gtEMINPVfRxJ63Euwkw==&lt;/P&gt;</div><div class="line">&lt;Q&gt;xU5Vbntok5Emt8aP823gizSpG4h//5NvLBDAYpDmGSeg3Jxi1clJLu8d0bYfDOkk+QADYlpNdmJkH2lC4lXqaQ==&lt;/Q&gt;</div><div class="line">&lt;DP&gt;FvcKvFoVGV/vW1Ev3JMLKGImel2CIajvUeVb2sXzjUZ8+qs+6nXVC6JdJCUKcjylRD+28MHMqg6WR+5LpsJZJQ==&lt;/DP&gt;</div><div class="line">&lt;DQ&gt;Ah9ameqn8FZyZS20pLi83qJ9YzdvsQ8j9gRkHWtTnlenylfAVG5q5B9cYcIkyV3EsQ0H/EneZXSfgRr/xjGIaQ==&lt;/DQ&gt;</div><div class="line">&lt;InverseQ&gt;aCt01Nk4gANWR0JrYvJcsLgwB38OOG82hQrBa/quPkCMjGtLZzKh9TFiZjcTWLs1hsBvCPDBO7LM/wbZn1PG6A==&lt;/InverseQ&gt;</div><div class="line">&lt;D&gt;O+gF2+coMLqxT9O0+AJKtqp3bDhWRO6uVc4NsgN2f5VqkzU4B7lNdULPbxCKDa8gS6fD1YC2wWxbWZDe8SY0gjgOF1EUbbO8G1XvcHFE5rGxmZsFJCY+dhxgknqO08MXHVaZYjkmQO7z7XpvFKBocduj39NEe2mYO25l07TQfBk=&lt;/D&gt;</div><div class="line">&lt;/RSAKeyValue&gt;</div></pre></td></tr></table></figure>
-<p>公钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;RSAKeyValue&gt;</div><div class="line">&lt;Modulus&gt;ociVSjfhJzxxAd9msplL4mllmaknjoB4OPgb+hVo1QGcQ9QWLyMHuPyCo3qbp3ahKqqa4nEkRkTHFOJeITXH69LE78Zyizne9N4hamAHZSVmuBa8dtsQmT06yJWxR4siG8JNMR9aQkMN7kGtxsJBN2+CbIomxSMWSQ2pqvFAyks=&lt;/Modulus&gt;</div><div class="line">&lt;Exponent&gt;AQAB&lt;/Exponent&gt;</div><div class="line">&lt;/RSAKeyValue&gt;</div></pre></td></tr></table></figure>
-<p>b.ASN—java平台惯用</p>
-<p>私钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAKHIlUo34Sc8cQHfZrKZS+JpZZmpJ46AeDj4G/oVaNUBnEPUFi8jB7j8gqN6m6d2oSqqmuJxJEZExxTiXiE1x+vSxO/Gcos53vTeIWpgB2UlZrgWvHbbEJk9OsiVsUeLIhvCTTEfWkJDDe5BrcbCQTdvgmyKJsUjFkkNqarxQMpLAgMBAAECgYA76AXb5ygwurFP07T4Akq2qndsOFZE7q5Vzg2yA3Z/lWqTNTgHuU11Qs9vEIoNryBLp8PVgLbBbFtZkN7xJjSCOA4XURRts7wbVe9wcUTmsbGZmwUkJj52HGCSeo7TwxcdVpliOSZA7vPtem8UoGhx26Pf00R7aZg7bmXTtNB8GQJBANHpETAWVNBoSGG02Um53f0wu0B7ROEwhX4PfJzgvBARgROlOYt84EaH2NCXVgWJljROYLRDCDT1X0cSetxLsJMCQQDFTlVue2iTkSa3xo/zbeCLNKkbiH//k28sEMBikOYZJ6DcnGLVyUku7x3Rth8M6ST5AANiWk12YmQfaULiVeppAkAW9wq8WhUZX+9bUS/ckwsoYiZ6XYIhqO9R5VvaxfONRnz6qz7qddULol0kJQpyPKVEP7bwwcyqDpZH7kumwlklAkACH1qZ6qfwVnJlLbSkuLzeon1jN2+xDyP2BGQda1OeV6fKV8BUbmrkH1xhwiTJXcSxDQf8Sd5ldJ+BGv/GMYhpAkBoK3TU2TiAA1ZHQmti8lywuDAHfw44bzaFCsFr+q4+QIyMa0tnMqH1MWJmNxNYuzWGwG8I8ME7ssz/BtmfU8bo</div></pre></td></tr></table></figure>
-<p>公钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQChyJVKN+EnPHEB32aymUviaWWZqSeOgHg4+Bv6FWjVAZxD1BYvIwe4/IKjepundqEqqpricSRGRMcU4l4hNcfr0sTvxnKLOd703iFqYAdlJWa4Frx22xCZPTrIlbFHiyIbwk0xH1pCQw3uQa3GwkE3b4JsiibFIxZJDamq8UDKSwIDAQAB</div></pre></td></tr></table></figure>
-<p>c.PEM—php平台惯用</p>
-<p>私钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">-----BEGIN PRIVATE KEY-----</div><div class="line">MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAKHIlUo34Sc8cQHf</div><div class="line">ZrKZS+JpZZmpJ46AeDj4G/oVaNUBnEPUFi8jB7j8gqN6m6d2oSqqmuJxJEZExxTi</div><div class="line">XiE1x+vSxO/Gcos53vTeIWpgB2UlZrgWvHbbEJk9OsiVsUeLIhvCTTEfWkJDDe5B</div><div class="line">rcbCQTdvgmyKJsUjFkkNqarxQMpLAgMBAAECgYA76AXb5ygwurFP07T4Akq2qnds</div><div class="line">OFZE7q5Vzg2yA3Z/lWqTNTgHuU11Qs9vEIoNryBLp8PVgLbBbFtZkN7xJjSCOA4X</div><div class="line">URRts7wbVe9wcUTmsbGZmwUkJj52HGCSeo7TwxcdVpliOSZA7vPtem8UoGhx26Pf</div><div class="line">00R7aZg7bmXTtNB8GQJBANHpETAWVNBoSGG02Um53f0wu0B7ROEwhX4PfJzgvBAR</div><div class="line">gROlOYt84EaH2NCXVgWJljROYLRDCDT1X0cSetxLsJMCQQDFTlVue2iTkSa3xo/z</div><div class="line">beCLNKkbiH//k28sEMBikOYZJ6DcnGLVyUku7x3Rth8M6ST5AANiWk12YmQfaULi</div><div class="line">VeppAkAW9wq8WhUZX+9bUS/ckwsoYiZ6XYIhqO9R5VvaxfONRnz6qz7qddULol0k</div><div class="line">JQpyPKVEP7bwwcyqDpZH7kumwlklAkACH1qZ6qfwVnJlLbSkuLzeon1jN2+xDyP2</div><div class="line">BGQda1OeV6fKV8BUbmrkH1xhwiTJXcSxDQf8Sd5ldJ+BGv/GMYhpAkBoK3TU2TiA</div><div class="line">A1ZHQmti8lywuDAHfw44bzaFCsFr+q4+QIyMa0tnMqH1MWJmNxNYuzWGwG8I8ME7</div><div class="line">ssz/BtmfU8bo</div><div class="line">-----END PRIVATE KEY-----</div></pre></td></tr></table></figure>
-<p>公钥：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">-----BEGIN PUBLIC KEY-----</div><div class="line">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQChyJVKN+EnPHEB32aymUviaWWZ</div><div class="line">qSeOgHg4+Bv6FWjVAZxD1BYvIwe4/IKjepundqEqqpricSRGRMcU4l4hNcfr0sTv</div><div class="line">xnKLOd703iFqYAdlJWa4Frx22xCZPTrIlbFHiyIbwk0xH1pCQw3uQa3GwkE3b4Js</div><div class="line">iibFIxZJDamq8UDKSwIDAQAB</div><div class="line">-----END PUBLIC KEY-----</div></pre></td></tr></table></figure>
-<p>4.密钥互通性</p>
-<p>各种格式的密钥都可以通过KeyPair类的c#:<code>To*KeyPair()</code>或java:<code>to*KeyPair()</code>方法相互进行转换，无门槛，无障碍。</p>
-<p>C#</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//转换成不同的格式</span></div><div class="line">KeyPair asnKeyPair = keyPair.ToASNKeyPair();</div><div class="line">KeyPair xmlKeyPair = asnKeyPair.ToXMLKeyPair();</div><div class="line">KeyPair pemKeyPair = xmlKeyPair.ToPEMKeyPair();</div></pre></td></tr></table></figure>
-<p>Java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//转换成不同的格式</span></div><div class="line">KeyPair asnKeyPair = keyPair.toASNKeyPair();</div><div class="line">KeyPair xmlKeyPair = asnKeyPair.toXMLKeyPair();</div><div class="line">KeyPair pemKeyPair = xmlKeyPair.toPEMKeyPair();</div></pre></td></tr></table></figure>
-<h3 id="互通加解密"><a href="#互通加解密" class="headerlink" title="互通加解密"></a>互通加解密</h3><p>基于三种语言环境都支持的RSA PKCS1填充方式的算法，实现加解密互通</p>
-<p>KeyWorker的c#:<code>Encrypt</code>,<code>Decrypt</code>或java:<code>encrypt</code>,<code>decrypt</code>或php:<code>encrypt</code>,<code>decrypt</code>方法实现加解密的功能</p>
-<p>1.C# </p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">using</span> Cn.Ubingo.Security.RSA.Core;</div><div class="line"><span class="keyword">using</span> Cn.Ubingo.Security.RSA.Data;</div><div class="line"><span class="comment">//加解密</span></div><div class="line"></div><div class="line"><span class="comment">//XML</span></div><div class="line">KeyWorker privateWorker = <span class="keyword">new</span> KeyWorker(privateKey, KeyFormat.XML);</div><div class="line">KeyWorker publicWorker = <span class="keyword">new</span> KeyWorker(publicKey, KeyFormat.XML);            </div><div class="line">Console.WriteLine(privateWorker.Decrypt(publicWorker.Encrypt(<span class="string">"你好！世界"</span>)));</div><div class="line">Console.WriteLine(publicWorker.Decrypt(privateWorker.Encrypt(<span class="string">"你好！中国"</span>)));</div><div class="line"><span class="comment">//ASN</span></div><div class="line">privateWorker = <span class="keyword">new</span> KeyWorker(asnKeyPair.PrivateKey, KeyFormat.ASN);</div><div class="line">publicWorker = <span class="keyword">new</span> KeyWorker(asnKeyPair.PublicKey, KeyFormat.ASN);</div><div class="line">Console.WriteLine(privateWorker.Decrypt(publicWorker.Encrypt(<span class="string">"你好！世界"</span>)));</div><div class="line">Console.WriteLine(publicWorker.Decrypt(privateWorker.Encrypt(<span class="string">"你好！中国"</span>)));</div><div class="line"><span class="comment">//PEM</span></div><div class="line">privateWorker = <span class="keyword">new</span> KeyWorker(pemKeyPair.PrivateKey, KeyFormat.PEM);</div><div class="line">publicWorker = <span class="keyword">new</span> KeyWorker(pemKeyPair.PublicKey, KeyFormat.PEM);</div><div class="line">Console.WriteLine(privateWorker.Decrypt(publicWorker.Encrypt(<span class="string">"你好！世界"</span>)));</div><div class="line">Console.WriteLine(publicWorker.Decrypt(privateWorker.Encrypt(<span class="string">"你好！中国"</span>)));</div></pre></td></tr></table></figure>
-<p>2.Java</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> cn.ubingo.security.rsa.core.*;</div><div class="line"><span class="keyword">import</span> cn.ubingo.security.rsa.data.*;</div><div class="line"><span class="comment">//ASN</span></div><div class="line">KeyWorker privateWorker = <span class="keyword">new</span> KeyWorker(privateKey, KeyFormat.ASN);</div><div class="line">KeyWorker publicWorker = <span class="keyword">new</span> KeyWorker(publicKey, KeyFormat.ASN);</div><div class="line">System.out.print(privateWorker.decrypt(publicWorker.encrypt(<span class="string">"你好！世界"</span>)));</div><div class="line">System.out.print(publicWorker.decrypt(privateWorker.encrypt(<span class="string">"你好！中国"</span>)));</div><div class="line"><span class="comment">//XML</span></div><div class="line">privateWorker = <span class="keyword">new</span> KeyWorker(xmlKeyPair.getPrivateKey(), KeyFormat.XML);</div><div class="line">publicWorker = <span class="keyword">new</span> KeyWorker(xmlKeyPair.getPublicKey(), KeyFormat.XML);</div><div class="line">System.out.print(privateWorker.decrypt(publicWorker.encrypt(<span class="string">"你好！世界"</span>)));</div><div class="line">System.out.print(publicWorker.decrypt(privateWorker.encrypt(<span class="string">"你好！中国"</span>)));</div><div class="line"><span class="comment">//PEM</span></div><div class="line">privateWorker = <span class="keyword">new</span> KeyWorker(pemKeyPair.getPrivateKey(), KeyFormat.PEM);</div><div class="line">publicWorker = <span class="keyword">new</span> KeyWorker(pemKeyPair.getPublicKey(), KeyFormat.PEM);</div><div class="line">System.out.print(privateWorker.decrypt(publicWorker.encrypt(<span class="string">"你好！世界"</span>)));</div><div class="line">System.out.print(publicWorker.decrypt(privateWorker.encrypt(<span class="string">"你好！中国"</span>)));</div></pre></td></tr></table></figure>
-<p>3.php<br>请保证php文件为utf-8的格式</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line">include "KeyWorker.php";</div><div class="line">use Cn\Ubingo\Security\RSA\Core as core;</div><div class="line">use Cn\Ubingo\Security\RSA\Data as data;</div><div class="line">/*PEM TEST*/</div><div class="line">$publicWorker = new data\KeyWorker("-----BEGIN PUBLIC KEY-----</div><div class="line">MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCZw5tyBNJsjgVrPkLUIWF9el5E</div><div class="line">OXL1AydVBnJ/WWPKTZJBWYxudW+1jI5ifML+1DkCxw/2QLowzViV1OLnpNAWr7zv</div><div class="line">LpN6i7OZtq0o2Yfc+vv6vCctTpMvFartRRwDeXTRBgoGd71UwWgdMOu8Gmr9sv5u</div><div class="line">3C9Kj5fhj0I4WgB94wIDAQAB</div><div class="line">-----END PUBLIC KEY-----",core\KeyFormat::PEM);</div><div class="line">$privateWorker = new data\KeyWorker("-----BEGIN PRIVATE KEY-----</div><div class="line">MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJnDm3IE0myOBWs+</div><div class="line">QtQhYX16XkQ5cvUDJ1UGcn9ZY8pNkkFZjG51b7WMjmJ8wv7UOQLHD/ZAujDNWJXU</div><div class="line">4uek0BavvO8uk3qLs5m2rSjZh9z6+/q8Jy1Oky8Vqu1FHAN5dNEGCgZ3vVTBaB0w</div><div class="line">67waav2y/m7cL0qPl+GPQjhaAH3jAgMBAAECgYA6ANHYlv0RuhlNNTVcdCMkhE6f</div><div class="line">CdTVnBTwO/hhFcVRASYUxMT2vhIfuB/WAx5DpqbC53ib+hrCYhPyoVXe8AsWjgBJ</div><div class="line">cj3RHxjLMou0Jbu6mTjcLgKzMYM85yHscmmDcc8l/ep9BhbiJJsTVM8RqqXfdPmY</div><div class="line">5CAgfwsNXruC7Zb5wQJBAMxVZhR+IzoeYLsmEciy2oOaTq5u8O6yjx7RapIggIKT</div><div class="line">dRU5G2GeCyLRHyZH/+U2/nL3undiP74fxizatzgTE3ECQQDApNKzaMobPW23wRes</div><div class="line">E+dDjJxYnqVqOmZS22D6s+BKwDmHpOt+oJmrirY4LWmOUwUfgAboDWH5y/q5+qJH</div><div class="line">P5STAkEAux+F4UR2nDXPnfPKG4L3K8f3QDUm/WGWQcHEF9gd9/Z0JaBrm+TxC8x4</div><div class="line">+0S6ar4HHWASalwWRdWxVchiO770cQJAGaEUAxhq4wreIPdIffU77Em1tziMC0Dv</div><div class="line">whA7q77olSlTvg8b4YHeT+spaPnptCypXtJ6mL7HDSOtHLcSheYYjwJBAJFdK3vg</div><div class="line">ZS0Sk4oy6iOaOcux+5uBkpF9ran0GIpehyGzia+F1Xf/+NnS22qER/ADvRMNnyHf</div><div class="line">QH24qWxQuST39UQ=</div><div class="line">-----END PRIVATE KEY-----",core\KeyFormat::PEM);</div><div class="line"></div><div class="line">echo $publicWorker-&gt;decrypt($privateWorker-&gt;encrypt("你好！世界"));</div><div class="line">echo $privateWorker-&gt;decrypt($publicWorker-&gt;encrypt("你好！中国"));</div><div class="line"></div><div class="line">/*ASN TEST*/</div><div class="line">$publicWorker = new data\KeyWorker("MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCZw5tyBNJsjgVrPkLUIWF9el5EOXL1AydVBnJ/WWPKTZJBWYxudW+1jI5ifML+1DkCxw/2QLowzViV1OLnpNAWr7zvLpN6i7OZtq0o2Yfc+vv6vCctTpMvFartRRwDeXTRBgoGd71UwWgdMOu8Gmr9sv5u3C9Kj5fhj0I4WgB94wIDAQAB",core\KeyFormat::ASN);</div><div class="line">$privateWorker = new data\KeyWorker("MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAJnDm3IE0myOBWs+QtQhYX16XkQ5cvUDJ1UGcn9ZY8pNkkFZjG51b7WMjmJ8wv7UOQLHD/ZAujDNWJXU4uek0BavvO8uk3qLs5m2rSjZh9z6+/q8Jy1Oky8Vqu1FHAN5dNEGCgZ3vVTBaB0w67waav2y/m7cL0qPl+GPQjhaAH3jAgMBAAECgYA6ANHYlv0RuhlNNTVcdCMkhE6fCdTVnBTwO/hhFcVRASYUxMT2vhIfuB/WAx5DpqbC53ib+hrCYhPyoVXe8AsWjgBJcj3RHxjLMou0Jbu6mTjcLgKzMYM85yHscmmDcc8l/ep9BhbiJJsTVM8RqqXfdPmY5CAgfwsNXruC7Zb5wQJBAMxVZhR+IzoeYLsmEciy2oOaTq5u8O6yjx7RapIggIKTdRU5G2GeCyLRHyZH/+U2/nL3undiP74fxizatzgTE3ECQQDApNKzaMobPW23wResE+dDjJxYnqVqOmZS22D6s+BKwDmHpOt+oJmrirY4LWmOUwUfgAboDWH5y/q5+qJHP5STAkEAux+F4UR2nDXPnfPKG4L3K8f3QDUm/WGWQcHEF9gd9/Z0JaBrm+TxC8x4+0S6ar4HHWASalwWRdWxVchiO770cQJAGaEUAxhq4wreIPdIffU77Em1tziMC0DvwhA7q77olSlTvg8b4YHeT+spaPnptCypXtJ6mL7HDSOtHLcSheYYjwJBAJFdK3vgZS0Sk4oy6iOaOcux+5uBkpF9ran0GIpehyGzia+F1Xf/+NnS22qER/ADvRMNnyHfQH24qWxQuST39UQ=",core\KeyFormat::ASN);</div><div class="line"></div><div class="line">echo $publicWorker-&gt;decrypt($privateWorker-&gt;encrypt("你好！世界"));</div><div class="line">echo $privateWorker-&gt;decrypt($publicWorker-&gt;encrypt("你好！中国"));</div></pre></td></tr></table></figure>
-<p>4.加解密互通性</p>
-<p>任何语言（指的是c#,java,php)使用KeyWorker加密得到的密文，用任何语言的KeyWorker都可以进行解密，只要公私钥配对即可。</p>
-<p><em>原文链接：<a href="http://www.cnblogs.com/FoChen/p/4740814.html" target="_blank" rel="external">http://www.cnblogs.com/FoChen/p/4740814.html</a></em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在数据安全上rsa起着非常大的作用，特别是数据网络通讯的安全上。当异构系统在数据网络通讯上对安全性有所要求时，rsa将作为其中的一种选择，此时rsa的互通性就显得尤为重要了。&lt;/p&gt;
-&lt;p&gt;本文参考网络资料，提供了rsa互通性的一种可行的解决方案(c#,java,php),而这种互通性是在一定的局限性上达成的，比如密钥是1024位的(更高位没试过，应该也可行），基于PKCS1填充方式。&lt;/p&gt;
-&lt;p&gt;所编写的代码有一部分使用了硬编码，同时注重了功能的实现，在类结构设计上关注不多，有需要的可自行修改重构。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
-    
-      <category term="RSA" scheme="VickChen.win/tags/RSA/"/>
-    
-      <category term="Java" scheme="VickChen.win/tags/Java/"/>
-    
-      <category term="PHP" scheme="VickChen.win/tags/PHP/"/>
     
   </entry>
   
