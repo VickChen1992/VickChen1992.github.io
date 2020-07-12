@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="JavaScript,layui,">
+  <meta name="keywords" content="MySql,">
 
 
 
@@ -86,22 +86,18 @@
 
 
 
-<meta name="description" content="由于table列比较多，有时候用户不需要看那么多列，虽然layui提供了隐藏列的接口。但页面刷新后就会复原，这时候就可以将数据保存至localStorage中实现本地永久化保存">
-<meta name="keywords" content="JavaScript,layui">
+<meta name="description" content="mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update 注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。">
+<meta name="keywords" content="MySql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="layui table 工具栏列隐藏状态本地永久化保存">
-<meta property="og:url" content="VickChen.win/2019/201906012003/index.html">
+<meta property="og:title" content="三种MySql避免重复插入记录方法">
+<meta property="og:url" content="VickChen.win/2019/201907192012/index.html">
 <meta property="og:site_name" content="Vick&#39;s Blog">
-<meta property="og:description" content="由于table列比较多，有时候用户不需要看那么多列，虽然layui提供了隐藏列的接口。但页面刷新后就会复原，这时候就可以将数据保存至localStorage中实现本地永久化保存">
+<meta property="og:description" content="mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update 注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/1.png">
-<meta property="og:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/2.png">
-<meta property="og:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/3.png">
-<meta property="og:updated_time" content="2020-07-10T12:32:25.898Z">
+<meta property="og:updated_time" content="2020-07-12T12:38:53.279Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="layui table 工具栏列隐藏状态本地永久化保存">
-<meta name="twitter:description" content="由于table列比较多，有时候用户不需要看那么多列，虽然layui提供了隐藏列的接口。但页面刷新后就会复原，这时候就可以将数据保存至localStorage中实现本地永久化保存">
-<meta name="twitter:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/1.png">
+<meta name="twitter:title" content="三种MySql避免重复插入记录方法">
+<meta name="twitter:description" content="mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update 注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。">
 
 
 
@@ -122,9 +118,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/2019/201906012003/">
+  <link rel="canonical" href="VickChen.win/2019/201907192012/">
 
-  <title> layui table 工具栏列隐藏状态本地永久化保存 | Vick's Blog </title>
+  <title> 三种MySql避免重复插入记录方法 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -264,7 +260,7 @@
             
             
               
-                layui table 工具栏列隐藏状态本地永久化保存
+                三种MySql避免重复插入记录方法
               
             
           </h1>
@@ -276,8 +272,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-06-01T20:03:32+08:00" content="2019-06-01">
-              2019-06-01
+            <time itemprop="dateCreated" datetime="2019-07-19T20:12:05+08:00" content="2019-07-19">
+              2019-07-19
             </time>
           </span>
 
@@ -323,12 +319,48 @@
       
 
       
-        <p>由于table列比较多，有时候用户不需要看那么多列，虽然layui提供了隐藏列的接口。但页面刷新后就会复原，这时候就可以将数据保存至localStorage中实现本地永久化保存</p>
+        <p>mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:<br>1、insert ignore<br>2、replace into<br>3、insert on duplicate key update</p>
+<p>注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。</p>
 <a id="more"></a>
-<p>只需要改他的几行源码。然后在那个界面写上一句<code>var tableFlag = &quot;xxx&quot;;</code></p>
-<p> table.js便会根据这个来区分是在操作哪个表的数据。</p>
-<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/1.png" alt><br><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/2.png" alt><br><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/3.png" alt></p>
-<p><em>本文部分转载自 - <a href="https://fly.layui.com/jie/47318/" target="_blank" rel="noopener">Layui官方社区</a></em></p>
+<h2 id="insert-ignore"><a href="#insert-ignore" class="headerlink" title="insert ignore"></a>insert ignore</h2><ul>
+<li>insert ignore会忽略数据库中已经存在的数据(根据主键或者唯一索引判断)，如果数据库没有数据，就插入新的数据，如果有数据的话就跳过这条数据。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT IGNORE INTO `table_name` (`email`, `phone`, `user_id`) </span><br><span class="line">VALUES (&apos;test9@163.com&apos;, &apos;99999&apos;, &apos;9999&apos;);</span><br></pre></td></tr></table></figure>
+<p>这样当有重复记录就会忽略,执行后返回数字0</p>
+<p>还有个应用就是复制表,避免重复记录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT IGNORE INTO `table_1` (`name`) SELECT `name` FROM `table_2`;</span><br></pre></td></tr></table></figure>
+<h2 id="replace-into"><a href="#replace-into" class="headerlink" title="replace into"></a>replace into</h2><ul>
+<li>replace into 首先尝试插入数据到表中。 如果发现表中已经有此行数据(根据主键或者唯一索引判断)则先删除此行数据，然后插入新的数据，否则，直接插入新数据。</li>
+<li>使用replace into，你必须具有delete和insert权限。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REPLACE INTO `table_name`(`col_name`, ...) VALUES (...);</span><br><span class="line">REPLACE INTO `table_name` (`col_name`, ...) SELECT ...;</span><br><span class="line">REPLACE INTO `table_name` SET `col_name`=&apos;value&apos;,...</span><br></pre></td></tr></table></figure>
+<h2 id="insert-on-duplicate-key-update"><a href="#insert-on-duplicate-key-update" class="headerlink" title="insert on duplicate key update"></a>insert on duplicate key update</h2><ul>
+<li><p>如果在insert into 语句末尾指定了on duplicate key update，并且插入行后会导致在一个UNIQUE索引或PRIMARY KEY中出现重复值，则在出现重复值的行执行UPDATE；如果不会导致重复的问题，则插入新行，跟普通的insert into一样。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--如果列a被定义为UNIQUE，并且包含值1，则以下两个语句具有相同的效果</span><br><span class="line">INSERT INTO `table` (`a`, `b`, `c`) VALUES (1, 2, 3) </span><br><span class="line">ON DUPLICATE KEY UPDATE `c`=`c`+1; </span><br><span class="line"></span><br><span class="line">UPDATE `table` SET `c`=`c`+1 WHERE `a`=1;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>使用insert into，你必须具有insert和update权限。</p>
+</li>
+<li><p>如果有新记录被插入，则受影响行的值显示1；如果原有的记录被更新，则受影响行的值显示2；如果记录被更新前后值是一样的，则受影响行数的值显示0。 </p>
+</li>
+<li><p>当您使用on duplicate key update时，insert delayed (延迟插入)选项被忽略。</p>
+</li>
+</ul>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
+<li><p>这三种方法都能避免主键或者唯一索引重复导致的插入失败问题。</p>
+</li>
+<li><p>insert ignore 能忽略重复数据，只插入不重复的数据。</p>
+</li>
+<li><p>replace into 和 insert … on duplicate key update 都是替换原有的重复数据。</p>
+</li>
+<li><p>replace into 是删除原有的行后，在插入新行，如有自增id，这个会造成自增id的改变；</p>
+</li>
+<li><p>insert … on duplicate key update在遇到重复行时，会直接更新原有的行，具体更新哪些字段怎么更新，取决于update后的语句。</p>
+</li>
+<li>特别说明：UNIQUE索引将会对null字段失效，也就是说(a字段上建立唯一索引)：<code>INSERT INTO</code>test<code>(</code>a<code>) VALUES (NULL);</code> 是可以重复插入的（联合唯一索引也一样）。</li>
+</ol>
+<p><em>本文部分出自 - <a href="https://www.jianshu.com/p/751299bd5669" target="_blank" rel="noopener">MySQL避免插入重复记录的方法</a></em></p>
 
       
     </div>
@@ -351,9 +383,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/JavaScript/" rel="tag">#JavaScript</a>
-          
-            <a href="/tags/layui/" rel="tag">#layui</a>
+            <a href="/tags/MySql/" rel="tag">#MySql</a>
           
         </div>
       
@@ -362,17 +392,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/201905270004/" rel="next" title="使用PicGo批量迁移图床">
-                <i class="fa fa-chevron-left"></i> 使用PicGo批量迁移图床
+              <a href="/2019/201906012003/" rel="next" title="layui table 工具栏列隐藏状态本地永久化保存">
+                <i class="fa fa-chevron-left"></i> layui table 工具栏列隐藏状态本地永久化保存
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/201907192012/" rel="prev" title="三种MySql避免重复插入记录方法">
-                三种MySql避免重复插入记录方法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -520,7 +546,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-ignore"><span class="nav-number">1.</span> <span class="nav-text">insert ignore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace-into"><span class="nav-number">2.</span> <span class="nav-text">replace into</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-on-duplicate-key-update"><span class="nav-number">3.</span> <span class="nav-text">insert on duplicate key update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li></ol></div>
             
           </div>
         </section>

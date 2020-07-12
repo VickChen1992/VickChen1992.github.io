@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2020-07-10T13:23:47.157Z</updated>
+  <updated>2020-07-12T12:38:53.279Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,15 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="VickChen.win/2020/201907192012/"/>
-    <id>VickChen.win/2020/201907192012/</id>
-    <published>2020-07-10T12:37:57.976Z</published>
-    <updated>2020-07-10T13:23:47.157Z</updated>
+    <title>三种MySql避免重复插入记录方法</title>
+    <link href="VickChen.win/2019/201907192012/"/>
+    <id>VickChen.win/2019/201907192012/</id>
+    <published>2019-07-19T12:12:05.000Z</published>
+    <updated>2020-07-12T12:38:53.279Z</updated>
     
-    <content type="html"><![CDATA[<hr>
-<p>title:三种MySql避免重复插入记录方法<br>date:2019-07-19 20:12:05<br>categories:技术</p>
-<h2 id="tag-MySql"><a href="#tag-MySql" class="headerlink" title="tag:[MySql]"></a>tag:[MySql]</h2><p>mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:<br>1、insert ignore<br>2、replace into<br>3、insert on duplicate key update</p>
+    <content type="html"><![CDATA[<p>mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:<br>1、insert ignore<br>2、replace into<br>3、insert on duplicate key update</p>
 <p>注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。</p>
 <a id="more"></a>
 <h2 id="insert-ignore"><a href="#insert-ignore" class="headerlink" title="insert ignore"></a>insert ignore</h2><ul>
@@ -70,13 +68,15 @@
     
     <summary type="html">
     
-      &lt;hr&gt;
-&lt;p&gt;title:三种MySql避免重复插入记录方法&lt;br&gt;date:2019-07-19 20:12:05&lt;br&gt;categories:技术&lt;/p&gt;
-&lt;h2 id=&quot;tag-MySql&quot;&gt;&lt;a href=&quot;#tag-MySql&quot; class=&quot;headerlink&quot; title=&quot;tag:[MySql]&quot;&gt;&lt;/a&gt;tag:[MySql]&lt;/h2&gt;&lt;p&gt;mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:&lt;br&gt;1、insert ignore&lt;br&gt;2、replace into&lt;br&gt;3、insert on duplicate key update&lt;/p&gt;
+      &lt;p&gt;mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:&lt;br&gt;1、insert ignore&lt;br&gt;2、replace into&lt;br&gt;3、insert on duplicate key update&lt;/p&gt;
 &lt;p&gt;注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。&lt;/p&gt;
     
     </summary>
     
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
     
   </entry>
   
