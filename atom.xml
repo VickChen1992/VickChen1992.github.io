@@ -344,9 +344,9 @@
     
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
     
-      <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
-    
       <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
+    
+      <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
     
   </entry>
   
