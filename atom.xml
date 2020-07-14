@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2020-07-12T13:21:14.114Z</updated>
+  <updated>2020-07-14T10:13:48.791Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -14,6 +14,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分布式事务理论</title>
+    <link href="VickChen.win/2019/201910172341/"/>
+    <id>VickChen.win/2019/201910172341/</id>
+    <published>2019-10-17T15:41:06.000Z</published>
+    <updated>2020-07-14T10:13:48.791Z</updated>
+    
+    <content type="html"><![CDATA[<p>说到事务，可能大家首先想到的就是数据库事务。对于数据库事务可能大家都很熟悉，在开发过程中也会经常使用到。众所周知，数据库能实现<strong>本地事务</strong>，但现在的系统常采用微服务、SOA等架构，因此就出现了跨多个数据库的事务需求，这种事务即为“分布式事务”。</p>
+<p>分布式事务一直是企业集成中的一个技术难点，也是每一个分布式系统架构中都会涉及到的一个东西，特别是在微服务架构中，几乎可以说是无法避免，本文就分布式事务来简单聊一下。</p>
+<a id="more"></a>
+<h2 id="事务的具体定义"><a href="#事务的具体定义" class="headerlink" title="事务的具体定义"></a>事务的具体定义</h2><p>事务提供一种机制将一个活动涉及的所有操作纳入到一个不可分割的执行单元，组成事务的所有操作只有在所有操作均能正常执行的情况下方能提交，只要其中任一操作执行失败，都将导致整个事务的回滚。简单地说，事务提供一种“要么什么都不做，要么做全做（All or Nothing）”机制。</p>
+<h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><p>数据库事务（简称：事务，Transaction）是指数据库执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。</p>
+<p>说到数据库事务，就不得不提一下事务著名的四大特性。</p>
+<ul>
+<li><strong>A:原子性(Atomicity)</strong> 事务是一个不可分割的执行单元，事务中的所有操作要么全都执行，要么全都不执行。</li>
+<li><strong>C:一致性(Consistency)</strong> 事务在开始前和结束后，数据库的完整性约束没有被破坏。</li>
+<li><strong>I:隔离性(Isolation)</strong> 事务的执行是相互独立的，它们不会相互干扰，一个事务不会看到另一个正在运行过程中的事务的数据。</li>
+<li><strong>D:持久性(Durability)</strong> 一个事务完成之后，事务的执行结果必须是持久化保存的。即使数据库发生崩溃，在数据库恢复后事务提交的结果仍然不会丢失。</li>
+</ul>
+<blockquote>
+<p>注意：事务只能保证数据库的<strong>高可靠性</strong>，即数据库本身发生问题后，事务提交后的数据仍然能恢复；而如果不是数据库本身的故障，如硬盘损坏了，那么事务提交的数据可能就丢失了。这属于『<strong>高可用性</strong>』的范畴。因此，事务只能保证数据库的『高可靠性』，而『高可用性』需要整个系统共同配合实现。</p>
+</blockquote>
+<p>具体关于事务的四种隔离级别之类的这里不再展开，有兴趣可以搜索一下相关资料。不过有一个知识点我们需要了解，就是假如数据库在提交事务的时候突然断电，那么它是怎么样恢复的呢？ 为什么要提到这个知识点呢？ 因为分布式系统的核心就是处理各种异常情况，这也是分布式系统复杂的地方，因为分布式的网络环境很复杂，这种“断电”故障要比单机多很多，所以我们在做分布式系统的时候，最先考虑的就是这种情况。</p>
+<h2 id="分布式理论"><a href="#分布式理论" class="headerlink" title="分布式理论"></a>分布式理论</h2><p>本地事务主要限制在单个会话内，不涉及多个数据库资源。但是在基于微服务、 SOA（Service-Oriented Architecture，面向服务架构）的分布式应用环境下，越来越多的应用要求对多个数据库资源，多个服务的访问都能纳入到同一个事务当中，再想保证集群的ACID几乎是很难达到，或者即使能达到那么效率和性能会大幅下降，最为关键的是再很难扩展新的分区了，这时我们就需要引入一个新的理论原则来适应这种集群的情况，就是 CAP 原则，那么CAP原则指的是什么呢？</p>
+<h3 id="CAP原则"><a href="#CAP原则" class="headerlink" title="CAP原则"></a>CAP原则</h3><p>又称CAP定理，是由加州大学伯克利分校Eric Brewer教授提出来的，他指出WEB服务无法同时满足以下3个属性：</p>
+<ul>
+<li>一致性(Consistency) ： 在分布式系统中的所有数据备份，在同一时刻是否同样的值。（等同于所有节点访问同一份最新的数据副本）</li>
+<li>可用性(Availability) ： 在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。（对数据更新具备高可用性）</li>
+<li>分区容错性(Partition tolerance) ： 以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择。</li>
+</ul>
+<p>CAP理论中说三者不可兼得，但实际情况是，<strong>在分布式场景中分区一定存在，也就必须要有分区容忍性对应的策略，之后才能在一致性和可用性间二者之间选择。所以对主流架构来说不是三选二，而是二选一。</strong></p>
+<h3 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h3><p>在分布式系统中，我们往往追求的是可用性，它的重要程序比一致性要高，那么如何实现高可用性呢？ 前人已经给我们提出来了另外一个理论，就是BASE理论，它是用来对CAP定理进行进一步扩充的。BASE理论指的是：</p>
+<ul>
+<li>Basically Available（基本可用）</li>
+<li>Soft state（软状态）</li>
+<li>Eventually consistent（最终一致性）</li>
+</ul>
+<p>BASE理论是对CAP中的一致性和可用性进行一个权衡的结果，理论的核心思想就是：<strong>我们无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性</strong>（Eventual consistency）。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;说到事务，可能大家首先想到的就是数据库事务。对于数据库事务可能大家都很熟悉，在开发过程中也会经常使用到。众所周知，数据库能实现&lt;strong&gt;本地事务&lt;/strong&gt;，但现在的系统常采用微服务、SOA等架构，因此就出现了跨多个数据库的事务需求，这种事务即为“分布式事务”。&lt;/p&gt;
+&lt;p&gt;分布式事务一直是企业集成中的一个技术难点，也是每一个分布式系统架构中都会涉及到的一个东西，特别是在微服务架构中，几乎可以说是无法避免，本文就分布式事务来简单聊一下。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
+    
+      <category term="分布式" scheme="VickChen.win/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+      <category term="CAP" scheme="VickChen.win/tags/CAP/"/>
+    
+  </entry>
   
   <entry>
     <title>C# 8中的范围类型(Range Type)</title>
@@ -344,9 +402,9 @@
     
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
     
-      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
-    
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
+    
+      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
     
   </entry>
   
@@ -1103,40 +1161,6 @@
       <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
     
       <category term="IIS" scheme="VickChen.win/tags/IIS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>将Excel中的数据读取到DataTable中</title>
-    <link href="VickChen.win/2018/201807102136/"/>
-    <id>VickChen.win/2018/201807102136/</id>
-    <published>2018-07-10T13:36:50.000Z</published>
-    <updated>2020-07-12T13:55:07.240Z</updated>
-    
-    <content type="html"><![CDATA[<p>读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行Excel导入。</p>
-<p>为了方便之后的开发，特意将之前写的代码进行记录。</p>
-<a id="more"></a>
-<p>首先需要引用NPOI的NuGet包，注意：有分Core版本(DotNetCore.NPOI)和非Core版本(NPOI)，注意区分。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">public DataTable ReadExcelToDataTable(string fileName, bool isFirstRowColumn = true)</span><br><span class="line">       &#123;</span><br><span class="line">           //定义要返回的dataTable对象</span><br><span class="line">           var data = new DataTable();</span><br><span class="line">           try</span><br><span class="line">           &#123;</span><br><span class="line">               if (!System.IO.File.Exists(fileName))</span><br><span class="line">               &#123;</span><br><span class="line">                   return null;</span><br><span class="line">               &#125;</span><br><span class="line">               //根据指定路径读取文件</span><br><span class="line">               var fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);</span><br><span class="line">               //根据文件流创建excel数据结构</span><br><span class="line">               var workbook = WorkbookFactory.Create(fs);</span><br><span class="line">               var sheet = workbook.GetSheetAt(0);</span><br><span class="line">               if (sheet == null) return data;</span><br><span class="line">               var firstRow = sheet.GetRow(0);</span><br><span class="line">               //一行最后一个cell的编号 即总的列数</span><br><span class="line">               int cellCount = firstRow.LastCellNum;</span><br><span class="line">               //如果第一行是标题列名</span><br><span class="line">               int startRow;</span><br><span class="line">               if (isFirstRowColumn)</span><br><span class="line">               &#123;</span><br><span class="line">                   for (int i = firstRow.FirstCellNum; i &lt; cellCount; ++i)</span><br><span class="line">                   &#123;</span><br><span class="line">                       var cell = firstRow.GetCell(i);</span><br><span class="line">                       var cellValue = cell?.StringCellValue;</span><br><span class="line">                       if (cellValue == null) continue;</span><br><span class="line">                       var column = new DataColumn(cellValue);</span><br><span class="line">                       data.Columns.Add(column);</span><br><span class="line">                   &#125;</span><br><span class="line">                   startRow = sheet.FirstRowNum + 1;//需要跳过的标题行</span><br><span class="line">               &#125;</span><br><span class="line">               else</span><br><span class="line">                   startRow = sheet.FirstRowNum;</span><br><span class="line"></span><br><span class="line">               //最后一列的标号</span><br><span class="line">               var rowCount = sheet.LastRowNum;</span><br><span class="line">               for (int i = startRow; i &lt;= rowCount; ++i)</span><br><span class="line">               &#123;</span><br><span class="line">                   var row = sheet.GetRow(i);</span><br><span class="line">                   if (row == null) continue; //没有数据的行默认是null</span><br><span class="line">                   var dataRow = data.NewRow();</span><br><span class="line">                   for (int j = row.FirstCellNum; j &lt; cellCount; ++j)</span><br><span class="line">                   &#123;</span><br><span class="line">                       if (row.GetCell(j) != null) //同理，没有数据的单元格都默认是null</span><br><span class="line">                           dataRow[j] = row.GetCell(j).ToString();</span><br><span class="line">                   &#125;</span><br><span class="line">                   data.Rows.Add(dataRow);</span><br><span class="line">               &#125;</span><br><span class="line">               return data;</span><br><span class="line">           &#125;</span><br><span class="line">           catch (Exception ex)</span><br><span class="line">           &#123;</span><br><span class="line">               throw ex;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;读取Excel的功能应该算是比较常见的，无论是订单、商品还是用户信息等都有可能需要进行Excel导入。&lt;/p&gt;
-&lt;p&gt;为了方便之后的开发，特意将之前写的代码进行记录。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
-    
-      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
-    
-      <category term="Excel" scheme="VickChen.win/tags/Excel/"/>
-    
-      <category term="NPOI" scheme="VickChen.win/tags/NPOI/"/>
     
   </entry>
   
