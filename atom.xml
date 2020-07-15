@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2020-07-14T10:13:48.791Z</updated>
+  <updated>2020-07-15T04:59:42.882Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,11 +16,59 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>分布式事务常用解决方案</title>
+    <link href="VickChen.win/2019/201911030147/"/>
+    <id>VickChen.win/2019/201911030147/</id>
+    <published>2019-11-02T17:47:55.000Z</published>
+    <updated>2020-07-15T04:59:42.882Z</updated>
+    
+    <content type="html"><![CDATA[<p>业界目前主流的分布式事务解决方案主要有：多阶段提交方案（2PC、3PC）、本地消息表、补偿事务（TCC）和消息事务（主要是RocketMQ）。这些方案的原理在此处不展开，目前网络中相应资料比较多，小结一下它们的特点</p>
+<a id="more"></a>
+<h2 id="多阶段提交方案"><a href="#多阶段提交方案" class="headerlink" title="多阶段提交方案"></a>多阶段提交方案</h2><p>常见的有二阶段（<strong>2PC</strong>）和三阶段（<strong>3PC</strong>）提交事务，需要额外的资源管理器来协调事务，数据一致性强，但是实现方案比较复杂，对性能的牺牲比较大（主要是需要对资源锁定，等待所有事务提交才能解锁），不适用于高并发的场景，目前比较知名的有阿里开源的<a href="https://github.com/alibaba/fescar" target="_blank" rel="noopener">fescar</a>。</p>
+<h2 id="补偿事务（TCC）"><a href="#补偿事务（TCC）" class="headerlink" title="补偿事务（TCC）"></a>补偿事务（TCC）</h2><p>因为每个事务操作都需要提供三个操作尝试（<code>Try</code>）、确认（<code>Confirm</code>）和补偿/撤销（<code>Cancel</code>），数据一致性的强度比多阶段提交方案低，但是实现的复杂度会有所降低，比较明显的缺陷是每个业务事务需要实现三组操作，有可能出现过多的补偿方案的代码；另外有很多输完液场景TCC是不合适的。</p>
+<h2 id="本地消息表"><a href="#本地消息表" class="headerlink" title="本地消息表"></a>本地消息表</h2><p>这种实现方式应该是业界使用最多的，其核心思想是将分布式事务拆分成本地事务进行处理，这种思路是来源于ebay。后来通过支付宝等公司的布道，在业内广泛使用。其设计思想是将远程分布式事务拆分成一系列的本地事务。如果不考虑性能及设计优雅，借助关系型数据库中的表即可实现。</p>
+<p>基本思路就是：</p>
+<p>消息生产方，需要额外建一个消息表，并记录消息发送状态。消息表和业务数据要在一个事务里提交，也就是说他们要在一个数据库里面。然后消息会经过MQ发送到消息的消费方。如果消息发送失败，会进行重试发送。</p>
+<p>消息消费方，需要处理这个消息，并完成自己的业务逻辑。此时如果本地事务处理成功，表明已经处理成功了，如果处理失败，那么就会重试执行。如果是业务上面的失败，可以给生产方发送一个业务补偿消息，通知生产方进行回滚等操作。</p>
+<p>生产方和消费方定时扫描本地消息表，把还没处理完成的消息或者失败的消息再发送一遍。如果有靠谱的自动对账补账逻辑，这种方案还是非常实用的。</p>
+<p>这种方案遵循BASE理论，采用的是最终一致性，个人认为是这几种方案里面比较适合实际业务场景的，即不会出现像2PC那样复杂的实现(当调用链很长的时候，2PC的可用性是非常低的)，也不会像TCC那样可能出现确认或者回滚不了的情况。</p>
+<h2 id="消息事务"><a href="#消息事务" class="headerlink" title="消息事务"></a>消息事务</h2><p>有一些第三方的MQ是支持事务消息的，比如RocketMQ，基本思想也是多阶段提交方案，并且基于中间提供件轮询和重试，其他消息队列中间件并没有实现分布式事务，比如 RabbitMQ 和 Kafka 都不支持。</p>
+<p>以阿里的 RocketMQ 中间件为例，一个事务的执行流程包括：发送预消息、执行本地事务、确认消息发送成功。它的消息中间件存储了下游无法消费成功的消息，并且不断重试推送下游消费消息，而生产者（上游）需要提供一个<code>check</code>接口，用于检查成功发送预消息但是未确认最终消息发送状态的事务的状态。</p>
+<p><strong>优点：</strong> 实现了最终一致性，不需要依赖本地数据库事务。</p>
+<p><strong>缺点：</strong> 实现难度大，主流MQ不支持，没有.NET客户端，RocketMQ事务消息部分代码也未开源。</p>
+<h2 id="Saga模式"><a href="#Saga模式" class="headerlink" title="Saga模式"></a>Saga模式</h2><p>Saga 模式适用于业务流程长且需要保证事务<strong>最终一致性</strong>的业务系统，Saga 模式一阶段就会提交本地事务，无锁、长流程情况下可以保证性能。</p>
+<p>事务参与者可能是其它公司的服务或者是遗留系统的服务，无法进行改造和提供 TCC 要求的接口，可以使用 Saga 模式。</p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>一阶段提交本地数据库事务，无锁，高性能；</li>
+<li>参与者可以采用事务驱动异步执行，高吞吐；</li>
+<li>补偿服务即正向服务的“反向”，易于理解，易于实现；</li>
+</ul>
+<p><strong>缺点：</strong>由于一阶段已经提交本地数据库事务，且没有进行“预留”动作，所以不能保证隔离性。</p>
+<p><em>本文参考 -<a href="https://www.cnblogs.com/savorboard/p/distributed-system-transaction-consistency.html" target="_blank" rel="noopener">Savorboard</a></em></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;业界目前主流的分布式事务解决方案主要有：多阶段提交方案（2PC、3PC）、本地消息表、补偿事务（TCC）和消息事务（主要是RocketMQ）。这些方案的原理在此处不展开，目前网络中相应资料比较多，小结一下它们的特点&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
+    
+      <category term="分布式" scheme="VickChen.win/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>分布式事务理论</title>
     <link href="VickChen.win/2019/201910172341/"/>
     <id>VickChen.win/2019/201910172341/</id>
     <published>2019-10-17T15:41:06.000Z</published>
-    <updated>2020-07-14T10:13:48.791Z</updated>
+    <updated>2020-07-15T05:00:26.770Z</updated>
     
     <content type="html"><![CDATA[<p>说到事务，可能大家首先想到的就是数据库事务。对于数据库事务可能大家都很熟悉，在开发过程中也会经常使用到。众所周知，数据库能实现<strong>本地事务</strong>，但现在的系统常采用微服务、SOA等架构，因此就出现了跨多个数据库的事务需求，这种事务即为“分布式事务”。</p>
 <p>分布式事务一直是企业集成中的一个技术难点，也是每一个分布式系统架构中都会涉及到的一个东西，特别是在微服务架构中，几乎可以说是无法避免，本文就分布式事务来简单聊一下。</p>
@@ -53,6 +101,7 @@
 <li>Eventually consistent（最终一致性）</li>
 </ul>
 <p>BASE理论是对CAP中的一致性和可用性进行一个权衡的结果，理论的核心思想就是：<strong>我们无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性</strong>（Eventual consistency）。</p>
+<p><em>本文参考 -<a href="https://www.cnblogs.com/savorboard/p/distributed-system-transaction-consistency.html" target="_blank" rel="noopener">Savorboard</a></em></p>
 ]]></content>
     
     <summary type="html">
@@ -65,11 +114,11 @@
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
-      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
-    
       <category term="分布式" scheme="VickChen.win/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
       <category term="CAP" scheme="VickChen.win/tags/CAP/"/>
+    
+      <category term="Transaction" scheme="VickChen.win/tags/Transaction/"/>
     
   </entry>
   
@@ -1112,55 +1161,6 @@
       <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
     
       <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>在IIS上部署你的ASP.NET Core 2.1项目</title>
-    <link href="VickChen.win/2018/201808021940/"/>
-    <id>VickChen.win/2018/201808021940/</id>
-    <published>2018-08-02T11:40:31.000Z</published>
-    <updated>2019-07-20T08:05:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是<code>AspNetCoreModule</code>，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。</p>
-<a id="more"></a>
-<ol>
-<li><p>开启控制台</p>
-<p>在控制面板→程序→启用或关闭Windows功能→勾选Internet Information Services以及Web管理工具下的IIS管理控制台</p>
-<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhkyelj20lj0gl0us.jpg" alt></p>
-</li>
-<li><p>IIS 安装AspNetCoreModule 模块</p>
-<p>部署之前要确保你的IIS上已经安装了AspNetCoreModule托管模块，如果没有的话，点击<a href="https://www.microsoft.com/net/download/windows" target="_blank" rel="noopener">这里</a>进行下载并安装</p>
-</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhjtoaj20rm0gs0tc.jpg" alt><br><strong>安装完后一定要重启，否则 Http Error 502</strong></p>
-<ol>
-<li><p>发布</p>
-<p>项目右键–发布</p>
-</li>
-<li><p>添加网站</p>
-<p>添加一个网站，设置一下名称，并将路径指向你刚才发布的文件夹</p>
-<p>设置应用程序池的.NET CLR版本为“无托管代码” 。因为IIS是作为一个反向代理的角色，并不需要它来托管代码</p>
-</li>
-</ol>
-<p><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhjecvj20kt0e1gmd.jpg" alt><br><img src="https://raw.githubusercontent.com/VickChen1992/PicRepository/master/9460f058gy1ftxjhhlf4aj20y30jn0vv.jpg" alt></p>
-<p>OK!</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;与ASP.NET时代不同，ASP.NET Core不再是由IIS工作进程（w3wp.exe）托管，而是使用自托管Web服务器（Kestrel）运行，IIS则是作为反向代理的角色转发请求到Kestrel不同端口的ASP.NET Core程序中，随后就将接收到的请求推送至中间件管道中去，处理完你的请求和相关业务逻辑之后再将HTTP响应数据重新回写到IIS中，最终转达到不同的客户端（浏览器，APP，客户端等）。而配置文件和过程都会由些许调整，中间最重要的角色便是&lt;code&gt;AspNetCoreModule&lt;/code&gt;，它是其中一个的IIS模块，请求进入到IIS之后便立即由它转发，并迅速重定向到ASP.NET Core项目中，所以这时候我们无需设置应用程序池来托管我们的代码，它只负责转发请求而已。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
-    
-      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
-    
-      <category term="IIS" scheme="VickChen.win/tags/IIS/"/>
     
   </entry>
   

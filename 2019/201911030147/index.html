@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="分布式,CAP,Transaction,">
+  <meta name="keywords" content="CSharp,分布式,">
 
 
 
@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="说到事务，可能大家首先想到的就是数据库事务。对于数据库事务可能大家都很熟悉，在开发过程中也会经常使用到。众所周知，数据库能实现本地事务，但现在的系统常采用微服务、SOA等架构，因此就出现了跨多个数据库的事务需求，这种事务即为“分布式事务”。 分布式事务一直是企业集成中的一个技术难点，也是每一个分布式系统架构中都会涉及到的一个东西，特别是在微服务架构中，几乎可以说是无法避免，本文就分布式事务来简单聊">
-<meta name="keywords" content="分布式,CAP,Transaction">
+<meta name="description" content="业界目前主流的分布式事务解决方案主要有：多阶段提交方案（2PC、3PC）、本地消息表、补偿事务（TCC）和消息事务（主要是RocketMQ）。这些方案的原理在此处不展开，目前网络中相应资料比较多，小结一下它们的特点">
+<meta name="keywords" content="CSharp,分布式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="分布式事务理论">
-<meta property="og:url" content="VickChen.win/2019/201910172341/index.html">
+<meta property="og:title" content="分布式事务常用解决方案">
+<meta property="og:url" content="VickChen.win/2019/201911030147/index.html">
 <meta property="og:site_name" content="Vick&#39;s Blog">
-<meta property="og:description" content="说到事务，可能大家首先想到的就是数据库事务。对于数据库事务可能大家都很熟悉，在开发过程中也会经常使用到。众所周知，数据库能实现本地事务，但现在的系统常采用微服务、SOA等架构，因此就出现了跨多个数据库的事务需求，这种事务即为“分布式事务”。 分布式事务一直是企业集成中的一个技术难点，也是每一个分布式系统架构中都会涉及到的一个东西，特别是在微服务架构中，几乎可以说是无法避免，本文就分布式事务来简单聊">
+<meta property="og:description" content="业界目前主流的分布式事务解决方案主要有：多阶段提交方案（2PC、3PC）、本地消息表、补偿事务（TCC）和消息事务（主要是RocketMQ）。这些方案的原理在此处不展开，目前网络中相应资料比较多，小结一下它们的特点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-15T05:00:26.770Z">
+<meta property="og:updated_time" content="2020-07-15T04:59:42.882Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="分布式事务理论">
-<meta name="twitter:description" content="说到事务，可能大家首先想到的就是数据库事务。对于数据库事务可能大家都很熟悉，在开发过程中也会经常使用到。众所周知，数据库能实现本地事务，但现在的系统常采用微服务、SOA等架构，因此就出现了跨多个数据库的事务需求，这种事务即为“分布式事务”。 分布式事务一直是企业集成中的一个技术难点，也是每一个分布式系统架构中都会涉及到的一个东西，特别是在微服务架构中，几乎可以说是无法避免，本文就分布式事务来简单聊">
+<meta name="twitter:title" content="分布式事务常用解决方案">
+<meta name="twitter:description" content="业界目前主流的分布式事务解决方案主要有：多阶段提交方案（2PC、3PC）、本地消息表、补偿事务（TCC）和消息事务（主要是RocketMQ）。这些方案的原理在此处不展开，目前网络中相应资料比较多，小结一下它们的特点">
 
 
 
@@ -118,9 +118,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/2019/201910172341/">
+  <link rel="canonical" href="VickChen.win/2019/201911030147/">
 
-  <title> 分布式事务理论 | Vick's Blog </title>
+  <title> 分布式事务常用解决方案 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +260,7 @@
             
             
               
-                分布式事务理论
+                分布式事务常用解决方案
               
             
           </h1>
@@ -272,8 +272,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2019-10-17T23:41:06+08:00" content="2019-10-17">
-              2019-10-17
+            <time itemprop="dateCreated" datetime="2019-11-03T01:47:55+08:00" content="2019-11-03">
+              2019-11-03
             </time>
           </span>
 
@@ -319,37 +319,29 @@
       
 
       
-        <p>说到事务，可能大家首先想到的就是数据库事务。对于数据库事务可能大家都很熟悉，在开发过程中也会经常使用到。众所周知，数据库能实现<strong>本地事务</strong>，但现在的系统常采用微服务、SOA等架构，因此就出现了跨多个数据库的事务需求，这种事务即为“分布式事务”。</p>
-<p>分布式事务一直是企业集成中的一个技术难点，也是每一个分布式系统架构中都会涉及到的一个东西，特别是在微服务架构中，几乎可以说是无法避免，本文就分布式事务来简单聊一下。</p>
+        <p>业界目前主流的分布式事务解决方案主要有：多阶段提交方案（2PC、3PC）、本地消息表、补偿事务（TCC）和消息事务（主要是RocketMQ）。这些方案的原理在此处不展开，目前网络中相应资料比较多，小结一下它们的特点</p>
 <a id="more"></a>
-<h2 id="事务的具体定义"><a href="#事务的具体定义" class="headerlink" title="事务的具体定义"></a>事务的具体定义</h2><p>事务提供一种机制将一个活动涉及的所有操作纳入到一个不可分割的执行单元，组成事务的所有操作只有在所有操作均能正常执行的情况下方能提交，只要其中任一操作执行失败，都将导致整个事务的回滚。简单地说，事务提供一种“要么什么都不做，要么做全做（All or Nothing）”机制。</p>
-<h2 id="数据库事务"><a href="#数据库事务" class="headerlink" title="数据库事务"></a>数据库事务</h2><p>数据库事务（简称：事务，Transaction）是指数据库执行过程中的一个逻辑单位，由一个有限的数据库操作序列构成。</p>
-<p>说到数据库事务，就不得不提一下事务著名的四大特性。</p>
+<h2 id="多阶段提交方案"><a href="#多阶段提交方案" class="headerlink" title="多阶段提交方案"></a>多阶段提交方案</h2><p>常见的有二阶段（<strong>2PC</strong>）和三阶段（<strong>3PC</strong>）提交事务，需要额外的资源管理器来协调事务，数据一致性强，但是实现方案比较复杂，对性能的牺牲比较大（主要是需要对资源锁定，等待所有事务提交才能解锁），不适用于高并发的场景，目前比较知名的有阿里开源的<a href="https://github.com/alibaba/fescar" target="_blank" rel="noopener">fescar</a>。</p>
+<h2 id="补偿事务（TCC）"><a href="#补偿事务（TCC）" class="headerlink" title="补偿事务（TCC）"></a>补偿事务（TCC）</h2><p>因为每个事务操作都需要提供三个操作尝试（<code>Try</code>）、确认（<code>Confirm</code>）和补偿/撤销（<code>Cancel</code>），数据一致性的强度比多阶段提交方案低，但是实现的复杂度会有所降低，比较明显的缺陷是每个业务事务需要实现三组操作，有可能出现过多的补偿方案的代码；另外有很多输完液场景TCC是不合适的。</p>
+<h2 id="本地消息表"><a href="#本地消息表" class="headerlink" title="本地消息表"></a>本地消息表</h2><p>这种实现方式应该是业界使用最多的，其核心思想是将分布式事务拆分成本地事务进行处理，这种思路是来源于ebay。后来通过支付宝等公司的布道，在业内广泛使用。其设计思想是将远程分布式事务拆分成一系列的本地事务。如果不考虑性能及设计优雅，借助关系型数据库中的表即可实现。</p>
+<p>基本思路就是：</p>
+<p>消息生产方，需要额外建一个消息表，并记录消息发送状态。消息表和业务数据要在一个事务里提交，也就是说他们要在一个数据库里面。然后消息会经过MQ发送到消息的消费方。如果消息发送失败，会进行重试发送。</p>
+<p>消息消费方，需要处理这个消息，并完成自己的业务逻辑。此时如果本地事务处理成功，表明已经处理成功了，如果处理失败，那么就会重试执行。如果是业务上面的失败，可以给生产方发送一个业务补偿消息，通知生产方进行回滚等操作。</p>
+<p>生产方和消费方定时扫描本地消息表，把还没处理完成的消息或者失败的消息再发送一遍。如果有靠谱的自动对账补账逻辑，这种方案还是非常实用的。</p>
+<p>这种方案遵循BASE理论，采用的是最终一致性，个人认为是这几种方案里面比较适合实际业务场景的，即不会出现像2PC那样复杂的实现(当调用链很长的时候，2PC的可用性是非常低的)，也不会像TCC那样可能出现确认或者回滚不了的情况。</p>
+<h2 id="消息事务"><a href="#消息事务" class="headerlink" title="消息事务"></a>消息事务</h2><p>有一些第三方的MQ是支持事务消息的，比如RocketMQ，基本思想也是多阶段提交方案，并且基于中间提供件轮询和重试，其他消息队列中间件并没有实现分布式事务，比如 RabbitMQ 和 Kafka 都不支持。</p>
+<p>以阿里的 RocketMQ 中间件为例，一个事务的执行流程包括：发送预消息、执行本地事务、确认消息发送成功。它的消息中间件存储了下游无法消费成功的消息，并且不断重试推送下游消费消息，而生产者（上游）需要提供一个<code>check</code>接口，用于检查成功发送预消息但是未确认最终消息发送状态的事务的状态。</p>
+<p><strong>优点：</strong> 实现了最终一致性，不需要依赖本地数据库事务。</p>
+<p><strong>缺点：</strong> 实现难度大，主流MQ不支持，没有.NET客户端，RocketMQ事务消息部分代码也未开源。</p>
+<h2 id="Saga模式"><a href="#Saga模式" class="headerlink" title="Saga模式"></a>Saga模式</h2><p>Saga 模式适用于业务流程长且需要保证事务<strong>最终一致性</strong>的业务系统，Saga 模式一阶段就会提交本地事务，无锁、长流程情况下可以保证性能。</p>
+<p>事务参与者可能是其它公司的服务或者是遗留系统的服务，无法进行改造和提供 TCC 要求的接口，可以使用 Saga 模式。</p>
+<p><strong>优点：</strong></p>
 <ul>
-<li><strong>A:原子性(Atomicity)</strong> 事务是一个不可分割的执行单元，事务中的所有操作要么全都执行，要么全都不执行。</li>
-<li><strong>C:一致性(Consistency)</strong> 事务在开始前和结束后，数据库的完整性约束没有被破坏。</li>
-<li><strong>I:隔离性(Isolation)</strong> 事务的执行是相互独立的，它们不会相互干扰，一个事务不会看到另一个正在运行过程中的事务的数据。</li>
-<li><strong>D:持久性(Durability)</strong> 一个事务完成之后，事务的执行结果必须是持久化保存的。即使数据库发生崩溃，在数据库恢复后事务提交的结果仍然不会丢失。</li>
+<li>一阶段提交本地数据库事务，无锁，高性能；</li>
+<li>参与者可以采用事务驱动异步执行，高吞吐；</li>
+<li>补偿服务即正向服务的“反向”，易于理解，易于实现；</li>
 </ul>
-<blockquote>
-<p>注意：事务只能保证数据库的<strong>高可靠性</strong>，即数据库本身发生问题后，事务提交后的数据仍然能恢复；而如果不是数据库本身的故障，如硬盘损坏了，那么事务提交的数据可能就丢失了。这属于『<strong>高可用性</strong>』的范畴。因此，事务只能保证数据库的『高可靠性』，而『高可用性』需要整个系统共同配合实现。</p>
-</blockquote>
-<p>具体关于事务的四种隔离级别之类的这里不再展开，有兴趣可以搜索一下相关资料。不过有一个知识点我们需要了解，就是假如数据库在提交事务的时候突然断电，那么它是怎么样恢复的呢？ 为什么要提到这个知识点呢？ 因为分布式系统的核心就是处理各种异常情况，这也是分布式系统复杂的地方，因为分布式的网络环境很复杂，这种“断电”故障要比单机多很多，所以我们在做分布式系统的时候，最先考虑的就是这种情况。</p>
-<h2 id="分布式理论"><a href="#分布式理论" class="headerlink" title="分布式理论"></a>分布式理论</h2><p>本地事务主要限制在单个会话内，不涉及多个数据库资源。但是在基于微服务、 SOA（Service-Oriented Architecture，面向服务架构）的分布式应用环境下，越来越多的应用要求对多个数据库资源，多个服务的访问都能纳入到同一个事务当中，再想保证集群的ACID几乎是很难达到，或者即使能达到那么效率和性能会大幅下降，最为关键的是再很难扩展新的分区了，这时我们就需要引入一个新的理论原则来适应这种集群的情况，就是 CAP 原则，那么CAP原则指的是什么呢？</p>
-<h3 id="CAP原则"><a href="#CAP原则" class="headerlink" title="CAP原则"></a>CAP原则</h3><p>又称CAP定理，是由加州大学伯克利分校Eric Brewer教授提出来的，他指出WEB服务无法同时满足以下3个属性：</p>
-<ul>
-<li>一致性(Consistency) ： 在分布式系统中的所有数据备份，在同一时刻是否同样的值。（等同于所有节点访问同一份最新的数据副本）</li>
-<li>可用性(Availability) ： 在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。（对数据更新具备高可用性）</li>
-<li>分区容错性(Partition tolerance) ： 以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择。</li>
-</ul>
-<p>CAP理论中说三者不可兼得，但实际情况是，<strong>在分布式场景中分区一定存在，也就必须要有分区容忍性对应的策略，之后才能在一致性和可用性间二者之间选择。所以对主流架构来说不是三选二，而是二选一。</strong></p>
-<h3 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h3><p>在分布式系统中，我们往往追求的是可用性，它的重要程序比一致性要高，那么如何实现高可用性呢？ 前人已经给我们提出来了另外一个理论，就是BASE理论，它是用来对CAP定理进行进一步扩充的。BASE理论指的是：</p>
-<ul>
-<li>Basically Available（基本可用）</li>
-<li>Soft state（软状态）</li>
-<li>Eventually consistent（最终一致性）</li>
-</ul>
-<p>BASE理论是对CAP中的一致性和可用性进行一个权衡的结果，理论的核心思想就是：<strong>我们无法做到强一致，但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性</strong>（Eventual consistency）。</p>
+<p><strong>缺点：</strong>由于一阶段已经提交本地数据库事务，且没有进行“预留”动作，所以不能保证隔离性。</p>
 <p><em>本文参考 -<a href="https://www.cnblogs.com/savorboard/p/distributed-system-transaction-consistency.html" target="_blank" rel="noopener">Savorboard</a></em></p>
 
       
@@ -373,11 +365,9 @@
       
         <div class="post-tags">
           
+            <a href="/tags/CSharp/" rel="tag">#CSharp</a>
+          
             <a href="/tags/分布式/" rel="tag">#分布式</a>
-          
-            <a href="/tags/CAP/" rel="tag">#CAP</a>
-          
-            <a href="/tags/Transaction/" rel="tag">#Transaction</a>
           
         </div>
       
@@ -386,17 +376,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/201908122354/" rel="next" title="C# 8中的范围类型(Range Type)">
-                <i class="fa fa-chevron-left"></i> C# 8中的范围类型(Range Type)
+              <a href="/2019/201910172341/" rel="next" title="分布式事务理论">
+                <i class="fa fa-chevron-left"></i> 分布式事务理论
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/201911030147/" rel="prev" title="分布式事务常用解决方案">
-                分布式事务常用解决方案 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -535,7 +521,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#事务的具体定义"><span class="nav-number">1.</span> <span class="nav-text">事务的具体定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库事务"><span class="nav-number">2.</span> <span class="nav-text">数据库事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分布式理论"><span class="nav-number">3.</span> <span class="nav-text">分布式理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CAP原则"><span class="nav-number">3.1.</span> <span class="nav-text">CAP原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BASE理论"><span class="nav-number">3.2.</span> <span class="nav-text">BASE理论</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#多阶段提交方案"><span class="nav-number">1.</span> <span class="nav-text">多阶段提交方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补偿事务（TCC）"><span class="nav-number">2.</span> <span class="nav-text">补偿事务（TCC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本地消息表"><span class="nav-number">3.</span> <span class="nav-text">本地消息表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息事务"><span class="nav-number">4.</span> <span class="nav-text">消息事务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Saga模式"><span class="nav-number">5.</span> <span class="nav-text">Saga模式</span></a></li></ol></div>
             
           </div>
         </section>
