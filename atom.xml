@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2020-07-18T08:01:49.102Z</updated>
+  <updated>2020-07-18T08:48:38.951Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,11 +16,87 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>.Net Core 3.1 使用Autofac</title>
+    <link href="VickChen.win/2020/202002182318/"/>
+    <id>VickChen.win/2020/202002182318/</id>
+    <published>2020-02-18T15:18:31.000Z</published>
+    <updated>2020-07-18T08:48:38.951Z</updated>
+    
+    <content type="html"><![CDATA[<p>在ASP.NET Core中,自带的IOC容器相关的使用方式和注入类型的生命周期.</p>
+<p>微软给自行注入的服务,提供了3种生命周期.</p>
+<ul>
+<li><p>Transient(瞬时的)</p>
+<p> 每次请求时都会创建的瞬时生命周期服务。这个生命周期最适合轻量级，无状态的服务。</p>
+</li>
+<li><p>Scoped(作用域的)</p>
+<p>在同作用域,服务每个请求只创建一次。</p>
+</li>
+<li><p>Singleton(唯一的)</p>
+<p>全局只创建一次,第一次被请求的时候被创建,然后就一直使用这一个.</p>
+</li>
+</ul>
+<p>自带的IOC 并不支持AOP（面向切面编程），所以我们最好还是使用Autofac.</p>
+<a id="more"></a>
+<ol>
+<li><p>从nuget引用包</p>
+<ul>
+<li>Autofac</li>
+<li>Autofac.Extensions.DependencyInjection </li>
+</ul>
+</li>
+<li><p>在Program.cs 新增一行代码</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IHostBuilder <span class="title">CreateHostBuilder</span>(<span class="params"><span class="keyword">string</span>[] args</span>)</span> =&gt;</span><br><span class="line">           Host.CreateDefaultBuilder(args)</span><br><span class="line">               .UseServiceProviderFactory(<span class="keyword">new</span> AutofacServiceProviderFactory())<span class="comment">//使用AutoFac做IOC和AOP</span></span><br><span class="line">   </span><br><span class="line">               .ConfigureWebHostDefaults(webBuilder =&gt;</span><br><span class="line">               &#123;</span><br><span class="line">                   webBuilder.UseStartup&lt;Startup&gt;();</span><br><span class="line">                   webBuilder.UseUrls(<span class="string">"http://*:8080"</span>);</span><br><span class="line">               &#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在Startup.cs 增加方法</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureContainer</span>(<span class="params">ContainerBuilder containerBuilder</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            containerBuilder.RegisterModule&lt;ConfigureAutofac&gt;();</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>ConfigureAutofac 是自己封装的一个类 继承了 Autofac.Module 也可以将以下代码直接写在这个方法里面:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ConfigureAutofac</span> : <span class="title">Module</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Load</span>(<span class="params">ContainerBuilder containerBuilder</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="comment">//程序集范围注入 名称注入</span></span><br><span class="line">            <span class="keyword">var</span> service = Assembly.Load(<span class="string">"Services"</span>);</span><br><span class="line">            <span class="keyword">var</span> iService = Assembly.Load(<span class="string">"IServices"</span>);</span><br><span class="line">            containerBuilder.RegisterAssemblyTypes(service, iService)</span><br><span class="line">                .Where(t =&gt; t.Name.EndsWith(<span class="string">"Service"</span>))</span><br><span class="line">                .AsImplementedInterfaces().PropertiesAutowired();</span><br><span class="line">            <span class="keyword">var</span> repository = Assembly.Load(<span class="string">"Repository"</span>);</span><br><span class="line">            <span class="keyword">var</span> iRepository = Assembly.Load(<span class="string">"IRepository"</span>);</span><br><span class="line">            containerBuilder.RegisterAssemblyTypes(repository, iRepository)</span><br><span class="line">                .Where(t =&gt; t.Name.EndsWith(<span class="string">"Repository"</span>))</span><br><span class="line">                .AsImplementedInterfaces().PropertiesAutowired();</span><br><span class="line"></span><br><span class="line">            <span class="comment">//注册当前程序集中以“Ser”结尾的类,暴漏类实现的所有接口，生命周期为PerLifetimeScope</span></span><br><span class="line">            <span class="comment">//containerBuilder.RegisterAssemblyTypes(System.Reflection.Assembly.GetExecutingAssembly()).Where(t =&gt; t.Name.EndsWith("Service")).AsImplementedInterfaces().InstancePerLifetimeScope();</span></span><br><span class="line">            <span class="comment">//containerBuilder.RegisterAssemblyTypes(System.Reflection.Assembly.GetExecutingAssembly()).Where(t =&gt; t.Name.EndsWith("Repository")).AsImplementedInterfaces().InstancePerLifetimeScope();</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//注册所有"Repository"程序集中的类</span></span><br><span class="line">            <span class="comment">//builder.RegisterAssemblyTypes(GetAssembly("Repository")).AsImplementedInterfaces();</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//单个注册</span></span><br><span class="line">            <span class="comment">//containerBuilder.RegisterType&lt;ExpertService&gt;().As&lt;IExpertService&gt;().PropertiesAutowired();</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">//在控制器中使用属性依赖注入，其中注入属性必须标注为public</span></span><br><span class="line">            <span class="comment">//    var controllersTypesInAssembly = typeof(Startup).Assembly.GetExportedTypes()</span></span><br><span class="line">            <span class="comment">//    .Where(type =&gt; typeof(Microsoft.AspNetCore.Mvc.ControllerBase).IsAssignableFrom(type)).ToArray();</span></span><br><span class="line">            <span class="comment">//containerBuilder.RegisterTypes(controllersTypesInAssembly).PropertiesAutowired();</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>控制器通过构造函数注入，或者属性注入：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">readonly</span> ITargetService _targetService;</span><br><span class="line">        <span class="keyword">private</span> IScopeService _scopeService &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;<span class="comment">//属性注入</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ExpertController</span>(<span class="params">ITargetService targetService</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            _targetService = targetService;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>其中属性注入需要在Startup.cs 的 ConfigureServices 方法下加入如下代码：</p>
+<p><code>services.AddControllers().AddControllersAsServices();</code></p>
+</li>
+</ol>
+<p><strong>注意： .Net Core 2.x和3.x 使用autofac注入方式不一样，此文仅适用于.Net Core 3.X</strong></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在ASP.NET Core中,自带的IOC容器相关的使用方式和注入类型的生命周期.&lt;/p&gt;
+&lt;p&gt;微软给自行注入的服务,提供了3种生命周期.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Transient(瞬时的)&lt;/p&gt;
+&lt;p&gt; 每次请求时都会创建的瞬时生命周期服务。这个生命周期最适合轻量级，无状态的服务。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Scoped(作用域的)&lt;/p&gt;
+&lt;p&gt;在同作用域,服务每个请求只创建一次。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Singleton(唯一的)&lt;/p&gt;
+&lt;p&gt;全局只创建一次,第一次被请求的时候被创建,然后就一直使用这一个.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;自带的IOC 并不支持AOP（面向切面编程），所以我们最好还是使用Autofac.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
+    
+      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
+    
+      <category term="Autofac" scheme="VickChen.win/tags/Autofac/"/>
+    
+  </entry>
+  
+  <entry>
     <title>.NET 分布式事务解决方案-CAP</title>
     <link href="VickChen.win/2019/201911272238/"/>
     <id>VickChen.win/2019/201911272238/</id>
     <published>2019-11-27T14:38:08.000Z</published>
-    <updated>2020-07-18T08:01:49.102Z</updated>
+    <updated>2020-07-18T08:04:32.147Z</updated>
     
     <content type="html"><![CDATA[<p>CAP 是一个在分布式系统中（SOA，MicroService）实现事件总线及最终一致性（分布式事务）的一个开源的 C# 库，她具有轻量级，高性能，易使用等特点。</p>
 <p>你可以轻松的在基于 .NET Core 技术的分布式系统中引入CAP，包括但限于 ASP.NET Core 和 ASP.NET Core on .NET Framework。</p>
@@ -85,6 +161,10 @@
     
       <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
+    
+      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
+    
+      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
     
       <category term="分布式" scheme="VickChen.win/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
     
@@ -1146,52 +1226,6 @@
       <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
     
       <category term="Idea" scheme="VickChen.win/tags/Idea/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>.Net Core使用 MiniProfiler 进行性能分析</title>
-    <link href="VickChen.win/2018/201809010211/"/>
-    <id>VickChen.win/2018/201809010211/</id>
-    <published>2018-08-31T18:11:52.000Z</published>
-    <updated>2019-07-20T08:05:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。</p>
-<p>虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。</p>
-<p>MiniProfiler此时就派上用场了，这是<a href="http://stackoverflow.com/" target="_blank" rel="noopener">Stack Overflow</a>团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引用、Ajax、Iframe形式访问的其它页面进行监控,监控内容包括数据库内容，并可以显示数据库访问的SQL（支持EF、EF CodeFirst等 ）。并且以很友好的方式展现在页面上。</p>
-<a id="more"></a>
-<p>官方文档： <a href="https://miniprofiler.com/dotnet/AspDotNetCore" target="_blank" rel="noopener">https://miniprofiler.com/dotnet/AspDotNetCore</a></p>
-<p>1、添加包 <a href="https://www.nuget.org/packages/MiniProfiler.AspNetCore.Mvc/" target="_blank" rel="noopener">MiniProfiler.AspNetCore.Mvc</a>   和    <a href="https://www.nuget.org/packages/MiniProfiler.EntityFrameworkCore" target="_blank" rel="noopener">MiniProfiler.EntityFrameworkCore</a></p>
-<p>2、在 Startup.cs 中的 ConfigureServices 下添加，也可以根据官方文档中的说明进行相应的配置</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">services.AddMiniProfiler().AddEntityFramework();</span><br></pre></td></tr></table></figure>
-<p>3、在 Startup.cs 中的 Configure 下添加</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.UseMiniProfiler();</span><br></pre></td></tr></table></figure>
-<p>4、修改 _ViewImports.cshtml </p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">using</span> StackExchange.Profiling</span><br><span class="line">@addTagHelper *, MiniProfiler.AspNetCore.Mvc</span><br></pre></td></tr></table></figure>
-<p>5、将MiniProfiler添加到布局文件（Shared/_Layout.cshtml）中</p>
-<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;mini-profiler /&gt;</span><br></pre></td></tr></table></figure>
-<p>完成~</p>
-<mini-profiler>
-
-
-</mini-profiler>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我们使用EF和在很大程度提高了开发速度，不过随之带来的是很多性能低下的写法和生成不太高效的sql。&lt;/p&gt;
-&lt;p&gt;虽然我们可以使用SQL Server Profiler来监控执行的sql，不过个人觉得实属麻烦，每次需要打开、过滤、清除、关闭。&lt;/p&gt;
-&lt;p&gt;MiniProfiler此时就派上用场了，这是&lt;a href=&quot;http://stackoverflow.com/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Stack Overflow&lt;/a&gt;团队设计的一款对ASP.NET MVC的性能分析的小程序。可以对一个页面本身，及该页面通过直接引用、Ajax、Iframe形式访问的其它页面进行监控,监控内容包括数据库内容，并可以显示数据库访问的SQL（支持EF、EF CodeFirst等 ）。并且以很友好的方式展现在页面上。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="SQL" scheme="VickChen.win/tags/SQL/"/>
-    
-      <category term="CSharp" scheme="VickChen.win/tags/CSharp/"/>
-    
-      <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
     
   </entry>
   
