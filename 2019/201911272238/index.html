@@ -1,0 +1,676 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="分布式,CAP,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="CAP 是一个在分布式系统中（SOA，MicroService）实现事件总线及最终一致性（分布式事务）的一个开源的 C# 库，她具有轻量级，高性能，易使用等特点。 你可以轻松的在基于 .NET Core 技术的分布式系统中引入CAP，包括但限于 ASP.NET Core 和 ASP.NET Core on .NET Framework。 CAP 以 NuGet 包的形式提供，对项目无任何入侵，你仍">
+<meta name="keywords" content="分布式,CAP">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".NET 分布式事务解决方案-CAP">
+<meta property="og:url" content="VickChen.win/2019/201911272238/index.html">
+<meta property="og:site_name" content="Vick&#39;s Blog">
+<meta property="og:description" content="CAP 是一个在分布式系统中（SOA，MicroService）实现事件总线及最终一致性（分布式事务）的一个开源的 C# 库，她具有轻量级，高性能，易使用等特点。 你可以轻松的在基于 .NET Core 技术的分布式系统中引入CAP，包括但限于 ASP.NET Core 和 ASP.NET Core on .NET Framework。 CAP 以 NuGet 包的形式提供，对项目无任何入侵，你仍">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-07-18T08:01:49.102Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=".NET 分布式事务解决方案-CAP">
+<meta name="twitter:description" content="CAP 是一个在分布式系统中（SOA，MicroService）实现事件总线及最终一致性（分布式事务）的一个开源的 C# 库，她具有轻量级，高性能，易使用等特点。 你可以轻松的在基于 .NET Core 技术的分布式系统中引入CAP，包括但限于 ASP.NET Core 和 ASP.NET Core on .NET Framework。 CAP 以 NuGet 包的形式提供，对项目无任何入侵，你仍">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="VickChen.win/2019/201911272238/">
+
+  <title> .NET 分布式事务解决方案-CAP | Vick's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vick's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                .NET 分布式事务解决方案-CAP
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-11-27T22:38:08+08:00" content="2019-11-27">
+              2019-11-27
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>CAP 是一个在分布式系统中（SOA，MicroService）实现事件总线及最终一致性（分布式事务）的一个开源的 C# 库，她具有轻量级，高性能，易使用等特点。</p>
+<p>你可以轻松的在基于 .NET Core 技术的分布式系统中引入CAP，包括但限于 ASP.NET Core 和 ASP.NET Core on .NET Framework。</p>
+<p>CAP 以 NuGet 包的形式提供，对项目无任何入侵，你仍然可以以你喜爱的方式来构建分布式系统。</p>
+<p>CAP 具有 Event Bus 的所有功能，并且CAP提供了更加简化的方式来处理EventBus中的发布/订阅。</p>
+<p>CAP 具有消息持久化的功能，也就是当你的服务进行重启或者宕机时，她可以保证消息的可靠性。</p>
+<p>CAP 实现了分布式事务中的最终一致性，你不用再去处理这些琐碎的细节。</p>
+<p>CAP 提供了基于 Microsoft DI 的 API 服务，她可以和你的 ASP.NET Core 系统进行无缝结合，并且能够和你的业务代码集成支持强一致性的事务处理。</p>
+<p>CAP 是开源免费的。CAP基于MIT协议开源，你可以免费的在你的私人或者商业项目中使用，不会有人向你收取任何费用。</p>
+<p>Github：<a href="https://github.com/dotnetcore/CAP" target="_blank" rel="noopener">https://github.com/dotnetcore/CAP</a></p>
+<a id="more"></a>
+<p>目前， CAP 同时支持使用 RabbitMQ，Kafka，Azure Service Bus 等进行底层之间的消息发送，你不需要具备这些消息队列的使用经验，仍然可以轻松的集成到项目中。</p>
+<p>CAP 目前支持使用 Sql Server，MySql，PostgreSql，MongoDB 数据库的项目。</p>
+<p>CAP 同时支持使用 EntityFrameworkCore 和 ADO.NET 的项目，你可以根据需要选择不同的配置方式。</p>
+<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><h3 id="NuGet"><a href="#NuGet" class="headerlink" title="NuGet"></a>NuGet</h3><p>你可以运行以下下命令在你的项目中安装 CAP。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PM&gt; Install-Package DotNetCore.CAP</span><br></pre></td></tr></table></figure>
+<p>CAP 支持 Kafka、RabbitMQ、AzureServiceBus 等消息队列，你可以按需选择下面的包进行安装：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PM&gt; Install-Package DotNetCore.CAP.Kafka</span><br><span class="line">PM&gt; Install-Package DotNetCore.CAP.RabbitMQ</span><br><span class="line">PM&gt; Install-Package DotNetCore.CAP.AzureServiceBus</span><br></pre></td></tr></table></figure>
+<p>CAP 提供了 Sql Server, MySql, PostgreSQL，MongoDB 的扩展作为数据库存储：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 按需选择安装你正在使用的数据库</span><br><span class="line">PM&gt; Install-Package DotNetCore.CAP.SqlServer</span><br><span class="line">PM&gt; Install-Package DotNetCore.CAP.MySql</span><br><span class="line">PM&gt; Install-Package DotNetCore.CAP.PostgreSql</span><br><span class="line">PM&gt; Install-Package DotNetCore.CAP.MongoDB</span><br></pre></td></tr></table></figure>
+<h3 id="Configuration"><a href="#Configuration" class="headerlink" title="Configuration"></a>Configuration</h3><p>首先配置CAP到 Startup.cs 文件中，如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">IServiceCollection services</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ......</span><br><span class="line"></span><br><span class="line">    services.AddDbContext&lt;AppDbContext&gt;();</span><br><span class="line"></span><br><span class="line">    services.AddCap(x =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//如果你使用的 EF 进行数据操作，你需要添加如下配置：</span></span><br><span class="line">        x.UseEntityFramework&lt;AppDbContext&gt;();  <span class="comment">//可选项，你不需要再次配置 x.UseSqlServer 了</span></span><br><span class="line">		</span><br><span class="line">        <span class="comment">//如果你使用的ADO.NET，根据数据库选择进行配置：</span></span><br><span class="line">        x.UseSqlServer(<span class="string">"数据库连接字符串"</span>);</span><br><span class="line">        x.UseMySql(<span class="string">"数据库连接字符串"</span>);</span><br><span class="line">        x.UsePostgreSql(<span class="string">"数据库连接字符串"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//如果你使用的 MongoDB，你可以添加如下配置：</span></span><br><span class="line">        x.UseMongoDB(<span class="string">"ConnectionStrings"</span>);  <span class="comment">//注意，仅支持MongoDB 4.0+集群</span></span><br><span class="line">	</span><br><span class="line">        <span class="comment">//CAP支持 RabbitMQ、Kafka、AzureServiceBus 等作为MQ，根据使用选择配置：</span></span><br><span class="line">        x.UseRabbitMQ(<span class="string">"ConnectionStrings"</span>);</span><br><span class="line">        x.UseKafka(<span class="string">"ConnectionStrings"</span>);</span><br><span class="line">        x.UseAzureServiceBus(<span class="string">"ConnectionStrings"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><p>在 Controller 中注入 <code>ICapPublisher</code> 然后使用 <code>ICapPublisher</code> 进行消息发送</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">PublishController</span> : <span class="title">Controller</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">readonly</span> ICapPublisher _capBus;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PublishController</span>(<span class="params">ICapPublisher capPublisher</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        _capBus = capPublisher;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//不使用事务</span></span><br><span class="line">    [<span class="meta">Route(<span class="meta-string">"~/without/transaction"</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> IActionResult <span class="title">WithoutTransaction</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        _capBus.Publish(<span class="string">"xxx.services.show.time"</span>, DateTime.Now);</span><br><span class="line">	</span><br><span class="line">        <span class="keyword">return</span> Ok();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Ado.Net 中使用事务，自动提交</span></span><br><span class="line">    [<span class="meta">Route(<span class="meta-string">"~/adonet/transaction"</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> IActionResult <span class="title">AdonetWithTransaction</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">using</span> (<span class="keyword">var</span> connection = <span class="keyword">new</span> MySqlConnection(ConnectionString))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">using</span> (<span class="keyword">var</span> transaction = connection.BeginTransaction(_capBus, autoCommit: <span class="literal">true</span>))</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">//业务代码</span></span><br><span class="line"></span><br><span class="line">                _capBus.Publish(<span class="string">"xxx.services.show.time"</span>, DateTime.Now);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Ok();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//EntityFramework 中使用事务，自动提交</span></span><br><span class="line">    [<span class="meta">Route(<span class="meta-string">"~/ef/transaction"</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> IActionResult <span class="title">EntityFrameworkWithTransaction</span>(<span class="params">[FromServices]AppDbContext dbContext</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">using</span> (<span class="keyword">var</span> trans = dbContext.Database.BeginTransaction(_capBus, autoCommit: <span class="literal">true</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//业务代码</span></span><br><span class="line"></span><br><span class="line">            _capBus.Publish(<span class="string">"xxx.services.show.time"</span>, DateTime.Now);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> Ok();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="订阅"><a href="#订阅" class="headerlink" title="订阅"></a>订阅</h3><p><strong>Action Method</strong></p>
+<p>在 Action 上添加 CapSubscribeAttribute 来订阅相关消息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class PublishController : Controller</span><br><span class="line">&#123;</span><br><span class="line">    [CapSubscribe(&quot;xxx.services.show.time&quot;)]</span><br><span class="line">    public void CheckReceivedMessage(DateTime datetime)</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(datetime);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>Service Method</strong></p>
+<p>如果你的订阅方法没有位于 Controller 中，则你订阅的类需要继承 <code>ICapSubscribe</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">namespace xxx.Service</span><br><span class="line">&#123;</span><br><span class="line">    public interface ISubscriberService</span><br><span class="line">    &#123;</span><br><span class="line">        public void CheckReceivedMessage(DateTime datetime);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public class SubscriberService: ISubscriberService, ICapSubscribe</span><br><span class="line">    &#123;</span><br><span class="line">        [CapSubscribe(&quot;xxx.services.show.time&quot;)]</span><br><span class="line">        public void CheckReceivedMessage(DateTime datetime)</span><br><span class="line">        &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后在 Startup.cs 中的 <code>ConfigureServices()</code> 中注入你的 <code>ISubscriberService</code> 类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void ConfigureServices(IServiceCollection services)</span><br><span class="line">&#123;</span><br><span class="line">    //注意: 注入的服务需要在 `services.AddCap()` 之前</span><br><span class="line">    services.AddTransient&lt;ISubscriberService,SubscriberService&gt;();</span><br><span class="line">	</span><br><span class="line">    services.AddCap(x=&gt;&#123;&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="订阅者组"><a href="#订阅者组" class="headerlink" title="订阅者组"></a>订阅者组</h4><p>订阅者组的概念类似于 Kafka 中的消费者组，它和消息队列中的广播模式相同，用来处理不同微服务实例之间同时消费相同的消息。</p>
+<p>当CAP启动的时候，她将创建一个默认的消费者组，如果多个相同消费者组的消费者消费同一个Topic消息的时候，只会有一个消费者被执行。 相反，如果消费者都位于不同的消费者组，则所有的消费者都会被执行。</p>
+<p>相同的实例中，你可以通过下面的方式来指定他们位于不同的消费者组。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">CapSubscribe(<span class="meta-string">"xxx.services.show.time"</span>, Group = <span class="meta-string">"group1"</span> )</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowTime1</span>(<span class="params">DateTime datetime</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">[<span class="meta">CapSubscribe(<span class="meta-string">"xxx.services.show.time"</span>, Group = <span class="meta-string">"group2"</span>)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ShowTime2</span>(<span class="params">DateTime datetime</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>ShowTime1</code> 和 <code>ShowTime2</code> 处于不同的组，他们将会被同时调用。</p>
+<p>PS，你可以通过下面的方式来指定默认的消费者组名称：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">services.AddCap(x =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    x.DefaultGroup = <span class="string">"default-group-name"</span>;  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="Dashboard"><a href="#Dashboard" class="headerlink" title="Dashboard"></a>Dashboard</h3><p>CAP 2.1+ 以上版本中提供了仪表盘（Dashboard）功能，你可以很方便的查看发出和接收到的消息。除此之外，你还可以在仪表盘中实时查看发送或者接收到的消息。</p>
+<p>使用一下命令安装 Dashboard：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PM&gt; Install-Package DotNetCore.CAP.Dashboard</span><br></pre></td></tr></table></figure>
+<p>在分布式环境中，仪表盘内置集成了 <a href="http://consul.io/" target="_blank" rel="noopener">Consul</a> 作为节点的注册发现，同时实现了网关代理功能，你同样可以方便的查看本节点或者其他节点的数据，它就像你访问本地资源一样。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">services.AddCap(x =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注册 Dashboard</span></span><br><span class="line">    x.UseDashboard();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 注册节点到 Consul</span></span><br><span class="line">    x.UseDiscovery(d =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        d.DiscoveryServerHostName = <span class="string">"localhost"</span>;</span><br><span class="line">        d.DiscoveryServerPort = <span class="number">8500</span>;</span><br><span class="line">        d.CurrentNodeHostName = <span class="string">"localhost"</span>;</span><br><span class="line">        d.CurrentNodePort = <span class="number">5800</span>;</span><br><span class="line">        d.NodeId = <span class="number">1</span>;</span><br><span class="line">        d.NodeName = <span class="string">"CAP No.1 Node"</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>仪表盘默认的访问地址是：<a href="http://localhost:xxx/cap，你可以在`d.MatchPath`配置项中修改`cap`路径后缀为其他的名字。" target="_blank" rel="noopener">http://localhost:xxx/cap，你可以在`d.MatchPath`配置项中修改`cap`路径后缀为其他的名字。</a></p>
+<p><em>本文转载自 -<a href="https://github.com/dotnetcore/CAP/blob/master/README.zh-cn" target="_blank" rel="noopener">README</a></em></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/分布式/" rel="tag">#分布式</a>
+          
+            <a href="/tags/CAP/" rel="tag">#CAP</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/201911030147/" rel="next" title="分布式事务常用解决方案">
+                <i class="fa fa-chevron-left"></i> 分布式事务常用解决方案
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Vick">
+          <p class="site-author-name" itemprop="name">Vick</p>
+          <p class="site-description motion-element" itemprop="description">只要路是对的，就不怕路远</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">38</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/VickChen1992" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://gitee.com/vickchen" target="_blank" title="gitee">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  gitee
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Getting-Started"><span class="nav-number">1.</span> <span class="nav-text">Getting Started</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NuGet"><span class="nav-number">1.1.</span> <span class="nav-text">NuGet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration"><span class="nav-number">1.2.</span> <span class="nav-text">Configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发布"><span class="nav-number">1.3.</span> <span class="nav-text">发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#订阅"><span class="nav-number">1.4.</span> <span class="nav-text">订阅</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#订阅者组"><span class="nav-number">1.4.1.</span> <span class="nav-text">订阅者组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dashboard"><span class="nav-number">1.5.</span> <span class="nav-text">Dashboard</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vick</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
