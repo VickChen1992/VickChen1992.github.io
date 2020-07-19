@@ -92,11 +92,11 @@
   </entry>
   
   <entry>
-    <title>.NET 分布式事务解决方案-CAP</title>
+    <title>.NET开源分布式事务解决方案-CAP</title>
     <link href="VickChen.win/2019/201911272238/"/>
     <id>VickChen.win/2019/201911272238/</id>
     <published>2019-11-27T14:38:08.000Z</published>
-    <updated>2020-07-18T08:04:32.147Z</updated>
+    <updated>2020-07-19T06:02:46.368Z</updated>
     
     <content type="html"><![CDATA[<p>CAP 是一个在分布式系统中（SOA，MicroService）实现事件总线及最终一致性（分布式事务）的一个开源的 C# 库，她具有轻量级，高性能，易使用等特点。</p>
 <p>你可以轻松的在基于 .NET Core 技术的分布式系统中引入CAP，包括但限于 ASP.NET Core 和 ASP.NET Core on .NET Framework。</p>
@@ -503,6 +503,63 @@
     
     
       <category term="Hexo" scheme="VickChen.win/tags/Hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>可能造成数据库索引失效的原因</title>
+    <link href="VickChen.win/2019/201903210041/"/>
+    <id>VickChen.win/2019/201903210041/</id>
+    <published>2019-03-20T16:41:31.000Z</published>
+    <updated>2020-07-19T05:45:47.530Z</updated>
+    
+    <content type="html"><![CDATA[<p>几乎所有的小伙伴都可以随口说几句关于创建索引的优缺点，也知道什么时候创建索引能够提高我们的查询性能，什么时候索引会更新，但是你有没有注意到，即使你设置了索引，有些时候索引他是不会生效的！这不仅考察了大家对索引的了解程度，还要让大家在使用的时候能够正确的使用。以下介绍了一些可能会造成索引失效的特殊情况，希望大家在平时开发和面试的时候能够注意到！</p>
+<a id="more"></a>
+<ol>
+<li><p>应尽量避免在 where 子句中使用 != 或 &lt;&gt; 操作符，否则引擎将放弃使用索引而进行全表扫描；</p>
+</li>
+<li><p>尽量避免在 where 子句中使用 or 来连接条件，否则将导致引擎放弃使用索引而进行全表扫描，即使其中有条件带索引也不会使用，这也是为什么尽量少用 or 的原因；</p>
+</li>
+<li><p>对于多列索引，不是使用的第一部分，则不会使用索引；</p>
+</li>
+<li><p>如果列类型是字符串，那一定要在条件中将数据使用引号引用起来，否则不会使用索引；</p>
+</li>
+<li><p>like的模糊查询以 % 开头，索引失效；</p>
+</li>
+<li><p>应尽量<strong>避免</strong>在 where 子句中对字段进行<strong>表达式操作</strong>，这将导致引擎放弃使用索引而进行全表扫描；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--索引无效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">num</span>/<span class="number">2</span> = <span class="number">100</span> </span><br><span class="line"><span class="comment">--索引有效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">num</span> = <span class="number">100</span>*<span class="number">2</span>；</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>应尽量<strong>避免</strong>在 where 子句中对字段进行<strong>函数操作</strong>，这将导致引擎放弃使用索引而进行全表扫描；</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--索引无效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">substring</span>(<span class="keyword">name</span>,<span class="number">1</span>,<span class="number">3</span>) = <span class="string">'abc'</span> – <span class="keyword">name</span>;</span><br><span class="line"><span class="comment">--以abc开头的，应改成：</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> ‘abc%’ </span><br><span class="line"></span><br><span class="line"><span class="comment">--索引无效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">datediff</span>(<span class="keyword">day</span>, createdate, <span class="string">'2005-11-30'</span>) = <span class="number">0</span> – <span class="string">'2005-11-30'</span>;</span><br><span class="line"><span class="comment">--索引有效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> createdate &gt;= <span class="string">'2005-11-30'</span> <span class="keyword">and</span> createdate &lt; <span class="string">'2005-12-1'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ol>
+<li><p>不要在 where 子句中的 “=” 左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引；</p>
+</li>
+<li><p>如果MySQL估计使用全表扫描要比使用索引快，则不使用索引；</p>
+</li>
+<li><p>不适合键值较少的列（重复数据较多的列）</p>
+<p>假如索引列TYPE有5个键值，如果有1万条数据，那么 WHERE TYPE = 1将访问表中的2000个数据块。再加上访问索引块，一共要访问大于200个的数据块。如果全表扫描，假设10条数据一个数据块，那么只需访问1000个数据块，既然全表扫描访问的数据块少一些，肯定就不会利用索引了。</p>
+</li>
+</ol>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;几乎所有的小伙伴都可以随口说几句关于创建索引的优缺点，也知道什么时候创建索引能够提高我们的查询性能，什么时候索引会更新，但是你有没有注意到，即使你设置了索引，有些时候索引他是不会生效的！这不仅考察了大家对索引的了解程度，还要让大家在使用的时候能够正确的使用。以下介绍了一些可能会造成索引失效的特殊情况，希望大家在平时开发和面试的时候能够注意到！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="SQL Server" scheme="VickChen.win/tags/SQL-Server/"/>
+    
+      <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
+    
+      <category term="DataBase" scheme="VickChen.win/tags/DataBase/"/>
     
   </entry>
   
@@ -1198,34 +1255,6 @@
       <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
     
       <category term="DeBug" scheme="VickChen.win/tags/DeBug/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux下IDEA无法输入中文问题</title>
-    <link href="VickChen.win/2018/201809172351/"/>
-    <id>VickChen.win/2018/201809172351/</id>
-    <published>2018-09-17T15:51:09.000Z</published>
-    <updated>2019-07-26T03:19:20.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近在Debian下使用Idea编写Java，感觉还不错，但偶尔会发生无法使用中文的情况，导致写注释很不方便，奇怪的是在Idea外面没问题。</p>
-<a id="more"></a>
-<p>解决方法：</p>
-<p>在IDEA的bin目录下的idea.sh文件的前面加上<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> XMODIFIERS=@im=fcitx</span><br><span class="line"><span class="built_in">export</span> QT_IM_MODULE=fcitx</span><br></pre></td></tr></table></figure></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近在Debian下使用Idea编写Java，感觉还不错，但偶尔会发生无法使用中文的情况，导致写注释很不方便，奇怪的是在Idea外面没问题。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-      <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
-    
-      <category term="Idea" scheme="VickChen.win/tags/Idea/"/>
     
   </entry>
   
