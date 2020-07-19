@@ -511,7 +511,7 @@
     <link href="VickChen.win/2019/201903210041/"/>
     <id>VickChen.win/2019/201903210041/</id>
     <published>2019-03-20T16:41:31.000Z</published>
-    <updated>2020-07-19T05:45:47.530Z</updated>
+    <updated>2020-07-19T06:05:48.250Z</updated>
     
     <content type="html"><![CDATA[<p>几乎所有的小伙伴都可以随口说几句关于创建索引的优缺点，也知道什么时候创建索引能够提高我们的查询性能，什么时候索引会更新，但是你有没有注意到，即使你设置了索引，有些时候索引他是不会生效的！这不仅考察了大家对索引的了解程度，还要让大家在使用的时候能够正确的使用。以下介绍了一些可能会造成索引失效的特殊情况，希望大家在平时开发和面试的时候能够注意到！</p>
 <a id="more"></a>
@@ -529,13 +529,9 @@
 <li><p>应尽量<strong>避免</strong>在 where 子句中对字段进行<strong>表达式操作</strong>，这将导致引擎放弃使用索引而进行全表扫描；</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--索引无效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">num</span>/<span class="number">2</span> = <span class="number">100</span> </span><br><span class="line"><span class="comment">--索引有效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">num</span> = <span class="number">100</span>*<span class="number">2</span>；</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol>
 <li><p>应尽量<strong>避免</strong>在 where 子句中对字段进行<strong>函数操作</strong>，这将导致引擎放弃使用索引而进行全表扫描；</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--索引无效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">substring</span>(<span class="keyword">name</span>,<span class="number">1</span>,<span class="number">3</span>) = <span class="string">'abc'</span> – <span class="keyword">name</span>;</span><br><span class="line"><span class="comment">--以abc开头的，应改成：</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">name</span> <span class="keyword">like</span> ‘abc%’ </span><br><span class="line"></span><br><span class="line"><span class="comment">--索引无效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> <span class="keyword">datediff</span>(<span class="keyword">day</span>, createdate, <span class="string">'2005-11-30'</span>) = <span class="number">0</span> – <span class="string">'2005-11-30'</span>;</span><br><span class="line"><span class="comment">--索引有效</span></span><br><span class="line"><span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">where</span> createdate &gt;= <span class="string">'2005-11-30'</span> <span class="keyword">and</span> createdate &lt; <span class="string">'2005-12-1'</span>;</span><br></pre></td></tr></table></figure>
 </li>
-</ol>
-<ol>
 <li><p>不要在 where 子句中的 “=” 左边进行函数、算术运算或其他表达式运算，否则系统将可能无法正确使用索引；</p>
 </li>
 <li><p>如果MySQL估计使用全表扫描要比使用索引快，则不使用索引；</p>
@@ -555,9 +551,9 @@
       <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="SQL Server" scheme="VickChen.win/tags/SQL-Server/"/>
-    
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
+    
+      <category term="SQL Server" scheme="VickChen.win/tags/SQL-Server/"/>
     
       <category term="DataBase" scheme="VickChen.win/tags/DataBase/"/>
     
