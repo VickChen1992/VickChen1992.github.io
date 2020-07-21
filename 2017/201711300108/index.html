@@ -1,0 +1,744 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="设计模式,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="创建型模式就是用来创建对象的模式，抽象了实例化的过程，能够提升已有代码的灵活性和可复用性。所有的创建型模式都有两个共同点。  它们都将系统使用哪些具体类的信息封装起来； 它们隐藏了这些类的实例是如何被创建和组织的">
+<meta name="keywords" content="设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式之创建型模式">
+<meta property="og:url" content="VickChen.win/2017/201711300108/index.html">
+<meta property="og:site_name" content="Vick&#39;s Blog">
+<meta property="og:description" content="创建型模式就是用来创建对象的模式，抽象了实例化的过程，能够提升已有代码的灵活性和可复用性。所有的创建型模式都有两个共同点。  它们都将系统使用哪些具体类的信息封装起来； 它们隐藏了这些类的实例是如何被创建和组织的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png">
+<meta property="og:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82.png">
+<meta property="og:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%BB%BA%E9%80%A0%E8%80%85.png">
+<meta property="og:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%8E%9F%E5%9E%8B.png">
+<meta property="og:updated_time" content="2020-07-21T11:33:31.827Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式之创建型模式">
+<meta name="twitter:description" content="创建型模式就是用来创建对象的模式，抽象了实例化的过程，能够提升已有代码的灵活性和可复用性。所有的创建型模式都有两个共同点。  它们都将系统使用哪些具体类的信息封装起来； 它们隐藏了这些类的实例是如何被创建和组织的">
+<meta name="twitter:image" content="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="VickChen.win/2017/201711300108/">
+
+  <title> 设计模式之创建型模式 | Vick's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vick's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                设计模式之创建型模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-11-30T01:08:29+08:00" content="2017-11-30">
+              2017-11-30
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>创建型模式就是用来创建对象的模式，抽象了实例化的过程，能够提升已有代码的灵活性和可复用性。所有的创建型模式都有两个共同点。</p>
+<ol>
+<li>它们都将系统使用哪些具体类的信息封装起来；</li>
+<li>它们隐藏了这些类的实例是如何被创建和组织的</li>
+</ol>
+<a id="more"></a>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>单例模式（<strong>亦称：</strong> 单件模式）指的是确保某一个类只有一个实例，并提供一个全局访问点。解决的是实体对象个数的问题，而其他的建造者模式都是解决new所带来的耦合关系问题。</p>
+<p>所有单例的实现都包含以下两个相同的步骤：</p>
+<ul>
+<li>将默认构造函数设为私有， 防止其他对象使用单例类的 <code>new</code>运算符。</li>
+<li>新建一个静态构建方法作为构造函数。 该函数会 “偷偷” 调用私有构造函数来创建对象， 并将其保存在一个静态成员变量中。 此后所有对于该函数的调用都将返回这一缓存对象。</li>
+</ul>
+<p>如果你的代码能够访问单例类， 那它就能调用单例类的静态方法。 无论何时调用该方法， 它总是会返回相同的对象。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F.png" alt></p>
+<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>在类中添加一个私有静态成员变量用于保存单例实例。</li>
+<li>声明一个公有静态构建方法用于获取单例实例。</li>
+<li>在静态方法中实现”延迟初始化”。 该方法会在首次被调用时创建一个新对象， 并将其存储在静态成员变量中。 此后该方法每次被调用时都返回该实例。</li>
+<li>将类的构造函数设为私有。 类的静态方法仍能调用构造函数， 但是其他对象不能调用。</li>
+<li>检查客户端代码， 将对单例的构造函数的调用替换为对其静态构建方法的调用。</li>
+</ol>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>如果程序中的某个类对于所有客户端只有一个可用的实例， 可以使用单例模式</li>
+<li>如果你需要更加严格地控制全局变量， 可以使用单例模式。</li>
+</ul>
+<h2 id="工厂方法模式"><a href="#工厂方法模式" class="headerlink" title="工厂方法模式"></a>工厂方法模式</h2><p>工厂方法模式（<strong>亦称：</strong> 虚拟构造函数）指的是在父类中提供一个创建对象的方法，由其子类决定要实例化的类，将实际创建工作推迟到子类中。它强调的是<strong>“单个对象”</strong>的变化。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F.png" alt></p>
+<h3 id="实现方法-1"><a href="#实现方法-1" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li><p>让所有产品都遵循同一接口。 该接口必须声明对所有产品都有意义的方法。</p>
+</li>
+<li><p>在创建类中添加一个空的工厂方法。 该方法的返回类型必须遵循通用的产品接口。</p>
+</li>
+<li><p>在创建者代码中找到对于产品构造函数的所有引用。 将它们依次替换为对于工厂方法的调用， 同时将创建产品的代码移入工厂方法。 你可能需要在工厂方法中添加临时参数来控制返回的产品类型。</p>
+<p>工厂方法的代码看上去可能非常糟糕。 其中可能会有复杂的 <code>switch</code>分支运算符， 用于选择各种需要实例化的产品类。 但是不要担心， 我们很快就会修复这个问题。</p>
+</li>
+<li><p>现在， 为工厂方法中的每种产品编写一个创建者子类， 然后在子类中重写工厂方法， 并将基本方法中的相关创建代码移动到工厂方法中。</p>
+</li>
+<li><p>如果应用中的产品类型太多， 那么为每个产品创建子类并无太大必要， 这时你也可以在子类中复用基类中的控制参数。</p>
+<p>例如， 设想你有以下一些层次结构的类。 基类 <code>邮件</code>及其子类 <code>航空邮件</code>和 <code>陆路邮件</code> ；  <code>运输</code>及其子类 <code>飞机</code>, <code>卡车</code>和 <code>火车</code> 。  <code>航空邮件</code>仅使用 <code>飞机</code>对象， 而 <code>陆路邮件</code>则会同时使用 <code>卡车</code>和 <code>火车</code>对象。 你可以编写一个新的子类 （例如 <code>火车邮件</code> ） 来处理这两种情况， 但是还有其他可选的方案。 客户端代码可以给 <code>陆路邮件</code>类传递一个参数， 用于控制其希望获得的产品。</p>
+</li>
+<li><p>如果代码经过上述移动后， 基础工厂方法中已经没有任何代码， 你可以将其转变为抽象类。 如果基础工厂方法中还有其他语句， 你可以将其设置为该方法的默认行为。</p>
+</li>
+</ol>
+<h3 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>当你在编写代码的过程中<strong>，</strong> 如果无法预知对象确切类别及其依赖关系时<strong>，</strong> 可使用工厂方法。</li>
+<li>如果你希望用户能扩展你软件库或框架的内部组件， 可使用工厂方法。</li>
+<li>如果你希望复用现有对象来节省系统资源， 而不是每次都重新创建对象， 可使用工厂方法。</li>
+</ul>
+<h2 id="抽象工厂模式"><a href="#抽象工厂模式" class="headerlink" title="抽象工厂模式"></a>抽象工厂模式</h2><p>抽象工厂模式指的是提供一个创建一系列相关或相互依赖对象的接口，使得客户端可以在不必指定产品的具体类型的情况下，创建多个产品族中的产品对象，强调的是”<strong>系列对象“</strong>的变化。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E6%8A%BD%E8%B1%A1%E5%B7%A5%E5%8E%82.png" alt></p>
+<h3 id="实现方法-2"><a href="#实现方法-2" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>以不同的产品类型与产品变体为维度绘制矩阵。</li>
+<li>为所有产品声明抽象产品接口。 然后让所有具体产品类实现这些接口。</li>
+<li>声明抽象工厂接口， 并且在接口中为所有抽象产品提供一组构建方法。</li>
+<li>为每种产品变体实现一个具体工厂类。</li>
+<li>在应用程序中开发初始化代码。 该代码根据应用程序配置或当前环境， 对特定具体工厂类进行初始化。 然后将该工厂对象传递给所有需要创建产品的类。</li>
+<li>找出代码中所有对产品构造函数的直接调用， 将其替换为对工厂对象中相应构建方法的调用。</li>
+</ol>
+<h3 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>如果代码需要与多个不同系列的相关产品交互， 但是由于无法提前获取相关信息， 或者出于对未来扩展性的考虑， 你不希望代码基于产品的具体类进行构建， 在这种情况下， 你可以使用抽象工厂</li>
+<li>如果你有一个基于一组抽象方法的类， 且其主要功能因此变得不明确， 那么在这种情况下可以考虑使用抽象工厂模式。</li>
+</ul>
+<h2 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h2><p>建造者模式(生成器模式)指的是将一个产品的内部表示与产品的构造过程分割开来，从而可以使一个建造过程生成具体不同的内部表示的产品对象，即该模式允许你使用相同的创建代码生成不同类型和形式的对象。强调的是产品的构造过程。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%BB%BA%E9%80%A0%E8%80%85.png" alt></p>
+<h3 id="实现方法-3"><a href="#实现方法-3" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li><p>清晰地定义通用步骤， 确保它们可以制造所有形式的产品。 否则你将无法进一步实施该模式。</p>
+</li>
+<li><p>在基本生成器接口中声明这些步骤。</p>
+</li>
+<li><p>为每个形式的产品创建具体生成器类， 并实现其构造步骤。</p>
+<p>不要忘记实现获取构造结果对象的方法。 你不能在生成器接口中声明该方法， 因为不同生成器构造的产品可能没有公共接口， 因此你就不知道该方法返回的对象类型。 但是， 如果所有产品都位于单一类层次中， 你就可以安全地在基本接口中添加获取生成对象的方法。</p>
+</li>
+<li><p>考虑创建主管类。 它可以使用同一生成器对象来封装多种构造产品的方式。</p>
+</li>
+<li><p>客户端代码会同时创建生成器和主管对象。 构造开始前， 客户端必须将生成器对象传递给主管对象。 通常情况下， 客户端只需调用主管类构造函数一次即可。 主管类使用生成器对象完成后续所有制造任务。 还有另一种方式， 那就是客户端可以将生成器对象直接传递给主管类的制造方法。</p>
+</li>
+<li><p>只有在所有产品都遵循相同接口的情况下， 构造结果可以直接通过主管类获取。 否则， 客户端应当通过生成器获取构造结果。</p>
+</li>
+</ol>
+<h3 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>使用生成器模式可避免 “重叠构造函数 （telescopic constructor）” 的出现。</li>
+<li>当你希望使用代码创建不同形式的产品 （例如石头或木头房屋） 时， 可使用生成器模式。</li>
+<li>使用生成器构造组合树或其他复杂对象。</li>
+</ul>
+<h2 id="原型工厂模式"><a href="#原型工厂模式" class="headerlink" title="原型工厂模式"></a>原型工厂模式</h2><p>原型模式（<strong>亦称：</strong> 克隆、原型模式）指的是通过给出一个原型对象来指明所要创建的对象类型，然后用复制的方法来创建出更多的同类型对象。使你能够复制已有对象， 而又无需使代码依赖它们所属的类。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%8E%9F%E5%9E%8B.png" alt></p>
+<h3 id="实现方法-4"><a href="#实现方法-4" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li><p>创建原型接口， 并在其中声明 <code>克隆</code>方法。 如果你已有类层次结构， 则只需在其所有类中添加该方法即可。</p>
+</li>
+<li><p>原型类必须另行定义一个以该类对象为参数的构造函数。 构造函数必须复制参数对象中的所有成员变量值到新建实体中。 如果你需要修改子类， 则必须调用父类构造函数， 让父类复制其私有成员变量值。</p>
+<p>如果编程语言不支持方法重载， 那么你可能需要定义一个特殊方法来复制对象数据。 在构造函数中进行此类处理比较方便， 因为它在调用 <code>new</code>运算符后会马上返回结果对象。</p>
+</li>
+<li><p>克隆方法通常只有一行代码： 使用 <code>new</code>运算符调用原型版本的构造函数。 注意， 每个类都必须显式重写克隆方法并使用自身类名调用 <code>new</code>运算符。 否则， 克隆方法可能会生成父类的对象。</p>
+</li>
+<li><p>你还可以创建一个中心化原型注册表， 用于存储常用原型。</p>
+<p>你可以新建一个工厂类来实现注册表， 或者在原型基类中添加一个获取原型的静态方法。 该方法必须能够根据客户端代码设定的条件进行搜索。 搜索条件可以是简单的字符串， 或者是一组复杂的搜索参数。 找到合适的原型后， 注册表应对原型进行克隆， 并将复制生成的对象返回给客户端。</p>
+<p>最后还要将对子类构造函数的直接调用替换为对原型注册表工厂方法的调用。</p>
+</li>
+</ol>
+<h3 id="适用场景-4"><a href="#适用场景-4" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>如果你需要复制一些对象， 同时又希望代码独立于这些对象所属的具体类， 可以使用原型模式。</li>
+<li>如果子类的区别仅在于其对象的初始化方式， 那么你可以使用该模式来减少子类的数量。 别人创建这些子类的目的可能是为了创建特定类型的对象。</li>
+</ul>
+<p>工厂方法，抽象工厂, 建造者都需要一个额外的工厂类来负责实例化“一个对象”，而原型模式则是通过原型（一个特殊的工厂类）来克隆“易变对象”。</p>
+<p>参考 - <a href="https://refactoring.guru/" target="_blank" rel="noopener">https://refactoring.guru/</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/201710220019/" rel="next" title="设计模式之设计原则">
+                <i class="fa fa-chevron-left"></i> 设计模式之设计原则
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/201806131846/" rel="prev" title="ASP.NET Core 2.1 使用Cookie验证身份">
+                ASP.NET Core 2.1 使用Cookie验证身份 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Vick">
+          <p class="site-author-name" itemprop="name">Vick</p>
+          <p class="site-description motion-element" itemprop="description">只要路是对的，就不怕路远</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">42</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">45</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/VickChen1992" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://gitee.com/vickchen" target="_blank" title="gitee">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  gitee
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#单例模式"><span class="nav-number">1.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方法"><span class="nav-number">1.1.</span> <span class="nav-text">实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景"><span class="nav-number">1.2.</span> <span class="nav-text">适用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工厂方法模式"><span class="nav-number">2.</span> <span class="nav-text">工厂方法模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方法-1"><span class="nav-number">2.1.</span> <span class="nav-text">实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景-1"><span class="nav-number">2.2.</span> <span class="nav-text">适用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象工厂模式"><span class="nav-number">3.</span> <span class="nav-text">抽象工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方法-2"><span class="nav-number">3.1.</span> <span class="nav-text">实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景-2"><span class="nav-number">3.2.</span> <span class="nav-text">适用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#建造者模式"><span class="nav-number">4.</span> <span class="nav-text">建造者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方法-3"><span class="nav-number">4.1.</span> <span class="nav-text">实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景-3"><span class="nav-number">4.2.</span> <span class="nav-text">适用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型工厂模式"><span class="nav-number">5.</span> <span class="nav-text">原型工厂模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实现方法-4"><span class="nav-number">5.1.</span> <span class="nav-text">实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#适用场景-4"><span class="nav-number">5.2.</span> <span class="nav-text">适用场景</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vick</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

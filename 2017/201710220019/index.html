@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="设计模式,">
 
 
 
@@ -86,17 +86,18 @@
 
 
 
-<meta name="description" content="title:三种MySql避免重复插入记录方法date:2019-07-19 20:12:05categories:技术 tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update 注意，除非表有一个PRIMARY KEY">
+<meta name="description" content="设计模式（Design pattern）是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。">
+<meta name="keywords" content="设计模式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vick&#39;s Blog">
-<meta property="og:url" content="VickChen.win/2020/201907192012/index.html">
+<meta property="og:title" content="设计模式之设计原则">
+<meta property="og:url" content="VickChen.win/2017/201710220019/index.html">
 <meta property="og:site_name" content="Vick&#39;s Blog">
-<meta property="og:description" content="title:三种MySql避免重复插入记录方法date:2019-07-19 20:12:05categories:技术 tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update 注意，除非表有一个PRIMARY KEY">
+<meta property="og:description" content="设计模式（Design pattern）是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-07-10T13:23:47.157Z">
+<meta property="og:updated_time" content="2020-07-21T10:31:53.331Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vick&#39;s Blog">
-<meta name="twitter:description" content="title:三种MySql避免重复插入记录方法date:2019-07-19 20:12:05categories:技术 tag:[MySql]mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:1、insert ignore2、replace into3、insert on duplicate key update 注意，除非表有一个PRIMARY KEY">
+<meta name="twitter:title" content="设计模式之设计原则">
+<meta name="twitter:description" content="设计模式（Design pattern）是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。">
 
 
 
@@ -117,9 +118,9 @@
 
 
 
-  <link rel="canonical" href="VickChen.win/2020/201907192012/">
+  <link rel="canonical" href="VickChen.win/2017/201710220019/">
 
-  <title>  | Vick's Blog </title>
+  <title> 设计模式之设计原则 | Vick's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -259,7 +260,7 @@
             
             
               
-                
+                设计模式之设计原则
               
             
           </h1>
@@ -271,11 +272,30 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2020-07-10T20:37:57+08:00" content="2020-07-10">
-              2020-07-10
+            <time itemprop="dateCreated" datetime="2017-10-22T00:19:53+08:00" content="2017-10-22">
+              2017-10-22
             </time>
           </span>
 
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -299,50 +319,42 @@
       
 
       
-        <hr>
-<p>title:三种MySql避免重复插入记录方法<br>date:2019-07-19 20:12:05<br>categories:技术</p>
-<h2 id="tag-MySql"><a href="#tag-MySql" class="headerlink" title="tag:[MySql]"></a>tag:[MySql]</h2><p>mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:<br>1、insert ignore<br>2、replace into<br>3、insert on duplicate key update</p>
-<p>注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。</p>
+        <p>设计模式（Design pattern）是软件开发人员在软件开发过程中面临的一般问题的解决方案。这些解决方案是众多软件开发人员经过相当长的一段时间的试验和错误总结出来的。</p>
 <a id="more"></a>
-<h2 id="insert-ignore"><a href="#insert-ignore" class="headerlink" title="insert ignore"></a>insert ignore</h2><ul>
-<li>insert ignore会忽略数据库中已经存在的数据(根据主键或者唯一索引判断)，如果数据库没有数据，就插入新的数据，如果有数据的话就跳过这条数据。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">INSERT IGNORE INTO `table_name` (`email`, `phone`, `user_id`) </span><br><span class="line">VALUES (&apos;test9@163.com&apos;, &apos;99999&apos;, &apos;9999&apos;);</span><br></pre></td></tr></table></figure>
-<p>这样当有重复记录就会忽略,执行后返回数字0</p>
-<p>还有个应用就是复制表,避免重复记录：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INSERT IGNORE INTO `table_1` (`name`) SELECT `name` FROM `table_2`;</span><br></pre></td></tr></table></figure>
-<h2 id="replace-into"><a href="#replace-into" class="headerlink" title="replace into"></a>replace into</h2><ul>
-<li>replace into 首先尝试插入数据到表中。 如果发现表中已经有此行数据(根据主键或者唯一索引判断)则先删除此行数据，然后插入新的数据，否则，直接插入新数据。</li>
-<li>使用replace into，你必须具有delete和insert权限。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">REPLACE INTO `table_name`(`col_name`, ...) VALUES (...);</span><br><span class="line">REPLACE INTO `table_name` (`col_name`, ...) SELECT ...;</span><br><span class="line">REPLACE INTO `table_name` SET `col_name`=&apos;value&apos;,...</span><br></pre></td></tr></table></figure>
-<h2 id="insert-on-duplicate-key-update"><a href="#insert-on-duplicate-key-update" class="headerlink" title="insert on duplicate key update"></a>insert on duplicate key update</h2><ul>
-<li><p>如果在insert into 语句末尾指定了on duplicate key update，并且插入行后会导致在一个UNIQUE索引或PRIMARY KEY中出现重复值，则在出现重复值的行执行UPDATE；如果不会导致重复的问题，则插入新行，跟普通的insert into一样。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">--如果列a被定义为UNIQUE，并且包含值1，则以下两个语句具有相同的效果</span><br><span class="line">INSERT INTO `table` (`a`, `b`, `c`) VALUES (1, 2, 3) </span><br><span class="line">ON DUPLICATE KEY UPDATE `c`=`c`+1; </span><br><span class="line"></span><br><span class="line">UPDATE `table` SET `c`=`c`+1 WHERE `a`=1;</span><br></pre></td></tr></table></figure>
+<p>使用设计模式的根本原因是适应变化，提高代码复用率，使软件更具有可维护性和可扩展性。并且，在进行设计的时候，也需要遵循以下几个原则：</p>
+<ol>
+<li><p><strong>单一职责原则 (Single Responsibility Principle，SRP)</strong></p>
+<p>一个模块的组成元素之间的功能相关性。从软件变化的角度来看，就一个类而言，应该仅有一个让它变化的原因；通俗地说，即一个类只负责一项职责。</p>
+<p>假设某个类 P 负责两个不同的职责，职责 P1 和 职责 P2，那么当职责 P1 需求发生改变而需要修改类 P，有可能会导致原来运行正常的职责 P2 功能发生故障。</p>
 </li>
-</ul>
-<ul>
-<li><p>使用insert into，你必须具有insert和update权限。</p>
-</li>
-<li><p>如果有新记录被插入，则受影响行的值显示1；如果原有的记录被更新，则受影响行的值显示2；如果记录被更新前后值是一样的，则受影响行数的值显示0。 </p>
-</li>
-<li><p>当您使用on duplicate key update时，insert delayed (延迟插入)选项被忽略。</p>
-</li>
-</ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
-<li><p>这三种方法都能避免主键或者唯一索引重复导致的插入失败问题。</p>
-</li>
-<li><p>insert ignore 能忽略重复数据，只插入不重复的数据。</p>
-</li>
-<li><p>replace into 和 insert … on duplicate key update 都是替换原有的重复数据。</p>
-</li>
-<li><p>replace into 是删除原有的行后，在插入新行，如有自增id，这个会造成自增id的改变；</p>
-</li>
-<li><p>insert … on duplicate key update在遇到重复行时，会直接更新原有的行，具体更新哪些字段怎么更新，取决于update后的语句。</p>
-</li>
-<li>特别说明：UNIQUE索引将会对null字段失效，也就是说(a字段上建立唯一索引)：<code>INSERT INTO</code>test<code>(</code>a<code>) VALUES (NULL);</code> 是可以重复插入的（联合唯一索引也一样）。</li>
+<li><p><strong>开放-关闭原则 (Open-Closed Principle，OCP)</strong></p>
+<p>软件实体 (类、模块、函数等等) 应该是可以被扩展的，但是不可被修改。即每次发生变化时，要通过添加新的代码来增强现有类型的行为，而不是修改原有的代码。</p>
+<p>如果一个软件能够满足 OCP 原则，那么它将有两项优点：</p>
+<ol>
+<li>能够扩展已存在的系统，能够提供新的功能满足新的需求，因此该软件有着很强的适应性和灵活性。</li>
+<li>已存在的模块，特别是那些重要的抽象模块，不需要被修改，那么该软件就有很强的稳定性和持久性。</li>
 </ol>
-<p><em>本文部分出自 - <a href="https://www.jianshu.com/p/751299bd5669" target="_blank" rel="noopener">MySQL避免插入重复记录的方法</a></em></p>
+</li>
+<li><p><strong>里氏替换原则 (Liskov Substitution Principle，LSP)</strong></p>
+<p>所有父类出现的地方，子类都可以出现，并且将父类对象替换为子类对象的时候，程序不会抛出任何异常或者错误，因此我们需要注意的是，尽量不要重载或者重写父类的方法(抽象方法除外)，因为这样可能会改变父类原有的行为。</p>
+<p>里氏替换原则通俗的来讲就是：子类可以扩展父类的功能，但不能改变父类原有的功能。</p>
+</li>
+<li><p><strong>依赖倒转原则 (Dependence Inversion Principle，DIP)</strong></p>
+<p>高层模块不应该依赖低层模块，二者都应该于抽象。进一步说，抽象不应该依赖于细节，细节应该依赖于抽象。也就是提出的 “面向接口编程，而不是面向实现编程”。这样可以降低客户与具体实现的耦合。</p>
+</li>
+<li><p><strong>接口隔离原则 (Interface Segregation Principle，ISP)</strong></p>
+<p>使用多个专门的接口比使用单一的总接口要好。也就是说不要让一个单一的接口承担过多的职责，而应把每个职责分离到多个专门的接口中，进行接口分离。过于臃肿的接口是对接口的一种污染。</p>
+<p>但是凡事都要有个度，如果接口设计过小，则会造成接口数量过多，使设计复杂化。所以一定要适度。</p>
+</li>
+<li><p><strong>迪米特法则（Law Of Demeter，LOD）</strong></p>
+<p>迪米特法则（Law of Demeter，LoD）又叫最少知识原则（Least Knowledge Principle，LKP），指的是一个对象应当对其他对象有尽可能少的了解。也就是说，一个模块或对象应尽量少的与其他实体之间发生相互作用，使得系统功能模块相对独立，这样当一个模块修改时，影响的模块就会越少，扩展起来更加容易。</p>
+</li>
+<li><p><strong>组合/聚合复用原则 (Composite/Aggregate Reuse Principle，CRP)</strong></p>
+<p>在一个新的对象里面使用一些已有的对象，使之成为新对象的一部分; 新的对象通过向这些对象的委派达到复用已有功能的目的。简单地说，就是要尽量使用合成/聚合，尽量不要使用继承。</p>
+<p>在面向对象的设计中，如果直接继承基类，会破坏封装，因为继承将基类的实现细节暴露给子类；如果基类的实现发生了改变，则子类的实现也不得不改变；从基类继承而来的实现是静态的，不可能在运行时发生改变，没有足够的灵活性。于是就提出了组合/聚合复用原则，也就是在实际开发设计中，尽量使用组合/聚合，不要使用类继承。</p>
+</li>
+</ol>
+<p>所有设计原则追求的宗旨还是保证系统的低耦合高内聚，指导它们的原则无非就是封装变化，责任单一，面向接口编程等设计原则。</p>
 
       
     </div>
@@ -363,18 +375,28 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/201906012003/" rel="next" title="layui table 工具栏列隐藏状态本地永久化保存">
-                <i class="fa fa-chevron-left"></i> layui table 工具栏列隐藏状态本地永久化保存
+              <a href="/2017/201708172327/" rel="next" title="Emmet语法入门">
+                <i class="fa fa-chevron-left"></i> Emmet语法入门
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/201711300108/" rel="prev" title="设计模式之创建型模式">
+                设计模式之创建型模式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -435,12 +457,12 @@
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Vick">
           <p class="site-author-name" itemprop="name">Vick</p>
-          <p class="site-description motion-element" itemprop="description"></p>
+          <p class="site-description motion-element" itemprop="description">只要路是对的，就不怕路远</p>
         </div>
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">33</span>
+              <span class="site-state-item-count">42</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -457,7 +479,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">45</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -487,20 +509,11 @@
               </span>
             
               <span class="links-of-author-item">
-                <a href="https://twitter.com/_VickChen" target="_blank" title="twitter">
+                <a href="https://gitee.com/vickchen" target="_blank" title="gitee">
                   
                     <i class="fa fa-fw fa-globe"></i>
                   
-                  twitter
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.facebook.com/VickChen92" target="_blank" title="facebook">
-                  
-                    <i class="fa fa-fw fa-facebook"></i>
-                  
-                  facebook
+                  gitee
                 </a>
               </span>
             
@@ -522,7 +535,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#tag-MySql"><span class="nav-number">1.</span> <span class="nav-text">tag:[MySql]</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-ignore"><span class="nav-number">2.</span> <span class="nav-text">insert ignore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#replace-into"><span class="nav-number">3.</span> <span class="nav-text">replace into</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#insert-on-duplicate-key-update"><span class="nav-number">4.</span> <span class="nav-text">insert on duplicate key update</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">5.</span> <span class="nav-text">结论</span></a></li></ol></div>
+              <p class="post-toc-empty">此文章未包含目录</p>
             
           </div>
         </section>
