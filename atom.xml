@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2020-07-22T14:24:30.278Z</updated>
+  <updated>2020-07-23T11:49:30.006Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -16,19 +16,292 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>设计模式之行为模式</title>
+    <link href="VickChen.win/2020/202005192357/"/>
+    <id>VickChen.win/2020/202005192357/</id>
+    <published>2020-04-11T15:01:22.000Z</published>
+    <updated>2020-07-23T11:49:30.006Z</updated>
+    
+    <content type="html"><![CDATA[<p>行为型模式共有十一种：策略模式、模板方法模式、观察者模式、迭代器模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</p>
+<ul>
+<li>策略模式 ：封装不同的算法，算法之间能互相替换</li>
+<li>状态模式 ：根据不同的状态做出不同的行为</li>
+<li>责任链模式 ：将事件沿着链去处理</li>
+<li>观察者模式 ：状态发生改变时通知观察者，一对多的关系</li>
+<li>模板方法模式 ：定义一套流程模板，根据需要实现模板中的操作</li>
+<li>迭代器模式 ：提供一种方法顺序访问一个聚合对象中的各个元素</li>
+<li>备忘录模式 ：保存对象的状态，在需要时进行恢复</li>
+<li>访问者模式 ：稳定数据结构中，定义新的操作行为</li>
+<li>中介者模式 ：将网状结构转变为星型结构，所有行为都通过中介</li>
+<li>解释器模式 ：定义语法，并对其进行解释</li>
+<li>命令模式 ：将请求封装成命令，并记录下来，能够撤销与重做</li>
+</ul>
+<a id="more"></a>
+<p>行为型模式是对在不同对象之间划分责任和算法的抽象化，这类模式负责对象间的高效沟通和职责委派。行为模式不仅仅关于类和对象，还关于它们之间的相互作用。它包括两种类型:</p>
+<ul>
+<li>类的行为模式：使用继承关系在几个类之间分配行为。</li>
+<li>对象的行为模式：使用对象聚合的方式来分配行为。</li>
+</ul>
+<h2 id="策略模式"><a href="#策略模式" class="headerlink" title="策略模式"></a>策略模式</h2><p>策略模式是对算法的包装，是把使用算法的责任和算法本身分割开，委派给不同的对象负责。策略模式通常把一系列的算法包装到一系列的策略类里面。用一句话慨括策略模式就是——“将每个算法封装到不同的策略类中，使得它们可以互换”。</p>
+<p>在现实生活中，中国的所得税，分为企业所得税、外商投资企业或外商企业所得税和个人所得税，针对于这3种所得税，每种所计算的方式不同，个人所得税有个人所得税的计算方式，而企业所得税有其对应计算方式。如果不采用策略模式来实现这样一个需求的话，我们会定义一个所得税类，该类有一个属性来标识所得税的类型，并且有一个计算税收的<code>CalculateTax()</code>方法，在该方法体内需要对税收类型进行判断，通过<code>if-else</code>语句来针对不同的税收类型来计算其所得税。这样的实现确实可以解决这个场景，但是这样的设计不利于扩展，如果系统后期需要增加一种所得税时，此时不得不回去修改<code>CalculateTax</code>方法来多添加一个判断语句，这样显然违背了开闭原则。此时，我们可以考虑使用策略模式来解决这个问题，既然税收方法是这个场景中的变化部分，此时自然可以想到对税收方法进行抽象，这也是策略模式实现的精髓所在。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E7%AD%96%E7%95%A5.png" alt></p>
+<h3 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>从上下文类中找出修改频率较高的算法 （也可能是用于在运行时选择某个算法变体的复杂条件运算符）。</li>
+<li>声明该算法所有变体的通用策略接口。</li>
+<li>将算法逐一抽取到各自的类中， 它们都必须实现策略接口。</li>
+<li>在上下文类中添加一个成员变量用于保存对于策略对象的引用。 然后提供设置器以修改该成员变量。 上下文仅可通过策略接口同策略对象进行交互， 如有需要还可定义一个接口来让策略访问其数据。</li>
+<li>客户端必须将上下文类与相应策略进行关联， 使上下文可以预期的方式完成其主要工作。</li>
+</ol>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>当你想使用对象中各种不同的算法变体， 并希望能在运行时切换算法时， 可使用策略模式。</li>
+<li>当你有许多仅在执行某些行为时略有不同的相似类时， 可使用策略模式。</li>
+<li>如果算法在上下文的逻辑中不是特别重要， 使用该模式能将类的业务逻辑与其算法实现细节隔离开来。</li>
+<li>当类中使用了复杂条件运算符以在同一算法的不同变体中切换时， 可使用该模式。</li>
+</ul>
+<h2 id="状态模式"><a href="#状态模式" class="headerlink" title="状态模式"></a>状态模式</h2><p>状态模式是一种行为设计模式， 让你能在一个对象的内部状态变化时改变其行为， 使其看上去就像改变了自身所属的类一样。</p>
+<p>每个对象都有其对应的状态，而每个状态又对应一些相应的行为，如果某个对象有多个状态时，那么就会对应很多的行为。那么对这些状态的判断和根据状态完成的行为，就会导致多重条件语句，并且如果添加一种新的状态时，需要更改之前现有的代码。这样的设计显然违背了开闭原则，状态模式正是用来解决这样的问题的。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E7%8A%B6%E6%80%81.png" alt></p>
+<h3 id="实现方法-1"><a href="#实现方法-1" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li><p>确定哪些类是上下文。 它可能是包含依赖于状态的代码的已有类； 如果特定于状态的代码分散在多个类中， 那么它可能是一个新的类。</p>
+</li>
+<li><p>声明状态接口。 虽然你可能会需要完全复制上下文中声明的所有方法， 但最好是仅把关注点放在那些可能包含特定于状态的行为的方法上。</p>
+</li>
+<li><p>为每个实际状态创建一个继承于状态接口的类。 然后检查上下文中的方法并将与特定状态相关的所有代码抽取到新建的类中。</p>
+<p>在将代码移动到状态类的过程中， 你可能会发现它依赖于上下文中的一些私有成员。 你可以采用以下几种变通方式：</p>
+<ul>
+<li>将这些成员变量或方法设为公有。</li>
+<li>将需要抽取的上下文行为更改为上下文中的公有方法， 然后在状态类中调用。 这种方式简陋却便捷， 你可以稍后再对其进行修补。</li>
+<li>将状态类嵌套在上下文类中。 这种方式需要你所使用的编程语言支持嵌套类。</li>
+</ul>
+</li>
+<li><p>在上下文类中添加一个状态接口类型的引用成员变量， 以及一个用于修改该成员变量值的公有设置器。</p>
+</li>
+<li><p>再次检查上下文中的方法， 将空的条件语句替换为相应的状态对象方法。</p>
+</li>
+<li><p>为切换上下文状态， 你需要创建某个状态类实例并将其传递给上下文。 你可以在上下文、 各种状态或客户端中完成这项工作。 无论在何处完成这项工作， 该类都将依赖于其所实例化的具体类。</p>
+</li>
+</ol>
+<h3 id="适用场景-1"><a href="#适用场景-1" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>如果对象需要根据自身当前状态进行不同行为， 同时状态的数量非常多且与状态相关的代码会频繁变更的话， 可使用状态模式。</li>
+<li>如果某个类需要根据成员变量的当前值改变自身行为， 从而需要使用大量的条件语句时， 可使用该模式。</li>
+<li>当相似状态和基于条件的状态机转换中存在许多重复代码时， 可使用状态模式。</li>
+</ul>
+<h2 id="责任链模式"><a href="#责任链模式" class="headerlink" title="责任链模式"></a>责任链模式</h2><p>责任链模式允许你将请求沿着处理者链进行发送。 收到请求后， 每个处理者均可对请求进行处理， 或将其传递给链上的下个处理者。</p>
+<p>某个请求需要多个对象进行处理，从而避免请求的发送者和接收之间的耦合关系。将这些对象连成一条链子，并沿着这条链子传递该请求，直到有对象处理它为止。<img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E8%B4%A3%E4%BB%BB%E9%93%BE.png" alt></p>
+<h3 id="实现方法-2"><a href="#实现方法-2" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li><p>声明处理者接口并描述请求处理方法的签名。</p>
+<p>确定客户端如何将请求数据传递给方法。 最灵活的方式是将请求转换为对象， 然后将其以参数的形式传递给处理函数。</p>
+</li>
+<li><p>为了在具体处理者中消除重复的样本代码， 你可以根据处理者接口创建抽象处理者基类。</p>
+<p>该类需要有一个成员变量来存储指向链上下个处理者的引用。 你可以将其设置为不可变类。 但如果你打算在运行时对链进行改变， 则需要定义一个设定方法来修改引用成员变量的值。</p>
+<p>为了使用方便， 你还可以实现处理方法的默认行为。 如果还有剩余对象， 该方法会将请求传递给下个对象。 具体处理者还能够通过调用父对象的方法来使用这一行为。</p>
+</li>
+<li><p>依次创建具体处理者子类并实现其处理方法。 每个处理者在接收到请求后都必须做出两个决定：</p>
+<ul>
+<li>是否自行处理这个请求。</li>
+<li>是否将该请求沿着链进行传递。</li>
+</ul>
+</li>
+<li><p>客户端可以自行组装链， 或者从其他对象处获得预先组装好的链。 在后一种情况下， 你必须实现工厂类以根据配置或环境设置来创建链。</p>
+</li>
+<li><p>客户端可以触发链中的任意处理者， 而不仅仅是第一个。 请求将通过链进行传递， 直至某个处理者拒绝继续传递， 或者请求到达链尾。</p>
+</li>
+<li><p>由于链的动态性， 客户端需要准备好处理以下情况：</p>
+<ul>
+<li>链中可能只有单个链接。</li>
+<li>部分请求可能无法到达链尾。</li>
+<li>其他请求可能直到链尾都未被处理。</li>
+</ul>
+</li>
+</ol>
+<h3 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>当程序需要使用不同方式处理不同种类请求， 而且请求类型和顺序预先未知时， 可以使用责任链模式。</li>
+<li>当必须按顺序执行多个处理者时， 可以使用该模式。</li>
+<li>如果所需处理者及其顺序必须在运行时进行改变， 可以使用责任链模式。</li>
+</ul>
+<h2 id="观察者模式"><a href="#观察者模式" class="headerlink" title="观察者模式"></a>观察者模式</h2><p>观察者模式定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象，这个主题对象在状态发生变化时，会通知所有观察者对象，使它们能够自动更新自己的行为。</p>
+<p>在现实生活中，处处可见观察者模式，例如，微信中的订阅号，订阅博客和QQ微博中关注好友，这些都属于观察者模式的应用。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E8%A7%82%E5%AF%9F%E8%80%85.png" alt></p>
+<h3 id="实现方法-3"><a href="#实现方法-3" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li><p>仔细检查你的业务逻辑， 试着将其拆分为两个部分： 独立于其他代码的核心功能将作为发布者； 其他代码则将转化为一组订阅类。</p>
+</li>
+<li><p>声明订阅者接口。 该接口至少应声明一个 <code>update</code>方法。</p>
+</li>
+<li><p>声明发布者接口并定义一些接口来在列表中添加和删除订阅对象。 记住发布者必须仅通过订阅者接口与它们进行交互。</p>
+</li>
+<li><p>确定存放实际订阅列表的位置并实现订阅方法。 通常所有类型的发布者代码看上去都一样， 因此将列表放置在直接扩展自发布者接口的抽象类中是显而易见的。 具体发布者会扩展该类从而继承所有的订阅行为。</p>
+<p>但是， 如果你需要在现有的类层次结构中应用该模式， 则可以考虑使用组合的方式： 将订阅逻辑放入一个独立的对象， 然后让所有实际订阅者使用该对象。</p>
+</li>
+<li><p>创建具体发布者类。 每次发布者发生了重要事件时都必须通知所有的订阅者。</p>
+</li>
+<li><p>在具体订阅者类中实现通知更新的方法。 绝大部分订阅者需要一些与事件相关的上下文数据。 这些数据可作为通知方法的参数来传递。</p>
+<p>但还有另一种选择。 订阅者接收到通知后直接从通知中获取所有数据。 在这种情况下， 发布者必须通过更新方法将自身传递出去。 另一种不太灵活的方式是通过构造函数将发布者与订阅者永久性地连接起来。</p>
+</li>
+<li><p>客户端必须生成所需的全部订阅者， 并在相应的发布者处完成注册工作。</p>
+</li>
+</ol>
+<h3 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>当一个对象状态的改变需要改变其他对象， 或实际对象是事先未知的或动态变化的时， 可使用观察者模式。</li>
+<li>当应用中的一些对象必须观察其他对象时， 可使用该模式。 但仅能在有限时间内或特定情况下使用。</li>
+</ul>
+<h2 id="模板方法模式"><a href="#模板方法模式" class="headerlink" title="模板方法模式"></a>模板方法模式</h2><p>模板方法模式是在一个抽象类中定义一个操作中的算法骨架，而将一些具体步骤实现延迟到子类中去实现。模板方法使得子类可以不改变算法结构的前提下，重新定义算法的特定步骤，从而达到复用代码的效果。</p>
+<p>在现实生活中，有论文模板，简历模板等。在现实生活中，模板的概念是给定一定的格式，然后其他所有使用模板的人可以根据自己的需求去实现它。同样，模板方法也是这样的。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E6%A8%A1%E6%9D%BF%E6%96%B9%E6%B3%95.png" alt></p>
+<h3 id="实现方法-4"><a href="#实现方法-4" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>分析目标算法， 确定能否将其分解为多个步骤。 从所有子类的角度出发， 考虑哪些步骤能够通用， 哪些步骤各不相同。</li>
+<li>创建抽象基类并声明一个模板方法和代表算法步骤的一系列抽象方法。 在模板方法中根据算法结构依次调用相应步骤。 可用 <code>final</code>最终修饰模板方法以防止子类对其进行重写。</li>
+<li>虽然可将所有步骤全都设为抽象类型， 但默认实现可能会给部分步骤带来好处， 因为子类无需实现那些方法。</li>
+<li>可考虑在算法的关键步骤之间添加钩子。</li>
+<li>为每个算法变体新建一个具体子类， 它<em>必须</em>实现所有的抽象步骤， 也<em>可以</em>重写部分可选步骤。</li>
+</ol>
+<h3 id="适用场景-4"><a href="#适用场景-4" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>当你只希望客户端扩展某个特定算法步骤， 而不是整个算法或其结构时， 可使用模板方法模式。</li>
+<li>当多个类的算法除一些细微不同之外几乎完全一样时， 你可使用该模式。 但其后果就是， 只要算法发生变化， 你就可能需要修改所有的类。</li>
+</ul>
+<h2 id="迭代器模式"><a href="#迭代器模式" class="headerlink" title="迭代器模式"></a>迭代器模式</h2><p>迭代器模式提供了一种方法来顺序访问一个集合对象中各个元素，而又无需暴露该对象的内部表示，这样既可以做到不暴露集合的内部结构，又可以让外部代码透明地访问集合内部元素。</p>
+<p>迭代器模式是针对集合对象而生的，对于集合对象而言，必然涉及到集合元素的添加删除操作，也肯定支持遍历集合元素的操作，此时如果把遍历操作也放在集合对象的话，集合对象就承担太多的责任了，此时可以进行责任分离，把集合的遍历放在另一个对象中，这个对象就是迭代器对象。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E8%BF%AD%E4%BB%A3%E5%99%A8.png" alt></p>
+<h3 id="实现方法-5"><a href="#实现方法-5" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>声明迭代器接口。 该接口必须提供至少一个方法来获取集合中的下个元素。 但为了使用方便， 你还可以添加一些其他方法， 例如获取前一个元素、 记录当前位置和判断迭代是否已结束。</li>
+<li>声明集合接口并描述一个获取迭代器的方法。 其返回值必须是迭代器接口。 如果你计划拥有多组不同的迭代器， 则可以声明多个类似的方法。</li>
+<li>为希望使用迭代器进行遍历的集合实现具体迭代器类。 迭代器对象必须与单个集合实体链接。 链接关系通常通过迭代器的构造函数建立。</li>
+<li>在你的集合类中实现集合接口。 其主要思想是针对特定集合为客户端代码提供创建迭代器的快捷方式。 集合对象必须将自身传递给迭代器的构造函数来创建两者之间的链接。</li>
+<li>检查客户端代码， 使用迭代器替代所有集合遍历代码。 每当客户端需要遍历集合元素时都会获取一个新的迭代器。</li>
+</ol>
+<h3 id="适用场景-5"><a href="#适用场景-5" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>当集合背后为复杂的数据结构， 且你希望对客户端隐藏其复杂性时 （出于使用便利性或安全性的考虑）， 可以使用迭代器模式。</li>
+<li>使用该模式可以减少程序中重复的遍历代码。</li>
+<li>如果你希望代码能够遍历不同的甚至是无法预知的数据结构， 可以使用迭代器模式。</li>
+</ul>
+<h2 id="备忘录模式"><a href="#备忘录模式" class="headerlink" title="备忘录模式"></a>备忘录模式</h2><p>备忘录模式是在不破坏封装的前提下，捕获一个对象的内部状态，并在该对象之外保存这个状态，这样以后就可以把该对象恢复到原先的状态。</p>
+<p>生活中的手机通讯录备忘录，操作系统备份点，数据库备份等都是备忘录模式的应用。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%A4%87%E5%BF%98%E5%BD%95.png" alt></p>
+<h3 id="实现方法-6"><a href="#实现方法-6" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li><p>确定担任原发器角色的类。 重要的是明确程序使用的一个原发器中心对象， 还是多个较小的对象。</p>
+</li>
+<li><p>创建备忘录类。 逐一声明对应每个原发器成员变量的备忘录成员变量。</p>
+</li>
+<li><p>将备忘录类设为不可变。 备忘录只能通过构造函数一次性接收数据。 该类中不能包含设置器。</p>
+</li>
+<li><p>如果你所使用的编程语言支持嵌套类， 则可将备忘录嵌套在原发器中； 如果不支持， 那么你可从备忘录类中抽取一个空接口， 然后让其他所有对象通过接口来引用备忘录。 你可在该接口中添加一些元数据操作， 但不能暴露原发器的状态。</p>
+</li>
+<li><p>在原发器中添加一个创建备忘录的方法。 原发器必须通过备忘录构造函数的一个或多个实际参数来将自身状态传递给备忘录。</p>
+<p>该方法返回结果的类型必须是你在上一步中抽取的接口 （如果你已经抽取了）。 实际上， 创建备忘录的方法必须直接与备忘录类进行交互。</p>
+</li>
+<li><p>在原发器类中添加一个用于恢复自身状态的方法。 该方法接受备忘录对象作为参数。 如果你在之前的步骤中抽取了接口， 那么可将接口作为参数的类型。 在这种情况下， 你需要将输入对象强制转换为备忘录， 因为原发器需要拥有对该对象的完全访问权限。</p>
+</li>
+<li><p>无论负责人是命令对象、 历史记录或其他完全不同的东西， 它都必须要知道何时向原发器请求新的备忘录、 如何存储备忘录以及何时使用特定备忘录来对原发器进行恢复。</p>
+</li>
+<li><p>负责人与原发器之间的连接可以移动到备忘录类中。 在本例中， 每个备忘录都必须与创建自己的原发器相连接。 恢复方法也可以移动到备忘录类中， 但只有当备忘录类嵌套在原发器中， 或者原发器类提供了足够多的设置器并可对其状态进行重写时， 这种方式才能实现。</p>
+</li>
+</ol>
+<h3 id="适用场景-6"><a href="#适用场景-6" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>当你需要创建对象状态快照来恢复其之前的状态时， 可以使用备忘录模式。</li>
+<li>当直接访问对象的成员变量、 获取器或设置器将导致封装被突破时， 可以使用该模式。</li>
+</ul>
+<h2 id="访问者模式"><a href="#访问者模式" class="headerlink" title="访问者模式"></a>访问者模式</h2><p>访问者模式是封装一些施加于某种数据结构之上的操作。一旦这些操作需要修改的话，接受这个操作的数据结构则可以保存不变。访问者模式适用于数据结构相对稳定的系统， 它把数据结构和作用于数据结构之上的操作之间的耦合度降低，使得操作集合可以相对自由地改变。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E8%AE%BF%E9%97%AE%E8%80%85.png" alt></p>
+<h3 id="实现方法-7"><a href="#实现方法-7" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li><p>在访问者接口中声明一组 “访问” 方法， 分别对应程序中的每个具体元素类。</p>
+</li>
+<li><p>声明元素接口。 如果程序中已有元素类层次接口， 可在层次结构基类中添加抽象的 “接收” 方法。 该方法必须接受访问者对象作为参数。</p>
+</li>
+<li><p>在所有具体元素类中实现接收方法。 这些方法必须将调用重定向到当前元素对应的访问者对象中的访问者方法上。</p>
+</li>
+<li><p>元素类只能通过访问者接口与访问者进行交互。 不过访问者必须知晓所有的具体元素类， 因为这些类在访问者方法中都被作为参数类型引用。</p>
+</li>
+<li><p>为每个无法在元素层次结构中实现的行为创建一个具体访问者类并实现所有的访问者方法。</p>
+<p>你可能会遇到访问者需要访问元素类的部分私有成员变量的情况。 在这种情况下， 你要么将这些变量或方法设为公有， 这将破坏元素的封装； 要么将访问者类嵌入到元素类中。 后一种方式只有在支持嵌套类的编程语言中才可能实现。</p>
+</li>
+<li><p>客户端必须创建访问者对象并通过 “接收” 方法将其传递给元素。</p>
+</li>
+</ol>
+<h3 id="适用场景-7"><a href="#适用场景-7" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>如果你需要对一个复杂对象结构 （例如对象树） 中的所有元素执行某些操作， 可使用访问者模式。</li>
+<li>可使用访问者模式来清理辅助行为的业务逻辑。</li>
+<li>当某个行为仅在类层次结构中的一些类中有意义， 而在其他类中没有意义时， 可使用该模式。</li>
+</ul>
+<h2 id="中介者模式"><a href="#中介者模式" class="headerlink" title="中介者模式"></a>中介者模式</h2><p>中介者模式定义了一个中介对象来封装一系列对象之间的交互关系。中介者使各个对象之间不需要显式地相互引用，从而使耦合性降低，而且可以独立地改变它们之间的交互行为。</p>
+<p>在现实生活中，有很多中介者模式的身影，例如QQ游戏平台，聊天室、QQ群和短信平台，这些都是中介者模式在现实生活中的应用。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E4%B8%AD%E4%BB%8B%E8%80%85.png" alt></p>
+<h3 id="实现方法-8"><a href="#实现方法-8" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>找到一组当前紧密耦合， 且提供其独立性能带来更大好处的类 （例如更易于维护或更方便复用）。</li>
+<li>声明中介者接口并描述中介者和各种组件之间所需的交流接口。 在绝大多数情况下， 一个接收组件通知的方法就足够了。 如果你希望在不同情景下复用组件类， 那么该接口将非常重要。 只要组件使用通用接口与其中介者合作， 你就能将该组件与不同实现中的中介者进行连接。</li>
+<li>实现具体中介者类。 该类可从自行保存其下所有组件的引用中受益。</li>
+<li>你可以更进一步， 让中介者负责组件对象的创建和销毁。 此后， 中介者可能会与<a href="https://refactoringguru.cn/design-patterns/abstract-factory" target="_blank" rel="noopener">工厂</a>或<a href="https://refactoringguru.cn/design-patterns/facade" target="_blank" rel="noopener">外观</a>类似。</li>
+<li>组件必须保存对于中介者对象的引用。 该连接通常在组件的构造函数中建立， 该函数会将中介者对象作为参数传递。</li>
+<li>修改组件代码， 使其可调用中介者的通知方法， 而非其他组件的方法。 然后将调用其他组件的代码抽取到中介者类中， 并在中介者接收到该组件通知时执行这些代码。</li>
+</ol>
+<h3 id="适用场景-8"><a href="#适用场景-8" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>当一些对象和其他对象紧密耦合以致难以对其进行修改时， 可使用中介者模式。</li>
+<li>当组件因过于依赖其他组件而无法在不同应用中复用时， 可使用中介者模式。</li>
+<li>如果为了能在不同情景下复用一些基本行为， 导致你需要被迫创建大量组件子类时， 可使用中介者模式。</li>
+</ul>
+<h2 id="解释器模式"><a href="#解释器模式" class="headerlink" title="解释器模式"></a>解释器模式</h2><p>解释器模式是给定一种语言，定义它文法的一种表示，并定义一种解释器，这个解释器使用该表示来解释器语言中的句子。</p>
+<p>解释器模式是一个比较少用的模式，所以我自己也没有对该模式进行深入研究。在生活中，英汉词典的作用就是实现英文和中文互译，这就是解释器模式的应用。</p>
+<h2 id="命令模式"><a href="#命令模式" class="headerlink" title="命令模式"></a>命令模式</h2><p>命令模式可将请求转换为一个包含与请求相关的所有信息的独立对象。 该转换让你能根据不同的请求将方法参数化、 延迟请求执行或将其放入队列中， 且能实现可撤销操作。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E5%91%BD%E4%BB%A4.png" alt></p>
+<h3 id="实现方法-9"><a href="#实现方法-9" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>声明仅有一个执行方法的命令接口。</li>
+<li>抽取请求并使之成为实现命令接口的具体命令类。 每个类都必须有一组成员变量来保存请求参数和对于实际接收者对象的引用。 所有这些变量的数值都必须通过命令构造函数进行初始化。</li>
+<li>找到担任<em>发送者</em>职责的类。 在这些类中添加保存命令的成员变量。 发送者只能通过命令接口与其命令进行交互。 发送者自身通常并不创建命令对象， 而是通过客户端代码获取。</li>
+<li>修改发送者使其执行命令， 而非直接将请求发送给接收者。</li>
+<li>客户端必须按照以下顺序来初始化对象：<ul>
+<li>创建接收者。</li>
+<li>创建命令， 如有需要可将其关联至接收者。</li>
+<li>创建发送者并将其与特定命令关联。</li>
+</ul>
+</li>
+</ol>
+<h3 id="适用场景-9"><a href="#适用场景-9" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>如果你需要通过操作来参数化对象， 可使用命令模式。</li>
+<li>如果你想要将操作放入队列中、 操作的执行或者远程执行操作， 可使用命令模式。</li>
+<li>如果你想要实现操作回滚功能， 可使用命令模式。</li>
+</ul>
+<p>设计模式系列：</p>
+<ol>
+<li><a href="http://vickchen.win/2017/201710220019/" target="_blank" rel="noopener">设计模式之设计原则</a></li>
+<li><a href="http://vickchen.win/2017/201711300108/" target="_blank" rel="noopener">设计模式之创建型模式</a></li>
+<li><a href="http://vickchen.win/2020/202004112301/" target="_blank" rel="noopener">设计模式之结构型模式</a></li>
+<li><a href="http://vickchen.win/2020/202005192357/" target="_blank" rel="noopener">设计模式之行为模式</a></li>
+</ol>
+<p>参考 - <a href="https://refactoring.guru/" target="_blank" rel="noopener">深入设计模式</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;行为型模式共有十一种：策略模式、模板方法模式、观察者模式、迭代器模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;策略模式 ：封装不同的算法，算法之间能互相替换&lt;/li&gt;
+&lt;li&gt;状态模式 ：根据不同的状态做出不同的行为&lt;/li&gt;
+&lt;li&gt;责任链模式 ：将事件沿着链去处理&lt;/li&gt;
+&lt;li&gt;观察者模式 ：状态发生改变时通知观察者，一对多的关系&lt;/li&gt;
+&lt;li&gt;模板方法模式 ：定义一套流程模板，根据需要实现模板中的操作&lt;/li&gt;
+&lt;li&gt;迭代器模式 ：提供一种方法顺序访问一个聚合对象中的各个元素&lt;/li&gt;
+&lt;li&gt;备忘录模式 ：保存对象的状态，在需要时进行恢复&lt;/li&gt;
+&lt;li&gt;访问者模式 ：稳定数据结构中，定义新的操作行为&lt;/li&gt;
+&lt;li&gt;中介者模式 ：将网状结构转变为星型结构，所有行为都通过中介&lt;/li&gt;
+&lt;li&gt;解释器模式 ：定义语法，并对其进行解释&lt;/li&gt;
+&lt;li&gt;命令模式 ：将请求封装成命令，并记录下来，能够撤销与重做&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="设计模式" scheme="VickChen.win/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>设计模式之结构型模式</title>
     <link href="VickChen.win/2020/202004112301/"/>
     <id>VickChen.win/2020/202004112301/</id>
     <published>2020-04-11T15:01:22.000Z</published>
-    <updated>2020-07-22T14:24:30.278Z</updated>
+    <updated>2020-07-23T11:48:37.126Z</updated>
     
-    <content type="html"><![CDATA[<p>设计模式系列：</p>
-<ol>
-<li><a href="http://vickchen.win/2017/201711300108/" target="_blank" rel="noopener">设计模式之创建型模式</a></li>
-</ol>
-<p>结构型模式，顾名思义讨论的是类和对象的结构 ，主要用来将对象和类组装成较大的结构， 并同时保持结构的灵活和高效。它包括两种类型，一是类结构型模式，指的是采用继承机制来组合接口或实现；二是对象结构型模式，指的是通过组合对象的方式来实现新的功能。</p>
-<a id="more"></a>
-<p>结构型模式包括适配器模式、桥接模式、装饰者模式、组合模式、外观模式、享元模式和代理模式。</p>
+    <content type="html"><![CDATA[<p>结构型模式包括适配器模式、桥接模式、装饰者模式、组合模式、外观模式、享元模式和代理模式。</p>
 <ul>
 <li>适配器模式注重转换接口，将不吻合的接口适配对接 </li>
 <li>桥接模式注重分离接口与其实现，支持多维度变化 </li>
@@ -38,7 +311,13 @@
 <li>享元模式注重保留接口，在内部使用共享技术优化对象存储 </li>
 <li>代理模式注重假借接口，增加间接层来实现灵活控制</li>
 </ul>
-<h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><p>适配器模式意在转换接口，它能够使原本不能再一起工作的两个类一起工作，所以经常用来在类库的复用、代码迁移等方面。例如DataAdapter类就应用了适配器模式。</p>
+<a id="more"></a>
+<p>结构型模式，顾名思义讨论的是类和对象的结构 ，主要用来将对象和类组装成较大的结构， 并同时保持结构的灵活和高效。它包括两种类型:</p>
+<ul>
+<li>类结构型模式：采用继承机制来组合接口或实现</li>
+<li>对象结构型模式：通过组合对象的方式来实现新的功能</li>
+</ul>
+<h2 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h2><p>适配器模式意在转换接口，它能够使原本不能再一起工作的两个类一起工作，所以经常用来在类库的复用、代码迁移等方面。例如<code>DataAdapter</code>类就应用了适配器模式。</p>
 <p>适配器不仅可以转换不同格式的数据， 其还有助于采用不同接口的对象之间的合作。 它的运作方式如下：</p>
 <ol>
 <li>适配器实现与其中一个现有对象兼容的接口。</li>
@@ -77,25 +356,10 @@
 <li>如果你想要拆分或重组一个具有多重功能的庞杂类 （例如能与多个数据库服务器进行交互的类）， 可以使用桥接模式。</li>
 <li>如果你希望在几个独立维度上扩展一个类， 可使用该模式。</li>
 </ul>
-<h2 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h2><p>装饰模式（<strong>亦称：</strong> 包装模式）可以动态地给一个对象添加一些额外的功能，装饰者模式较继承生成子类的方式更加灵活。虽然装饰者模式能够动态地将职责附加到对象上，但它也会造成产生一些细小的对象，增加了系统的复杂度。</p>
-<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E8%A3%85%E9%A5%B0.png" alt></p>
-<h3 id="实现方法-2"><a href="#实现方法-2" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
-<li>确保业务逻辑可用一个基本组件及多个额外可选层次表示。</li>
-<li>找出基本组件和可选层次的通用方法。 创建一个组件接口并在其中声明这些方法。</li>
-<li>创建一个具体组件类， 并定义其基础行为。</li>
-<li>创建装饰基类， 使用一个成员变量存储指向被封装对象的引用。 该成员变量必须被声明为组件接口类型， 从而能在运行时连接具体组件和装饰。 装饰基类必须将所有工作委派给被封装的对象。</li>
-<li>确保所有类实现组件接口。</li>
-<li>将装饰基类扩展为具体装饰。 具体装饰必须在调用父类方法 （总是委派给被封装对象） 之前或之后执行自身的行为。</li>
-<li>客户端代码负责创建装饰并将其组合成客户端所需的形式。</li>
-</ol>
-<h3 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
-<li>如果你希望在无需修改代码的情况下即可使用对象， 且希望在运行时为对象新增额外的行为， 可以使用装饰模式。</li>
-<li>如果用继承来扩展对象行为的方案难以实现或者根本不可行， 你可以使用该模式。</li>
-</ul>
 <h2 id="组合模式"><a href="#组合模式" class="headerlink" title="组合模式"></a>组合模式</h2><p>组合模式（<strong>亦称：</strong> 对象树）将对象组合成树形结构，用来表示整体与部分的关系，并且能像使用独立对象一样使用它们，使得客户端将单个对象和组合对象同等对待。</p>
-<p>如在.NET中WinForm中的控件<code>TextBox</code>、<code>Label</code>等简单控件继承自<code>Control</code>类，同时<code>GroupBox</code>这样的组合控件也是继承于Control类。</p>
+<p>如 .NET 中 <code>WinForm</code> 下<code>TextBox</code>、<code>Label</code>等简单控件继承自<code>Control</code>类，同时<code>GroupBox</code>这样的组合控件也是继承于<code>Control</code>类。</p>
 <p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E7%BB%84%E5%90%88.png" alt></p>
-<h3 id="实现方法-3"><a href="#实现方法-3" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<h3 id="实现方法-2"><a href="#实现方法-2" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
 <li><p>确保应用的核心模型能够以树状结构表示。 尝试将其分解为简单元素和容器。 记住， 容器必须能够同时包含简单元素和其他容器。</p>
 </li>
 <li><p>声明组件接口及其一系列方法， 这些方法对简单和复杂元素都有意义。</p>
@@ -109,9 +373,24 @@
 <p>记住， 这些操作可在组件接口中声明。 这将会违反<em>接口隔离原则</em>， 因为叶节点类中的这些方法为空。 但是， 这可以让客户端无差别地访问所有元素， 即使是组成树状结构的元素。</p>
 </li>
 </ol>
-<h3 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<h3 id="适用场景-2"><a href="#适用场景-2" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
 <li>如果你需要实现树状对象结构， 可以使用组合模式。</li>
 <li>如果你希望客户端代码以相同方式处理简单和复杂元素， 可以使用该模式。</li>
+</ul>
+<h2 id="装饰模式"><a href="#装饰模式" class="headerlink" title="装饰模式"></a>装饰模式</h2><p>装饰模式（<strong>亦称：</strong> 包装模式）可以动态地给一个对象添加一些额外的功能，装饰者模式较继承生成子类的方式更加灵活。虽然装饰者模式能够动态地将职责附加到对象上，但它也会造成产生一些细小的对象，增加了系统的复杂度。</p>
+<p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E8%A3%85%E9%A5%B0.png" alt></p>
+<h3 id="实现方法-3"><a href="#实现方法-3" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
+<li>确保业务逻辑可用一个基本组件及多个额外可选层次表示。</li>
+<li>找出基本组件和可选层次的通用方法。 创建一个组件接口并在其中声明这些方法。</li>
+<li>创建一个具体组件类， 并定义其基础行为。</li>
+<li>创建装饰基类， 使用一个成员变量存储指向被封装对象的引用。 该成员变量必须被声明为组件接口类型， 从而能在运行时连接具体组件和装饰。 装饰基类必须将所有工作委派给被封装的对象。</li>
+<li>确保所有类实现组件接口。</li>
+<li>将装饰基类扩展为具体装饰。 具体装饰必须在调用父类方法 （总是委派给被封装对象） 之前或之后执行自身的行为。</li>
+<li>客户端代码负责创建装饰并将其组合成客户端所需的形式。</li>
+</ol>
+<h3 id="适用场景-3"><a href="#适用场景-3" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
+<li>如果你希望在无需修改代码的情况下即可使用对象， 且希望在运行时为对象新增额外的行为， 可以使用装饰模式。</li>
+<li>如果用继承来扩展对象行为的方案难以实现或者根本不可行， 你可以使用该模式。</li>
 </ul>
 <h2 id="外观模式"><a href="#外观模式" class="headerlink" title="外观模式"></a>外观模式</h2><p>外观模式可以为包含许多活动部件的复杂子系统提供一个简单的接口。 与直接调用子系统相比， 外观提供的功能可能比较有限， 但它却包含了客户端真正关心的功能。</p>
 <p>如果你的程序需要与包含几十种功能的复杂库整合， 但只需使用其中非常少的功能， 那么使用外观模式会非常方便。</p>
@@ -128,7 +407,7 @@
 </ul>
 <h2 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h2><p>享元模式是一种结构型设计模式， 它摒弃了在每个对象中保存所有数据的方式， 通过共享多个对象所共有的相同状态， 让你能在有限的内存容量中载入更多对象。</p>
 <p>在系统中，如何我们需要重复使用某个对象时，此时如果重复地使用new操作符来创建这个对象的话，这对系统资源是一个极大的浪费，既然每次使用的都是同一个对象，为什么不能对其共享呢？这也是享元模式出现的原因。</p>
-<p>享元模式运用共享的技术有效地支持细粒度的对象，使其进行共享。在.NET类库中，String类的实现就使用了享元模式，String类采用字符串驻留池的来使字符串进行共享。更多内容参考博文：<a href="http://www.cnblogs.com/artech/archive/2010/11/25/internedstring.html。" target="_blank" rel="noopener">http://www.cnblogs.com/artech/archive/2010/11/25/internedstring.html。</a></p>
+<p>享元模式运用共享的技术有效地支持细粒度的对象，使其进行共享。在.NET类库中，<code>String</code>类的实现就使用了享元模式，String类采用字符串驻留池的来使字符串进行共享。</p>
 <p><img src="https://gitee.com/vickchen/blogImgs/raw/master/img/%E4%BA%AB%E5%85%83.png" alt></p>
 <h3 id="实现方法-5"><a href="#实现方法-5" class="headerlink" title="实现方法"></a>实现方法</h3><ol>
 <li>将需要改写为享元的类成员变量拆分为两个部分：<ul>
@@ -139,7 +418,7 @@
 <li>保留类中表示内在状态的成员变量， 并将其属性设置为不可修改。 这些变量仅可在构造函数中获得初始数值。</li>
 <li>找到所有使用外在状态成员变量的方法， 为在方法中所用的每个成员变量新建一个参数， 并使用该参数代替成员变量。</li>
 <li>你可以有选择地创建工厂类来管理享元缓存池， 它负责在新建享元时检查已有的享元。 如果选择使用工厂， 客户端就只能通过工厂来请求享元， 它们需要将享元的内在状态作为参数传递给工厂。</li>
-<li>客户端必须存储和计算外在状态 （情景） 的数值， 因为只有这样才能调用享元对象的方法。 为了使用方便， 外在状态和引用享元的成员变量可以移动到单独的情景类中。</li>
+<li>客户端必须存储和计算外在状态 （情景）的数值， 因为只有这样才能调用享元对象的方法。 为了使用方便， 外在状态和引用享元的成员变量可以移动到单独的情景类中。</li>
 </ol>
 <h3 id="适用场景-5"><a href="#适用场景-5" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
 <li>仅在程序必须支持大量对象且没有足够的内存容量时使用享元模式。</li>
@@ -161,16 +440,28 @@
 <li>记录日志请求 （日志记录代理）。 适用于当你需要保存对于服务对象的请求历史记录时。 代理可以在向服务传递请求前进行记录。</li>
 <li>智能引用。 可在没有客户端使用某个重量级对象时立即销毁该对象。</li>
 </ul>
+<p>设计模式系列：</p>
+<ol>
+<li><a href="http://vickchen.win/2017/201710220019/" target="_blank" rel="noopener">设计模式之设计原则</a></li>
+<li><a href="http://vickchen.win/2017/201711300108/" target="_blank" rel="noopener">设计模式之创建型模式</a></li>
+<li><a href="http://vickchen.win/2020/202004112301/" target="_blank" rel="noopener">设计模式之结构型模式</a></li>
+<li><a href="http://vickchen.win/2020/202005192357/" target="_blank" rel="noopener">设计模式之行为模式</a></li>
+</ol>
 <p>参考 - <a href="https://refactoring.guru/" target="_blank" rel="noopener">深入设计模式</a></p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;设计模式系列：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://vickchen.win/2017/201711300108/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;设计模式之创建型模式&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;结构型模式，顾名思义讨论的是类和对象的结构 ，主要用来将对象和类组装成较大的结构， 并同时保持结构的灵活和高效。它包括两种类型，一是类结构型模式，指的是采用继承机制来组合接口或实现；二是对象结构型模式，指的是通过组合对象的方式来实现新的功能。&lt;/p&gt;
+      &lt;p&gt;结构型模式包括适配器模式、桥接模式、装饰者模式、组合模式、外观模式、享元模式和代理模式。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;适配器模式注重转换接口，将不吻合的接口适配对接 &lt;/li&gt;
+&lt;li&gt;桥接模式注重分离接口与其实现，支持多维度变化 &lt;/li&gt;
+&lt;li&gt;组合模式注重统一接口，将“一对多”的关系转化为“一对一”的关系 &lt;/li&gt;
+&lt;li&gt;装饰者模式注重稳定接口，在此前提下为对象扩展功能 &lt;/li&gt;
+&lt;li&gt;外观模式注重简化接口，简化组件系统与外部客户程序的依赖关系 &lt;/li&gt;
+&lt;li&gt;享元模式注重保留接口，在内部使用共享技术优化对象存储 &lt;/li&gt;
+&lt;li&gt;代理模式注重假借接口，增加间接层来实现灵活控制&lt;/li&gt;
+&lt;/ul&gt;
     
     </summary>
     
@@ -717,9 +1008,9 @@
       <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
-      <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
-    
       <category term="SQL Server" scheme="VickChen.win/tags/SQL-Server/"/>
+    
+      <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
     
       <category term="DataBase" scheme="VickChen.win/tags/DataBase/"/>
     
@@ -1331,57 +1622,6 @@
       <category term="Java" scheme="VickChen.win/tags/Java/"/>
     
       <category term="Idea" scheme="VickChen.win/tags/Idea/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>jQuery实现滚动条到底部时加载数据</title>
-    <link href="VickChen.win/2018/201810012332/"/>
-    <id>VickChen.win/2018/201810012332/</id>
-    <published>2018-10-01T15:32:01.000Z</published>
-    <updated>2019-07-20T08:05:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>滚动条到底部加载数据原理很简单，就是为window或者滚动元素添加一个scroll事件，浏览器每次触发scroll事件时判断是否滚动到了浏览器底部，如果到了底部则加载新数据。关键是计算滚动条是否滚动到了浏览器底部</p>
-<a id="more"></a>
-<p>滚动条卷起来的高度 + 窗口高度 &gt; 文档的总高度</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).on(<span class="string">'scroll'</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//滚动响应区域高度取50px</span></span><br><span class="line">    <span class="keyword">if</span>(scrollTop() + windowHeight() &gt;= (documentHeight() - <span class="number">50</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        loadMore();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadMore</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="comment">//todo XXX</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>获取页面顶部被卷起来的高度函数</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取页面顶部被卷起来的高度</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">scrollTop</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(</span><br><span class="line">    <span class="comment">//chrome</span></span><br><span class="line">    <span class="built_in">document</span>.body.scrollTop,</span><br><span class="line">    <span class="comment">//firefox/IE</span></span><br><span class="line">    <span class="built_in">document</span>.documentElement.scrollTop);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><em>chrome浏览器和Firefox/IE对滚动条是属于body还是html理解不同导致处理不同。</em></p>
-<p>获取页面文档的总高度</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取页面文档的总高度</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">documentHeight</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line">    <span class="comment">//现代浏览器（IE9+和其他浏览器）和IE8的document.body.scrollHeight和</span></span><br><span class="line">    <span class="comment">//document.documentElement.scrollHeight都可以 </span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Math</span>.max(<span class="built_in">document</span>.body.scrollHeight,<span class="built_in">document</span>.documentElement.scrollHeight);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个算法和jQuery计算文档高度的方法一致。</p>
-<p>获取页面浏览器视口的高度</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">windowHeight</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     <span class="keyword">return</span> (<span class="built_in">document</span>.compatMode == <span class="string">"CSS1Compat"</span>)? </span><br><span class="line">     <span class="built_in">document</span>.documentElement.clientHeight: <span class="built_in">document</span>.body.clientHeight;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<p>这里需要说明的是document.compatMode。很陌生，一般情况貌似没有遇到过。</p>
-<p><code>document.compatMode</code>有两个取值”<strong>BackCompat</strong>“和”<strong>CSS1Compat</strong>“。</p>
-<p>官方解释是BackCompat：标准兼容模式关闭。CSS1Compat：标准兼容模式开启。  </p>
-<p>　　IE对盒模型的渲染在 <code>Standards Mode</code>和<code>Quirks Mode</code>是有很大差别的，在<code>Standards Mode</code>下对于盒模型的解释和其他的标准浏览器是一样，</p>
-<p>但在<code>Quirks Mode</code>模式下则有很大差别，而在不声明Doctype的情况下，IE默认又是Quirks Mode。  </p>
-<p>　　举个例子说明两种模式之间的差别有多大。</p>
-<p>　　当document.compatMode等于BackCompat时，浏览器客户区宽度是<code>document.body.clientWidth</code></p>
-<p>　　当document.compatMode等于CSS1Compat时，浏览器客户区宽度是<code>document.documentElement.clientWidth</code></p>
-<p>　　还有其他属性类似。这里不说了，但是我们可以预见两种模式导致IE渲染的基石都更改了，可想而知构建出来的建筑物差别当有多大。</p>
-<p>　　所以请为每一个页面声明Doctype不仅仅是一个好习惯，而且是一个必要的处理。Quirks Mode可以进垃圾堆了。</p>
-<p>当用户滚动元素中到一个不同的地方时，scroll事件将发送到这个元素。它适用于<strong>window对象</strong>，但也可滚动框架与CSS overflow属性设置为scroll的元素</p>
-<h3 id="普通的div滚动到底部加载更多的方法"><a href="#普通的div滚动到底部加载更多的方法" class="headerlink" title="普通的div滚动到底部加载更多的方法"></a>普通的div滚动到底部加载更多的方法</h3><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id="test"&gt;内容&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'#test'</span>).scroll(<span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">		<span class="keyword">var</span> top = $(<span class="keyword">this</span>).scrollTop();</span><br><span class="line">		<span class="keyword">var</span> height = $(<span class="keyword">this</span>).height();</span><br><span class="line">		<span class="keyword">var</span> scrollHeight = $(<span class="keyword">this</span>).get(<span class="number">0</span>).scrollHeight;  </span><br><span class="line">		<span class="keyword">if</span>(scrollHeight &lt;= top+height)&#123;</span><br><span class="line">			loadMore();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
-<p>运行发现#test的div怎么样也不能接受scroll时间，最后经过查找资料和测试，发现要给div加上overflow和height的属性。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#test</span>&#123;</span><br><span class="line">		<span class="attribute">overflow</span>:scroll;</span><br><span class="line">		<span class="attribute">height</span>:<span class="number">655px</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="window滚动事件"><a href="#window滚动事件" class="headerlink" title="window滚动事件"></a>window滚动事件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="built_in">window</span>).scroll(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">     <span class="keyword">var</span> scrollTop = $(<span class="built_in">window</span>).scrollTop(); <span class="comment">// 滚动条距离顶部的高度</span></span><br><span class="line">     <span class="comment">//scrollHeight,windowHeight,scrollHeight1三个height相同，都是这个页面的高度</span></span><br><span class="line">     <span class="keyword">var</span> scrollHeight = $(<span class="built_in">document</span>).height(); <span class="comment">// 当前页面的总高度</span></span><br><span class="line">     <span class="comment">// 当前可视的页面高度，jquery获取的不是屏幕的高度，而是整个文档的高度</span></span><br><span class="line">     <span class="keyword">var</span> windowHeight = $(<span class="built_in">window</span>).height();</span><br><span class="line">     <span class="keyword">var</span> scrollHeight1 = $(<span class="string">"#test"</span>).get(<span class="number">0</span>).scrollHeight;</span><br><span class="line">     <span class="keyword">var</span> windowidth = $(<span class="built_in">window</span>).width();</span><br><span class="line">     <span class="keyword">var</span> documentwidtht = $(<span class="built_in">document</span>).width();</span><br><span class="line">     <span class="keyword">var</span> innerHeight = <span class="built_in">window</span>.innerHeight; <span class="comment">//window的高度，即手机的高度</span></span><br><span class="line">     <span class="keyword">var</span> clientHeight = <span class="built_in">document</span>.body.clientHeight; <span class="comment">//window的高度</span></span><br><span class="line">     <span class="comment">//这个是body的整个高度，chrom测试</span></span><br><span class="line">     <span class="keyword">var</span> clientHeight1 = <span class="built_in">document</span>.documentElement.clientHeight;</span><br><span class="line">     <span class="comment">// 距离顶部+当前高度 &gt;=文档总高度，即代表滑动到底部</span></span><br><span class="line">     <span class="keyword">if</span>(scrollTop + innerHeight &gt;= scrollHeight)&#123;</span><br><span class="line">         loadMore();</span><br><span class="line">     &#125;</span><br><span class="line"> &#125;);</span><br></pre></td></tr></table></figure>
-<p><em>原文链接：<a href="https://blog.csdn.net/wuyou1336/article/details/56035560" target="_blank" rel="noopener">https://blog.csdn.net/wuyou1336/article/details/56035560</a></em></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;滚动条到底部加载数据原理很简单，就是为window或者滚动元素添加一个scroll事件，浏览器每次触发scroll事件时判断是否滚动到了浏览器底部，如果到了底部则加载新数据。关键是计算滚动条是否滚动到了浏览器底部&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="jQuery" scheme="VickChen.win/tags/jQuery/"/>
     
   </entry>
   
