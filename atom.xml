@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2020-07-26T08:26:19.351Z</updated>
+  <updated>2020-07-26T08:38:58.180Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="VickChen.win/2020/202006210014/"/>
     <id>VickChen.win/2020/202006210014/</id>
     <published>2020-06-20T16:14:29.000Z</published>
-    <updated>2020-07-26T08:26:19.351Z</updated>
+    <updated>2020-07-26T08:38:58.180Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。 </p>
 <a id="more"></a>
@@ -39,9 +39,8 @@
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> Task <span class="title">RequestDelegate</span>(<span class="params">HttpContext context</span>)</span>;</span><br></pre></td></tr></table></figure>
 <p>还记得中间件是干嘛的吗？是用来处理Http请求和响应的，即对<code>HttpContext</code>的处理，这里我们可以看出来原来中间件的业务逻辑就是封装在<code>RequestDelegate</code>里面。</p>
 <h2 id="中间件（Middleware）和过滤器（Filter）的区别"><a href="#中间件（Middleware）和过滤器（Filter）的区别" class="headerlink" title="中间件（Middleware）和过滤器（Filter）的区别"></a>中间件（Middleware）和过滤器（Filter）的区别</h2><p>熟悉MVC框架的同学应该知道，MVC也提供了5大过滤器供我们用来处理请求前后需要执行的代码。分别是<code>AuthenticationFilter</code>,<code>AuthorizationFilter</code>,<code>ActionFilter</code>,<code>ExceptionFilter</code>,<code>ResultFilter</code>。</p>
-<p>根据描述，可以看出中间件和过滤器的功能类似，那么他们有什么区别？为什么又要搞一个中间件呢？<br>其实，过滤器和中间件他们的关注点是不一样的，也就是说职责不一样，干的事情就不一样。</p>
-<p>同作为两个AOP利器，过滤器更贴合业务，它关注于应用程序本身，比如你看<code>ActionFilter</code> 和 <code>ResultFilter</code>，它都直接和你的Action，ActionResult交互了，是不是离你很近的感觉，那我有一些比如对我的输出结果进行格式化啦，对我的请求的ViewModel进行数据验证啦，肯定就是用Filter无疑了。它是MVC的一部分，它可以拦截到你Action上下文的一些信息，而中间件是没有这个能力的。</p>
-<h3 id="什么情况使用中间件"><a href="#什么情况使用中间件" class="headerlink" title="什么情况使用中间件"></a>什么情况使用中间件</h3><p>我的理解是在我们的应用程序当中和业务关系不大的一些需要在管道中做的事情可以使用，比如身份验证，Session存储，日志记录等。其实我们的 asp.net core项目中本身已经包含了很多个中间件。</p>
+<p>根据描述，可以看出中间件和过滤器的功能类似，那么他们有什么区别？为什么又要搞一个中间件呢？<br>其实，过滤器和中间件他们的关注点是不一样的。<strong>过滤器更贴合业务，中间件关注于应用程序本身</strong>。比如<code>ActionFilter</code> 和 <code>ResultFilter</code>，已经直接和你的<code>Action</code>，<code>ActionResult</code>交互了。那假设我有对输出结果进行格式化、对<code>ViewModel</code>进行数据验证之类的需求肯定就是用Filter无疑了。它是MVC的一部分，可以拦截到你<code>Action</code>上下文的一些信息，而中间件是没有这个能力的。</p>
+<h3 id="什么情况使用中间件"><a href="#什么情况使用中间件" class="headerlink" title="什么情况使用中间件"></a>什么情况使用中间件</h3><p>业务关系不大且需要在管道中做的事情可以使用中间件，比如身份验证、Session存储、日志记录等。其实.NET Core项目中本身已经包含了很多个中间件。</p>
 <h2 id="Use-Run-和-Map"><a href="#Use-Run-和-Map" class="headerlink" title="Use, Run, 和 Map"></a>Use, Run, 和 Map</h2><p>.NET Core 中间件的配置方法分别是：<code>Run()</code>，<code>Use()</code>，<code>Map()</code>：</p>
 <ul>
 <li><strong>Run()</strong>，使用此方法调用中间件的时候，可以使管道短路，会直接返回一个响应，所以后续的中间件将不再被执行。</li>
