@@ -1,0 +1,815 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="CSharp,.Net Core,中间件,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。">
+<meta name="keywords" content="CSharp,.Net Core,中间件">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".NET Core中间件">
+<meta property="og:url" content="VickChen.win/2020/202006210014/index.html">
+<meta property="og:site_name" content="Vick&#39;s Blog">
+<meta property="og:description" content="ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/middleware/index/_static/request-delegate-pipeline.png?view=aspnetcore-3.1">
+<meta property="og:updated_time" content="2020-07-26T08:15:56.789Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=".NET Core中间件">
+<meta name="twitter:description" content="ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。">
+<meta name="twitter:image" content="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/middleware/index/_static/request-delegate-pipeline.png?view=aspnetcore-3.1">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="VickChen.win/2020/202006210014/">
+
+  <title> .NET Core中间件 | Vick's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vick's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                .NET Core中间件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2020-06-21T00:14:29+08:00" content="2020-06-21">
+              2020-06-21
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。 </p>
+<a id="more"></a>
+<h2 id="什么是中间件"><a href="#什么是中间件" class="headerlink" title="什么是中间件"></a>什么是中间件</h2><p>我们都知道，任何的一个web框架都是把Http请求封装成一个管道，每一次的请求都是经过管道的一系列操作，最终才会到达我们写的代码中。而中间件就是用于组成应用程序管道来处理请求和响应的组件。管道内的每一个组件都可以选择是否将请求转交给下一个组件，并在管道中调用下一个组件之前和之后执行某些操作。请求委托被用来建立请求管道，请求委托处理每一个Http请求。</p>
+<p>中间件可以认为有两个基本的职责：</p>
+<ol>
+<li>选择是否将请求传递给管道中的下一个中间件。</li>
+<li>可以在管道中的下一个中间件前后执行一些工作。</li>
+</ol>
+<p>请求委托通过使用<code>IApplicationBuilder</code>类型的<code>Run</code>、<code>Map</code>以及<code>Use</code>扩展方法来配置，并在<code>Startup</code>类中传给<code>Configure</code>方法。每个单独的请求委托都可以被指定为一个内嵌匿名方法，或其定义在一个可重用的类中。这些可以重用的类被称作 <code>中间件</code>或<code>中间件组件</code>。每个位于请求管道内的中间件组件负责调用管道中下一个组件，或适时短路调用链。中间件是一个典型的<code>AOP</code>应用。</p>
+<p>看完上面的介绍，可能还是不太了解中间件在程序中到底是什么？那么就从大家熟悉的<code>Startup</code>类里<code>Configure</code>方法中的那个<code>IApplicationBuilder</code>说起</p>
+<p><code>IApplicationBuilder</code>，应用构建者，听这个名字就能感受它的核心地位，ASP.NET Core应用就是依赖它构建出来，看看它的定义：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IApplicationBuilder</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...省略部分代码...</span></span><br><span class="line">    <span class="function">IApplicationBuilder <span class="title">Use</span>(<span class="params">Func&lt;RequestDelegate, RequestDelegate&gt; middleware</span>)</span>;</span><br><span class="line">    <span class="function">RequestDelegate <span class="title">Build</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>Use</code>方法用来把中间件添加到应用管道中，此时我们已经看到中间件的真面目了，原来是一个委托，输入参数是<code>RequestDelegate</code>，返回也是<code>RequestDelegate</code>，其实<code>RequestDelegate</code>还是个委托，如下：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> Task <span class="title">RequestDelegate</span>(<span class="params">HttpContext context</span>)</span>;</span><br></pre></td></tr></table></figure>
+<p>还记得中间件是干嘛的吗？是用来处理Http请求和响应的，即对<code>HttpContext</code>的处理，这里我们可以看出来原来中间件的业务逻辑就是封装在<code>RequestDelegate</code>里面。</p>
+<h2 id="Use-Run-和-Map"><a href="#Use-Run-和-Map" class="headerlink" title="Use, Run, 和 Map"></a>Use, Run, 和 Map</h2><p>.NET Core 中间件的配置方法分别是：<code>Run()</code>，<code>Use()</code>，<code>Map()</code>：</p>
+<ul>
+<li><strong>Run()</strong>，使用此方法调用中间件的时候，可以使管道短路，会直接返回一个响应，所以后续的中间件将不再被执行。</li>
+<li><strong>Use()</strong>，此方法是一个约定，会对请求做一些工作或处理，例如添加一些请求的上下文数据，有时候甚至什么也不做，直接把请求交给下一个中间件。</li>
+<li><strong>Map()</strong>，它会把请求重新路由到其它的中间件路径上去。</li>
+</ul>
+<h2 id="使用-IApplicationBuilder-创建中间件管道"><a href="#使用-IApplicationBuilder-创建中间件管道" class="headerlink" title="使用 IApplicationBuilder 创建中间件管道"></a>使用 IApplicationBuilder 创建中间件管道</h2><p>ASP.NET Core 请求管道包含一系列请求委托，依次调用。 下图演示了这一概念。 沿黑色箭头执行。</p>
+<p><img src="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/middleware/index/_static/request-delegate-pipeline.png?view=aspnetcore-3.1" alt="请求处理模式显示请求到达、通过三个中间件进行处理以及响应离开应用。"></p>
+<p>每个委托均可在下一个委托前后执行操作。 应尽早在管道中调用异常处理委托，这样它们就能捕获在管道的后期阶段发生的异常。</p>
+<p>尽可能简单的 ASP.NET Core 应用设置了处理所有请求的单个请求委托。 这种情况不包括实际请求管道。 调用单个匿名函数以响应每个 HTTP 请求。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Startup</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        app.Run(<span class="keyword">async</span> context =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">await</span> context.Response.WriteAsync(<span class="string">"Hello, World!"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第一个 <a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.runextensions.run" target="_blank" rel="noopener">Run</a> 委托终止了管道。</p>
+<p>用 <a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.useextensions.use" target="_blank" rel="noopener">Use</a> 将多个请求委托链接在一起。 <code>next</code> 参数表示管道中的下一个委托。 可通过不调用 next 参数使管道短路。 通常可在下一个委托前后执行操作，如以下示例所示：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Startup</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        app.Use(<span class="keyword">async</span> (context, next) =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Do work that doesn't write to the Response.</span></span><br><span class="line">            <span class="keyword">await</span> next.Invoke();</span><br><span class="line">            <span class="comment">// Do logging or other work that doesn't write to the Response.</span></span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        app.Run(<span class="keyword">async</span> context =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">await</span> context.Response.WriteAsync(<span class="string">"Hello from 2nd delegate."</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当委托不将请求传递给下一个委托时，它被称为“让请求管道短路”。 通常需要短路，因为这样可以避免不必要的工作。 例如，<a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/static-files?view=aspnetcore-2.1" target="_blank" rel="noopener">静态文件中间件</a>可以处理对静态文件的请求，并让管道的其余部分短路，从而起到终端中间件的作用。 如果中间件添加到管道中，且位于终止进一步处理的中间件前，它们仍处理 <code>next.Invoke</code> 语句后面的代码。 不过，请参阅下面有关尝试对已发送的响应执行写入操作的警告。</p>
+<p><strong>在向客户端发送响应后，请勿调用 <code>next.Invoke</code>。</strong> 响应启动后，针对 <a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.http.httpresponse" target="_blank" rel="noopener">HttpResponse</a> 的更改将引发异常。 例如，设置标头和状态代码更改将引发异常。 调用 <code>next</code> 后写入响应正文：</p>
+<ul>
+<li>可能导致违反协议。 例如，写入的长度超过规定的 <code>Content-Length</code>。</li>
+<li>可能损坏正文格式。 例如，向 CSS 文件中写入 HTML 页脚。</li>
+</ul>
+<p><a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.http.httpresponse.hasstarted" target="_blank" rel="noopener">HasStarted</a> 是一个有用的提示，指示是否已发送标头或已写入正文。</p>
+<h2 id="中间件顺序"><a href="#中间件顺序" class="headerlink" title="中间件顺序"></a>中间件顺序</h2><p>向 <code>Startup.Configure</code> 方法添加中间件组件的顺序定义了针对请求调用这些组件的顺序，以及响应的相反顺序。 此顺序对于安全性、性能和功能至关重要。</p>
+<p>下面的 <code>Startup.Configure</code> 方法按照建议的顺序增加与安全相关的中间件组件：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app, IHostingEnvironment env</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (env.IsDevelopment())</span><br><span class="line">    &#123;</span><br><span class="line">        app.UseDeveloperExceptionPage();</span><br><span class="line">        app.UseDatabaseErrorPage();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        app.UseExceptionHandler(<span class="string">"/Home/Error"</span>);</span><br><span class="line">        app.UseHsts();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    app.UseHttpsRedirection();</span><br><span class="line">    app.UseStaticFiles();</span><br><span class="line">    app.UseCookiePolicy();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// app.UseRequestLocalization();</span></span><br><span class="line">    <span class="comment">// app.UseCors();</span></span><br><span class="line"></span><br><span class="line">    app.UseAuthentication();</span><br><span class="line">    <span class="comment">// app.UseSession();</span></span><br><span class="line"></span><br><span class="line">    app.UseMvc(routes =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        routes.MapRoute(</span><br><span class="line">            name: <span class="string">"default"</span>,</span><br><span class="line">            template: <span class="string">"&#123;controller=Home&#125;/&#123;action=Index&#125;/&#123;id?&#125;"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上述代码中：</p>
+<ul>
+<li>在使用<a href="https://docs.microsoft.com/zh-cn/aspnet/core/security/authentication/identity?view=aspnetcore-2.1" target="_blank" rel="noopener">单个用户帐户</a>创建新的 Web 应用时未添加的中间件已被注释掉。</li>
+<li>并非所有中间件都需要准确按照此顺序运行，但许多中间件必须遵循这个顺序。 例如，<code>UseCors</code> 和 <code>UseAuthentication</code> 必须按照上述顺序运行。</li>
+</ul>
+<p>以下 <code>Startup.Configure</code> 方法将为常见应用方案添加中间件组件：</p>
+<ol>
+<li>异常/错误处理<ul>
+<li>当应用在开发环境中运行时：<ul>
+<li>开发人员异常页中间件 (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.developerexceptionpageextensions.usedeveloperexceptionpage" target="_blank" rel="noopener">UseDeveloperExceptionPage</a>) 报告应用运行时错误。</li>
+<li>数据库错误页中间件 (<code>Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage</code>) 报告数据库运行时错误。</li>
+</ul>
+</li>
+<li>当应用在生产环境中运行时：<ul>
+<li>异常处理程序中间件 (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.exceptionhandlerextensions.useexceptionhandler" target="_blank" rel="noopener">UseExceptionHandler</a>) 捕获以下中间件中引发的异常。</li>
+<li>HTTP 严格传输安全协议 (HSTS) 中间件 (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.hstsbuilderextensions.usehsts" target="_blank" rel="noopener">UseHsts</a>) 添加 <code>Strict-Transport-Security</code> 标头。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>HTTPS 重定向中间件 (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.httpspolicybuilderextensions.usehttpsredirection" target="_blank" rel="noopener">UseHttpsRedirection</a>) 将 HTTP 请求重定向到 HTTPS。</li>
+<li>静态文件中间件 (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles" target="_blank" rel="noopener">UseStaticFiles</a>) 返回静态文件，并简化进一步请求处理。</li>
+<li>Cookie 策略中间件 (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy" target="_blank" rel="noopener">UseCookiePolicy</a>) 使应用符合欧盟一般数据保护条例 (GDPR) 规定。</li>
+<li>身份验证中间件 (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication" target="_blank" rel="noopener">UseAuthentication</a>) 尝试对用户进行身份验证，然后才会允许用户访问安全资源。</li>
+<li>会话中间件 (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.sessionmiddlewareextensions.usesession" target="_blank" rel="noopener">UseSession</a>) 建立和维护会话状态。 如果应用使用会话状态，请在 Cookie 策略中间件之后和 MVC 中间件之前调用会话中间件。</li>
+<li>MVC (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.mvcapplicationbuilderextensions.usemvc" target="_blank" rel="noopener">UseMvc</a>) 将 MVC 添加到请求管道。</li>
+</ol>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app, IHostingEnvironment env</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (env.IsDevelopment())</span><br><span class="line">    &#123;</span><br><span class="line">        app.UseDeveloperExceptionPage();</span><br><span class="line">        app.UseDatabaseErrorPage();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        app.UseExceptionHandler(<span class="string">"/Error"</span>);</span><br><span class="line">        app.UseHsts();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    app.UseHttpsRedirection();</span><br><span class="line">    app.UseStaticFiles();</span><br><span class="line">    app.UseCookiePolicy();</span><br><span class="line">    app.UseAuthentication();</span><br><span class="line">    app.UseSession();</span><br><span class="line">    app.UseMvc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.exceptionhandlerextensions.useexceptionhandler" target="_blank" rel="noopener">UseExceptionHandler</a> 是添加到管道的第一个中间件组件。 因此，异常处理程序中间件可捕获稍后调用中发生的任何异常。</p>
+<p>尽早在管道中调用静态文件中间件，以便它可以处理请求并使其短路，而无需通过剩余组件。 静态文件中间件不提供授权检查。 可公开访问由静态文件中间件服务的任何文件，包括 wwwroot 下的文件。</p>
+<p>如果静态文件中间件未处理请求，则请求将被传递给执行身份验证的身份验证中间件 (<a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication" target="_blank" rel="noopener">UseAuthentication</a>)。 身份验证不使未经身份验证的请求短路。 虽然身份验证中间件对请求进行身份验证，但仅在 MVC 选择特定 Razor Page 或 MVC 控制器和操作后，才发生授权（和拒绝）。</p>
+<p>以下示例演示中间件排序，其中静态文件的请求在响应压缩中间件前由静态文件中间件进行处理。 使用此中间件顺序不压缩静态文件。 可以压缩来自 <a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.mvcapplicationbuilderextensions.usemvcwithdefaultroute" target="_blank" rel="noopener">UseMvcWithDefaultRoute</a> 的 MVC 响应。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// Static files aren't compressed by Static File Middleware.</span></span><br><span class="line">    app.UseStaticFiles();</span><br><span class="line"></span><br><span class="line">    app.UseResponseCompression();</span><br><span class="line"></span><br><span class="line">    app.UseMvcWithDefaultRoute();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="内置中间件"><a href="#内置中间件" class="headerlink" title="内置中间件"></a>内置中间件</h2><p>.NET Core 附带以下中间件组件。 “顺序”列提供备注，以说明中间件在请求处理管道中的放置，以及中间件可能会终止请求处理的条件。 如果中间件让请求处理管道短路，并阻止下游中间件进一步处理请求，它被称为“终端中间件”。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">中间件</th>
+<th style="text-align:left">描述</th>
+<th style="text-align:left">顺序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/security/authentication/identity?view=aspnetcore-2.1" target="_blank" rel="noopener">身份验证</a></td>
+<td style="text-align:left">提供身份验证支持。</td>
+<td style="text-align:left">在需要 <code>HttpContext.User</code> 之前。 OAuth 回叫的终端。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/security/gdpr?view=aspnetcore-2.1" target="_blank" rel="noopener">Cookie 策略</a></td>
+<td style="text-align:left">跟踪用户是否同意存储个人信息，并强制实施 cookie 字段（如 <code>secure</code> 和 <code>SameSite</code>）的最低标准。</td>
+<td style="text-align:left">在发出 cookie 的中间件之前。 示例：身份验证、会话、MVC (TempData)。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/security/cors?view=aspnetcore-2.1" target="_blank" rel="noopener">CORS</a></td>
+<td style="text-align:left">配置跨域资源共享。</td>
+<td style="text-align:left">在使用 CORS 的组件之前。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/error-handling?view=aspnetcore-2.1" target="_blank" rel="noopener">诊断</a></td>
+<td style="text-align:left">提供新应用的开发人员异常页、异常处理、状态代码页和默认网页的几个单独的中间件。</td>
+<td style="text-align:left">在生成错误的组件之前。 异常终端或为新应用提供默认网页的终端。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/host-and-deploy/proxy-load-balancer?view=aspnetcore-2.1" target="_blank" rel="noopener">转接头</a></td>
+<td style="text-align:left">将代理标头转发到当前请求。</td>
+<td style="text-align:left">在使用已更新字段的组件之前。 示例：方案、主机、客户端 IP、方法。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/host-and-deploy/health-checks?view=aspnetcore-2.1" target="_blank" rel="noopener">运行状况检查</a></td>
+<td style="text-align:left">检查 ASP.NET Core 应用及其依赖项的运行状况，如检查数据库可用性。</td>
+<td style="text-align:left">如果请求与运行状况检查终结点匹配，则为终端。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/dotnet/api/microsoft.aspnetcore.builder.httpmethodoverrideextensions" target="_blank" rel="noopener">HTTP 方法重写</a></td>
+<td style="text-align:left">允许传入 POST 请求重写方法。</td>
+<td style="text-align:left">在使用已更新方法的组件之前。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/security/enforcing-ssl?view=aspnetcore-2.1#require-https" target="_blank" rel="noopener">HTTPS 重定向</a></td>
+<td style="text-align:left">将所有 HTTP 请求重定向到 HTTPS。</td>
+<td style="text-align:left">在使用 URL 的组件之前。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/security/enforcing-ssl?view=aspnetcore-2.1#http-strict-transport-security-protocol-hsts" target="_blank" rel="noopener">HTTP 严格传输安全协议 (HSTS)</a></td>
+<td style="text-align:left">添加特殊响应标头的安全增强中间件。</td>
+<td style="text-align:left">在发送响应之前，修改请求的组件之后。 示例：转接头、URL 重写。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/mvc/overview?view=aspnetcore-2.1" target="_blank" rel="noopener">MVC</a></td>
+<td style="text-align:left">用 MVC/Razor Pages 处理请求。</td>
+<td style="text-align:left">如果请求与路由匹配，则为终端。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/owin?view=aspnetcore-2.1" target="_blank" rel="noopener">OWIN</a></td>
+<td style="text-align:left">与基于 OWIN 的应用、服务器和中间件进行互操作。</td>
+<td style="text-align:left">如果 OWIN 中间件处理完请求，则为终端。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/performance/caching/middleware?view=aspnetcore-2.1" target="_blank" rel="noopener">响应缓存</a></td>
+<td style="text-align:left">提供对缓存响应的支持。</td>
+<td style="text-align:left">在需要缓存的组件之前。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/performance/response-compression?view=aspnetcore-2.1" target="_blank" rel="noopener">响应压缩</a></td>
+<td style="text-align:left">提供对压缩响应的支持。</td>
+<td style="text-align:left">在需要压缩的组件之前。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/localization?view=aspnetcore-2.1" target="_blank" rel="noopener">请求本地化</a></td>
+<td style="text-align:left">提供本地化支持。</td>
+<td style="text-align:left">在对本地化敏感的组件之前。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/routing?view=aspnetcore-2.1" target="_blank" rel="noopener">终结点路由</a></td>
+<td style="text-align:left">定义和约束请求路由。</td>
+<td style="text-align:left">用于匹配路由的终端。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/app-state?view=aspnetcore-2.1" target="_blank" rel="noopener">会话</a></td>
+<td style="text-align:left">提供对管理用户会话的支持。</td>
+<td style="text-align:left">在需要会话的组件之前。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/static-files?view=aspnetcore-2.1" target="_blank" rel="noopener">静态文件</a></td>
+<td style="text-align:left">为提供静态文件和目录浏览提供支持。</td>
+<td style="text-align:left">如果请求与文件匹配，则为终端。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/url-rewriting?view=aspnetcore-2.1" target="_blank" rel="noopener">URL 重写</a></td>
+<td style="text-align:left">提供对重写 URL 和重定向请求的支持。</td>
+<td style="text-align:left">在使用 URL 的组件之前。</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/websockets?view=aspnetcore-2.1" target="_blank" rel="noopener">WebSockets</a></td>
+<td style="text-align:left">启用 WebSockets 协议。</td>
+<td style="text-align:left">在接受 WebSocket 请求所需的组件之前。</td>
+</tr>
+</tbody>
+</table>
+<p><em>部分转自 - <a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/middleware/?view=aspnetcore-3.1" target="_blank" rel="noopener">ASP.NET Core 文档</a></em></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSharp/" rel="tag">#CSharp</a>
+          
+            <a href="/tags/Net-Core/" rel="tag">#.Net Core</a>
+          
+            <a href="/tags/中间件/" rel="tag">#中间件</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/202005192357/" rel="next" title="设计模式之行为模式">
+                <i class="fa fa-chevron-left"></i> 设计模式之行为模式
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Vick">
+          <p class="site-author-name" itemprop="name">Vick</p>
+          <p class="site-description motion-element" itemprop="description">只要路是对的，就不怕路远</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">46</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/VickChen1992" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://gitee.com/vickchen" target="_blank" title="gitee">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  gitee
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是中间件"><span class="nav-number">1.</span> <span class="nav-text">什么是中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-Run-和-Map"><span class="nav-number">2.</span> <span class="nav-text">Use, Run, 和 Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-IApplicationBuilder-创建中间件管道"><span class="nav-number">3.</span> <span class="nav-text">使用 IApplicationBuilder 创建中间件管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间件顺序"><span class="nav-number">4.</span> <span class="nav-text">中间件顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置中间件"><span class="nav-number">5.</span> <span class="nav-text">内置中间件</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vick</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
