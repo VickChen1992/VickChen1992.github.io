@@ -95,7 +95,7 @@
 <meta property="og:description" content="ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/middleware/index/_static/request-delegate-pipeline.png?view=aspnetcore-3.1">
-<meta property="og:updated_time" content="2020-07-26T08:15:56.789Z">
+<meta property="og:updated_time" content="2020-07-26T08:26:19.351Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content=".NET Core中间件">
 <meta name="twitter:description" content="ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。">
@@ -323,19 +323,24 @@
       
         <p>ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。 </p>
 <a id="more"></a>
-<h2 id="什么是中间件"><a href="#什么是中间件" class="headerlink" title="什么是中间件"></a>什么是中间件</h2><p>我们都知道，任何的一个web框架都是把Http请求封装成一个管道，每一次的请求都是经过管道的一系列操作，最终才会到达我们写的代码中。而中间件就是用于组成应用程序管道来处理请求和响应的组件。管道内的每一个组件都可以选择是否将请求转交给下一个组件，并在管道中调用下一个组件之前和之后执行某些操作。请求委托被用来建立请求管道，请求委托处理每一个Http请求。</p>
+<h2 id="什么是中间件"><a href="#什么是中间件" class="headerlink" title="什么是中间件"></a>什么是中间件</h2><p>任何web框架都是把Http请求封装成一个管道，每次请求都是经过管道的一系列操作，最终才会到达我们写的代码中。而<strong>中间件就是用于组成应用程序管道来处理请求和响应的组件</strong>。</p>
+<p>管道内的每一个组件都可以选择是否将请求转交给下一个组件，并在管道中调用下一个组件之前和之后执行某些操作。请求委托被用来建立请求管道，请求委托处理每一个Http请求。</p>
 <p>中间件可以认为有两个基本的职责：</p>
 <ol>
 <li>选择是否将请求传递给管道中的下一个中间件。</li>
 <li>可以在管道中的下一个中间件前后执行一些工作。</li>
 </ol>
 <p>请求委托通过使用<code>IApplicationBuilder</code>类型的<code>Run</code>、<code>Map</code>以及<code>Use</code>扩展方法来配置，并在<code>Startup</code>类中传给<code>Configure</code>方法。每个单独的请求委托都可以被指定为一个内嵌匿名方法，或其定义在一个可重用的类中。这些可以重用的类被称作 <code>中间件</code>或<code>中间件组件</code>。每个位于请求管道内的中间件组件负责调用管道中下一个组件，或适时短路调用链。中间件是一个典型的<code>AOP</code>应用。</p>
-<p>看完上面的介绍，可能还是不太了解中间件在程序中到底是什么？那么就从大家熟悉的<code>Startup</code>类里<code>Configure</code>方法中的那个<code>IApplicationBuilder</code>说起</p>
+<h3 id="中间件的真面目"><a href="#中间件的真面目" class="headerlink" title="中间件的真面目"></a>中间件的真面目</h3><p>看完上面的介绍，可能还是不太了解中间件在程序中到底是什么？那么就从大家熟悉的<code>Startup</code>类里<code>Configure</code>方法中的那个<code>IApplicationBuilder</code>说起。</p>
 <p><code>IApplicationBuilder</code>，应用构建者，听这个名字就能感受它的核心地位，ASP.NET Core应用就是依赖它构建出来，看看它的定义：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IApplicationBuilder</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//...省略部分代码...</span></span><br><span class="line">    <span class="function">IApplicationBuilder <span class="title">Use</span>(<span class="params">Func&lt;RequestDelegate, RequestDelegate&gt; middleware</span>)</span>;</span><br><span class="line">    <span class="function">RequestDelegate <span class="title">Build</span>(<span class="params"></span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><code>Use</code>方法用来把中间件添加到应用管道中，此时我们已经看到中间件的真面目了，原来是一个委托，输入参数是<code>RequestDelegate</code>，返回也是<code>RequestDelegate</code>，其实<code>RequestDelegate</code>还是个委托，如下：</p>
+<p><code>Use</code>方法用来把中间件添加到应用管道中，此时我们已经看到中间件的真面目了，就是个委托(Func)，输入参数是<code>RequestDelegate</code>，返回类型也是<code>RequestDelegate</code>，而且看名字可以得知<code>RequestDelegate</code>还是个委托，如下：</p>
 <figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">delegate</span> Task <span class="title">RequestDelegate</span>(<span class="params">HttpContext context</span>)</span>;</span><br></pre></td></tr></table></figure>
 <p>还记得中间件是干嘛的吗？是用来处理Http请求和响应的，即对<code>HttpContext</code>的处理，这里我们可以看出来原来中间件的业务逻辑就是封装在<code>RequestDelegate</code>里面。</p>
+<h2 id="中间件（Middleware）和过滤器（Filter）的区别"><a href="#中间件（Middleware）和过滤器（Filter）的区别" class="headerlink" title="中间件（Middleware）和过滤器（Filter）的区别"></a>中间件（Middleware）和过滤器（Filter）的区别</h2><p>熟悉MVC框架的同学应该知道，MVC也提供了5大过滤器供我们用来处理请求前后需要执行的代码。分别是<code>AuthenticationFilter</code>,<code>AuthorizationFilter</code>,<code>ActionFilter</code>,<code>ExceptionFilter</code>,<code>ResultFilter</code>。</p>
+<p>根据描述，可以看出中间件和过滤器的功能类似，那么他们有什么区别？为什么又要搞一个中间件呢？<br>其实，过滤器和中间件他们的关注点是不一样的，也就是说职责不一样，干的事情就不一样。</p>
+<p>同作为两个AOP利器，过滤器更贴合业务，它关注于应用程序本身，比如你看<code>ActionFilter</code> 和 <code>ResultFilter</code>，它都直接和你的Action，ActionResult交互了，是不是离你很近的感觉，那我有一些比如对我的输出结果进行格式化啦，对我的请求的ViewModel进行数据验证啦，肯定就是用Filter无疑了。它是MVC的一部分，它可以拦截到你Action上下文的一些信息，而中间件是没有这个能力的。</p>
+<h3 id="什么情况使用中间件"><a href="#什么情况使用中间件" class="headerlink" title="什么情况使用中间件"></a>什么情况使用中间件</h3><p>我的理解是在我们的应用程序当中和业务关系不大的一些需要在管道中做的事情可以使用，比如身份验证，Session存储，日志记录等。其实我们的 asp.net core项目中本身已经包含了很多个中间件。</p>
 <h2 id="Use-Run-和-Map"><a href="#Use-Run-和-Map" class="headerlink" title="Use, Run, 和 Map"></a>Use, Run, 和 Map</h2><p>.NET Core 中间件的配置方法分别是：<code>Run()</code>，<code>Use()</code>，<code>Map()</code>：</p>
 <ul>
 <li><strong>Run()</strong>，使用此方法调用中间件的时候，可以使管道短路，会直接返回一个响应，所以后续的中间件将不再被执行。</li>
@@ -681,7 +686,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是中间件"><span class="nav-number">1.</span> <span class="nav-text">什么是中间件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-Run-和-Map"><span class="nav-number">2.</span> <span class="nav-text">Use, Run, 和 Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-IApplicationBuilder-创建中间件管道"><span class="nav-number">3.</span> <span class="nav-text">使用 IApplicationBuilder 创建中间件管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间件顺序"><span class="nav-number">4.</span> <span class="nav-text">中间件顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置中间件"><span class="nav-number">5.</span> <span class="nav-text">内置中间件</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是中间件"><span class="nav-number">1.</span> <span class="nav-text">什么是中间件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#中间件的真面目"><span class="nav-number">1.1.</span> <span class="nav-text">中间件的真面目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间件（Middleware）和过滤器（Filter）的区别"><span class="nav-number">2.</span> <span class="nav-text">中间件（Middleware）和过滤器（Filter）的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么情况使用中间件"><span class="nav-number">2.1.</span> <span class="nav-text">什么情况使用中间件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Use-Run-和-Map"><span class="nav-number">3.</span> <span class="nav-text">Use, Run, 和 Map</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用-IApplicationBuilder-创建中间件管道"><span class="nav-number">4.</span> <span class="nav-text">使用 IApplicationBuilder 创建中间件管道</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中间件顺序"><span class="nav-number">5.</span> <span class="nav-text">中间件顺序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#内置中间件"><span class="nav-number">6.</span> <span class="nav-text">内置中间件</span></a></li></ol></div>
             
           </div>
         </section>
