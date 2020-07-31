@@ -1,0 +1,772 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css">
+
+
+  <meta name="keywords" content="算法,">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Vick's Blog" type="application/atom+xml">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/icon.ico?v=5.0.1">
+
+
+
+
+
+
+<meta name="description" content="算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。 也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。 如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。 不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。 算法中的指令描述的是">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法概述及五大常用算法">
+<meta property="og:url" content="VickChen.win/2019/201903170029/index.html">
+<meta property="og:site_name" content="Vick&#39;s Blog">
+<meta property="og:description" content="算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。 也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。 如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。 不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。 算法中的指令描述的是">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-07-31T14:05:07.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法概述及五大常用算法">
+<meta name="twitter:description" content="算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。 也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。 如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。 不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。 算法中的指令描述的是">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="VickChen.win/2019/201903170029/">
+
+  <title> 算法概述及五大常用算法 | Vick's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vick's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                算法概述及五大常用算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2019-03-17T00:29:05+08:00" content="2019-03-17">
+              2019-03-17
+            </time>
+          </span>
+
+          
+            <span class="post-category">
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。</p>
+<p>也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。</p>
+<p>如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。</p>
+<p>不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。</p>
+<p>算法中的指令描述的是一个计算，当其运行时能从一个初始状态和（可能为空的）初始输入开始，经过一系列有限而清晰定义的状态，最终产生输出并停止于一个终态。一个状态到另一个状态的转移不一定是确定的。</p>
+<p>随机化算法在内的一些算法，包含了一些随机输入。</p>
+<a id="more"></a>
+<h2 id="算法的特征"><a href="#算法的特征" class="headerlink" title="算法的特征"></a>算法的特征</h2><ol>
+<li><p>有穷性（Finiteness）</p>
+<p>算法必须能在执行有限个步骤之后终止；</p>
+</li>
+<li><p>确切性（Definiteness）</p>
+<p>算法的每一步骤必须有确切的定义；</p>
+</li>
+<li><p>输入项（Input）</p>
+<p>一个算法有0个或多个输入，以刻画运算对象的初始情况，所谓0个输入是指算法本身定出了初始条件；</p>
+</li>
+<li><p>输出项（Output）</p>
+<p>一个算法有一个或多个输出，以反映对输入数据加工后的结果。没有输出的算法是毫无意义的；</p>
+</li>
+<li><p>可行性（Effectiveness）</p>
+<p>亦称有效性，是指算法中执行的任何计算步骤都是可以被分解为基本的可执行的操作步，即每个计算步都可以在有限时间内完成。</p>
+</li>
+</ol>
+<h2 id="算法的要素"><a href="#算法的要素" class="headerlink" title="算法的要素"></a>算法的要素</h2><ul>
+<li><p>数据对象的运算和操作</p>
+<p>计算机可以执行的基本操作是以指令的形式描述的。</p>
+<p>一个计算机系统能执行的所有指令的集合，成为该计算机系统的指令系统。一个计算机的基本运算和操作有如下四类：</p>
+<ol>
+<li>算术运算：加减乘除等运算</li>
+<li>逻辑运算：或、且、非等运算</li>
+<li>关系运算：大于、小于、等于、不等于等运算</li>
+<li>数据传输：输入、输出、赋值等运算</li>
+</ol>
+</li>
+<li><p>算法的控制结构</p>
+<p>一个算法的功能结构不仅取决于所选用的操作，而且还与各操作之间的执行顺序有关。</p>
+</li>
+</ul>
+<h2 id="五大常用算法"><a href="#五大常用算法" class="headerlink" title="五大常用算法"></a>五大常用算法</h2><h3 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>字面上的解释是“分而治之”，就是 把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并 。这个技巧是很多高效算法的基础，如排序算法(快速排序，归并排序)，傅立叶变换……</p>
+<p>任何一个可以用计算机求解的问题所需的计算时间都与其规模有关。问题的规模越小，越容易直接求解，解题所需的计算时间也越少。例如：对于n个元素的排序问题，当n=1时，不需任何计算。n=2时，只要作一次比较即可排好序。n=3时只要作3次比较即可，…。而当n较大时，问题就不那么容易处理了。要想直接解决一个规模较大的问题，有时是相当困难的。</p>
+<h4 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h4><p>对于一个规模为n的问题，若该问题可以容易地解决（比如说规模n较小）则直接解决，否则将其分解为k个规模较小的子问题，这些子问题互相独立且与原问题形式相同，递归地解这些子问题，然后将各子问题的解合并得到原问题的解 。这种算法设计策略叫做分治法。</p>
+<p>如果原问题可分割成k个子问题，1 &lt; k ≤ n， 且这些子问题都可解并可利用这些子问题的解求出原问题的解，那么这种分治法就是可行的。由分治法产生的子问题往往是原问题的较小模式，这就为使用递归技术提供了方便。在这种情况下，反复应用分治手段，可以使子问题与原问题类型一致而其规模却不断缩小，最终使子问题缩小到很容易直接求出其解。 这自然导致递归过程的产生。分治与递归像一对孪生兄弟，经常同时应用在算法设计之 中，并由此产生许多高效算法。</p>
+<h4 id="适用条件"><a href="#适用条件" class="headerlink" title="适用条件"></a>适用条件</h4><ol>
+<li>该问题的规模缩小到一定的程度就可以容易地解决;</li>
+<li>该问题可以分解为若干个规模较小的相同问题，即该问题具有最优子结构性质;</li>
+<li>利用该问题分解出的子问题的解可以合并为该问题的解;</li>
+<li>该问题所分解出的各个子问题是相互独立的，即子问题之间不包含公共的子问题。</li>
+</ol>
+<p>第一条特征是绝大多数问题都可以满足的，因为问题的计算复杂性一般是随着问题规模的增加而增加；</p>
+<p>第二条特征是应用分治法的前提，它也是大多数问题可以满足的，此特征反映了递归思想的应用；</p>
+<p>第三条特征是关键，能否利用分治法完全取决于问题是否具有第三条特征，如果具备了第一条和第二条特征，而不具备第三条特征，则可以考虑用贪心法或动态规划法。</p>
+<p>第四条特征涉及到分治法的效率，如果各子问题是不独立的则分治法要做许多不必要的工作，重复地解公共的子问题，此时虽然可用分治法，但一般用动态规划法较好。</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>分解：将原问题分解为若干个规模较小，相互独立，与原问题形式相同的子问题；</li>
+<li>解决：若子问题规模较小而容易被解决则直接解，否则递归地解各个子问题 </li>
+<li>合并：将各个子问题的解合并为原问题的解。</li>
+</ol>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>二分归并排序、快速排序、幂乘算法、矩阵算法、平面点对、棋盘覆盖、汉诺塔等</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中产生出来的，所以，这种多阶段最优化决策解决问题的过程就称为动态规划。</p>
+<h4 id="策略-1"><a href="#策略-1" class="headerlink" title="策略"></a>策略</h4><p>与分治法类似，也是将待求解的问题分解为若干个子问题（阶段），按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。</p>
+<p>由于动态规划解决的问题多数有重叠子问题这个特点，为减少重复计算，对每一个子问题只解一次，将其不同阶段的不同状态保存在一个二维数组中。</p>
+<p>与分治法最大的差别：适合于用动态规划法求解的问题，经分解后得到的子问题往往不是互相独立的。即下一个子阶段的求解是建立在上一个子阶段的解的基础上，进行进一步的求解。</p>
+<h4 id="适用条件-1"><a href="#适用条件-1" class="headerlink" title="适用条件"></a>适用条件</h4><ol>
+<li><p>最优子结构性质</p>
+<p>一个最优化策略具有这样的性质，不论过去状态和决策如何，对前面的决策所形成的状态而言，余下的诸决策必须构成最优策略。简而言之，一个最优化策略的子策略总是最优的。一个问题满足最优化原理又称其具有最优子结构性质。</p>
+</li>
+<li><p>无后效性</p>
+<p>将各阶段按照一定的次序排列好之后，对于某个给定的阶段状态，它以前各阶段的状态无法直接影响它未来的决策，而只能通过当前的这个状态</p>
+</li>
+<li><p>子问题重叠</p>
+<p>即子问题之间是不独立的，一个子问题在下一阶段决策中可能被多次使用到。</p>
+<p><em>该性质并不是动态规划适用的必要条件，但是如果没有这条性质，动态规划算法同其他算法相比就不具备优势。</em></p>
+</li>
+</ol>
+<h4 id="设计步骤"><a href="#设计步骤" class="headerlink" title="设计步骤"></a>设计步骤</h4><ol>
+<li>分析最优解的性质，并刻画其结构特征。</li>
+<li>递归的定义最优解。</li>
+<li>以自底向上或自顶向下的记忆化方式（备忘录法）计算出最优值</li>
+<li>根据计算最优值时得到的信息，构造问题的最优解</li>
+</ol>
+<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><p>矩阵链相乘、投资问题、背包问题、最大字段和问题、最长公共子序列问题、图像压缩问题、多边形游戏</p>
+<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><h4 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h4><p>在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的仅是在某种意义上的局部最优解。</p>
+<p><strong>贪心算法不是对所有问题都能得到整体最优解</strong>，选择的贪心策略必须具备无后效性，即某个状态以后的过程不会影响以前的状态，只与当前状态有关。</p>
+<p>所以对所采用的贪心策略一定要仔细分析其是否满足无后效性。</p>
+<h4 id="适用条件-2"><a href="#适用条件-2" class="headerlink" title="适用条件"></a>适用条件</h4><p>贪心策略适用的前提是：局部最优策略能导致产生全局最优解。</p>
+<p>实际上，贪心算法适用的情况很少。一般，对一个问题分析是否适用于贪心算法，可以先选择该问题下的几个实际数据进行分析，就可做出判断。</p>
+<h4 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>建立数学模型来描述问题。</li>
+<li>把求解的问题分成若干个子问题。</li>
+<li>对每一子问题求解，得到子问题的局部最优解。</li>
+<li>把子问题的解局部最优解合成原来解问题的一个解</li>
+</ol>
+<h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>通常是一轮处理（一般是一层for循环就解决了），一般是O(n)+O(nlogn)（排序消耗）的时间</p>
+<h4 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h4><p>活动选择问题、最优装载问题、最小延迟调度问题、最优前缀码、最小生成树、单源最短路径问题</p>
+<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><p>此算法实际上是一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就“回溯”返回，尝试别的路径。</p>
+<p>回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。</p>
+<p>许多复杂的，规模较大的问题都可以使用回溯法，有“通用解题方法”的美称。</p>
+<h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><p>在包含问题的所有解的解空间树中，按照深度优先搜索的策略，从根结点出发深度探索解空间树。当探索到某一结点时，要先判断该结点是否包含问题的解，如果包含，就从该结点出发继续探索下去，如果该结点不包含问题的解，则逐层向其祖先结点回溯。（其实回溯法就是对隐式图的深度优先搜索算法）。</p>
+<p>若用回溯法求问题的所有解时，要回溯到根，且根结点的所有可行的子树都要已被搜索遍才结束。</p>
+<p>而若使用回溯法求任一个解时，只要搜索到问题的一个解就可以结束。</p>
+<h4 id="适用条件-3"><a href="#适用条件-3" class="headerlink" title="适用条件"></a>适用条件</h4><p>满足多米诺性质（必要条件），是一个多部判断求解，适用于搜索和优化问题</p>
+<h4 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li><p>针对所给问题，确定问题的解空间</p>
+<p>首先应明确定义问题的解空间，问题的解空间应至少包含问题的一个最优解。</p>
+</li>
+<li><p>确定结点的扩展搜索规则</p>
+</li>
+<li><p>以深度优先方式搜索解空间，并在搜索过程中用剪枝函数避免无效搜索。</p>
+</li>
+</ol>
+<h4 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>此算法的复杂度往往和蛮力算法没有太大的差别，但是它可以做到更好的剪枝效果，比蛮力算法更能快速搜索</p>
+<h4 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h4><p>n后问题、0-1背包问题、货郎问题、最优装载问题、圆排列问题、最大团问题</p>
+<h3 id="分支限界"><a href="#分支限界" class="headerlink" title="分支限界"></a>分支限界</h3><p>类似于回溯法，也是一种在问题的解空间树T上搜索问题解的算法。但在一般情况下，分支限界法与回溯法的求解目标不同。回溯法的求解目标是找出T中满足约束条件的所有解，而分支限界法的求解目标则是找出满足约束条件的一个解，或是在满足约束条件的解中找出使某一目标函数值达到极大或极小的解，即在某种意义下的最优解。</p>
+<ul>
+<li><p>分支搜索算法</p>
+<p>所谓“分支”就是采用广度优先的策略，依次搜索E-结点的所有分支，也就是所有相邻结点，抛弃不满足约束条件的结点，其余结点加入活结点表。然后从表中选择一个结点作为下一个E-结点，继续搜索。</p>
+<p>选择下一个E-结点的方式不同，则会有几种不同的分支搜索方式。</p>
+<ol>
+<li>FIFO搜索</li>
+<li>LIFO搜索</li>
+<li>优先队列式搜索</li>
+</ol>
+</li>
+<li><p>分支限界搜索算法</p>
+</li>
+</ul>
+<h4 id="适用条件-4"><a href="#适用条件-4" class="headerlink" title="适用条件"></a>适用条件</h4><p>以广度优先或以最小耗费（最大效益）优先的方式搜索问题</p>
+<h4 id="两种方法"><a href="#两种方法" class="headerlink" title="两种方法"></a>两种方法</h4><ol>
+<li><p>队列式(FIFO)分支限界法<br>按照队列先进先出（FIFO）原则选取下一个节点为扩展节点。</p>
+</li>
+<li><p>优先队列式分支限界法<br>按照优先队列中规定的优先级选取优先级最高的节点成为当前扩展节点。</p>
+</li>
+</ol>
+<h4 id="搜索策略"><a href="#搜索策略" class="headerlink" title="搜索策略"></a>搜索策略</h4><p>在当前节点（扩展节点）处，先生成其所有的子节点（分支），然后再从当前的活节点（当前节点的子节点）表中选择下一个扩展节点。</p>
+<p>为了有效地选择下一个扩展节点，加速搜索的进程，在每一个活节点处，计算一个函数值（限界），并根据函数值，从当前活节点表中选择一个最有利的节点作为扩展节点，使搜索朝着解空间上有最优解的分支推进，以便尽快地找出一个最优解。</p>
+<p>分支限界法解决了大量离散最优化的问题。</p>
+<h4 id="设计步骤-1"><a href="#设计步骤-1" class="headerlink" title="设计步骤"></a>设计步骤</h4><p>确定队列的入队和出队以及在什么时候入队和出队、确定活结点的属性、确定最优解存储、确定约束条件及代价函数</p>
+<h4 id="例子-4"><a href="#例子-4" class="headerlink" title="例子"></a>例子</h4><p>布线问题、0-1背包问题、最大团问题、货郎问题、最优装载问题、批作业调度问题</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag">#算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/201902150122/" rel="next" title="Debian使用Docker安装redis和mysql">
+                <i class="fa fa-chevron-left"></i> Debian使用Docker安装redis和mysql
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/201903210041/" rel="prev" title="可能造成数据库索引失效的原因">
+                可能造成数据库索引失效的原因 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image" src="/uploads/avatar.jpg" alt="Vick">
+          <p class="site-author-name" itemprop="name">Vick</p>
+          <p class="site-description motion-element" itemprop="description">只要路是对的，就不怕路远</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">46</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/VickChen1992" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://gitee.com/vickchen" target="_blank" title="gitee">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  gitee
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#算法的特征"><span class="nav-number">1.</span> <span class="nav-text">算法的特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法的要素"><span class="nav-number">2.</span> <span class="nav-text">算法的要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五大常用算法"><span class="nav-number">3.</span> <span class="nav-text">五大常用算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分治"><span class="nav-number">3.1.</span> <span class="nav-text">分治</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念"><span class="nav-number">3.1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#策略"><span class="nav-number">3.1.2.</span> <span class="nav-text">策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#适用条件"><span class="nav-number">3.1.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤"><span class="nav-number">3.1.4.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子"><span class="nav-number">3.1.5.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态规划"><span class="nav-number">3.2.</span> <span class="nav-text">动态规划</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念-1"><span class="nav-number">3.2.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#策略-1"><span class="nav-number">3.2.2.</span> <span class="nav-text">策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#适用条件-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计步骤"><span class="nav-number">3.2.4.</span> <span class="nav-text">设计步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-1"><span class="nav-number">3.2.5.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贪心"><span class="nav-number">3.3.</span> <span class="nav-text">贪心</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念-2"><span class="nav-number">3.3.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#适用条件-2"><span class="nav-number">3.3.2.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-1"><span class="nav-number">3.3.3.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂度分析"><span class="nav-number">3.3.4.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-2"><span class="nav-number">3.3.5.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯"><span class="nav-number">3.4.</span> <span class="nav-text">回溯</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本思想"><span class="nav-number">3.4.1.</span> <span class="nav-text">基本思想</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#适用条件-3"><span class="nav-number">3.4.2.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#步骤-2"><span class="nav-number">3.4.3.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复杂度分析-1"><span class="nav-number">3.4.4.</span> <span class="nav-text">复杂度分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-3"><span class="nav-number">3.4.5.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支限界"><span class="nav-number">3.5.</span> <span class="nav-text">分支限界</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#适用条件-4"><span class="nav-number">3.5.1.</span> <span class="nav-text">适用条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#两种方法"><span class="nav-number">3.5.2.</span> <span class="nav-text">两种方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#搜索策略"><span class="nav-number">3.5.3.</span> <span class="nav-text">搜索策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设计步骤-1"><span class="nav-number">3.5.4.</span> <span class="nav-text">设计步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例子-4"><span class="nav-number">3.5.5.</span> <span class="nav-text">例子</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Vick</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

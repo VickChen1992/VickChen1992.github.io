@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2020-07-26T08:38:58.180Z</updated>
+  <updated>2020-07-26T09:27:10.773Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="VickChen.win/2020/202006210014/"/>
     <id>VickChen.win/2020/202006210014/</id>
     <published>2020-06-20T16:14:29.000Z</published>
-    <updated>2020-07-26T08:38:58.180Z</updated>
+    <updated>2020-07-26T09:27:10.773Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。 </p>
 <a id="more"></a>
@@ -1182,7 +1182,7 @@
     <link href="VickChen.win/2019/201903210041/"/>
     <id>VickChen.win/2019/201903210041/</id>
     <published>2019-03-20T16:41:31.000Z</published>
-    <updated>2020-07-19T06:05:48.250Z</updated>
+    <updated>2020-07-27T08:40:54.005Z</updated>
     
     <content type="html"><![CDATA[<p>几乎所有的小伙伴都可以随口说几句关于创建索引的优缺点，也知道什么时候创建索引能够提高我们的查询性能，什么时候索引会更新，但是你有没有注意到，即使你设置了索引，有些时候索引他是不会生效的！这不仅考察了大家对索引的了解程度，还要让大家在使用的时候能够正确的使用。以下介绍了一些可能会造成索引失效的特殊情况，希望大家在平时开发和面试的时候能够注意到！</p>
 <a id="more"></a>
@@ -1219,7 +1219,7 @@
     
     </summary>
     
-      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
     
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
@@ -1231,11 +1231,177 @@
   </entry>
   
   <entry>
+    <title>算法概述及五大常用算法</title>
+    <link href="VickChen.win/2019/201903170029/"/>
+    <id>VickChen.win/2019/201903170029/</id>
+    <published>2019-03-16T16:29:05.000Z</published>
+    <updated>2020-07-31T14:05:07.732Z</updated>
+    
+    <content type="html"><![CDATA[<p>算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。</p>
+<p>也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。</p>
+<p>如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。</p>
+<p>不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。</p>
+<p>算法中的指令描述的是一个计算，当其运行时能从一个初始状态和（可能为空的）初始输入开始，经过一系列有限而清晰定义的状态，最终产生输出并停止于一个终态。一个状态到另一个状态的转移不一定是确定的。</p>
+<p>随机化算法在内的一些算法，包含了一些随机输入。</p>
+<a id="more"></a>
+<h2 id="算法的特征"><a href="#算法的特征" class="headerlink" title="算法的特征"></a>算法的特征</h2><ol>
+<li><p>有穷性（Finiteness）</p>
+<p>算法必须能在执行有限个步骤之后终止；</p>
+</li>
+<li><p>确切性（Definiteness）</p>
+<p>算法的每一步骤必须有确切的定义；</p>
+</li>
+<li><p>输入项（Input）</p>
+<p>一个算法有0个或多个输入，以刻画运算对象的初始情况，所谓0个输入是指算法本身定出了初始条件；</p>
+</li>
+<li><p>输出项（Output）</p>
+<p>一个算法有一个或多个输出，以反映对输入数据加工后的结果。没有输出的算法是毫无意义的；</p>
+</li>
+<li><p>可行性（Effectiveness）</p>
+<p>亦称有效性，是指算法中执行的任何计算步骤都是可以被分解为基本的可执行的操作步，即每个计算步都可以在有限时间内完成。</p>
+</li>
+</ol>
+<h2 id="算法的要素"><a href="#算法的要素" class="headerlink" title="算法的要素"></a>算法的要素</h2><ul>
+<li><p>数据对象的运算和操作</p>
+<p>计算机可以执行的基本操作是以指令的形式描述的。</p>
+<p>一个计算机系统能执行的所有指令的集合，成为该计算机系统的指令系统。一个计算机的基本运算和操作有如下四类：</p>
+<ol>
+<li>算术运算：加减乘除等运算</li>
+<li>逻辑运算：或、且、非等运算</li>
+<li>关系运算：大于、小于、等于、不等于等运算</li>
+<li>数据传输：输入、输出、赋值等运算</li>
+</ol>
+</li>
+<li><p>算法的控制结构</p>
+<p>一个算法的功能结构不仅取决于所选用的操作，而且还与各操作之间的执行顺序有关。</p>
+</li>
+</ul>
+<h2 id="五大常用算法"><a href="#五大常用算法" class="headerlink" title="五大常用算法"></a>五大常用算法</h2><h3 id="分治"><a href="#分治" class="headerlink" title="分治"></a>分治</h3><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p>字面上的解释是“分而治之”，就是 把一个复杂的问题分成两个或更多的相同或相似的子问题，再把子问题分成更小的子问题……直到最后子问题可以简单的直接求解，原问题的解即子问题的解的合并 。这个技巧是很多高效算法的基础，如排序算法(快速排序，归并排序)，傅立叶变换……</p>
+<p>任何一个可以用计算机求解的问题所需的计算时间都与其规模有关。问题的规模越小，越容易直接求解，解题所需的计算时间也越少。例如：对于n个元素的排序问题，当n=1时，不需任何计算。n=2时，只要作一次比较即可排好序。n=3时只要作3次比较即可，…。而当n较大时，问题就不那么容易处理了。要想直接解决一个规模较大的问题，有时是相当困难的。</p>
+<h4 id="策略"><a href="#策略" class="headerlink" title="策略"></a>策略</h4><p>对于一个规模为n的问题，若该问题可以容易地解决（比如说规模n较小）则直接解决，否则将其分解为k个规模较小的子问题，这些子问题互相独立且与原问题形式相同，递归地解这些子问题，然后将各子问题的解合并得到原问题的解 。这种算法设计策略叫做分治法。</p>
+<p>如果原问题可分割成k个子问题，1 &lt; k ≤ n， 且这些子问题都可解并可利用这些子问题的解求出原问题的解，那么这种分治法就是可行的。由分治法产生的子问题往往是原问题的较小模式，这就为使用递归技术提供了方便。在这种情况下，反复应用分治手段，可以使子问题与原问题类型一致而其规模却不断缩小，最终使子问题缩小到很容易直接求出其解。 这自然导致递归过程的产生。分治与递归像一对孪生兄弟，经常同时应用在算法设计之 中，并由此产生许多高效算法。</p>
+<h4 id="适用条件"><a href="#适用条件" class="headerlink" title="适用条件"></a>适用条件</h4><ol>
+<li>该问题的规模缩小到一定的程度就可以容易地解决;</li>
+<li>该问题可以分解为若干个规模较小的相同问题，即该问题具有最优子结构性质;</li>
+<li>利用该问题分解出的子问题的解可以合并为该问题的解;</li>
+<li>该问题所分解出的各个子问题是相互独立的，即子问题之间不包含公共的子问题。</li>
+</ol>
+<p>第一条特征是绝大多数问题都可以满足的，因为问题的计算复杂性一般是随着问题规模的增加而增加；</p>
+<p>第二条特征是应用分治法的前提，它也是大多数问题可以满足的，此特征反映了递归思想的应用；</p>
+<p>第三条特征是关键，能否利用分治法完全取决于问题是否具有第三条特征，如果具备了第一条和第二条特征，而不具备第三条特征，则可以考虑用贪心法或动态规划法。</p>
+<p>第四条特征涉及到分治法的效率，如果各子问题是不独立的则分治法要做许多不必要的工作，重复地解公共的子问题，此时虽然可用分治法，但一般用动态规划法较好。</p>
+<h4 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>分解：将原问题分解为若干个规模较小，相互独立，与原问题形式相同的子问题；</li>
+<li>解决：若子问题规模较小而容易被解决则直接解，否则递归地解各个子问题 </li>
+<li>合并：将各个子问题的解合并为原问题的解。</li>
+</ol>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>二分归并排序、快速排序、幂乘算法、矩阵算法、平面点对、棋盘覆盖、汉诺塔等</p>
+<h3 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><p>每次决策依赖于当前状态，又随即引起状态的转移。一个决策序列就是在变化的状态中产生出来的，所以，这种多阶段最优化决策解决问题的过程就称为动态规划。</p>
+<h4 id="策略-1"><a href="#策略-1" class="headerlink" title="策略"></a>策略</h4><p>与分治法类似，也是将待求解的问题分解为若干个子问题（阶段），按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。</p>
+<p>由于动态规划解决的问题多数有重叠子问题这个特点，为减少重复计算，对每一个子问题只解一次，将其不同阶段的不同状态保存在一个二维数组中。</p>
+<p>与分治法最大的差别：适合于用动态规划法求解的问题，经分解后得到的子问题往往不是互相独立的。即下一个子阶段的求解是建立在上一个子阶段的解的基础上，进行进一步的求解。</p>
+<h4 id="适用条件-1"><a href="#适用条件-1" class="headerlink" title="适用条件"></a>适用条件</h4><ol>
+<li><p>最优子结构性质</p>
+<p>一个最优化策略具有这样的性质，不论过去状态和决策如何，对前面的决策所形成的状态而言，余下的诸决策必须构成最优策略。简而言之，一个最优化策略的子策略总是最优的。一个问题满足最优化原理又称其具有最优子结构性质。</p>
+</li>
+<li><p>无后效性</p>
+<p>将各阶段按照一定的次序排列好之后，对于某个给定的阶段状态，它以前各阶段的状态无法直接影响它未来的决策，而只能通过当前的这个状态</p>
+</li>
+<li><p>子问题重叠</p>
+<p>即子问题之间是不独立的，一个子问题在下一阶段决策中可能被多次使用到。</p>
+<p><em>该性质并不是动态规划适用的必要条件，但是如果没有这条性质，动态规划算法同其他算法相比就不具备优势。</em></p>
+</li>
+</ol>
+<h4 id="设计步骤"><a href="#设计步骤" class="headerlink" title="设计步骤"></a>设计步骤</h4><ol>
+<li>分析最优解的性质，并刻画其结构特征。</li>
+<li>递归的定义最优解。</li>
+<li>以自底向上或自顶向下的记忆化方式（备忘录法）计算出最优值</li>
+<li>根据计算最优值时得到的信息，构造问题的最优解</li>
+</ol>
+<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><p>矩阵链相乘、投资问题、背包问题、最大字段和问题、最长公共子序列问题、图像压缩问题、多边形游戏</p>
+<h3 id="贪心"><a href="#贪心" class="headerlink" title="贪心"></a>贪心</h3><h4 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h4><p>在对问题求解时，总是做出在当前看来是最好的选择。也就是说，不从整体最优上加以考虑，他所做出的仅是在某种意义上的局部最优解。</p>
+<p><strong>贪心算法不是对所有问题都能得到整体最优解</strong>，选择的贪心策略必须具备无后效性，即某个状态以后的过程不会影响以前的状态，只与当前状态有关。</p>
+<p>所以对所采用的贪心策略一定要仔细分析其是否满足无后效性。</p>
+<h4 id="适用条件-2"><a href="#适用条件-2" class="headerlink" title="适用条件"></a>适用条件</h4><p>贪心策略适用的前提是：局部最优策略能导致产生全局最优解。</p>
+<p>实际上，贪心算法适用的情况很少。一般，对一个问题分析是否适用于贪心算法，可以先选择该问题下的几个实际数据进行分析，就可做出判断。</p>
+<h4 id="步骤-1"><a href="#步骤-1" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li>建立数学模型来描述问题。</li>
+<li>把求解的问题分成若干个子问题。</li>
+<li>对每一子问题求解，得到子问题的局部最优解。</li>
+<li>把子问题的解局部最优解合成原来解问题的一个解</li>
+</ol>
+<h4 id="复杂度分析"><a href="#复杂度分析" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>通常是一轮处理（一般是一层for循环就解决了），一般是O(n)+O(nlogn)（排序消耗）的时间</p>
+<h4 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h4><p>活动选择问题、最优装载问题、最小延迟调度问题、最优前缀码、最小生成树、单源最短路径问题</p>
+<h3 id="回溯"><a href="#回溯" class="headerlink" title="回溯"></a>回溯</h3><p>此算法实际上是一个类似枚举的搜索尝试过程，主要是在搜索尝试过程中寻找问题的解，当发现已不满足求解条件时，就“回溯”返回，尝试别的路径。</p>
+<p>回溯法是一种选优搜索法，按选优条件向前搜索，以达到目标。但当探索到某一步时，发现原先选择并不优或达不到目标，就退回一步重新选择，这种走不通就退回再走的技术为回溯法，而满足回溯条件的某个状态的点称为“回溯点”。</p>
+<p>许多复杂的，规模较大的问题都可以使用回溯法，有“通用解题方法”的美称。</p>
+<h4 id="基本思想"><a href="#基本思想" class="headerlink" title="基本思想"></a>基本思想</h4><p>在包含问题的所有解的解空间树中，按照深度优先搜索的策略，从根结点出发深度探索解空间树。当探索到某一结点时，要先判断该结点是否包含问题的解，如果包含，就从该结点出发继续探索下去，如果该结点不包含问题的解，则逐层向其祖先结点回溯。（其实回溯法就是对隐式图的深度优先搜索算法）。</p>
+<p>若用回溯法求问题的所有解时，要回溯到根，且根结点的所有可行的子树都要已被搜索遍才结束。</p>
+<p>而若使用回溯法求任一个解时，只要搜索到问题的一个解就可以结束。</p>
+<h4 id="适用条件-3"><a href="#适用条件-3" class="headerlink" title="适用条件"></a>适用条件</h4><p>满足多米诺性质（必要条件），是一个多部判断求解，适用于搜索和优化问题</p>
+<h4 id="步骤-2"><a href="#步骤-2" class="headerlink" title="步骤"></a>步骤</h4><ol>
+<li><p>针对所给问题，确定问题的解空间</p>
+<p>首先应明确定义问题的解空间，问题的解空间应至少包含问题的一个最优解。</p>
+</li>
+<li><p>确定结点的扩展搜索规则</p>
+</li>
+<li><p>以深度优先方式搜索解空间，并在搜索过程中用剪枝函数避免无效搜索。</p>
+</li>
+</ol>
+<h4 id="复杂度分析-1"><a href="#复杂度分析-1" class="headerlink" title="复杂度分析"></a>复杂度分析</h4><p>此算法的复杂度往往和蛮力算法没有太大的差别，但是它可以做到更好的剪枝效果，比蛮力算法更能快速搜索</p>
+<h4 id="例子-3"><a href="#例子-3" class="headerlink" title="例子"></a>例子</h4><p>n后问题、0-1背包问题、货郎问题、最优装载问题、圆排列问题、最大团问题</p>
+<h3 id="分支限界"><a href="#分支限界" class="headerlink" title="分支限界"></a>分支限界</h3><p>类似于回溯法，也是一种在问题的解空间树T上搜索问题解的算法。但在一般情况下，分支限界法与回溯法的求解目标不同。回溯法的求解目标是找出T中满足约束条件的所有解，而分支限界法的求解目标则是找出满足约束条件的一个解，或是在满足约束条件的解中找出使某一目标函数值达到极大或极小的解，即在某种意义下的最优解。</p>
+<ul>
+<li><p>分支搜索算法</p>
+<p>所谓“分支”就是采用广度优先的策略，依次搜索E-结点的所有分支，也就是所有相邻结点，抛弃不满足约束条件的结点，其余结点加入活结点表。然后从表中选择一个结点作为下一个E-结点，继续搜索。</p>
+<p>选择下一个E-结点的方式不同，则会有几种不同的分支搜索方式。</p>
+<ol>
+<li>FIFO搜索</li>
+<li>LIFO搜索</li>
+<li>优先队列式搜索</li>
+</ol>
+</li>
+<li><p>分支限界搜索算法</p>
+</li>
+</ul>
+<h4 id="适用条件-4"><a href="#适用条件-4" class="headerlink" title="适用条件"></a>适用条件</h4><p>以广度优先或以最小耗费（最大效益）优先的方式搜索问题</p>
+<h4 id="两种方法"><a href="#两种方法" class="headerlink" title="两种方法"></a>两种方法</h4><ol>
+<li><p>队列式(FIFO)分支限界法<br>按照队列先进先出（FIFO）原则选取下一个节点为扩展节点。</p>
+</li>
+<li><p>优先队列式分支限界法<br>按照优先队列中规定的优先级选取优先级最高的节点成为当前扩展节点。</p>
+</li>
+</ol>
+<h4 id="搜索策略"><a href="#搜索策略" class="headerlink" title="搜索策略"></a>搜索策略</h4><p>在当前节点（扩展节点）处，先生成其所有的子节点（分支），然后再从当前的活节点（当前节点的子节点）表中选择下一个扩展节点。</p>
+<p>为了有效地选择下一个扩展节点，加速搜索的进程，在每一个活节点处，计算一个函数值（限界），并根据函数值，从当前活节点表中选择一个最有利的节点作为扩展节点，使搜索朝着解空间上有最优解的分支推进，以便尽快地找出一个最优解。</p>
+<p>分支限界法解决了大量离散最优化的问题。</p>
+<h4 id="设计步骤-1"><a href="#设计步骤-1" class="headerlink" title="设计步骤"></a>设计步骤</h4><p>确定队列的入队和出队以及在什么时候入队和出队、确定活结点的属性、确定最优解存储、确定约束条件及代价函数</p>
+<h4 id="例子-4"><a href="#例子-4" class="headerlink" title="例子"></a>例子</h4><p>布线问题、0-1背包问题、最大团问题、货郎问题、最优装载问题、批作业调度问题</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。&lt;/p&gt;
+&lt;p&gt;也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。&lt;/p&gt;
+&lt;p&gt;如果一个算法有缺陷，或不适合于某个问题，执行这个算法将不会解决这个问题。&lt;/p&gt;
+&lt;p&gt;不同的算法可能用不同的时间、空间或效率来完成同样的任务。一个算法的优劣可以用空间复杂度与时间复杂度来衡量。&lt;/p&gt;
+&lt;p&gt;算法中的指令描述的是一个计算，当其运行时能从一个初始状态和（可能为空的）初始输入开始，经过一系列有限而清晰定义的状态，最终产生输出并停止于一个终态。一个状态到另一个状态的转移不一定是确定的。&lt;/p&gt;
+&lt;p&gt;随机化算法在内的一些算法，包含了一些随机输入。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+    
+    
+      <category term="算法" scheme="VickChen.win/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Debian使用Docker安装redis和mysql</title>
     <link href="VickChen.win/2019/201902150122/"/>
     <id>VickChen.win/2019/201902150122/</id>
     <published>2019-02-14T17:22:01.000Z</published>
-    <updated>2019-07-20T09:59:49.000Z</updated>
+    <updated>2020-07-27T08:41:14.572Z</updated>
     
     <content type="html"><![CDATA[<p>Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。</p>
 <p>这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。</p>
@@ -1327,18 +1493,18 @@
     
     </summary>
     
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
       <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
     
-      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
-    
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
     
-      <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
+      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
       <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
+    
+      <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
     
   </entry>
   
@@ -1347,7 +1513,7 @@
     <link href="VickChen.win/2019/201901221340/"/>
     <id>VickChen.win/2019/201901221340/</id>
     <published>2019-01-22T05:40:32.000Z</published>
-    <updated>2019-07-26T03:00:28.000Z</updated>
+    <updated>2020-07-27T08:41:34.260Z</updated>
     
     <content type="html"><![CDATA[<p>项目中需要用到的数据库安装、配置以及常见错误</p>
 <a id="more"></a>
@@ -1470,14 +1636,14 @@
     
     </summary>
     
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
       <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
     
-      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
-    
       <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
+    
+      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
     
@@ -1488,7 +1654,7 @@
     <link href="VickChen.win/2018/201812240020/"/>
     <id>VickChen.win/2018/201812240020/</id>
     <published>2018-12-23T16:20:11.000Z</published>
-    <updated>2019-07-20T08:06:36.000Z</updated>
+    <updated>2020-07-27T08:41:41.993Z</updated>
     
     <content type="html"><![CDATA[<p>VMware Tools是VMware虚拟机中自带的一种增强工具，相当于VirtualBox中的增强功能（Sun VirtualBox Guest Additions），是VMware提供的增强虚拟显卡和硬盘性能、以及同步虚拟机与主机时钟的驱动程序。</p>
 <a id="more"></a>
@@ -1527,7 +1693,7 @@
     
     </summary>
     
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
+      <category term="工具" scheme="VickChen.win/categories/%E5%B7%A5%E5%85%B7/"/>
     
     
       <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
@@ -1766,46 +1932,6 @@
       <category term=".Net Core" scheme="VickChen.win/tags/Net-Core/"/>
     
       <category term="Entity Framework" scheme="VickChen.win/tags/Entity-Framework/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Redis 用户验证</title>
-    <link href="VickChen.win/2018/201810202143/"/>
-    <id>VickChen.win/2018/201810202143/</id>
-    <published>2018-10-20T13:43:31.000Z</published>
-    <updated>2019-07-26T03:43:13.000Z</updated>
-    
-    <content type="html"><![CDATA[<p> redis没有实现访问控制这个功能，但是它提供了一个轻量级的认证方式，可以编辑redis.conf配置来启用认证。</p>
-<a id="more"></a>
-<h3 id="初始化Redis密码"><a href="#初始化Redis密码" class="headerlink" title="初始化Redis密码"></a>初始化Redis密码</h3><p>在配置文件中有个参数： <code>requirepass</code>  这个就是配置redis访问密码的参数。</p>
-<p>比如 <code>requirepass test123</code> <strong>需重启Redis才能生效</strong></p>
-<p>redis的查询速度是非常快的，外部用户一秒内可以尝试多达150K个密码。</p>
-<p>所以密码要尽量长（对于DBA 没有必要必须记住密码）。</p>
-<h3 id="不重启Redis设置密码"><a href="#不重启Redis设置密码" class="headerlink" title="不重启Redis设置密码"></a>不重启Redis设置密码</h3><p>在配置文件中配置<code>requirepass</code>的密码（当redis重启时密码依然有效）。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; config <span class="built_in">set</span> requirepass test123</span><br></pre></td></tr></table></figure></p>
-<p>查询密码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; config get requirepass</span><br><span class="line">(error) ERR operation not permitted</span><br></pre></td></tr></table></figure></p>
-<p>密码验证：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; auth test123</span><br><span class="line">OK</span><br></pre></td></tr></table></figure></p>
-<p>再次查询：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis 127.0.0.1:6379&gt; config get requirepass</span><br><span class="line">1) <span class="string">"requirepass"</span></span><br><span class="line">2) <span class="string">"test123"</span></span><br></pre></td></tr></table></figure></p>
-<p><strong>如果配置文件中没添加密码，密码会在redis重启后失效</strong></p>
-<h3 id="登陆有密码的Redis"><a href="#登陆有密码的Redis" class="headerlink" title="登陆有密码的Redis"></a>登陆有密码的Redis</h3><p>在登录的时候的时候输入密码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -p 6379 -a test123</span><br></pre></td></tr></table></figure></p>
-<p>先登陆后验证：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">redis-cli -p 6379</span><br><span class="line">redis 127.0.0.1:6379&gt; auth test123</span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
-<p>AUTH命令跟其他redis命令一样，是没有加密的，阻止不了攻击者在网络上窃取你的密码。</p>
-<p>认证层的目标是提供多一层的保护，如果防火墙或者用来保护redis的系统防御失败的话，外部用户如果没有通过密码认证还是无法访问redis的。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt; redis没有实现访问控制这个功能，但是它提供了一个轻量级的认证方式，可以编辑redis.conf配置来启用认证。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="技术" scheme="VickChen.win/categories/%E6%8A%80%E6%9C%AF/"/>
-    
-    
-      <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
-    
-      <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
   </entry>
   
