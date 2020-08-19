@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="VickChen.win/"/>
-  <updated>2020-07-26T09:27:10.773Z</updated>
+  <updated>2020-07-26T08:38:52.000Z</updated>
   <id>VickChen.win/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="VickChen.win/2020/202006210014/"/>
     <id>VickChen.win/2020/202006210014/</id>
     <published>2020-06-20T16:14:29.000Z</published>
-    <updated>2020-07-26T09:27:10.773Z</updated>
+    <updated>2020-07-26T08:38:52.000Z</updated>
     
     <content type="html"><![CDATA[<p>ASP.NET Core 中 HTTP 管道使用中间件组合处理的方式。换句人话来说，对于写代码的人而言，一切皆中间件。业务逻辑/数据访问/等等一切都需要以中间件的方式来呈现。 </p>
 <a id="more"></a>
@@ -229,8 +229,8 @@
     <title>设计模式之行为模式</title>
     <link href="VickChen.win/2020/202005192357/"/>
     <id>VickChen.win/2020/202005192357/</id>
-    <published>2020-04-11T15:01:22.000Z</published>
-    <updated>2020-07-23T11:49:30.006Z</updated>
+    <published>2020-05-19T15:57:08.000Z</published>
+    <updated>2020-08-19T01:48:05.719Z</updated>
     
     <content type="html"><![CDATA[<p>行为型模式共有十一种：策略模式、模板方法模式、观察者模式、迭代器模式、责任链模式、命令模式、备忘录模式、状态模式、访问者模式、中介者模式、解释器模式。</p>
 <ul>
@@ -509,7 +509,7 @@
     <link href="VickChen.win/2020/202004112301/"/>
     <id>VickChen.win/2020/202004112301/</id>
     <published>2020-04-11T15:01:22.000Z</published>
-    <updated>2020-07-23T11:48:37.126Z</updated>
+    <updated>2020-07-23T11:48:35.000Z</updated>
     
     <content type="html"><![CDATA[<p>结构型模式包括适配器模式、桥接模式、装饰者模式、组合模式、外观模式、享元模式和代理模式。</p>
 <ul>
@@ -687,7 +687,7 @@
     <link href="VickChen.win/2020/202002182318/"/>
     <id>VickChen.win/2020/202002182318/</id>
     <published>2020-02-18T15:18:31.000Z</published>
-    <updated>2020-07-18T08:48:38.951Z</updated>
+    <updated>2020-07-18T08:48:37.000Z</updated>
     
     <content type="html"><![CDATA[<p>在ASP.NET Core中,自带的IOC容器相关的使用方式和注入类型的生命周期.</p>
 <p>微软给自行注入的服务,提供了3种生命周期.</p>
@@ -763,7 +763,7 @@
     <link href="VickChen.win/2019/201911272238/"/>
     <id>VickChen.win/2019/201911272238/</id>
     <published>2019-11-27T14:38:08.000Z</published>
-    <updated>2020-07-23T12:00:06.699Z</updated>
+    <updated>2020-07-23T11:59:57.000Z</updated>
     
     <content type="html"><![CDATA[<p>CAP 是一个在分布式系统中（SOA，MicroService）实现事件总线及最终一致性（分布式事务）的一个开源的 C# 库，她具有轻量级，高性能，易使用等特点。</p>
 <p>你可以轻松的在基于 .NET Core 技术的分布式系统中引入CAP，包括但限于 ASP.NET Core 和 ASP.NET Core on .NET Framework。</p>
@@ -848,7 +848,7 @@
     <link href="VickChen.win/2019/201911030147/"/>
     <id>VickChen.win/2019/201911030147/</id>
     <published>2019-11-02T17:47:55.000Z</published>
-    <updated>2020-07-15T05:02:11.714Z</updated>
+    <updated>2020-07-15T05:02:07.000Z</updated>
     
     <content type="html"><![CDATA[<p>业界目前主流的分布式事务解决方案主要有：多阶段提交方案（2PC、3PC）、本地消息表、补偿事务（TCC）和消息事务（主要是RocketMQ）。这些方案的原理在此处不展开，目前网络中相应资料比较多，小结一下它们的特点</p>
 <a id="more"></a>
@@ -900,7 +900,7 @@
     <link href="VickChen.win/2019/201910172341/"/>
     <id>VickChen.win/2019/201910172341/</id>
     <published>2019-10-17T15:41:06.000Z</published>
-    <updated>2020-07-15T05:00:26.770Z</updated>
+    <updated>2020-07-15T05:00:26.000Z</updated>
     
     <content type="html"><![CDATA[<p>说到事务，可能大家首先想到的就是数据库事务。对于数据库事务可能大家都很熟悉，在开发过程中也会经常使用到。众所周知，数据库能实现<strong>本地事务</strong>，但现在的系统常采用微服务、SOA等架构，因此就出现了跨多个数据库的事务需求，这种事务即为“分布式事务”。</p>
 <p>分布式事务一直是企业集成中的一个技术难点，也是每一个分布式系统架构中都会涉及到的一个东西，特别是在微服务架构中，几乎可以说是无法避免，本文就分布式事务来简单聊一下。</p>
@@ -959,7 +959,7 @@
     <link href="VickChen.win/2019/201908122354/"/>
     <id>VickChen.win/2019/201908122354/</id>
     <published>2019-08-12T15:54:27.000Z</published>
-    <updated>2020-07-12T13:21:14.114Z</updated>
+    <updated>2020-07-12T13:21:01.000Z</updated>
     
     <content type="html"><![CDATA[<p>C# 8.0中加入了一个新的范围类型(Range Type)。</p>
 <p>这里我们首先展示一些代码，并一步一步为代码添加一些不同的东西, 为大家展示一下范围类型的功能和用法。</p>
@@ -1019,7 +1019,7 @@
     <link href="VickChen.win/2019/201907192012/"/>
     <id>VickChen.win/2019/201907192012/</id>
     <published>2019-07-19T12:12:05.000Z</published>
-    <updated>2020-07-12T12:38:53.279Z</updated>
+    <updated>2020-07-12T12:38:48.000Z</updated>
     
     <content type="html"><![CDATA[<p>mysql在存在主键冲突或者唯一键冲突的情况下，根据插入策略不同，一般有以下三种避免方法:<br>1、insert ignore<br>2、replace into<br>3、insert on duplicate key update</p>
 <p>注意，除非表有一个PRIMARY KEY或UNIQUE索引，否则，使用以上三个语句没有意义，与使用单纯的INSERT INTO相同。</p>
@@ -1084,7 +1084,7 @@
     <link href="VickChen.win/2019/201906012003/"/>
     <id>VickChen.win/2019/201906012003/</id>
     <published>2019-06-01T12:03:32.000Z</published>
-    <updated>2020-07-10T12:32:25.898Z</updated>
+    <updated>2020-07-10T12:31:25.000Z</updated>
     
     <content type="html"><![CDATA[<p>由于table列比较多，有时候用户不需要看那么多列，虽然layui提供了隐藏列的接口。但页面刷新后就会复原，这时候就可以将数据保存至localStorage中实现本地永久化保存</p>
 <a id="more"></a>
@@ -1182,7 +1182,7 @@
     <link href="VickChen.win/2019/201903210041/"/>
     <id>VickChen.win/2019/201903210041/</id>
     <published>2019-03-20T16:41:31.000Z</published>
-    <updated>2020-07-27T08:40:54.005Z</updated>
+    <updated>2020-07-27T08:40:54.000Z</updated>
     
     <content type="html"><![CDATA[<p>几乎所有的小伙伴都可以随口说几句关于创建索引的优缺点，也知道什么时候创建索引能够提高我们的查询性能，什么时候索引会更新，但是你有没有注意到，即使你设置了索引，有些时候索引他是不会生效的！这不仅考察了大家对索引的了解程度，还要让大家在使用的时候能够正确的使用。以下介绍了一些可能会造成索引失效的特殊情况，希望大家在平时开发和面试的时候能够注意到！</p>
 <a id="more"></a>
@@ -1235,7 +1235,7 @@
     <link href="VickChen.win/2019/201903170029/"/>
     <id>VickChen.win/2019/201903170029/</id>
     <published>2019-03-16T16:29:05.000Z</published>
-    <updated>2020-07-31T14:05:07.732Z</updated>
+    <updated>2020-07-31T14:05:07.000Z</updated>
     
     <content type="html"><![CDATA[<p>算法（Algorithm）是指解题方案的准确而完整的描述，是一系列解决问题的清晰指令，算法代表着用系统的方法描述解决问题的策略机制。</p>
 <p>也就是说，能够对一定规范的输入，在有限时间内获得所要求的输出。</p>
@@ -1401,7 +1401,7 @@
     <link href="VickChen.win/2019/201902150122/"/>
     <id>VickChen.win/2019/201902150122/</id>
     <published>2019-02-14T17:22:01.000Z</published>
-    <updated>2020-07-27T08:41:14.572Z</updated>
+    <updated>2020-07-27T08:41:14.000Z</updated>
     
     <content type="html"><![CDATA[<p>Docker是一个简化容器中应用程序进程管理过程的应用程序。容器允许您在资源隔离的进程中运行应用程序。它们与虚拟机类似，但容器更便携，更加资源友好，并且更依赖于主机操作系统。</p>
 <p>这一次，我们将在Debian 9上安装和使用Docker CE。您将安装Docker本身，并使用容器和映像。</p>
@@ -1498,13 +1498,13 @@
     
       <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
     
-      <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
-    
       <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
     
-      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
+      <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
+    
+      <category term="Docker" scheme="VickChen.win/tags/Docker/"/>
     
   </entry>
   
@@ -1513,7 +1513,7 @@
     <link href="VickChen.win/2019/201901221340/"/>
     <id>VickChen.win/2019/201901221340/</id>
     <published>2019-01-22T05:40:32.000Z</published>
-    <updated>2020-07-27T08:41:34.260Z</updated>
+    <updated>2020-07-27T08:41:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>项目中需要用到的数据库安装、配置以及常见错误</p>
 <a id="more"></a>
@@ -1641,9 +1641,9 @@
     
       <category term="Linux" scheme="VickChen.win/tags/Linux/"/>
     
-      <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
-    
       <category term="Redis" scheme="VickChen.win/tags/Redis/"/>
+    
+      <category term="Debian" scheme="VickChen.win/tags/Debian/"/>
     
       <category term="MySql" scheme="VickChen.win/tags/MySql/"/>
     
@@ -1654,7 +1654,7 @@
     <link href="VickChen.win/2018/201812240020/"/>
     <id>VickChen.win/2018/201812240020/</id>
     <published>2018-12-23T16:20:11.000Z</published>
-    <updated>2020-07-27T08:41:41.993Z</updated>
+    <updated>2020-07-27T08:41:41.000Z</updated>
     
     <content type="html"><![CDATA[<p>VMware Tools是VMware虚拟机中自带的一种增强工具，相当于VirtualBox中的增强功能（Sun VirtualBox Guest Additions），是VMware提供的增强虚拟显卡和硬盘性能、以及同步虚拟机与主机时钟的驱动程序。</p>
 <a id="more"></a>
